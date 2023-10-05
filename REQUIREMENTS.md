@@ -1,0 +1,26 @@
+# Client Requirements:
+
+- [ ]  User profile with measurements of:
+  - [ ]  Nutrition choices(what they eat)?
+  - [ ]  Liquids
+  - [ ]  Exercise
+  - [ ]  Mood
+  - [ ]  Energy Levels
+  - [ ]  Menstrual cycle
+  - [ ]  Other issues the user may face.
+- [ ]  Profile must have:
+  - [ ]  Comparison feature for before/after to see progress + images.
+  - [ ]  Health information.
+- [ ]  Must have the ability to multiselect chronic conditions.
+- [ ]  Link to Dr Monica’s Google Calendar
+- [ ]  Accessible for age(?)/reading difficulties.
+- [ ]  Must have some sort of library of recipes.
+  - [ ]  Must be able to filter the library of foods with filters like time to make, budget
+  - [ ]  Must be cached on device if no internet.
+- [ ]  Tips for alternative options, must be conscious of user’s intolerances(if user has IBS or fibre problems).
+- [ ]  Must learn about an individual’s chronic condition + adjust advice accordingly(?)
+- [ ]  Habit tracker.
+- [ ]  Integration with other health/wellbeing apps that may be on someone’s phone
+- [ ]  Shopping list integration with Tesco/Asda/Lidl.
+- [ ]  Free vs Premium features(?)
+- [ ]  May need an admin dashboard.
