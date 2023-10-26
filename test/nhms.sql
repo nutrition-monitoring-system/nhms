@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `mydb` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `mydb`;
--- MySQL dump 10.13  Distrib 8.0.34, for macos13 (arm64)
+-- MySQL dump 10.13  Distrib 8.1.0, for macos13.3 (arm64)
 --
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
@@ -9,7 +7,7 @@ USE `mydb`;
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -26,13 +24,13 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `forename` varchar(16) NOT NULL,
+  `surname` varchar(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `dob` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` varchar(32) NOT NULL,
-  `surname` varchar(32) DEFAULT NULL,
-  `is_admin` tinyint DEFAULT NULL,
-  `userID` char(32) NOT NULL,
-  `gender` char(1) DEFAULT NULL,
-  `dob` date DEFAULT NULL,
+  `gender` char(1) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `userID` char(32) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `is_admin` tinyint DEFAULT '0',
   PRIMARY KEY (`userID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -43,7 +41,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('Sheh Wai','wlsh1987@hotmail.com','12345','Lam',NULL,'00ebe1bd-7866-44c4-aee9-b8337060','F','2003-04-02');
+INSERT INTO `user` VALUES ('Sheh Wai','Lam','2003-04-02','wlsh1987@hotmail.com','12345','F','00ebe1bd-7866-44c4-aee9-b8337060',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-26 10:51:50
+-- Dump completed on 2023-10-26 12:20:42

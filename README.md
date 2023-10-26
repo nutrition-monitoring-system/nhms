@@ -11,3 +11,9 @@ It is made up of a front end, a back end + a database.
 [`/res`](/res) is for all 'static' assets like images and videos.
 
 [`/test`](/test) is for all test files, and should mirror the layout of the [`src`](/src) folder.
+
+**SQL Commands**
+
+To dump the SQL table from your current mysql session, use `mysqldump -u root -p mydb > test/nhms.sql` replacing root with your MySQL username. You will be prompted for your password.
+
+To import the table from a `.sql` file use `mysql -u root -p mydb < test/nhms.sql`.
