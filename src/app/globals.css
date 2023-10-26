@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Modak&family=Open+Sans:wght@300;400;800&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --color-primary: #fb923c;
+    --color-secondary: #34d399;
+    --color-primary-light: #fff7ed;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(7px);
+}
+
+@layer components {
+  input {
+    @apply p-3 bg-white w-full rounded-md text-black focus:outline-none shadow-xl;
+  }
+  .tile {
+    @apply min-w-fit flex justify-between items-center gap-2 rounded-md
+    bg-white px-5 py-2 text-sm text-black
+    shadow-xl transition-all duration-200 ease-in
+    hover:shadow-2xl;
+  }
+}
