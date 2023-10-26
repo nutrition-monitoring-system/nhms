@@ -17,20 +17,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
 USE `mydb` ;
 
--- -----------------------------------------------------
--- Table `mydb`.`user_2`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`user_2` (
-  `forename` VARCHAR(16) NOT NULL,
-  `email` VARCHAR(255) NULL,
-  `password` VARCHAR(32) NOT NULL,
-  `surname`  NULL,
-  `password`  NULL,
-  `is_admin` TINYINT NULL,
-  `userId`  NOT NULL,
-  `gender`  NULL,
-  PRIMARY KEY (`userId`));
-
 
 -- -----------------------------------------------------
 -- Table `mydb`.`user`
@@ -39,8 +25,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`user` (
   `forename` VARCHAR(16) NOT NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(32) NOT NULL,
-  `surname`  NULL,
-  `password`  NULL,
+  `surname`  VARCHAR(32)NULL,
   `is_admin` TINYINT NULL,
   `userId` CHAR NOT NULL,
   `gender` TINYINT NULL,
