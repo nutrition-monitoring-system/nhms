@@ -2,6 +2,7 @@
 import { useState } from "react";
 //import Image from 'next/image'
 import Button from "../../components/Button.jsx";
+import Accessibility from "../../components/Accessibility.jsx";
 import {
   FormOne,
   FormTwo,
@@ -14,7 +15,7 @@ export default function Home() {
   //const [formDone, setFormDone] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
-    if (index >= 3) {
+    if (index >= 4) {
       return;
     }
     setIndex((prevIndex) => prevIndex + 1);
@@ -52,6 +53,10 @@ export default function Home() {
               <FormTwo onClick={handleClick} onClickPrev={handleClickPrev} />
               <FormThree onClick={handleClick} onClickPrev={handleClickPrev} />
               <FormFour onClick={handleClick} onClickPrev={handleClickPrev} />
+              <Accessibility
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+              />
             </form>
           </div>
         </div>
