@@ -1,19 +1,31 @@
 "use client";
+import Image from "next/image.js";
 import Button from "./Button.jsx";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export function FormOne({ onClick }) {
+  const [type, setType] = useState("text");
+
+  const handleFocus = (event) => {
+    event.preventDefault();
+    setType("date");
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
         <div className="flex gap-2">
-          <input type={"text"} placeholder={"First Name"}></input>
-          <input type={"text"} placeholder={"Last Name"}></input>
+          <input type={"text"} placeholder={"First Name"} />
+          <input type={"text"} placeholder={"Last Name"} />
         </div>
-        <input type={"Date"} placeholder={"Date of Birth"}></input>
-        <input type={"text"} placeholder={"Username or Email"}></input>
-        <input type={"password"} placeholder={"Password"}></input>
-        <input type={"password"} placeholder={"Confirm Password"}></input>
+        <input
+          placeholder={"Date of Birth"}
+          type={type}
+          onFocus={handleFocus}
+        />
+        <input type={"text"} placeholder={"Username or Email"} />
+        <input type={"password"} placeholder={"Password"} />
+        <input type={"password"} placeholder={"Confirm Password"} />
         <div className="grid place-items-center">
           <Button onClick={onClick}>Next</Button>
         </div>
@@ -365,5 +377,45 @@ export function FormFour({ onClick, onClickPrev }) {
         </div>
       </div>
     </>
+  );
+}
+
+export function FormFive({ onClickPrev, handleSubmit }) {
+  return (
+    <div className="min-w-full pb-2">
+      <h1 className="grid place-items-center text-secondary">
+        Did you have any thing today?
+      </h1>
+      <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
+        <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
+          <h1>BreakFast</h1>
+          <div className="min-w-full p-1">
+            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
+              <Image src={"/icons/add.png"} width={20} height={20}></Image>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
+          <h1>Lunch</h1>
+          <div className="min-w-full p-1">
+            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
+              <Image src={"/icons/add.png"} width={20} height={20}></Image>
+            </div>
+          </div>
+        </div>
+        <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
+          <h1>Dinner</h1>
+          <div className="min-w-full p-1">
+            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
+              <Image src={"/icons/add.png"} width={20} height={20}></Image>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 place-items-center">
+        <Button onClick={onClickPrev}>Previous</Button>
+        <Button onClick={handleSubmit}>done</Button>
+      </div>
+    </div>
   );
 }
