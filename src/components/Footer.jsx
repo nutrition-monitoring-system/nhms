@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 const Footer = () => (
   <>
     <div className="bg-orange-50 flex flex-col h-screen p-3 text-black font-opensans px-3">
@@ -10,50 +11,58 @@ const Footer = () => (
         </div>
         <div className="flex flex-col justify-center items-left">
           <h3 className="font-bold text-secondary mb-3">Links</h3>
-          <a href="">Home</a>
-          <a href="">Blog</a>
-          <a href="">Recipes</a>
-          <a href="">Dashboard</a>
-          <a href="">Login</a>
-          <a href="">Register</a>
+          <Link href="">Home</Link>
+          <Link href="">Blog</Link>
+          <Link href="">Recipes</Link>
+          <Link href="">Dashboard</Link>
+          <Link href="">Login</Link>
+          <Link href="">Register</Link>
         </div>
         <div className="flex flex-col justify-center items-left">
           <h3 className="font-bold text-secondary mb-3">Products</h3>
-          <a href="">Product 1</a>
-          <a href="">Service 1</a>
-          <a href="">Product 2</a>
-          <a href="">Service 2</a>
-          <a href="">Product 3</a>
-          <a href="">Service 3</a>
+          <Link href="">Product 1</Link>
+          <Link href="">Service 1</Link>
+          <Link href="">Product 2</Link>
+          <Link href="">Service 2</Link>
+          <Link href="">Product 3</Link>
+          <Link href="">Service 3</Link>
         </div>
         <div className="flex flex-col justify-center items-left">
-          <h3 className="font-bold text-secondary mb-3">
-            Mobile Version Coming Soon
-          </h3>
-          <div className="flex justify-around items-center bg-white pb-2 mb-2 rounded-md">
+          <h3 className="font-bold text-secondary mb-3">Coming Soon</h3>
+          <div className="flex justify-around items-center mb-2 rounded-md w-fit bg-white">
             <button className="px-6 py-3 text-black" disabled>
-              apple
+              <Image
+                src={"/icons/game.png"}
+                className="bg-white p-1 rounded-lg shadow-md cursor-pointer"
+                width={50}
+                height={50}
+              />
             </button>
             <button className="px-6 py-3 text-black" disabled>
-              playstore
+              <Image
+                src={"/icons/app-store.png"}
+                className="bg-white p-1 rounded-lg shadow-md cursor-pointer"
+                width={50}
+                height={50}
+              />
             </button>
           </div>
           <h3 className="font-bold text-secondary">Get In Touch</h3>
           <div className="flex justify-start items-center gap-3 p-3 m-y-3">
-            <a href="">
+            <Link href="">
               <Image src={"/icons/facebook.png"} width={20} height={20} />
-            </a>
-            <a href="">
+            </Link>
+            <Link href="">
               <Image src={"/icons/instagram.png"} width={20} height={20} />
-            </a>
-            <a href="">
+            </Link>
+            <Link href="">
               <Image
                 src={"/icons/twitter.png"}
                 className="bg-white p-1 rounded-sm"
                 width={20}
                 height={20}
               />
-            </a>
+            </Link>
           </div>
           <h3 className="font-bold text-secondary text-sm">Subscribe Now</h3>
           <form
@@ -82,10 +91,10 @@ const Footer = () => (
           @{new Date().getFullYear()} all rights reserved
         </div>
         <div className="grid grid-cols-4 place-items-center">
-          <a href="">About</a>
-          <a href="">Help</a>
-          <a href="">Contact</a>
-          <a href="">Settings</a>
+          <Link href="">About</Link>
+          <Link href="">Help</Link>
+          <Link href="">Contact</Link>
+          <Link href="">Settings</Link>
         </div>
       </div>
     </div>
