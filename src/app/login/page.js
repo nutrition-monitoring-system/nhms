@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
@@ -20,12 +20,23 @@ export default function Home() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
+  const [timer, setTimer] = useState(30);
+  //const [timerId, setTimerId] = useState(null);
+
   const router = useRouter();
 
   const modal = useRef(null);
   const handlePopUP = (e) => {
     e.preventDefault();
     modal.current.showModal();
+    // const tempId = setInterval(() => {
+    //   setTimer((timer) => timer - 1);
+    //   if (timer < 1) {
+    //     clearInterval(timerId);
+    //     setTimerId(null);
+    //   }
+    // }, 1000);
+    // setTimerId(tempId);
   };
   const handleClose = (e) => {
     e.preventDefault();
@@ -37,6 +48,7 @@ export default function Home() {
     // e.preventDefault();
     // router.push("./home");
   };
+
   return (
     <>
       <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans">
@@ -50,7 +62,7 @@ export default function Home() {
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
           <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10">
-            LogIn to your account
+            LogIn To Your Account
           </h1>
           <form
             className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md"
@@ -95,7 +107,15 @@ export default function Home() {
               <a className="text-purple-600 cursor-pointer">send</a>
               <p>You should get a confirmation code on your email</p>
               <input type={"text"} placeholder={"Confirmation Code.."}></input>
-              <a className="text-purple-600 cursor-pointer">reset/resend</a>
+              <div className="flex justify-left items-center gap-2">
+                <span className="p-2 ml-1">
+                  {timer}
+                  <span className="ml-1">s</span>
+                </span>
+                <button className="text-purple-600 cursor-pointer" disabled>
+                  resend code
+                </button>
+              </div>
               <input type={"password"} placeholder={"New Password"}></input>
               <input type={"password"} placeholder={"Confirm Password"}></input>
               <div className="flex justify-between items-center">

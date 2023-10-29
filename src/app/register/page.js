@@ -58,7 +58,10 @@ export default function Home() {
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
               />
-              <FormFive onClick={handleClick} onClickPrev={handleClickPrev} />
+              <FormFive
+                onClickPrev={handleClickPrev}
+                handleSubmit={handleSubmit}
+              />
             </form>
           </div>
         </div>

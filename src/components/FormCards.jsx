@@ -15,7 +15,7 @@ export function FormOne({ onClick }) {
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
         <div className="flex gap-2">
-          <input type={"text"} placeholder={"First Name"} />
+          <input type={"text"} placeholder={"First Name"} id="name" />
           <input type={"text"} placeholder={"Last Name"} />
         </div>
         <input
