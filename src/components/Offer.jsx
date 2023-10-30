@@ -1,3 +1,4 @@
+import Image from "next/image";
 const WhatWeOffer = () => (
   <>
     <div className="bg-orange-50 min-h-screen font-opensans text-black py-3">
@@ -17,7 +18,7 @@ function Card() {
   return (
     <>
       <div className="max-w-sm rounded overflow-hidden m-3 shadow-lg">
-        <img
+        <Image
           className="w-full"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
           alt="Sunset in the mountains"

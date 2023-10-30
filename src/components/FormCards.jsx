@@ -3,7 +3,14 @@ import Image from "next/image.js";
 import Button from "./Button.jsx";
 import { useRef, useState } from "react";
 
-export function FormOne({ onClick }) {
+export function FormOne({ onClick, formValidation }) {
+  // for form validation
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = formValidation;
+
   const [type, setType] = useState("text");
 
   const handleFocus = (event) => {
@@ -15,17 +22,50 @@ export function FormOne({ onClick }) {
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
         <div className="flex gap-2">
-          <input type={"text"} placeholder={"First Name*"} id="name" />
-          <input type={"text"} placeholder={"Last Name*"} />
+          <input
+            type={"text"}
+            placeholder={"First Name*"}
+            id="name"
+            {...register("firstName", { required: true })}
+          />
+          <input
+            type={"text"}
+            placeholder={"Last Name*"}
+            {...register("lastName", { required: true })}
+          />
         </div>
+        <div className="flex gap-2 justify-between">
+          <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
+          <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
+        </div>
+
         <input
           placeholder={"Date of Birth*"}
           type={type}
           onFocus={handleFocus}
+          {...register("date", { required: true })}
         />
-        <input type={"text"} placeholder={"Email Address*"} />
-        <input type={"password"} placeholder={"Password*"} />
-        <input type={"password"} placeholder={"Confirm Password*"} />
+        <p className="text-rose-600 text-sm">{errors.date?.message}</p>
+        <input
+          type={"text"}
+          placeholder={"Email Address*"}
+          {...register("email", { required: true })}
+        />
+        <p className="text-rose-600 text-sm">{errors.email?.message}</p>
+        <input
+          type={"password"}
+          placeholder={"Password*"}
+          {...register("password", { required: true })}
+        />
+        <p className="text-rose-600 text-sm">{errors.password?.message}</p>
+        <input
+          type={"password"}
+          placeholder={"Confirm Password*"}
+          {...register("confirmPassword", { required: true })}
+        />
+        <p className="text-rose-600 text-sm">
+          {errors.confirmPassword?.message}
+        </p>
         <div className="grid place-items-center">
           <Button onClick={onClick}>Next</Button>
         </div>
@@ -100,7 +140,7 @@ export function FormTwo({ onClick, onClickPrev }) {
           Help with information about you
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -109,7 +149,7 @@ export function FormTwo({ onClick, onClickPrev }) {
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
           <button className="tile">
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -122,7 +162,7 @@ export function FormTwo({ onClick, onClickPrev }) {
             return (
               <div key={idx}>
                 <div className="tile">
-                  <img
+                  <Image
                     onClick={(e) =>
                       handleModalclick(e, food?.type, food?.description)
                     }
@@ -137,7 +177,7 @@ export function FormTwo({ onClick, onClickPrev }) {
             );
           })}
           <button className="tile">
-            <img
+            <Image
               src="/icons/full-screen.png"
               alt="go full screen icon"
               width={20}
@@ -204,7 +244,7 @@ export function FormThree({ onClick, onClickPrev }) {
           Any Allergies
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -213,7 +253,7 @@ export function FormThree({ onClick, onClickPrev }) {
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
           <button className="tile">
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -226,7 +266,7 @@ export function FormThree({ onClick, onClickPrev }) {
             return (
               <div key={idx}>
                 <div className="tile">
-                  <img
+                  <Image
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -246,7 +286,7 @@ export function FormThree({ onClick, onClickPrev }) {
           })}
 
           <button className="tile">
-            <img
+            <Image
               src="/icons/full-screen.png"
               alt="go full screen icon"
               width={20}
@@ -321,7 +361,7 @@ export function FormFour({ onClick, onClickPrev }) {
           Chronic Conditions
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -330,7 +370,7 @@ export function FormFour({ onClick, onClickPrev }) {
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
           <button className="tile">
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -343,7 +383,7 @@ export function FormFour({ onClick, onClickPrev }) {
             return (
               <div key={idx}>
                 <div className="tile">
-                  <img
+                  <Image
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -362,7 +402,7 @@ export function FormFour({ onClick, onClickPrev }) {
             );
           })}
           <button className="tile">
-            <img
+            <Image
               src="/icons/full-screen.png"
               alt="go full screen icon"
               width={20}
@@ -476,7 +516,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               </div>
               {breakFast.map((food, idx) => {
                 return (
-                  <div id={idx}>
+                  <div key={idx}>
                     <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
                       {food?.name}
                     </div>
@@ -496,7 +536,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               </div>
               {Lunch.map((food, idx) => {
                 return (
-                  <div id={idx}>
+                  <div key={idx}>
                     <div className="aspect-[1/1] w-[60px] rounded-md text-sm bg-white shadow-xl grid place-items-center cursor-pointer">
                       {food?.name}
                     </div>
@@ -516,7 +556,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               </div>
               {Dinner.map((food, idx) => {
                 return (
-                  <div id={idx}>
+                  <div key={idx}>
                     <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
                       {food?.name}
                     </div>

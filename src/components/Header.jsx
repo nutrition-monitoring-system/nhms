@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Header() {
   return (
     <>
@@ -60,7 +60,7 @@ function ImageIcon({ link, src }) {
     <>
       <Link href={link}>
         {" "}
-        <img
+        <Image
           className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
           src={"./icons/" + src}
           loading="lazy"

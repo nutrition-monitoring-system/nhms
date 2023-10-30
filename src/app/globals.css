@@ -39,7 +39,7 @@ dialog::backdrop {
 }
 @layer components {
   input {
-    @apply p-3 bg-white w-full rounded-md text-black focus:outline-none shadow-xl;
+    @apply px-3 py-4 bg-white w-full rounded-md text-black focus:outline-none shadow-xl;
   }
   input::placeholder {
     @apply text-gray-700 font-semibold opacity-70;

@@ -46,8 +46,7 @@ export default function Home() {
     e.preventDefault();
     modal.current.close();
   };
-  const submitForm = async (data) => {
-    console.log(data);
+  const submitForm = (data) => {
     router.push("./home");
   };
 
@@ -77,7 +76,7 @@ export default function Home() {
               name="email"
             ></input>
             {errors.email && (
-              <p className="text-rose-600">{errors.email.message}</p>
+              <p className="text-rose-600 text-sm">{errors.email?.message}</p>
             )}
             <input
               {...register("password", { required: true })}
@@ -86,7 +85,9 @@ export default function Home() {
               name="password"
             ></input>
             {errors.password && (
-              <p className="text-rose-600">{errors.password.message}</p>
+              <p className="text-rose-600 text-sm">
+                {errors.password?.message}
+              </p>
             )}
             <a className="grid place-items-center">
               <span className="cursor-pointer" onClick={handlePopUP}>
