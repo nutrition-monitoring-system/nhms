@@ -20,8 +20,8 @@ export default function Home() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
-  const [timer, setTimer] = useState(30);
-  //const [timerId, setTimerId] = useState(null);
+  const [timer, setTimer] = useState(10);
+  const [timerId, setTimerId] = useState(null);
 
   const router = useRouter();
 
@@ -29,24 +29,26 @@ export default function Home() {
   const handlePopUP = (e) => {
     e.preventDefault();
     modal.current.showModal();
-    // const tempId = setInterval(() => {
-    //   setTimer((timer) => timer - 1);
-    //   if (timer < 1) {
-    //     clearInterval(timerId);
-    //     setTimerId(null);
-    //   }
-    // }, 1000);
-    // setTimerId(tempId);
+    // this is a timer for forgot password verification.
+    const tempId = setInterval(() => {
+      setTimer((timer) => {
+        if (timer > 0) return timer - 1;
+        else {
+          clearInterval(timerId);
+          setTimerId(null);
+          return timer;
+        }
+      });
+    }, 1000);
+    setTimerId(tempId);
   };
   const handleClose = (e) => {
     e.preventDefault();
     modal.current.close();
   };
   const submitForm = async (data) => {
-    console.log(userSchema.isValid(data));
-    // console.log(e);
-    // e.preventDefault();
-    // router.push("./home");
+    console.log(data);
+    router.push("./home");
   };
 
   return (
@@ -108,13 +110,11 @@ export default function Home() {
               <p>You should get a confirmation code on your email</p>
               <input type={"text"} placeholder={"Confirmation Code.."}></input>
               <div className="flex justify-left items-center gap-2">
-                <span className="p-2 ml-1">
+                <span className="p-2 mx-1">
                   {timer}
-                  <span className="ml-1">s</span>
+                  <span className="">s</span>
                 </span>
-                <button className="text-purple-600 cursor-pointer" disabled>
-                  resend code
-                </button>
+                <a className="text-purple-600 cursor-pointer">reset/resend</a>
               </div>
               <input type={"password"} placeholder={"New Password"}></input>
               <input type={"password"} placeholder={"Confirm Password"}></input>

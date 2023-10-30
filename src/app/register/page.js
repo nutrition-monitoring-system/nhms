@@ -11,8 +11,11 @@ import {
   FormFive,
 } from "../../components/FormCards.jsx";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
   const [index, setIndex] = useState(0);
+  const router = useRouter();
   //const [formDone, setFormDone] = useState(false);
   const handleClick = (e) => {
     e.preventDefault();
@@ -29,7 +32,10 @@ export default function Home() {
     }
     setIndex((prevIndex) => prevIndex - 1);
   };
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    router.push("/home");
+  };
 
   return (
     <>

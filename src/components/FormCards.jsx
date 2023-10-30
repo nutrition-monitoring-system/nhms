@@ -381,41 +381,86 @@ export function FormFour({ onClick, onClickPrev }) {
 }
 
 export function FormFive({ onClickPrev, handleSubmit }) {
+  const modal = useRef(null);
+  const handleModalclose = (event) => {
+    event.preventDefault();
+    modal.current.close();
+  };
+  const handleAddClick = () => {
+    modal.current.showModal();
+  };
   return (
-    <div className="min-w-full pb-2">
-      <h1 className="grid place-items-center text-secondary">
-        Did you have any thing today?
-      </h1>
-      <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
-        <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
-          <h1>BreakFast</h1>
-          <div className="min-w-full p-1">
-            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
-              <Image src={"/icons/add.png"} width={20} height={20}></Image>
+    <>
+      <dialog
+        ref={modal}
+        className="w-[35%] h-fit bg-white rounded-md relative p-1"
+      >
+        <div className="p-2 grid place-items-center gap-1">
+          <h1 className="grid place-items-center text-secondary">
+            Did you have any thing today?
+          </h1>
+          <div className="gap-2">
+            <input type="text" placeholder="Food name" />
+            <input
+              type="text"
+              placeholder="Food description"
+              className="my-2"
+            />
+            <input
+              type="text"
+              placeholder="a drink? water maybe"
+              value={"water"}
+            />
+          </div>
+          <button onClick={handleModalclose} className="tile mt-2">
+            close
+          </button>
+        </div>
+      </dialog>
+      <div className="min-w-full pb-2">
+        <h1 className="grid place-items-center text-secondary">
+          Did you have any thing today?
+        </h1>
+        <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
+          <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
+            <h1>BreakFast</h1>
+            <div className="min-w-full p-1">
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
+                onClick={handleAddClick}
+              >
+                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
+            <h1>Lunch</h1>
+            <div className="min-w-full p-1">
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
+                onClick={handleAddClick}
+              >
+                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
+            <h1>Dinner</h1>
+            <div className="min-w-full p-1">
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
+                onClick={handleAddClick}
+              >
+                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+              </div>
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
-          <h1>Lunch</h1>
-          <div className="min-w-full p-1">
-            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
-              <Image src={"/icons/add.png"} width={20} height={20}></Image>
-            </div>
-          </div>
-        </div>
-        <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
-          <h1>Dinner</h1>
-          <div className="min-w-full p-1">
-            <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center">
-              <Image src={"/icons/add.png"} width={20} height={20}></Image>
-            </div>
-          </div>
+        <div className="grid grid-cols-2 place-items-center">
+          <Button onClick={onClickPrev}>Previous</Button>
+          <Button onClick={handleSubmit}>done</Button>
         </div>
       </div>
-      <div className="grid grid-cols-2 place-items-center">
-        <Button onClick={onClickPrev}>Previous</Button>
-        <Button onClick={handleSubmit}>done</Button>
-      </div>
-    </div>
+    </>
   );
 }
