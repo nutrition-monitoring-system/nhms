@@ -621,11 +621,12 @@ export function Accessibility({ onClick, onClickPrev }) {
             return (
               <div key={idx}>
                 <div className="tile">
-                  <Image
+                  <img
                     src={setting?.src}
                     alt={setting?.alt}
                     width={20}
                     height={20}
+                    loading="lazy"
                   />
                   {setting?.value}
                 </div>
