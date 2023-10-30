@@ -60,6 +60,7 @@ export default function Home() {
       return;
     }
     setTitle("Create A New Account");
+
     setIndex((prevIndex) => prevIndex - 1);
   };
   const handleFormSubmit = async (data) => {

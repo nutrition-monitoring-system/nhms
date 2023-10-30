@@ -517,7 +517,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               {breakFast.map((food, idx) => {
                 return (
                   <div key={idx}>
-                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
+                    <div className="aspect-[1/1] min-w-fit w-[60px] rounded-md bg-white shadow-xl flex justify-center items-center text-center px-2 cursor-pointer">
                       {food?.name}
                     </div>
                   </div>
@@ -537,7 +537,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               {Lunch.map((food, idx) => {
                 return (
                   <div key={idx}>
-                    <div className="aspect-[1/1] w-[60px] rounded-md text-sm bg-white shadow-xl grid place-items-center cursor-pointer">
+                    <div className="aspect-[1/1] w-[60px] rounded-md text-sm bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
                       {food?.name}
                     </div>
                   </div>
@@ -557,7 +557,7 @@ export function FormFive({ onClickPrev, handleSubmit }) {
               {Dinner.map((food, idx) => {
                 return (
                   <div key={idx}>
-                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
+                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
                       {food?.name}
                     </div>
                   </div>

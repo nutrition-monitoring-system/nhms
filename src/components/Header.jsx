@@ -62,7 +62,7 @@ function ImageIcon({ link, src }) {
         {" "}
         <Image
           className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
-          src={"./icons/" + src}
+          src={"/icons/" + src}
           loading="lazy"
           width={30}
           height={30}

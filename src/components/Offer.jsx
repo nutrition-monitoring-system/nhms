@@ -18,9 +18,10 @@ function Card() {
   return (
     <>
       <div className="max-w-sm rounded overflow-hidden m-3 shadow-lg">
-        <Image
+        <img
           className="w-full"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
+          width={100}
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
