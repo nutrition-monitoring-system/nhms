@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const userSchema = object().shape({
   email: string().email().required("Please type in your email."),
-  password: string().required("Please type in your password."),
+  password: string().min(10).max(20).required("Please type in your password."),
 });
 
 export default function Home() {
@@ -73,7 +73,7 @@ export default function Home() {
             <input
               {...register("email", { required: true })}
               type="text"
-              placeholder={"Username or Email"}
+              placeholder={"Email Address"}
               name="email"
             ></input>
             {errors.email && (

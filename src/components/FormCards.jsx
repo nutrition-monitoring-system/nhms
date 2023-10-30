@@ -15,17 +15,17 @@ export function FormOne({ onClick }) {
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
         <div className="flex gap-2">
-          <input type={"text"} placeholder={"First Name"} id="name" />
-          <input type={"text"} placeholder={"Last Name"} />
+          <input type={"text"} placeholder={"First Name*"} id="name" />
+          <input type={"text"} placeholder={"Last Name*"} />
         </div>
         <input
-          placeholder={"Date of Birth"}
+          placeholder={"Date of Birth*"}
           type={type}
           onFocus={handleFocus}
         />
-        <input type={"text"} placeholder={"Username or Email"} />
-        <input type={"password"} placeholder={"Password"} />
-        <input type={"password"} placeholder={"Confirm Password"} />
+        <input type={"text"} placeholder={"Email Address*"} />
+        <input type={"password"} placeholder={"Password*"} />
+        <input type={"password"} placeholder={"Confirm Password*"} />
         <div className="grid place-items-center">
           <Button onClick={onClick}>Next</Button>
         </div>
@@ -382,12 +382,47 @@ export function FormFour({ onClick, onClickPrev }) {
 
 export function FormFive({ onClickPrev, handleSubmit }) {
   const modal = useRef(null);
+  const foodName = useRef(null);
+  const foodDescription = useRef(null);
+  const aDrink = useRef(null);
+
+  const [breakFast, setBreakFast] = useState([]);
+  const [Lunch, setLunch] = useState([]);
+  const [Dinner, setDinner] = useState([]);
+
+  const [type, setType] = useState("");
+
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
   };
-  const handleAddClick = () => {
+  const handleAddClick = (event, type) => {
+    event.preventDefault();
     modal.current.showModal();
+    setType(type);
+  };
+  const handleAddFood = (event) => {
+    event.preventDefault();
+    const foodInformation = {
+      name: foodName.current.value,
+      description: foodDescription.current.value,
+      drink: aDrink.current.value,
+    };
+    switch (type) {
+      case "breakfast":
+        setBreakFast([...breakFast, foodInformation]);
+        break;
+      case "lunch":
+        setLunch([...Lunch, foodInformation]);
+        break;
+      default: // super
+        setDinner([...Dinner, foodInformation]);
+        break;
+    }
+    // do not need to clear drink because water is the default
+    (foodName.current.value = ""),
+      (foodDescription.current.value = ""),
+      handleModalclose(event);
   };
   return (
     <>
@@ -398,23 +433,31 @@ export function FormFive({ onClickPrev, handleSubmit }) {
         <div className="p-2 grid place-items-center gap-1">
           <h1 className="grid place-items-center text-secondary">
             Did you have any thing today?
+            <p>{type.toUpperCase()}</p>
           </h1>
           <div className="gap-2">
-            <input type="text" placeholder="Food name" />
+            <input type="text" placeholder="Food name" ref={foodName} />
             <input
               type="text"
               placeholder="Food description"
               className="my-2"
+              ref={foodDescription}
             />
             <input
               type="text"
               placeholder="a drink? water maybe"
-              value={"water"}
+              defaultValue={"water"}
+              ref={aDrink}
             />
           </div>
-          <button onClick={handleModalclose} className="tile mt-2">
-            close
-          </button>
+          <div className="flex justify-around items-center mt-2 w-full">
+            <button onClick={handleAddFood} className="tile">
+              add
+            </button>
+            <button onClick={handleModalclose} className="tile">
+              close
+            </button>
+          </div>
         </div>
       </dialog>
       <div className="min-w-full pb-2">
@@ -424,35 +467,62 @@ export function FormFive({ onClickPrev, handleSubmit }) {
         <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
           <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
             <h1>BreakFast</h1>
-            <div className="min-w-full p-1">
+            <div className="min-w-full p-1 flex justify-left items-center gap-1">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
-                onClick={handleAddClick}
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <Image src={"/icons/add.png"} width={20} height={20}></Image>
               </div>
+              {breakFast.map((food, idx) => {
+                return (
+                  <div id={idx}>
+                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
+                      {food?.name}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
             <h1>Lunch</h1>
-            <div className="min-w-full p-1">
+            <div className="min-w-full p-1 flex justify-left items-center gap-1">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
-                onClick={handleAddClick}
+                className="aspect-[1/1] w-[60px] rounded-md bg-white  shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "lunch")}
               >
                 <Image src={"/icons/add.png"} width={20} height={20}></Image>
               </div>
+              {Lunch.map((food, idx) => {
+                return (
+                  <div id={idx}>
+                    <div className="aspect-[1/1] w-[60px] rounded-md text-sm bg-white shadow-xl grid place-items-center cursor-pointer">
+                      {food?.name}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
             <h1>Dinner</h1>
-            <div className="min-w-full p-1">
+            <div className="min-w-full p-1 flex justify-left items-center gap-1">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer"
-                onClick={handleAddClick}
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "dinner")}
               >
                 <Image src={"/icons/add.png"} width={20} height={20}></Image>
               </div>
+              {Dinner.map((food, idx) => {
+                return (
+                  <div id={idx}>
+                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer">
+                      {food?.name}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
