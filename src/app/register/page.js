@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 //import Image from 'next/image'
 import Button from "../../components/Button.jsx";
-import Accessibility from "../../components/Accessibility.jsx";
+//import Accessibility from "../../components/Accessibility.jsx";
 import {
   FormOne,
   FormTwo,
   FormThree,
   FormFour,
   FormFive,
+  Accessibility,
 } from "../../components/FormCards.jsx";
 
 import { useRouter } from "next/navigation";

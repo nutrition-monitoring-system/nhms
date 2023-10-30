@@ -574,3 +574,70 @@ export function FormFive({ onClickPrev, handleSubmit }) {
     </>
   );
 }
+
+export function Accessibility({ onClick, onClickPrev }) {
+  const settings = [
+    { value: "font Size", src: "/icons/add.png", alt: "add icon" },
+    { value: "use bold Text", src: "/icons/bold.png", alt: "capital b" },
+    { value: "dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
+    {
+      value: "use Descriptive Links",
+      src: "/icons/information.png",
+      alt: "descriptive links",
+    },
+    {
+      value: "High Contrast Mode",
+      src: "/icons/adjustment.png",
+      alt: "High contrast mode",
+    },
+    { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
+  ];
+  return (
+    <>
+      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
+        <h1 className="grid place-items-center text-secondary">
+          Accessiblity Settings
+        </h1>
+        <div className="relative flex items-center gap-1 p-2">
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <input
+            type="text"
+            placeholder="Type to add or search"
+            className="pl-7 flex-grow"
+          />
+        </div>
+        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+          <button className="tile">
+            <Image
+              src="/icons/add.png"
+              className="rotate-45"
+              alt="go full screen icon"
+              width={20}
+              height={20}
+            />
+            none
+          </button>
+          {settings.map((setting, idx) => {
+            return (
+              <div key={idx}>
+                <div className="tile">
+                  <Image
+                    src={setting?.src}
+                    alt={setting?.alt}
+                    width={20}
+                    height={20}
+                  />
+                  {setting?.value}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="grid grid-cols-2 place-items-center">
+          <Button onClick={onClickPrev}>Previous</Button>
+          <Button onClick={onClick}>next</Button>
+        </div>
+      </div>
+    </>
+  );
+}
