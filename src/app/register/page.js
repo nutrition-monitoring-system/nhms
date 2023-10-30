@@ -55,6 +55,7 @@ export default function Home() {
     setIndex((prevIndex) => prevIndex + 1);
   };
 
+  // this functions handle's the previous click button
   const handleClickPrev = (e) => {
     e.preventDefault();
     if (index <= 0) {
@@ -88,7 +89,7 @@ export default function Home() {
           </h1>
           <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidden">
             <form
-              className="flex transition-transform duration-300 min-h-fit"
+              className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <FormOne

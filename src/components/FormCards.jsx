@@ -3,6 +3,7 @@ import Image from "next/image.js";
 import Button from "./Button.jsx";
 import { useRef, useState } from "react";
 
+// personal information
 export function FormOne({ onClick, formValidation }) {
   // for form validation
   const {
@@ -21,7 +22,7 @@ export function FormOne({ onClick, formValidation }) {
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           <input
             type={"text"}
             placeholder={"First Name*"}
@@ -74,6 +75,7 @@ export function FormOne({ onClick, formValidation }) {
   );
 }
 
+// food category
 export function FormTwo({ onClick, onClickPrev }) {
   const foodTypeInformation = [
     { type: "vegan", description: "No animal products." },
@@ -109,6 +111,8 @@ export function FormTwo({ onClick, onClickPrev }) {
   const modal = useRef(null);
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
+  const [userSelected, SetUserSelected] = useState("");
+
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
@@ -118,6 +122,13 @@ export function FormTwo({ onClick, onClickPrev }) {
     modal.current.showModal();
     setType(type);
     setDescription(description);
+  };
+  const FoodTypeRefs = Array(foodTypeInformation.length)
+    .fill(null)
+    .map(() => useRef(null));
+  const handleOptionClick = (refIdx) => {
+    FoodTypeRefs[refIdx].current.classList.toggle("bg-secondary");
+    SetUserSelected([...userSelected, foodTypeInformation[refIdx].type]);
   };
   return (
     <>
@@ -148,7 +159,7 @@ export function FormTwo({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile">
+          <button className="tile bg-secondary">
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -161,7 +172,11 @@ export function FormTwo({ onClick, onClickPrev }) {
           {foodTypeInformation.slice(0, 10)?.map((food, idx) => {
             return (
               <div key={idx}>
-                <div className="tile">
+                <div
+                  className="tile"
+                  ref={FoodTypeRefs[idx]}
+                  onClick={() => handleOptionClick(idx)}
+                >
                   <Image
                     onClick={(e) =>
                       handleModalclick(e, food?.type, food?.description)
@@ -176,15 +191,6 @@ export function FormTwo({ onClick, onClickPrev }) {
               </div>
             );
           })}
-          <button className="tile">
-            <Image
-              src="/icons/full-screen.png"
-              alt="go full screen icon"
-              width={20}
-              height={20}
-            />
-            more...
-          </button>
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
@@ -195,6 +201,7 @@ export function FormTwo({ onClick, onClickPrev }) {
   );
 }
 
+//allergies
 export function FormThree({ onClick, onClickPrev }) {
   const Allergies = [
     { type: "Peanuts", description: "Allergic to peanuts." },
@@ -214,6 +221,8 @@ export function FormThree({ onClick, onClickPrev }) {
   const modal = useRef(null);
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
+  const [userSelected, SetUserSelected] = useState("");
+
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
@@ -223,6 +232,13 @@ export function FormThree({ onClick, onClickPrev }) {
     modal.current.showModal();
     setType(type);
     setDescription(description);
+  };
+  const AllergyRefs = Array(Allergies.length)
+    .fill(null)
+    .map(() => useRef(null));
+  const handleOptionClick = (refIdx) => {
+    AllergyRefs[refIdx].current.classList.toggle("bg-secondary");
+    SetUserSelected([...userSelected, Allergies[refIdx].type]);
   };
   return (
     <>
@@ -252,7 +268,7 @@ export function FormThree({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile">
+          <button className="tile bg-secondary">
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -262,10 +278,14 @@ export function FormThree({ onClick, onClickPrev }) {
             />
             none
           </button>
-          {Allergies.slice(0, 10).map((allergy, idx) => {
+          {Allergies.map((allergy, idx) => {
             return (
               <div key={idx}>
-                <div className="tile">
+                <div
+                  className="tile"
+                  ref={AllergyRefs[idx]}
+                  onClick={() => handleOptionClick(idx)}
+                >
                   <Image
                     onClick={(event) =>
                       handleModalclick(
@@ -284,16 +304,6 @@ export function FormThree({ onClick, onClickPrev }) {
               </div>
             );
           })}
-
-          <button className="tile">
-            <Image
-              src="/icons/full-screen.png"
-              alt="go full screen icon"
-              width={20}
-              height={20}
-            />
-            more...
-          </button>
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
@@ -304,6 +314,7 @@ export function FormThree({ onClick, onClickPrev }) {
   );
 }
 
+// chronic conditions
 export function FormFour({ onClick, onClickPrev }) {
   const chronicConditions = [
     { type: "Diabetes", description: "Affects blood sugar regulation." },
@@ -328,9 +339,12 @@ export function FormFour({ onClick, onClickPrev }) {
     },
     { type: "COPD", description: "Chronic lung diseases like emphysema." },
   ];
+
   const modal = useRef(null);
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
+  const [userSelected, SetUserSelected] = useState("");
+
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
@@ -340,6 +354,13 @@ export function FormFour({ onClick, onClickPrev }) {
     modal.current.showModal();
     setType(type);
     setDescription(description);
+  };
+  const ConditionRefs = Array(chronicConditions.length)
+    .fill(null)
+    .map(() => useRef(null));
+  const handleOptionClick = (refIdx) => {
+    ConditionRefs[refIdx].current.classList.toggle("bg-secondary");
+    SetUserSelected([...userSelected, chronicConditions[refIdx].type]);
   };
   return (
     <>
@@ -369,20 +390,24 @@ export function FormFour({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile">
+          <button className="tile bg-secondary">
             <Image
               src="/icons/add.png"
               className="rotate-45"
-              alt="go full screen icon"
+              alt="add icon"
               width={20}
               height={20}
             />
             none
           </button>
-          {chronicConditions.slice(0, 10).map((condition, idx) => {
+          {chronicConditions.map((condition, idx) => {
             return (
               <div key={idx}>
-                <div className="tile">
+                <div
+                  className="tile"
+                  ref={ConditionRefs[idx]}
+                  onClick={() => handleOptionClick(idx)}
+                >
                   <Image
                     onClick={(event) =>
                       handleModalclick(
@@ -401,15 +426,6 @@ export function FormFour({ onClick, onClickPrev }) {
               </div>
             );
           })}
-          <button className="tile">
-            <Image
-              src="/icons/full-screen.png"
-              alt="go full screen icon"
-              width={20}
-              height={20}
-            />
-            more...
-          </button>
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
@@ -420,6 +436,7 @@ export function FormFour({ onClick, onClickPrev }) {
   );
 }
 
+// adding daily intake
 export function FormFive({ onClickPrev, handleSubmit }) {
   const modal = useRef(null);
   const foodName = useRef(null);
@@ -592,6 +609,14 @@ export function Accessibility({ onClick, onClickPrev }) {
     },
     { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
   ];
+  const [userSelected, SetUserSelected] = useState([]);
+  const SettingsRef = Array(settings.length)
+    .fill(null)
+    .map(() => useRef(null));
+  const handleOptionClick = (refIdx) => {
+    SettingsRef[refIdx].current.classList.toggle("bg-secondary");
+    SetUserSelected([...userSelected, settings[refIdx].type]);
+  };
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
@@ -607,7 +632,7 @@ export function Accessibility({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile">
+          <button className="tile bg-secondary">
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -620,7 +645,11 @@ export function Accessibility({ onClick, onClickPrev }) {
           {settings.map((setting, idx) => {
             return (
               <div key={idx}>
-                <div className="tile">
+                <div
+                  className="tile"
+                  ref={SettingsRef[idx]}
+                  onClick={() => handleOptionClick(idx)}
+                >
                   <img
                     src={setting?.src}
                     alt={setting?.alt}
