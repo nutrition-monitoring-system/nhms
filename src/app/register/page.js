@@ -23,6 +23,7 @@ const userSchema = object().shape({
   firstName: string().required("Please type in your First name."),
   lastName: string().required("Please type in your last name."),
   date: date().required("Please type in your date of birth."),
+  gender: string().required("Please choose a gender from list of options"),
   email: string().email().required("Please type in your email."),
   password: string().min(10).max(20).required("Please type in your password."),
   confirmPassword: string().oneOf(
@@ -66,10 +67,38 @@ export default function Home() {
     setIndex((prevIndex) => prevIndex - 1);
   };
   const handleFormSubmit = async (data) => {
-    router.push("/home");
+    data = {
+      forename: data.firstName,
+      surname: data.lastName,
+      dob: data.date,
+      email: data.email,
+      password: data.password,
+      gender: data.gender,
+      is_admin: 0
+    }
+    console.log(data);
+    try {
+      const url = "https://localhost:3000/addUser";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const content = await response.json();
+
+      //router.push("/home");
+      console.log(content);
+    } catch (error) {
+      console.error("Could not push to /api/addUSer");
+    } finally {
+    }
   };
 
   useEffect(() => {
+    setTitle("Create A New Account");
     setIndex((prevIndex) => prevIndex * 0);
   }, [errors]);
 

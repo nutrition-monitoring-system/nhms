@@ -21,8 +21,8 @@ export function PersonalInformation({ onClick, formValidation }) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full p-3 rounded-md">
-        <div className="flex gap-1">
+      <div className="flex flex-col justify-center items-left gap-2 min-w-full p-3 rounded-md">
+        <div className="flex gap-2">
           <input
             type={"text"}
             placeholder={"First Name*"}
@@ -39,7 +39,21 @@ export function PersonalInformation({ onClick, formValidation }) {
           <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
           <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
         </div>
-
+        <select {...register("gender")} className="font-opensans">
+          <option
+            className="opacity-70 font-semibold"
+            value=""
+            defaultValue
+            disabled
+            hidden
+          >
+            Gender*
+          </option>
+          <option value="female">female</option>
+          <option value="male">male</option>
+          <option value="other">other</option>
+        </select>
+        <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
         <input
           placeholder={"Date of Birth*"}
           type={type}
@@ -112,7 +126,12 @@ export function FoodCategories({ onClick, onClickPrev }) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
+  const inputRef = useRef(null);
+  const handleOnChange = () => {
+    setSearchValue(inputRef.current.value);
+  };
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
@@ -125,14 +144,18 @@ export function FoodCategories({ onClick, onClickPrev }) {
   };
 
   const noneButtonRef = useRef(null);
+  const FoodTypeRefs = useRef({});
+
   const handleNone = (event) => {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
+    Object.keys(FoodTypeRefs.current).forEach((key) => {
+      FoodTypeRefs.current[key].classList.remove("bg-secondary");
+    });
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
-  const FoodTypeRefs = useRef({});
   const handleOptionClick = (refIdx) => {
     FoodTypeRefs.current[refIdx].classList.toggle("bg-secondary");
     handleNone(null);
@@ -165,6 +188,9 @@ export function FoodCategories({ onClick, onClickPrev }) {
             type="text"
             placeholder="Type to add or search"
             className="pl-7 flex-grow"
+            onChange={handleOnChange}
+            ref={inputRef}
+            onSubmit={(e) => e.preventDefault()}
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
@@ -182,28 +208,31 @@ export function FoodCategories({ onClick, onClickPrev }) {
             />
             none
           </button>
-          {foodTypeInformation.slice(0, 10)?.map((food, idx) => {
-            return (
-              <div key={idx}>
-                <div
-                  className="tile"
-                  ref={(element) => (FoodTypeRefs.current[idx] = element)}
-                  onClick={() => handleOptionClick(idx)}
-                >
-                  <Image
-                    onClick={(e) =>
-                      handleModalclick(e, food?.type, food?.description)
-                    }
-                    src="/icons/info.png"
-                    alt="information icon"
-                    width={20}
-                    height={20}
-                  />
-                  {food?.type}
+          {foodTypeInformation
+            .slice(0, 10)
+            ?.filter((food) => food.type.includes(searchValue))
+            .map((food, idx) => {
+              return (
+                <div key={idx}>
+                  <div
+                    className="tile"
+                    ref={(element) => (FoodTypeRefs.current[idx] = element)}
+                    onClick={() => handleOptionClick(idx)}
+                  >
+                    <Image
+                      onClick={(e) =>
+                        handleModalclick(e, food?.type, food?.description)
+                      }
+                      src="/icons/info.png"
+                      alt="information icon"
+                      width={20}
+                      height={20}
+                    />
+                    {food?.type}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
@@ -235,6 +264,12 @@ export function Allergies({ onClick, onClickPrev }) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
+  const inputRef = useRef(null);
+  const handleOnChange = () => {
+    setSearchValue(inputRef.current.value);
+  };
 
   const handleModalclose = (event) => {
     event.preventDefault();
@@ -248,14 +283,18 @@ export function Allergies({ onClick, onClickPrev }) {
   };
 
   const noneButtonRef = useRef(null);
+  const AllergyRefs = useRef({});
+
   const handleNone = (event) => {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
+    Object.keys(AllergyRefs.current).forEach((key) => {
+      AllergyRefs.current[key].classList.remove("bg-secondary");
+    });
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
-  const AllergyRefs = useRef({});
   const handleOptionClick = (refIdx) => {
     AllergyRefs.current[refIdx].classList.toggle("bg-secondary");
     handleNone(null);
@@ -287,6 +326,9 @@ export function Allergies({ onClick, onClickPrev }) {
             type="text"
             placeholder="Type to add or search"
             className="pl-7 flex-grow"
+            onChange={handleOnChange}
+            ref={inputRef}
+            onSubmit={(e) => e.preventDefault()}
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
@@ -370,6 +412,12 @@ export function ChronicConditions({ onClick, onClickPrev }) {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+
+  const inputRef = useRef(null);
+  const handleOnChange = () => {
+    setSearchValue(inputRef.current.value);
+  };
 
   const handleModalclose = (event) => {
     event.preventDefault();
@@ -383,14 +431,18 @@ export function ChronicConditions({ onClick, onClickPrev }) {
   };
 
   const noneButtonRef = useRef(null);
+  const ConditionRefs = useRef({});
+
   const handleNone = (event) => {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
+    Object.keys(ConditionRefs.current).forEach((key) => {
+      ConditionRefs.current[key].classList.remove("bg-secondary");
+    });
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
-  const ConditionRefs = useRef({});
   const handleOptionClick = (refIdx) => {
     ConditionRefs.current[refIdx].classList.toggle("bg-secondary");
     handleNone(null);
@@ -421,6 +473,9 @@ export function ChronicConditions({ onClick, onClickPrev }) {
             type="text"
             placeholder="Type to add or search"
             className="pl-7 flex-grow"
+            onChange={handleOnChange}
+            ref={inputRef}
+            onSubmit={(e) => e.preventDefault()}
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
@@ -495,14 +550,18 @@ export function Accessibility({ onClick, onClickPrev }) {
   const [userSelected, SetUserSelected] = useState([]);
 
   const noneButtonRef = useRef(null);
+  const SettingsRef = useRef({});
+
   const handleNone = (event) => {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
+    Object.keys(SettingsRef.current).forEach((key) => {
+      SettingsRef.current[key].classList.remove("bg-secondary");
+    });
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
-  const SettingsRef = useRef({});
   const handleOptionClick = (refIdx) => {
     SettingsRef.current[refIdx].classList.toggle("bg-secondary");
     handleNone(null);
@@ -660,7 +719,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
-                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+                <Image
+                  src={"/icons/add.png"}
+                  alt={"Add image icon"}
+                  width={20}
+                  height={20}
+                ></Image>
               </div>
               {breakFast.map((food, idx) => {
                 return (
@@ -680,7 +744,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white  shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "lunch")}
               >
-                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+                <Image
+                  src={"/icons/add.png"}
+                  alt={"Add image icon"}
+                  width={20}
+                  height={20}
+                ></Image>
               </div>
               {Lunch.map((food, idx) => {
                 return (
@@ -700,7 +769,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "dinner")}
               >
-                <Image src={"/icons/add.png"} width={20} height={20}></Image>
+                <Image
+                  src={"/icons/add.png"}
+                  alt={"Add image icon"}
+                  width={20}
+                  height={20}
+                ></Image>
               </div>
               {Dinner.map((food, idx) => {
                 return (
@@ -722,3 +796,5 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
     </>
   );
 }
+
+// function TemplateForm({ onClick, onClickPrev, handleSubmit }) {}

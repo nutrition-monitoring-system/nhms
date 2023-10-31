@@ -38,15 +38,16 @@ dialog::backdrop {
   backdrop-filter: blur(7px);
 }
 @layer components {
-  input {
-    @apply px-3 py-4 bg-white w-full rounded-md text-black focus:outline-none shadow-xl;
+  input,
+  select {
+    @apply px-3 py-4 bg-white w-full outline-none rounded-md text-black focus:outline-none shadow-xl;
   }
   input::placeholder {
     @apply text-gray-700 font-semibold opacity-70;
   }
   .tile {
     @apply min-w-fit flex justify-between items-center gap-2 rounded-md
-    bg-white px-5 py-2 text-sm text-black
+    bg-white px-5 py-2 text-sm text-black transition-all duration-75 ease-in-out
     shadow-xl hover:shadow-2xl cursor-pointer;
   }
   button:disabled {
