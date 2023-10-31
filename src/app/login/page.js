@@ -49,7 +49,7 @@ export default function Home() {
           <Button href={"/register"}>Sign Up</Button>
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
-          <h1 className="font-black text-[40px] font-modak text-center w-1/2">
+          <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10">
             LogIn to your account
           </h1>
           <form
