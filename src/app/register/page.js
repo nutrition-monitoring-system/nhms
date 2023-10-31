@@ -74,8 +74,8 @@ export default function Home() {
       email: data.email,
       password: data.password,
       gender: data.gender,
-      is_admin: 0
-    }
+      is_admin: 0,
+    };
     console.log(data);
     try {
       const url = "https://localhost:3000/addUser";
@@ -92,8 +92,7 @@ export default function Home() {
       //router.push("/home");
       console.log(content);
     } catch (error) {
-      console.error("Could not push to /api/addUSer");
-    } finally {
+      console.log("Could not push to /api/addUSer");
     }
   };
 
