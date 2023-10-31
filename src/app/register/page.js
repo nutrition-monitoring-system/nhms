@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Button from "../../components/Button.jsx";
 //import Accessibility from "../../components/Accessibility.jsx";
 import {
-  FormOne,
-  FormTwo,
-  FormThree,
-  FormFour,
-  FormFive,
+  PersonalInformation,
+  FoodCategories,
+  Allergies,
+  ChronicConditions,
+  DailyIntake,
   Accessibility,
 } from "../../components/FormCards.jsx";
 
@@ -92,7 +92,7 @@ export default function Home() {
               className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
             >
-              <FormOne
+              <PersonalInformation
                 onClick={handleClick}
                 formValidation={{
                   register,
@@ -100,14 +100,20 @@ export default function Home() {
                   formState: { errors },
                 }}
               />
-              <FormTwo onClick={handleClick} onClickPrev={handleClickPrev} />
-              <FormThree onClick={handleClick} onClickPrev={handleClickPrev} />
-              <FormFour onClick={handleClick} onClickPrev={handleClickPrev} />
+              <FoodCategories
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+              />
+              <Allergies onClick={handleClick} onClickPrev={handleClickPrev} />
+              <ChronicConditions
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+              />
               <Accessibility
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
               />
-              <FormFive
+              <DailyIntake
                 onClickPrev={handleClickPrev}
                 handleSubmit={handleSubmit(handleFormSubmit)}
               />

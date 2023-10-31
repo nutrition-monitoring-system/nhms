@@ -4,7 +4,7 @@ import Button from "./Button.jsx";
 import { useRef, useState } from "react";
 
 // personal information
-export function FormOne({ onClick, formValidation }) {
+export function PersonalInformation({ onClick, formValidation }) {
   // for form validation
   const {
     register,
@@ -76,7 +76,7 @@ export function FormOne({ onClick, formValidation }) {
 }
 
 // food category
-export function FormTwo({ onClick, onClickPrev }) {
+export function FoodCategories({ onClick, onClickPrev }) {
   const foodTypeInformation = [
     { type: "vegan", description: "No animal products." },
     { type: "vegetarian", description: "Plant-based diet without meat." },
@@ -123,13 +123,22 @@ export function FormTwo({ onClick, onClickPrev }) {
     setType(type);
     setDescription(description);
   };
-  const FoodTypeRefs = Array(foodTypeInformation.length)
-    .fill(null)
-    .map(() => useRef(null));
+
+  const noneButtonRef = useRef(null);
+  const handleNone = (event) => {
+    if (event === null)
+      return noneButtonRef.current.classList.remove("bg-secondary");
+    event.preventDefault();
+    return noneButtonRef.current.classList.toggle("bg-secondary");
+  };
+
+  const FoodTypeRefs = useRef({});
   const handleOptionClick = (refIdx) => {
-    FoodTypeRefs[refIdx].current.classList.toggle("bg-secondary");
+    FoodTypeRefs.current[refIdx].classList.toggle("bg-secondary");
+    handleNone(null);
     SetUserSelected([...userSelected, foodTypeInformation[refIdx].type]);
   };
+
   return (
     <>
       {/* dynamic dialog box */}
@@ -159,7 +168,11 @@ export function FormTwo({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile bg-secondary">
+          <button
+            className="tile bg-secondary"
+            ref={noneButtonRef}
+            onClick={(event) => handleNone(event)}
+          >
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -174,7 +187,7 @@ export function FormTwo({ onClick, onClickPrev }) {
               <div key={idx}>
                 <div
                   className="tile"
-                  ref={FoodTypeRefs[idx]}
+                  ref={(element) => (FoodTypeRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
                   <Image
@@ -202,7 +215,7 @@ export function FormTwo({ onClick, onClickPrev }) {
 }
 
 //allergies
-export function FormThree({ onClick, onClickPrev }) {
+export function Allergies({ onClick, onClickPrev }) {
   const Allergies = [
     { type: "Peanuts", description: "Allergic to peanuts." },
     { type: "Tree Nuts", description: "Allergic to tree nuts." },
@@ -233,13 +246,22 @@ export function FormThree({ onClick, onClickPrev }) {
     setType(type);
     setDescription(description);
   };
-  const AllergyRefs = Array(Allergies.length)
-    .fill(null)
-    .map(() => useRef(null));
+
+  const noneButtonRef = useRef(null);
+  const handleNone = (event) => {
+    if (event === null)
+      return noneButtonRef.current.classList.remove("bg-secondary");
+    event.preventDefault();
+    return noneButtonRef.current.classList.toggle("bg-secondary");
+  };
+
+  const AllergyRefs = useRef({});
   const handleOptionClick = (refIdx) => {
-    AllergyRefs[refIdx].current.classList.toggle("bg-secondary");
+    AllergyRefs.current[refIdx].classList.toggle("bg-secondary");
+    handleNone(null);
     SetUserSelected([...userSelected, Allergies[refIdx].type]);
   };
+
   return (
     <>
       {/* dynamic dialog box */}
@@ -268,7 +290,11 @@ export function FormThree({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile bg-secondary">
+          <button
+            className="tile bg-secondary"
+            onClick={handleNone}
+            ref={noneButtonRef}
+          >
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -283,7 +309,7 @@ export function FormThree({ onClick, onClickPrev }) {
               <div key={idx}>
                 <div
                   className="tile"
-                  ref={AllergyRefs[idx]}
+                  ref={(element) => (AllergyRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
                   <Image
@@ -315,7 +341,7 @@ export function FormThree({ onClick, onClickPrev }) {
 }
 
 // chronic conditions
-export function FormFour({ onClick, onClickPrev }) {
+export function ChronicConditions({ onClick, onClickPrev }) {
   const chronicConditions = [
     { type: "Diabetes", description: "Affects blood sugar regulation." },
     { type: "Hypertension", description: "High blood pressure." },
@@ -355,11 +381,19 @@ export function FormFour({ onClick, onClickPrev }) {
     setType(type);
     setDescription(description);
   };
-  const ConditionRefs = Array(chronicConditions.length)
-    .fill(null)
-    .map(() => useRef(null));
+
+  const noneButtonRef = useRef(null);
+  const handleNone = (event) => {
+    if (event === null)
+      return noneButtonRef.current.classList.remove("bg-secondary");
+    event.preventDefault();
+    return noneButtonRef.current.classList.toggle("bg-secondary");
+  };
+
+  const ConditionRefs = useRef({});
   const handleOptionClick = (refIdx) => {
-    ConditionRefs[refIdx].current.classList.toggle("bg-secondary");
+    ConditionRefs.current[refIdx].classList.toggle("bg-secondary");
+    handleNone(null);
     SetUserSelected([...userSelected, chronicConditions[refIdx].type]);
   };
   return (
@@ -390,7 +424,11 @@ export function FormFour({ onClick, onClickPrev }) {
           />
         </div>
         <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile bg-secondary">
+          <button
+            className="tile bg-secondary"
+            onClick={handleNone}
+            ref={noneButtonRef}
+          >
             <Image
               src="/icons/add.png"
               className="rotate-45"
@@ -405,7 +443,7 @@ export function FormFour({ onClick, onClickPrev }) {
               <div key={idx}>
                 <div
                   className="tile"
-                  ref={ConditionRefs[idx]}
+                  ref={(element) => (ConditionRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
                   <Image
@@ -436,8 +474,101 @@ export function FormFour({ onClick, onClickPrev }) {
   );
 }
 
+//Accessibility Settings
+export function Accessibility({ onClick, onClickPrev }) {
+  const settings = [
+    { value: "font Size", src: "/icons/add.png", alt: "add icon" },
+    { value: "use bold Text", src: "/icons/bold.png", alt: "capital b" },
+    { value: "dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
+    {
+      value: "use Descriptive Links",
+      src: "/icons/information.png",
+      alt: "descriptive links",
+    },
+    {
+      value: "High Contrast Mode",
+      src: "/icons/adjustment.png",
+      alt: "High contrast mode",
+    },
+    { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
+  ];
+  const [userSelected, SetUserSelected] = useState([]);
+
+  const noneButtonRef = useRef(null);
+  const handleNone = (event) => {
+    if (event === null)
+      return noneButtonRef.current.classList.remove("bg-secondary");
+    event.preventDefault();
+    return noneButtonRef.current.classList.toggle("bg-secondary");
+  };
+
+  const SettingsRef = useRef({});
+  const handleOptionClick = (refIdx) => {
+    SettingsRef.current[refIdx].classList.toggle("bg-secondary");
+    handleNone(null);
+    SetUserSelected([...userSelected, settings[refIdx].type]);
+  };
+  return (
+    <>
+      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
+        <h1 className="grid place-items-center text-secondary">
+          Accessiblity Settings
+        </h1>
+        <div className="relative flex items-center gap-1 p-2">
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <input
+            type="text"
+            placeholder="Type to add or search"
+            className="pl-7 flex-grow"
+          />
+        </div>
+        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+          <button
+            className="tile bg-secondary"
+            onClick={handleNone}
+            ref={noneButtonRef}
+          >
+            <Image
+              src="/icons/add.png"
+              className="rotate-45"
+              alt="go full screen icon"
+              width={20}
+              height={20}
+            />
+            none
+          </button>
+          {settings.map((setting, idx) => {
+            return (
+              <div key={idx}>
+                <div
+                  className="tile"
+                  ref={(element) => (SettingsRef.current[idx] = element)}
+                  onClick={() => handleOptionClick(idx)}
+                >
+                  <img
+                    src={setting?.src}
+                    alt={setting?.alt}
+                    width={20}
+                    height={20}
+                    loading="lazy"
+                  />
+                  {setting?.value}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div className="grid grid-cols-2 place-items-center">
+          <Button onClick={onClickPrev}>Previous</Button>
+          <Button onClick={onClick}>next</Button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 // adding daily intake
-export function FormFive({ onClickPrev, handleSubmit }) {
+export function DailyIntake({ onClickPrev, handleSubmit }) {
   const modal = useRef(null);
   const foodName = useRef(null);
   const foodDescription = useRef(null);
@@ -586,86 +717,6 @@ export function FormFive({ onClickPrev, handleSubmit }) {
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
           <Button onClick={handleSubmit}>done</Button>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export function Accessibility({ onClick, onClickPrev }) {
-  const settings = [
-    { value: "font Size", src: "/icons/add.png", alt: "add icon" },
-    { value: "use bold Text", src: "/icons/bold.png", alt: "capital b" },
-    { value: "dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
-    {
-      value: "use Descriptive Links",
-      src: "/icons/information.png",
-      alt: "descriptive links",
-    },
-    {
-      value: "High Contrast Mode",
-      src: "/icons/adjustment.png",
-      alt: "High contrast mode",
-    },
-    { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
-  ];
-  const [userSelected, SetUserSelected] = useState([]);
-  const SettingsRef = Array(settings.length)
-    .fill(null)
-    .map(() => useRef(null));
-  const handleOptionClick = (refIdx) => {
-    SettingsRef[refIdx].current.classList.toggle("bg-secondary");
-    SetUserSelected([...userSelected, settings[refIdx].type]);
-  };
-  return (
-    <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary">
-          Accessiblity Settings
-        </h1>
-        <div className="relative flex items-center gap-1 p-2">
-          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
-          <input
-            type="text"
-            placeholder="Type to add or search"
-            className="pl-7 flex-grow"
-          />
-        </div>
-        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
-          <button className="tile bg-secondary">
-            <Image
-              src="/icons/add.png"
-              className="rotate-45"
-              alt="go full screen icon"
-              width={20}
-              height={20}
-            />
-            none
-          </button>
-          {settings.map((setting, idx) => {
-            return (
-              <div key={idx}>
-                <div
-                  className="tile"
-                  ref={SettingsRef[idx]}
-                  onClick={() => handleOptionClick(idx)}
-                >
-                  <img
-                    src={setting?.src}
-                    alt={setting?.alt}
-                    width={20}
-                    height={20}
-                    loading="lazy"
-                  />
-                  {setting?.value}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={onClick}>next</Button>
         </div>
       </div>
     </>

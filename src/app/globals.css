@@ -47,8 +47,7 @@ dialog::backdrop {
   .tile {
     @apply min-w-fit flex justify-between items-center gap-2 rounded-md
     bg-white px-5 py-2 text-sm text-black
-    shadow-xl transition-all duration-200 ease-in
-    hover:shadow-2xl;
+    shadow-xl hover:shadow-2xl cursor-pointer;
   }
   button:disabled {
     @apply opacity-80 select-none;
