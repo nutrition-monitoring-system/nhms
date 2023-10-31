@@ -17,3 +17,8 @@ It is made up of a front end, a back end + a database.
 To dump the SQL table from your current mysql session, use `mysqldump -u root -p mydb > test/nhms.sql` replacing root with your MySQL username. You will be prompted for your password.
 
 To import the table from a `.sql` file use `mysql -u root -p mydb < test/nhms.sql`.
+
+
+**Updating the Prisma schema.**
+
+To update the Prisma database run `npx prisma db pull`. Then run `npx prisma generate`. 
