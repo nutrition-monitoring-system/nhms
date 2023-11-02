@@ -10,7 +10,7 @@ import {
   ChronicConditions,
   DailyIntake,
   Accessibility,
-} from "../../components/FormCards.jsx";
+} from "../../components/MultiForm.jsx";
 
 import { useRouter } from "next/navigation";
 
@@ -67,6 +67,7 @@ export default function Home() {
     setIndex((prevIndex) => prevIndex - 1);
   };
   const handleFormSubmit = async (data) => {
+    router.push("/home");
     data = {
       forename: data.firstName,
       surname: data.lastName,
@@ -78,7 +79,7 @@ export default function Home() {
     };
     console.log(data);
     try {
-      const url = "https://localhost:3000/addUser";
+      const url = "/api/addUser";
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -89,7 +90,6 @@ export default function Home() {
       });
       const content = await response.json();
 
-      //router.push("/home");
       console.log(content);
     } catch (error) {
       console.log("Could not push to /api/addUSer");

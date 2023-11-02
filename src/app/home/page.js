@@ -59,7 +59,7 @@ function NavBar() {
       </div>
       <div className="flex justify-center items-center gap-2">
         <Button href={"/login"}>basket</Button>
-        <Button href={"/register"}>Account</Button>
+        <Button href={"/user"}>Account</Button>
       </div>
     </div>
   );
