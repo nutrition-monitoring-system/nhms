@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  forename    String        @db.VarChar(16)
+  surname     String?       @db.VarChar(32)
+  dob         DateTime?     @db.Date
+  email       String?       @db.VarChar(255)
+  password    String        @db.VarChar(32)
+  gender      String?       @db.Char(1)
+  userID      String        @id @db.Char(32)
+  is_admin    Int?          @default(0) @db.TinyInt
+  food        food[]
+  health      health[]
+  preferences preferences[]
+}
+
+model allergies {
+  AllergiesID        String   @id @unique(map: "AllergiesID_UNIQUE") @db.Char(32)
+  Allergy_Type       String   @map("Allergy Type") @db.VarChar(45)
+  Alternative_Choice String   @map("Alternative Choice") @db.VarChar(45)
+  health             health[]
+}
+
+model chronic_condition {
+  ChronicID      String   @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
+  Condition_Type String   @default("IBS") @map("Condition Type") @db.VarChar(45)
+  health         health[]
+}
+
+model food {
+  FoodID        String  @unique(map: "FoodID_UNIQUE") @db.Char(32)
+  FoodName      String  @unique(map: "FoodName_UNIQUE") @db.VarChar(45)
+  isDrink       Boolean
+  Protein       Int
+  Fat           Int
+  Carbohydrates Int
+  Vitamins      Int
+  Calcium       Int
+  Iron          Int
+  Potassium     Int
+  user_userID   String  @db.Char(32)
+  user          user    @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_Food Database_user1")
+
+  @@id([FoodID, user_userID])
+  @@index([user_userID], map: "fk_Food Database_user1_idx")
+}
+
+model health {
+  HealthID                    String            @unique(map: "HeathID_UNIQUE") @db.Char(32)
+  Height                      Int?
+  Weight                      Int?
+  Blood_Pressure              Int?              @map("Blood Pressure")
+  Blood_Glucose_Levels        Int?              @map("Blood Glucose Levels")
+  user_userID                 String            @db.Char(32)
+  chronic_condition_ChronicID String            @db.Char(32)
+  allergies_AllergiesID       String            @db.Char(32)
+  user                        user              @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_Healrh Information_user1")
+  allergies                   allergies         @relation(fields: [allergies_AllergiesID], references: [AllergiesID], onDelete: NoAction, onUpdate: NoAction, map: "fk_health_allergies1")
+  chronic_condition           chronic_condition @relation(fields: [chronic_condition_ChronicID], references: [ChronicID], onDelete: NoAction, onUpdate: NoAction, map: "fk_health_chronic_condition1")
+
+  @@id([HealthID, user_userID, chronic_condition_ChronicID, allergies_AllergiesID])
+  @@index([user_userID], map: "fk_Healrh Information_user1_idx")
+  @@index([allergies_AllergiesID], map: "fk_health_allergies1_idx")
+  @@index([chronic_condition_ChronicID], map: "fk_health_chronic_condition1_idx")
+}
+
+model preferences {
+  Preference_ID      String  @unique(map: "Preference ID_UNIQUE") @map("Preference ID") @db.Char(32)
+  Font_Size          Int     @default(20) @map("Font Size")
+  Bold_Text          Boolean @default(false) @map("Bold Text")
+  High_Contrast_Mode Boolean @default(false) @map("High Contrast Mode")
+  Descriptive_Links  Boolean @default(true) @map("Descriptive Links")
+  Dark_Mode          Boolean @default(false) @map("Dark Mode")
+  user_userID        String  @db.Char(32)
+  user               user    @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_preferences_user1")
+
+  @@id([Preference_ID, user_userID])
+  @@index([user_userID], map: "fk_preferences_user1_idx")
+}
