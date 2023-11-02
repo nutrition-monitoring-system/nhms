@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const userSchema = object().shape({
   email: string().email().required("Please type in your email."),
-  password: string().required("Please type in your password."),
+  password: string().min(10).max(20).required("Please type in your password."),
 });
 
 export default function Home() {
@@ -20,23 +20,36 @@ export default function Home() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
+  const [timer, setTimer] = useState(10);
+  const [timerId, setTimerId] = useState(null);
+
   const router = useRouter();
 
   const modal = useRef(null);
   const handlePopUP = (e) => {
     e.preventDefault();
     modal.current.showModal();
+    // this is a timer for forgot password verification.
+    const tempId = setInterval(() => {
+      setTimer((timer) => {
+        if (timer > 0) return timer - 1;
+        else {
+          clearInterval(timerId);
+          setTimerId(null);
+          return timer;
+        }
+      });
+    }, 1000);
+    setTimerId(tempId);
   };
   const handleClose = (e) => {
     e.preventDefault();
     modal.current.close();
   };
-  const submitForm = async (data) => {
-    console.log(userSchema.isValid(data));
-    // console.log(e);
-    // e.preventDefault();
-    // router.push("./home");
+  const submitForm = (data) => {
+    router.push("./home");
   };
+
   return (
     <>
       <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans">
@@ -50,7 +63,7 @@ export default function Home() {
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
           <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10">
-            LogIn to your account
+            LogIn To Your Account
           </h1>
           <form
             className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md"
@@ -59,11 +72,11 @@ export default function Home() {
             <input
               {...register("email", { required: true })}
               type="text"
-              placeholder={"Username or Email"}
+              placeholder={"Email Address"}
               name="email"
             ></input>
             {errors.email && (
-              <p className="text-rose-600">{errors.email.message}</p>
+              <p className="text-rose-600 text-sm">{errors.email?.message}</p>
             )}
             <input
               {...register("password", { required: true })}
@@ -72,7 +85,9 @@ export default function Home() {
               name="password"
             ></input>
             {errors.password && (
-              <p className="text-rose-600">{errors.password.message}</p>
+              <p className="text-rose-600 text-sm">
+                {errors.password?.message}
+              </p>
             )}
             <a className="grid place-items-center">
               <span className="cursor-pointer" onClick={handlePopUP}>
@@ -95,7 +110,13 @@ export default function Home() {
               <a className="text-purple-600 cursor-pointer">send</a>
               <p>You should get a confirmation code on your email</p>
               <input type={"text"} placeholder={"Confirmation Code.."}></input>
-              <a className="text-purple-600 cursor-pointer">reset/resend</a>
+              <div className="flex justify-left items-center gap-2">
+                <span className="p-2 mx-1">
+                  {timer}
+                  <span className="">s</span>
+                </span>
+                <a className="text-purple-600 cursor-pointer">reset/resend</a>
+              </div>
               <input type={"password"} placeholder={"New Password"}></input>
               <input type={"password"} placeholder={"Confirm Password"}></input>
               <div className="flex justify-between items-center">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 const WhatWeOffer = () => (
   <>
     <div className="bg-orange-50 min-h-screen font-opensans text-black py-3">
@@ -20,6 +21,7 @@ function Card() {
         <img
           className="w-full"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
+          width={100}
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">

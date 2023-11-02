@@ -1,35 +1,105 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //import Image from 'next/image'
 import Button from "../../components/Button.jsx";
-import Accessibility from "../../components/Accessibility.jsx";
+//import Accessibility from "../../components/Accessibility.jsx";
 import {
-  FormOne,
-  FormTwo,
-  FormThree,
-  FormFour,
-  FormFive,
-} from "../../components/FormCards.jsx";
+  PersonalInformation,
+  FoodCategories,
+  Allergies,
+  ChronicConditions,
+  DailyIntake,
+  Accessibility,
+} from "../../components/MultiForm.jsx";
+
+import { useRouter } from "next/navigation";
+
+// form validation imports
+import { useForm } from "react-hook-form";
+import { object, string, date, ref } from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const userSchema = object().shape({
+  firstName: string().required("Please type in your First name."),
+  lastName: string().required("Please type in your last name."),
+  date: date().required("Please type in your date of birth."),
+  gender: string().required("Please choose a gender from list of options"),
+  email: string().email().required("Please type in your email."),
+  password: string().min(10).max(20).required("Please type in your password."),
+  confirmPassword: string().oneOf(
+    [ref("password"), null],
+    "Passwords must match"
+  ),
+});
 
 export default function Home() {
+  //form validation
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(userSchema) });
+
   const [index, setIndex] = useState(0);
-  //const [formDone, setFormDone] = useState(false);
+  const router = useRouter();
+  const [title, setTitle] = useState("Create A New Account");
+
   const handleClick = (e) => {
+    const numberOFSubForms = 5;
     e.preventDefault();
-    if (index >= 5) {
+    if (index >= numberOFSubForms) {
       return;
+    } else if (index >= numberOFSubForms - 1) {
+      setTitle("Almost Done!");
     }
+
     setIndex((prevIndex) => prevIndex + 1);
   };
 
+  // this functions handle's the previous click button
   const handleClickPrev = (e) => {
     e.preventDefault();
     if (index <= 0) {
       return;
     }
+    setTitle("Create A New Account");
+
     setIndex((prevIndex) => prevIndex - 1);
   };
-  const handleSubmit = (e) => {};
+  const handleFormSubmit = async (data) => {
+    router.push("/home");
+    data = {
+      forename: data.firstName,
+      surname: data.lastName,
+      dob: data.date,
+      email: data.email,
+      password: data.password,
+      gender: data.gender,
+      is_admin: 0,
+    };
+    console.log(data);
+    try {
+      const url = "/api/addUser";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const content = await response.json();
+
+      console.log(content);
+    } catch (error) {
+      console.log("Could not push to /api/addUSer");
+    }
+  };
+
+  useEffect(() => {
+    setTitle("Create A New Account");
+    setIndex((prevIndex) => prevIndex * 0);
+  }, [errors]);
 
   return (
     <>
@@ -42,23 +112,39 @@ export default function Home() {
           <Button href={"/login"}>Sign In</Button>
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
-          <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10">
-            Create A New Account
+          <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10">
+            {title}
           </h1>
           <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidden">
             <form
-              className="flex transition-transform duration-300 min-h-fit"
+              className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
             >
-              <FormOne onClick={handleClick} />
-              <FormTwo onClick={handleClick} onClickPrev={handleClickPrev} />
-              <FormThree onClick={handleClick} onClickPrev={handleClickPrev} />
-              <FormFour onClick={handleClick} onClickPrev={handleClickPrev} />
+              <PersonalInformation
+                onClick={handleClick}
+                formValidation={{
+                  register,
+                  handleSubmit,
+                  formState: { errors },
+                }}
+              />
+              <FoodCategories
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+              />
+              <Allergies onClick={handleClick} onClickPrev={handleClickPrev} />
+              <ChronicConditions
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+              />
               <Accessibility
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
               />
-              <FormFive onClick={handleClick} onClickPrev={handleClickPrev} />
+              <DailyIntake
+                onClickPrev={handleClickPrev}
+                handleSubmit={handleSubmit(handleFormSubmit)}
+              />
             </form>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 export default function Header() {
   return (
     <>
@@ -7,7 +7,7 @@ export default function Header() {
         <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 h-[85%]">
           <NavBar></NavBar>
           <div className="text-center grid place-items-center h-full p-2">
-            <h1 className="text-[50px] w-3/4 font-black">
+            <h1 className="text-[50px] w-3/4 font-black translate-y-[-50px] hover:translate-y-0 animate-enter">
               A Smart and Personalised Nutrition Management System
             </h1>
             <p className="w-1/2">
@@ -60,9 +60,9 @@ function ImageIcon({ link, src }) {
     <>
       <Link href={link}>
         {" "}
-        <img
+        <Image
           className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
-          src={"./icons/" + src}
+          src={"/icons/" + src}
           loading="lazy"
           width={30}
           height={30}
