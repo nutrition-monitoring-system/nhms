@@ -44,6 +44,11 @@ export default function Home() {
   const [index, setIndex] = useState(0);
   const router = useRouter();
   const [title, setTitle] = useState("Create A New Account");
+  const [otherFormData, setOtherFormData] = useState({});
+
+  const handleCollectData = (data) => {
+    setOtherFormData({ ...otherFormData, ...data });
+  };
 
   const handleClick = (e) => {
     const numberOFSubForms = 5;
@@ -70,6 +75,7 @@ export default function Home() {
   const handleFormSubmit = async (data) => {
     router.push("/home");
     data = {
+      ...otherFormData,
       forename: data.firstName,
       surname: data.lastName,
       dob: data.date,
@@ -103,19 +109,19 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit">
+      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit sm:grid-cols-1 sm:grid-rows-4">
         <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2">
           <h1 className="font-extrabold text-[20px]">Welcome back!</h1>
           <p className="text-center">
             Sign in to unlock a world of nutrition opportunities!
           </p>
-          <Button href={"/login"}>Sign In</Button>
+          <Button href={"/login"}>LogIn Instead</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
-          <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10">
+        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-3">
+          <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
-          <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidden">
+          <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
               className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
@@ -131,15 +137,22 @@ export default function Home() {
               <FoodCategories
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
-              <Allergies onClick={handleClick} onClickPrev={handleClickPrev} />
+              <Allergies
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
+              />
               <ChronicConditions
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
               <Accessibility
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
               <DailyIntake
                 onClickPrev={handleClickPrev}

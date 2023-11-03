@@ -24,11 +24,17 @@ module.exports = {
         modak: ["Open Sans", "sans-serif"],
       },
       screens: {
-        sm: "640px", // Small screens, like smartphones
-        md: "768px", // Medium screens, like tablets
-        lg: "1024px", // Large screens, like laptops
-        xl: "1280px", // Extra-large screens, like desktops
-        // Add more screen sizes as needed
+        xl: { min: "1279px" },
+        // => @media (min-width: 1279px) { ... }
+
+        lg: { max: "1023px" },
+        // => @media (max-width: 1023px) { ... }
+
+        md: { max: "767px" },
+        // => @media (max-width: 767px) { ... }
+
+        sm: { max: "639px" },
+        // => @media (max-width: 639px) { ... }
       },
     },
   },

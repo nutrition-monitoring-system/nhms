@@ -86,7 +86,7 @@ export function PersonalInformation({ onClick, formValidation }) {
 }
 
 // food category
-export function FoodCategories({ onClick, onClickPrev }) {
+export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
   const foodTypeInformation = [
     { type: "vegan", description: "No animal products." },
     { type: "vegetarian", description: "Plant-based diet without meat." },
@@ -146,7 +146,6 @@ export function FoodCategories({ onClick, onClickPrev }) {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
-    console.log(Object.keys(FoodTypeRefs.current));
     Object.keys(FoodTypeRefs.current).forEach((key) => {
       FoodTypeRefs.current[key].classList.remove("bg-secondary");
     });
@@ -234,7 +233,14 @@ export function FoodCategories({ onClick, onClickPrev }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={onClick}>Next</Button>
+          <Button
+            onClick={(event) => {
+              handleCollectData({ foodCategories: userSelected });
+              onClick(event);
+            }}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>
@@ -242,7 +248,7 @@ export function FoodCategories({ onClick, onClickPrev }) {
 }
 
 //allergies
-export function Allergies({ onClick, onClickPrev }) {
+export function Allergies({ onClick, onClickPrev, handleCollectData }) {
   const Allergies = [
     { type: "Peanuts", description: "Allergic to peanuts." },
     { type: "Tree Nuts", description: "Allergic to tree nuts." },
@@ -373,7 +379,14 @@ export function Allergies({ onClick, onClickPrev }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={onClick}>Next</Button>
+          <Button
+            onClick={(event) => {
+              handleCollectData({ Allergies: userSelected });
+              onClick(event);
+            }}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>
@@ -381,7 +394,7 @@ export function Allergies({ onClick, onClickPrev }) {
 }
 
 // chronic conditions
-export function ChronicConditions({ onClick, onClickPrev }) {
+export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
   const chronicConditions = [
     { type: "Diabetes", description: "Affects blood sugar regulation." },
     { type: "Hypertension", description: "High blood pressure." },
@@ -520,7 +533,14 @@ export function ChronicConditions({ onClick, onClickPrev }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={onClick}>Next</Button>
+          <Button
+            onClick={(event) => {
+              handleCollectData({ chronicConditions: userSelected });
+              onClick(event);
+            }}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </>
@@ -528,7 +548,7 @@ export function ChronicConditions({ onClick, onClickPrev }) {
 }
 
 //Accessibility Settings
-export function Accessibility({ onClick, onClickPrev }) {
+export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
   const settings = [
     { value: "font Size", src: "/icons/add.png", alt: "add icon" },
     { value: "use bold Text", src: "/icons/bold.png", alt: "capital b" },
@@ -616,7 +636,14 @@ export function Accessibility({ onClick, onClickPrev }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={onClick}>next</Button>
+          <Button
+            onClick={(event) => {
+              handleCollectData({ accessibilitySettings: userSelected });
+              onClick(event);
+            }}
+          >
+            next
+          </Button>
         </div>
       </div>
     </>

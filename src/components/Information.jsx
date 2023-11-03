@@ -17,7 +17,7 @@ export default function Information() {
         className="h-screen text-black grid place-items-center bg-white relative z"
         id="information"
       >
-        <div className="w-[60%] font-opensans text-lg text-left relative z-10">
+        <div className="w-[60%] font-opensans text-xl text-left relative z-10 sm:w-[80%] sm:text-center">
           <Typewriter
             options={{
               autoStart: true,
