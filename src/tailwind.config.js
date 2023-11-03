@@ -21,7 +21,7 @@ module.exports = {
       },
       fontFamily: {
         opensans: ["Open Sans", "sans-serif"],
-        modak: ["Modak", "sans-serif"],
+        modak: ["Open Sans", "sans-serif"],
       },
       screens: {
         sm: "640px", // Small screens, like smartphones

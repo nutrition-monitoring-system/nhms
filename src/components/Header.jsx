@@ -60,10 +60,9 @@ function ImageIcon({ link, src }) {
     <>
       <Link href={link}>
         {" "}
-        <Image
+        <img
           className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
           src={"/icons/" + src}
-          loading="lazy"
           width={30}
           height={30}
         />

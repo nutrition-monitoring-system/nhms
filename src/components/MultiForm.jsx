@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image.js";
 import Button from "./Button.jsx";
 import { useRef, useState } from "react";
 
@@ -39,19 +38,16 @@ export function PersonalInformation({ onClick, formValidation }) {
           <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
           <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
         </div>
-        <select {...register("gender")} className="font-opensans">
-          <option
-            className="opacity-70 font-semibold"
-            value=""
-            defaultValue
-            disabled
-            hidden
-          >
-            Gender*
+        <select
+          {...register("gender", { required: "Gender is required" })}
+          className="font-opensans px-3"
+        >
+          <option className="opacity-70 font-semibold" value="" disabled>
+            Select a gender
           </option>
-          <option value="female">female</option>
-          <option value="male">male</option>
-          <option value="other">other</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="other">Other</option>
         </select>
         <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
         <input
@@ -92,107 +88,40 @@ export function PersonalInformation({ onClick, formValidation }) {
 // food category
 export function FoodCategories({ onClick, onClickPrev }) {
   const foodTypeInformation = [
-    {
-      type: "vegan",
-      description: "No animal products.",
-      cannotBe: ["vegetarian", "pescatarian", "omnivore", "carnivore"],
-    },
-    {
-      type: "vegetarian",
-      description: "Plant-based diet without meat.",
-      cannotBe: ["vegan", "pescatarian", "omnivore", "carnivore"],
-    },
-    {
-      type: "omnivore",
-      description: "Eats both plants and animals.",
-      cannotBe: ["vegan", "vegetarian"],
-    },
+    { type: "vegan", description: "No animal products." },
+    { type: "vegetarian", description: "Plant-based diet without meat." },
+    { type: "omnivore", description: "Eats both plants and animals." },
     {
       type: "paleo",
       description: "Emphasizes whole foods, like our ancestors.",
-      cannotBe: ["vegan", "vegetarian"],
     },
-    {
-      type: "pescatarian",
-      description: "Vegetarian with fish and seafood.",
-      cannotBe: ["vegan", "vegetarian", "omnivore", "carnivore"],
-    },
-    {
-      type: "carnivore",
-      description: "Primarily meat-based diet.",
-      cannotBe: ["vegan", "vegetarian", "pescatarian"],
-    },
+    { type: "pescatarian", description: "Vegetarian with fish and seafood." },
+    { type: "carnivore", description: "Primarily meat-based diet." },
     {
       type: "flexitarian",
       description: "Mainly plant-based with occasional meat.",
-      cannotBe: [],
     },
-    {
-      type: "keto",
-      description: "High-fat, low-carb diet for ketosis.",
-      cannotBe: ["low-fat"],
-    },
-    {
-      type: "gluten-free",
-      description: "Avoids gluten-containing foods.",
-      cannotBe: [],
-    },
-    {
-      type: "lactose-free",
-      description: "Avoids lactose in dairy products.",
-      cannotBe: ["dairy-free"],
-    },
-    {
-      type: "dairy-free",
-      description: "Excludes all dairy products.",
-      cannotBe: ["lactose-free"],
-    },
+    { type: "keto", description: "High-fat, low-carb diet for ketosis." },
+    { type: "gluten-free", description: "Avoids gluten-containing foods." },
+    { type: "lactose-free", description: "Avoids lactose in dairy products." },
+    { type: "dairy-free", description: "Excludes all dairy products." },
     {
       type: "shellfish-free",
       description: "Avoids shellfish due to allergies.",
-      cannotBe: [],
     },
-    {
-      type: "soy-free",
-      description: "Excludes soy-based foods.",
-      cannotBe: [],
-    },
-    {
-      type: "allergen-free",
-      description: "Avoids common allergens.",
-      cannotBe: [],
-    },
-    {
-      type: "low-carb",
-      description: "Restricts carbohydrates.",
-      cannotBe: ["keto"],
-    },
-    {
-      type: "mediterranean",
-      description: "Based on Mediterranean cuisine.",
-      cannotBe: ["keto", "low-carb", "low-fat", "low-sugar", "low-food"],
-    },
-    {
-      type: "low-fat",
-      description: "Emphasizes low-fat foods.",
-      cannotBe: ["keto", "mediterranean", "low-carb", "low-sugar", "low-food"],
-    },
-    {
-      type: "low-sugar",
-      description: "Limits sugar intake.",
-      cannotBe: ["keto", "mediterranean", "low-carb", "low-fat", "low-food"],
-    },
-    {
-      type: "low-food",
-      description: "Reduces overall food consumption.",
-      cannotBe: ["keto", "mediterranean", "low-carb", "low-fat", "low-sugar"],
-    },
+    { type: "soy-free", description: "Excludes soy-based foods." },
+    { type: "allergen-free", description: "Avoids common allergens." },
+    { type: "low-carb", description: "Restricts carbohydrates." },
+    { type: "mediterranean", description: "Based on Mediterranean cuisine." },
+    { type: "low-fat", description: "Emphasizes low-fat foods." },
+    { type: "low-sugar", description: "Limits sugar intake." },
+    { type: "low-food", description: "Reduces overall food consumption." },
   ];
 
   const modal = useRef(null);
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
-  const [userSelected, SetUserSelected] = useState("");
+  const [userSelected, SetUserSelected] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const inputRef = useRef(null);
@@ -217,6 +146,7 @@ export function FoodCategories({ onClick, onClickPrev }) {
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
     event.preventDefault();
+    console.log(Object.keys(FoodTypeRefs.current));
     Object.keys(FoodTypeRefs.current).forEach((key) => {
       FoodTypeRefs.current[key].classList.remove("bg-secondary");
     });
@@ -225,26 +155,9 @@ export function FoodCategories({ onClick, onClickPrev }) {
   };
 
   const handleOptionClick = (refIdx) => {
-    // this function makes sure that vegans cannot be meat eaters and vice versal and for all other food categories
-    const newItem = foodTypeInformation[refIdx].type;
+    FoodTypeRefs.current[refIdx].classList.toggle("bg-secondary");
     handleNone(null);
-    const compatibility = foodTypeInformation.find((foodtype) => {
-      if (
-        userSelected.includes(foodtype.type) &&
-        foodtype.cannotBe.includes(newItem)
-      ) {
-        return false;
-      }
-      return true;
-    });
-
-    if (compatibility) {
-      // If there's compatibility, you can add the new item to the userSelected array
-      FoodTypeRefs.current[refIdx].classList.add("bg-secondary");
-      SetUserSelected([...userSelected, newItem]);
-    } else {
-      //FoodTypeRefs.current[refIdx].classList.toggle("bg-secondary");
-    }
+    SetUserSelected([...userSelected, foodTypeInformation[refIdx].type]);
   };
 
   return (
@@ -268,7 +181,7 @@ export function FoodCategories({ onClick, onClickPrev }) {
           Help with information about you
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -284,7 +197,7 @@ export function FoodCategories({ onClick, onClickPrev }) {
             ref={noneButtonRef}
             onClick={(event) => handleNone(event)}
           >
-            <Image
+            <img
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -304,7 +217,7 @@ export function FoodCategories({ onClick, onClickPrev }) {
                     ref={(element) => (FoodTypeRefs.current[idx] = element)}
                     onClick={() => handleOptionClick(idx)}
                   >
-                    <Image
+                    <img
                       onClick={(e) =>
                         handleModalclick(e, food?.type, food?.description)
                       }
@@ -406,7 +319,7 @@ export function Allergies({ onClick, onClickPrev }) {
           Any Allergies
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -422,7 +335,7 @@ export function Allergies({ onClick, onClickPrev }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <Image
+            <img
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -439,7 +352,7 @@ export function Allergies({ onClick, onClickPrev }) {
                   ref={(element) => (AllergyRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
-                  <Image
+                  <img
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -553,7 +466,7 @@ export function ChronicConditions({ onClick, onClickPrev }) {
           Chronic Conditions
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -569,7 +482,7 @@ export function ChronicConditions({ onClick, onClickPrev }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <Image
+            <img
               src="/icons/add.png"
               className="rotate-45"
               alt="add icon"
@@ -586,7 +499,7 @@ export function ChronicConditions({ onClick, onClickPrev }) {
                   ref={(element) => (ConditionRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
-                  <Image
+                  <img
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -659,7 +572,7 @@ export function Accessibility({ onClick, onClickPrev }) {
           Accessiblity Settings
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -672,7 +585,7 @@ export function Accessibility({ onClick, onClickPrev }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <Image
+            <img
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -694,7 +607,6 @@ export function Accessibility({ onClick, onClickPrev }) {
                     alt={setting?.alt}
                     width={20}
                     height={20}
-                    loading="lazy"
                   />
                   {setting?.value}
                 </div>
@@ -804,12 +716,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
-                <Image
+                <img
                   src={"/icons/add.png"}
-                  alt={"Add image icon"}
+                  alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></Image>
+                ></img>
               </div>
               {breakFast.map((food, idx) => {
                 return (
@@ -829,12 +741,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white  shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "lunch")}
               >
-                <Image
+                <img
                   src={"/icons/add.png"}
-                  alt={"Add image icon"}
+                  alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></Image>
+                ></img>
               </div>
               {Lunch.map((food, idx) => {
                 return (
@@ -854,12 +766,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "dinner")}
               >
-                <Image
+                <img
                   src={"/icons/add.png"}
-                  alt={"Add image icon"}
+                  alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></Image>
+                ></img>
               </div>
               {Dinner.map((food, idx) => {
                 return (

@@ -59,8 +59,25 @@ dialog::backdrop {
   animation: animateEnter 1s forwards;
 }
 
+.slide-down {
+  animation: slide-down-move 200ms forwards, slide-down-opacity 200ms forwards;
+  pointer-events: all;
+}
+
 @keyframes animateEnter {
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes slide-down-move {
+  100% {
+    top: 2.5rem; /*tailwind top-10 */
+  }
+}
+
+@keyframes slide-down-opacity {
+  100% {
+    opacity: 1; /*tailwind opacity-1 */
   }
 }

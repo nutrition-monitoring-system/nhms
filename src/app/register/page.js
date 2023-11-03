@@ -12,6 +12,9 @@ import {
 
 import { useRouter } from "next/navigation";
 
+// authentication for protected routes
+import { signIn } from "next-auth/react";
+
 // form validation imports
 import { useForm } from "react-hook-form";
 import { object, string, date, ref } from "yup";
@@ -74,29 +77,28 @@ export default function Home() {
       password: data.password,
       gender: data.gender,
       is_admin: 0,
+      registration: true,
     };
-    console.log(data);
-    try {
-      const url = "/api/addUser";
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const content = await response.json();
+    const result = await signIn("credentials", {
+      redirect: false, // Don't redirect, we'll handle that manually
+      ...data, // Pass data
+    });
 
-      console.log(content);
-    } catch (error) {
-      console.log("Could not push to /api/addUSer");
+    if (result.error) {
+      // Handle sign-in error, you can display an error message to the user
+      console.error("Sign-in error:", result.error);
+    } else {
+      // Sign-in was successful
+      router.push("/home");
     }
   };
 
   useEffect(() => {
-    setTitle("Create A New Account");
-    setIndex((prevIndex) => prevIndex * 0);
+    // making sure to only go back if we have  errors
+    if (Object.keys(errors).length > 0) {
+      setTitle("Create A New Account");
+      setIndex((prevIndex) => prevIndex * 0);
+    }
   }, [errors]);
 
   return (

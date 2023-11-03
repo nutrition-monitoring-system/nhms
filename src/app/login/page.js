@@ -3,14 +3,17 @@ import { useRef, useState } from "react";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
+//page authentication
+import { signIn } from "next-auth/react";
+
 // for form validation
 import { useForm } from "react-hook-form";
-import { object, string, number, date, InferType } from "yup";
+import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const userSchema = object().shape({
   email: string().email().required("Please type in your email."),
-  password: string().min(10).max(20).required("Please type in your password."),
+  password: string().min(5).max(20).required("Please type in your password."),
 });
 
 export default function Home() {
@@ -46,8 +49,20 @@ export default function Home() {
     e.preventDefault();
     modal.current.close();
   };
-  const submitForm = (data) => {
-    router.push("./home");
+  const submitForm = async (data) => {
+    data = { ...data, registration: false };
+    const result = await signIn("credentials", {
+      redirect: false, // Don't redirect, we'll handle that manually
+      ...data, // Pass in the email and password from the form
+    });
+
+    if (result.error) {
+      // Handle sign-in error, you can display an error message to the user
+      console.error("Sign-in error:", result.error);
+    } else {
+      // Sign-in was successful
+      router.push("/home");
+    }
   };
 
   return (
