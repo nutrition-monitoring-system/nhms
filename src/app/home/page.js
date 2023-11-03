@@ -28,10 +28,7 @@ function Home() {
     },
   });
   if (status === "unauthenticated") {
-    router.push("/login");
-    return "";
-  } else if (status === "loading") {
-    return <div>Authenticating...</div>;
+    return "<></>" && router.push("/login");
   }
 
   const handleLogout = () => {
@@ -74,6 +71,29 @@ function NavBar({ handleLogout }) {
   const handleMenuclick = () => {
     menuItems.current.classList.toggle("slide-down");
   };
+  const home = useRef(null);
+  const recipes = useRef(null);
+  const recipesCollections = useRef(null);
+  const foodCollection = useRef(null);
+  const foodRecommendation = useRef(null);
+
+  const refList = [
+    home,
+    recipes,
+    recipesCollections,
+    foodCollection,
+    foodRecommendation,
+  ];
+  const handleOnclick = (reference) => {
+    const refIndex = refList.findIndex((refValue) => refValue === reference);
+    if (refIndex !== -1) {
+      refList.forEach((ref, idx) => {
+        refIndex !== idx && ref.current.classList.remove("bg-gray-300");
+      });
+    }
+    !reference.current.classList.contains("bg-gray-300") &&
+      reference.current.classList.add("bg-gray-300");
+  };
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sticky top-0">
       <div className="grid grid-cols-4 p-4 shadow-2xl">
@@ -107,7 +127,10 @@ function NavBar({ handleLogout }) {
             />
             <span>basket</span>
           </div>
-          <div className="tile relative z-10">
+          <div
+            className="tile relative z-10 flex justify-around items-center gap-3"
+            onClick={handleMenuclick}
+          >
             <img
               src="/icons/account.png"
               width={20}
@@ -115,7 +138,7 @@ function NavBar({ handleLogout }) {
               alt="account icon"
               className="ml-2 "
             />
-            <span onClick={handleMenuclick}>Account</span>
+            <span>Account</span>
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
@@ -159,11 +182,37 @@ function NavBar({ handleLogout }) {
         </div>
       </div>
       <div className="bg-primary flex justify-center items-center gap-1">
-        <div className="tile">home</div>
-        <div className="tile">Recipes</div>
-        <div className="tile">Recipes collections</div>
-        <div className="tile">Food Recommendations</div>
-        <div className="tile">Food collections</div>
+        <div className="tile" ref={home} onClick={() => handleOnclick(home)}>
+          home
+        </div>
+        <div
+          className="tile"
+          ref={recipes}
+          onClick={() => handleOnclick(recipes)}
+        >
+          Recipes
+        </div>
+        <div
+          className="tile"
+          ref={recipesCollections}
+          onClick={() => handleOnclick(recipesCollections)}
+        >
+          Recipes collections
+        </div>
+        <div
+          className="tile"
+          ref={foodRecommendation}
+          onClick={() => handleOnclick(foodRecommendation)}
+        >
+          Food Recommendations
+        </div>
+        <div
+          className="tile"
+          ref={foodCollection}
+          onClick={() => handleOnclick(foodCollection)}
+        >
+          Food collections
+        </div>
       </div>
     </div>
   );

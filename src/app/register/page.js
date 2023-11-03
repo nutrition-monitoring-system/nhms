@@ -44,6 +44,11 @@ export default function Home() {
   const [index, setIndex] = useState(0);
   const router = useRouter();
   const [title, setTitle] = useState("Create A New Account");
+  const [otherFormData, setOtherFormData] = useState({});
+
+  const handleCollectData = (data) => {
+    setOtherFormData({ ...otherFormData, ...data });
+  };
 
   const handleClick = (e) => {
     const numberOFSubForms = 5;
@@ -70,6 +75,7 @@ export default function Home() {
   const handleFormSubmit = async (data) => {
     router.push("/home");
     data = {
+      ...otherFormData,
       forename: data.firstName,
       surname: data.lastName,
       dob: data.date,
@@ -131,15 +137,22 @@ export default function Home() {
               <FoodCategories
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
-              <Allergies onClick={handleClick} onClickPrev={handleClickPrev} />
+              <Allergies
+                onClick={handleClick}
+                onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
+              />
               <ChronicConditions
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
               <Accessibility
                 onClick={handleClick}
                 onClickPrev={handleClickPrev}
+                handleCollectData={handleCollectData}
               />
               <DailyIntake
                 onClickPrev={handleClickPrev}
