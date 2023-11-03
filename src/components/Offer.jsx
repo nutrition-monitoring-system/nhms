@@ -5,7 +5,7 @@ const WhatWeOffer = () => (
       <h1 className="font-extrabold text-[30px] text-center">
         What do we offer?{" "}
       </h1>
-      <div className="min-h-fit flex justify-around items-center p-6">
+      <div className="min-h-fit flex justify-around items-center p-6 md:flex-wrap">
         <Card />
         <Card />
         <Card />

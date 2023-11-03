@@ -67,7 +67,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans">
+      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans sm:grid-cols-1 sm:grid-rows-3">
         <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2">
           <h1 className="font-extrabold text-[20px]">New Here?</h1>
           <p className="text-center">
@@ -76,12 +76,12 @@ export default function Home() {
           </p>
           <Button href={"/register"}>Sign Up</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4">
-          <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10">
+        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-2">
+          <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10 sm:w-3/4 sm:text-[35px]">
             LogIn To Your Account
           </h1>
           <form
-            className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md"
+            className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md sm:w-[90%]"
             onSubmit={handleSubmit(submitForm)}
           >
             <input

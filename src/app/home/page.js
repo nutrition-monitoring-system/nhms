@@ -39,27 +39,27 @@ function Home() {
     <div className="h-screen bg-white flex flex-col min-h-fit">
       <NavBar handleLogout={handleLogout} />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
-        <div className="flex justify-center items-center flex-wrap gap-4 w-[70%] min-h-fit pt-10">
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] w-[200px] shadow-xl bg-white rounded-md"></div>
+        <div className="flex justify-center items-center flex-wrap gap-4 w-[70%] min-h-fit pt-10 sm:w-full">
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
+          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
         </div>
       </div>
     </div>
@@ -95,8 +95,8 @@ function NavBar({ handleLogout }) {
       reference.current.classList.add("bg-gray-300");
   };
   return (
-    <div className="w-full grid grid-rows-2 bg-white h-[30%] sticky top-0">
-      <div className="grid grid-cols-4 p-4 shadow-2xl">
+    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+      <div className="grid grid-cols-4 p-4 shadow-2xl sm:grid-cols-1 sm:grid-rows-4 sm:place-items-center sm:row-span-2">
         <div className="text-black font-modak text-[30px]">
           <Link href={"/"}>Logo</Link>
         </div>
@@ -107,8 +107,8 @@ function NavBar({ handleLogout }) {
           <img
             src="/icons/search.png"
             alt="search icon"
-            width={30}
-            height={30}
+            width={20}
+            height={20}
           />
           <input
             type="text"
@@ -181,7 +181,7 @@ function NavBar({ handleLogout }) {
           </div>
         </div>
       </div>
-      <div className="bg-primary flex justify-center items-center gap-1">
+      <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
         <div className="tile" ref={home} onClick={() => handleOnclick(home)}>
           home
         </div>

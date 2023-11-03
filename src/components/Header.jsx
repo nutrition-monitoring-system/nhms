@@ -10,10 +10,13 @@ export default function Header() {
         <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 h-[85%]">
           <NavBar></NavBar>
           <div className="text-center grid place-items-center h-full p-2">
-            <h1 className="text-[50px] w-3/4 font-black translate-y-[-50px] hover:translate-y-0 animate-enter">
+            <h1
+              className="text-[50px] w-3/4 font-black translate-y-[-50px] hover:translate-y-0 animate-enter
+            sm:text-[35px] sm:w-full"
+            >
               A Smart and Personalised Nutrition Management System
             </h1>
-            <p className="w-1/2">
+            <p className="w-1/2 sm:w-3/4">
               Explore Link vibrant recipe library, set and monitor health goals,
               and integrate with well-being apps. Embark on your journey to Link
               healthier you today!"
@@ -42,11 +45,11 @@ function NavBar() {
   });
   if (status === "unauthenticated" || status === "loading") {
     return (
-      <div className="w-full grid grid-cols-2 py-2 bg-white">
+      <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
         <div className="grid place-items-center text-black font-modak text-[30px]">
           Logo
         </div>
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
           <Button href={"/login"}>Login</Button>
           <Button href={"/register"}>Register</Button>
         </div>
@@ -54,11 +57,11 @@ function NavBar() {
     );
   }
   return (
-    <div className="w-full grid grid-cols-2 py-2 bg-white">
+    <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
       <div className="grid place-items-center text-black font-modak text-[30px]">
         Logo
       </div>
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
         <div className="tile relative z-10">
           <img
             src="/icons/account.png"
