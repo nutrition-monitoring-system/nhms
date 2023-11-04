@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => (
   <>
     <div className="bg-orange-50 flex flex-col h-screen p-3 text-black font-opensans px-3">
-      <div className="bg-black h-[80%] rounded-lg grid grid-cols-4 grid-rows-1 text-white px-4 sm:grid-cols-1 sm:flex sm:justify-around sm:items-center sm:flex-col sm:gap-2 sm:py-5 sm:h-fit">
+      <div className="bg-black h-[80%] px-[20%] rounded-lg grid grid-cols-4 grid-rows-1 text-white sm:px-[5%] sm:grid-cols-1 sm:flex sm:justify-around sm:items-center sm:flex-col sm:gap-2 sm:py-5 sm:h-fit">
         <div className="grid place-items-center">
           <h3 className="font-grid place-items-center text-white font-modak text-[30px] text-center">
             Logo

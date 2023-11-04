@@ -86,13 +86,19 @@ function NavBar({ handleLogout }) {
   ];
   const handleOnclick = (reference) => {
     const refIndex = refList.findIndex((refValue) => refValue === reference);
+    const classes = ["bg-black", "text-white"];
     if (refIndex !== -1) {
       refList.forEach((ref, idx) => {
-        refIndex !== idx && ref.current.classList.remove("bg-gray-300");
+        refIndex !== idx &&
+          classes.forEach((className) =>
+            ref.current.classList.remove(className)
+          );
       });
     }
-    !reference.current.classList.contains("bg-gray-300") &&
-      reference.current.classList.add("bg-gray-300");
+    classes.forEach((className) => {
+      !reference.current.classList.contains(className) &&
+        reference.current.classList.add(className);
+    });
   };
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">

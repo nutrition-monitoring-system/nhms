@@ -3,6 +3,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRef } from "react";
+import Typewriter from "typewriter-effect";
 export default function Header() {
   return (
     <SessionProvider>
@@ -16,11 +17,24 @@ export default function Header() {
             >
               A Smart and Personalised Nutrition Management System
             </h1>
-            <p className="w-1/2 sm:w-3/4">
-              Explore Link vibrant recipe library, set and monitor health goals,
-              and integrate with well-being apps. Embark on your journey to Link
-              healthier you today!"
-            </p>
+            <div className="w-1/2 sm:w-3/4">
+              <Typewriter
+                options={{
+                  autoStart: true,
+                  loop: false,
+                }}
+                onInit={(typewriter) => {
+                  typewriter
+                    .changeDelay(15)
+                    .typeString(
+                      `Explore Link vibrant recipe library, set and monitor health goals,
+                    and integrate with well-being apps. Embark on your journey to Link
+                    healthier you today!`
+                    )
+                    .start();
+                }}
+              />
+            </div>
             <ImageIcon
               src={"angle-double-small-down.png"}
               link={"#information"}
