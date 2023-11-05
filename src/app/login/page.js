@@ -77,7 +77,7 @@ export default function Home() {
           <Button href={"/register"}>Sign Up</Button>
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-2">
-          <h1 className="font-black text-[40px] font-modak text-center w-1/2 leading-10 sm:w-3/4 sm:text-[35px]">
+          <h1 className="font-black text-[45px] font-modak text-center w-1/2 leading-10 sm:w-3/4 sm:text-[35px]">
             LogIn To Your Account
           </h1>
           <form

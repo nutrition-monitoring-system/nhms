@@ -28,39 +28,20 @@ const Footer = () => (
           <Link href="">Service 3</Link>
         </div>
         <div className="flex flex-col justify-center items-left sm:w-full sm:items-center sm:py-2">
-          <h3 className="font-bold text-secondary mb-3">Coming Soon</h3>
-          <div className="flex justify-around items-center mb-2 rounded-md w-fit bg-white ">
-            <button className="px-6 py-3 text-black" disabled>
-              <Image
-                src={"/icons/game.png"}
-                className="bg-white p-1 rounded-lg shadow-md cursor-pointer"
-                width={50}
-                height={50}
-              />
-            </button>
-            <button className="px-6 py-3 text-black" disabled>
-              <Image
-                src={"/icons/app-store.png"}
-                className="bg-white p-1 rounded-lg shadow-md cursor-pointer"
-                width={50}
-                height={50}
-              />
-            </button>
-          </div>
           <h3 className="font-bold text-secondary">Get In Touch</h3>
           <div className="flex justify-start items-center gap-3 p-3 m-y-3">
             <Link href="">
-              <Image src={"/icons/facebook.png"} width={20} height={20} />
+              <Image src={"/icons/facebook.png"} width={25} height={25} />
             </Link>
             <Link href="">
-              <Image src={"/icons/instagram.png"} width={20} height={20} />
+              <Image src={"/icons/instagram.png"} width={25} height={25} />
             </Link>
             <Link href="">
               <Image
                 src={"/icons/twitter.png"}
                 className="bg-white p-1 rounded-sm"
-                width={20}
-                height={20}
+                width={25}
+                height={25}
               />
             </Link>
           </div>

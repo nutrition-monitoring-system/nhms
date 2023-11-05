@@ -76,6 +76,16 @@ function NavBar() {
         Logo
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
+        <div className="tile">
+          <img
+            src="/icons/blog.png"
+            width={20}
+            height={20}
+            alt="Blog icon"
+            className="ml-2 "
+          />
+          <span>Blog</span>
+        </div>
         <div className="tile relative z-10">
           <img
             src="/icons/account.png"

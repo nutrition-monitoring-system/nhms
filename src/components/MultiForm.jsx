@@ -42,11 +42,11 @@ export function PersonalInformation({ onClick, formValidation }) {
           {...register("gender", { required: "Gender is required" })}
           className="font-opensans px-3"
         >
-          <option className="opacity-70 font-semibold" value="" disabled>
+          <option className="opacity-70 font-semibold" value="">
             Select a gender
           </option>
-          <option value="female">Female</option>
           <option value="male">Male</option>
+          <option value="female">Female</option>
           <option value="other">Other</option>
         </select>
         <p className="text-rose-600 text-sm">{errors.gender?.message}</p>

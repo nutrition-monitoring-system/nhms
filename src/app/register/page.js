@@ -99,6 +99,11 @@ export default function Home() {
     }
   };
 
+  const handleNavclick = (event, pos) => {
+    event.preventDefault();
+    setIndex((index) => index * 0 + pos);
+  };
+
   useEffect(() => {
     // making sure to only go back if we have  errors
     if (Object.keys(errors).length > 0) {
@@ -117,10 +122,54 @@ export default function Home() {
           </p>
           <Button href={"/login"}>LogIn Instead</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-3">
+        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
+          <div className="flex justify-center items-center flex-wrap gap-3">
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 0)}
+            >
+              1
+            </button>
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 1)}
+            >
+              2
+            </button>
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 2)}
+            >
+              3
+            </button>
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 3)}
+            >
+              4
+            </button>
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 4)}
+            >
+              5
+            </button>
+            <button
+              href=""
+              className="rounded-xl opacity-80"
+              onClick={(event) => handleNavclick(event, 5)}
+            >
+              6
+            </button>
+          </div>
           <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
               className="flex transition-transform duration-200 min-h-fit"
