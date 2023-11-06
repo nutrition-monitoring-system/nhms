@@ -101,7 +101,7 @@ function NavBar({ handleLogout }) {
     });
   };
   return (
-    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-1 sm:relative sm:grid-rows-3">
       <div className="grid grid-cols-4 p-4 shadow-2xl sm:grid-cols-1 sm:grid-rows-4 sm:place-items-center sm:row-span-2">
         <div className="text-black font-modak text-[30px]">
           <Link href={"/"}>Logo</Link>

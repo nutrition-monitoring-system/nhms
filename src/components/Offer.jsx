@@ -1,47 +1,81 @@
-import Image from "next/image";
 const WhatWeOffer = () => (
   <>
     <div className="bg-orange-50 min-h-screen font-opensans text-black py-3">
-      <h1 className="font-extrabold text-[30px] text-center">
-        What do we offer?{" "}
+      <h1 className="font-extrabold text-[30px] text-center mb-7">
+        What do we offer?
       </h1>
-      <div className="min-h-fit flex justify-around items-center p-6 md:flex-wrap">
-        <Card />
-        <Card />
-        <Card />
+      <div className="min-h-fit grid grid-cols-3 grid-rows-1 p-7 gap-3 bg-orange-100 sm:flex-wrap">
+        <InfoCardOne />
+        <InfoCardTwo />
+        <InfoCardThree />
       </div>
     </div>
   </>
 );
 
-function Card() {
+function InfoCardOne() {
+  const title = "1. Personalized Health and Wellness Profiles";
+  const content = [
+    "Customized user profiles to track nutrition, exercise, mood, and more.",
+    "Visual progress comparisons with before-and-after images.",
+    "Integration with Dr. Monica's Google Calendar for appointments.",
+    "Multiselect chronic condition tracking.",
+  ];
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden m-3 shadow-lg">
+      <InfoCard title={title} content={content} />
+    </>
+  );
+}
+function InfoCardTwo() {
+  const title = "2. Smart Nutrition and Recipe Library";
+  const content = [
+    "Extensive recipe library with filters for time and budget.",
+    "Offline access through device caching.",
+    "Personalized dietary recommendations.",
+    "Consideration of intolerances like IBS.",
+  ];
+  return (
+    <>
+      <InfoCard title={title} content={content} />
+    </>
+  );
+}
+function InfoCardThree() {
+  const title = "3. Comprehensive Health and Well-being Integration:";
+  const content = [
+    "Integration with other health and well-being apps.",
+    "Habit tracking and goal setting.",
+    "Shopping list integration with popular stores.",
+    "Free and premium feature options.",
+  ];
+
+  return (
+    <>
+      <InfoCard title={title} content={content} />
+    </>
+  );
+}
+
+function InfoCard({ title, content }) {
+  return (
+    <>
+      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-1">
         <img
-          className="w-full"
+          className="w-full rounded-lg"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
           width={100}
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">The Coldest Sunset</div>
-          <p className="text-gray-700 text-base">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
-          </p>
-        </div>
-        <div className="px-6 pt-4 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            #photography
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            #travel
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            #winter
-          </span>
+          <div className="font-bold text-xl mb-2">{title}</div>
+          <ul className="text-gray-700 text-sm p-2">
+            {content.map((item, idx) => (
+              <li key={idx} className="list-disc">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>
