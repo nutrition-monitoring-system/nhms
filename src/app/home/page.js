@@ -107,7 +107,7 @@ function NavBar({ handleLogout }) {
           <Link href={"/"}>Logo</Link>
         </div>
         <span className="text-black grid place-items-center">
-          welcome, Mr.Bryan
+          Welcome, Mr.Bryan: {/* Test name, will be changed on user authentication. */}
         </span>
         <div className="relative flex items-center gap-1 p-2">
           <img
@@ -118,7 +118,7 @@ function NavBar({ handleLogout }) {
           />
           <input
             type="text"
-            placeholder="Type to search"
+            placeholder="Type to search: "
             className="pl-7 flex-grow ml-3 placeholder:text-black placeholder:font-normal"
           />
         </div>
@@ -131,7 +131,7 @@ function NavBar({ handleLogout }) {
               alt="shopping icon"
               className="ml-2"
             />
-            <span>basket</span>
+            <span>Basket</span>
           </div>
           <div
             className="tile relative z-10 flex justify-around items-center gap-3"
@@ -189,7 +189,7 @@ function NavBar({ handleLogout }) {
       </div>
       <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
         <div className="tile" ref={home} onClick={() => handleOnclick(home)}>
-          home
+          Home
         </div>
         <div
           className="tile"
@@ -203,7 +203,7 @@ function NavBar({ handleLogout }) {
           ref={recipesCollections}
           onClick={() => handleOnclick(recipesCollections)}
         >
-          Recipes collections
+          Collections
         </div>
         <div
           className="tile"
@@ -212,12 +212,13 @@ function NavBar({ handleLogout }) {
         >
           Food Recommendations
         </div>
+        {/* I want to suggest maybe getting rid of food collections? It isn't clear what it is. - Harry */}
         <div
           className="tile"
           ref={foodCollection}
           onClick={() => handleOnclick(foodCollection)}
         >
-          Food collections
+          Food Collections
         </div>
       </div>
     </div>

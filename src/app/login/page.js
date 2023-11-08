@@ -78,7 +78,7 @@ export default function Home() {
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-2">
           <h1 className="font-black text-[45px] font-modak text-center w-1/2 leading-10 sm:w-3/4 sm:text-[35px]">
-            LogIn To Your Account
+            Login To Your Account
           </h1>
           <form
             className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md sm:w-[90%]"
@@ -122,7 +122,7 @@ export default function Home() {
             </h1>
             <form className="flex flex-col justify-center items-left gap-3 w-full p-3 rounded-md">
               <input type={"text"} placeholder={"Email Address.."}></input>
-              <a className="text-purple-600 cursor-pointer">send</a>
+              <a className="text-purple-600 cursor-pointer">Send</a>
               <p>You should get a confirmation code on your email</p>
               <input type={"text"} placeholder={"Confirmation Code.."}></input>
               <div className="flex justify-left items-center gap-2">

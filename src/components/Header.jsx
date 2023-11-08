@@ -27,9 +27,8 @@ export default function Header() {
                   typewriter
                     .changeDelay(15)
                     .typeString(
-                      `Explore Link vibrant recipe library, set and monitor health goals,
-                    and integrate with well-being apps. Embark on your journey to Link
-                    healthier you today!`
+                      `Explore a vibrant range of recipe libraries, set and monitor your health goals,
+                      and integrate with wellknown well-being apps. Embark on your journey to a healthier you today!`
                     )
                     .start();
                 }}
