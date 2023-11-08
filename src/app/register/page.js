@@ -21,10 +21,10 @@ import { object, string, date, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const userSchema = object().shape({
-  firstName: string().required("Please type in your First name."),
+  firstName: string().required("Please type in your first name."),
   lastName: string().required("Please type in your last name."),
   date: date().required("Please type in your date of birth."),
-  gender: string().required("Please choose a gender from list of options"),
+  gender: string().required("Please choose your gender. "),
   email: string().email().required("Please type in your email."),
   password: string().min(10).max(20).required("Please type in your password."),
   confirmPassword: string().oneOf(
@@ -43,7 +43,7 @@ export default function Home() {
 
   const [index, setIndex] = useState(0);
   const router = useRouter();
-  const [title, setTitle] = useState("Create A New Account");
+  const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
 
   const handleCollectData = (data) => {
@@ -56,7 +56,7 @@ export default function Home() {
     if (index >= numberOFSubForms) {
       return;
     } else if (index >= numberOFSubForms - 1) {
-      setTitle("Almost Done!");
+      setTitle("Almost done!");
     }
 
     setIndex((prevIndex) => prevIndex + 1);
@@ -68,7 +68,7 @@ export default function Home() {
     if (index <= 0) {
       return;
     }
-    setTitle("Create A New Account");
+    setTitle("Create a new account");
 
     setIndex((prevIndex) => prevIndex - 1);
   };
@@ -106,7 +106,7 @@ export default function Home() {
   useEffect(() => {
     // making sure to only go back if we have  errors
     if (Object.keys(errors).length > 0) {
-      setTitle("Create A New Account");
+      setTitle("Create a new account");
       setIndex((prevIndex) => prevIndex * 0);
     }
   }, [errors]);
@@ -119,7 +119,7 @@ export default function Home() {
           <p className="text-center">
             Sign in to unlock a world of nutrition opportunities!
           </p>
-          <Button href={"/login"}>LogIn Instead</Button>
+          <Button href={"/login"}>Login</Button>
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">

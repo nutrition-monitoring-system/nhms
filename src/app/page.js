@@ -6,9 +6,8 @@ import WhatWeOffer from "../components/Offer.jsx";
 import Coach from "../components/Coach.jsx";
 export const metadata = {
   title: "nmhs",
-  description: `Explore Link vibrant recipe library, set and monitor health goals,
-  and integrate with well-being apps. Embark on your journey to Link
-  healthier you today!`,
+  description: `Explore a vibrant range of recipe libraries, set and monitor your health goals,
+  and integrate with wellknown well-being apps. Embark on your journey to a healthier you today!`,
 };
 
 export default function Home() {

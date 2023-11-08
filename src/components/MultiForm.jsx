@@ -40,14 +40,21 @@ export function PersonalInformation({ onClick, formValidation }) {
         </div>
         <select
           {...register("gender", { required: "Gender is required" })}
-          className="font-opensans px-3"
+          className=""
+          defaultValue={"male"}
         >
           <option className="opacity-70 font-semibold" value="">
-            Select a gender
+            Select a gender:
           </option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
+          <option className="pl-3" value="male">
+            Male
+          </option>
+          <option className="pl-3" value="female">
+            Female
+          </option>
+          <option className="pl-3" value="other">
+            Other
+          </option>
         </select>
         <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
         <input
@@ -88,34 +95,34 @@ export function PersonalInformation({ onClick, formValidation }) {
 // food category
 export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
   const foodTypeInformation = [
-    { type: "vegan", description: "No animal products." },
-    { type: "vegetarian", description: "Plant-based diet without meat." },
-    { type: "omnivore", description: "Eats both plants and animals." },
+    { type: "Vegan", description: "No animal products." },
+    { type: "Vegetarian", description: "Plant-based diet without meat." },
+    { type: "Omnivore", description: "Eats both plants and animals." },
     {
-      type: "paleo",
+      type: "Paleo",
       description: "Emphasizes whole foods, like our ancestors.",
     },
-    { type: "pescatarian", description: "Vegetarian with fish and seafood." },
-    { type: "carnivore", description: "Primarily meat-based diet." },
+    { type: "Pescatarian", description: "Vegetarian with fish and seafood." },
+    { type: "Carnivore", description: "Primarily meat-based diet." },
     {
-      type: "flexitarian",
+      type: "Flexitarian",
       description: "Mainly plant-based with occasional meat.",
     },
-    { type: "keto", description: "High-fat, low-carb diet for ketosis." },
-    { type: "gluten-free", description: "Avoids gluten-containing foods." },
-    { type: "lactose-free", description: "Avoids lactose in dairy products." },
-    { type: "dairy-free", description: "Excludes all dairy products." },
+    { type: "Keto", description: "High-fat, low-carb diet for ketosis." },
+    { type: "Gluten-free", description: "Avoids gluten-containing foods." },
+    { type: "Lactose-free", description: "Avoids lactose in dairy products." },
+    { type: "Dairy-free", description: "Excludes all dairy products." },
     {
-      type: "shellfish-free",
+      type: "Shellfish-free",
       description: "Avoids shellfish due to allergies.",
     },
-    { type: "soy-free", description: "Excludes soy-based foods." },
-    { type: "allergen-free", description: "Avoids common allergens." },
-    { type: "low-carb", description: "Restricts carbohydrates." },
-    { type: "mediterranean", description: "Based on Mediterranean cuisine." },
-    { type: "low-fat", description: "Emphasizes low-fat foods." },
-    { type: "low-sugar", description: "Limits sugar intake." },
-    { type: "low-food", description: "Reduces overall food consumption." },
+    { type: "Soy-free", description: "Excludes soy-based foods." },
+    { type: "Allergen-free", description: "Avoids common allergens." },
+    { type: "Low-carb", description: "Restricts carbohydrates." },
+    { type: "Mediterranean", description: "Based on Mediterranean cuisine." },
+    { type: "Low-fat", description: "Emphasizes low-fat foods." },
+    { type: "Low-sugar", description: "Limits sugar intake." },
+    { type: "Low-food", description: "Reduces overall food consumption." },
   ];
 
   const modal = useRef(null);
@@ -170,14 +177,14 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
           <h1 className="text-center text-lg font-bold">{type}</h1>
           <p className="text-center w-3/4">{description}</p>
           <button onClick={handleModalclose} className="tile">
-            close
+            Close
           </button>
         </div>
       </dialog>
       {/*  */}
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
         <h1 className="grid place-items-center text-secondary">
-          Help with information about you
+          Dietary Restrictions?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
           <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
@@ -203,7 +210,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
               width={20}
               height={20}
             />
-            none
+            None
           </button>
           {foodTypeInformation
             .slice(0, 10)
@@ -316,13 +323,13 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
           <h1 className="text-center text-lg font-bold">{type}</h1>
           <p className="text-center w-3/4">{description}</p>
           <button onClick={handleModalclose} className="tile">
-            close
+            Close
           </button>
         </div>
       </dialog>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
         <h1 className="grid place-items-center text-secondary">
-          Any Allergies
+          Any Allergies?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
           <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
@@ -470,7 +477,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
           <h1 className="text-center text-lg font-bold">{type}</h1>
           <p className="text-center w-3/4">{description}</p>
           <button onClick={handleModalclose} className="tile">
-            close
+            Close
           </button>
         </div>
       </dialog>
@@ -502,7 +509,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
               width={20}
               height={20}
             />
-            none
+            None
           </button>
           {chronicConditions.map((condition, idx) => {
             return (
@@ -550,11 +557,11 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
 //Accessibility Settings
 export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
   const settings = [
-    { value: "font Size", src: "/icons/add.png", alt: "add icon" },
-    { value: "use bold Text", src: "/icons/bold.png", alt: "capital b" },
-    { value: "dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
+    { value: "Font Size", src: "/icons/add.png", alt: "add icon" },
+    { value: "Use Bold Text", src: "/icons/bold.png", alt: "capital b" },
+    { value: "Dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
     {
-      value: "use Descriptive Links",
+      value: "Use Descriptive Links",
       src: "/icons/information.png",
       alt: "descriptive links",
     },
@@ -588,7 +595,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary">
+        <h1 className="grid place-items-center text-secondary text-center">
           Accessiblity Settings
         </h1>
         <div className="relative flex items-center gap-1 p-2">
@@ -612,7 +619,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
               width={20}
               height={20}
             />
-            none
+            None
           </button>
           {settings.map((setting, idx) => {
             return (
@@ -634,6 +641,10 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
             );
           })}
         </div>
+        <p className="grid place-items-center text-slate text-center opacity-50 my-1">
+          (Please note your changes will be applied after you leave
+          this form.)
+        </p>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
           <Button
@@ -642,14 +653,14 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
               onClick(event);
             }}
           >
-            next
+            Next
           </Button>
         </div>
       </div>
     </>
   );
 }
-
+/* Daily Food form.  */
 // adding daily intake
 export function DailyIntake({ onClickPrev, handleSubmit }) {
   const modal = useRef(null);
@@ -814,7 +825,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
-          <Button onClick={handleSubmit}>done</Button>
+          <Button onClick={handleSubmit}>Done</Button>
         </div>
       </div>
     </>
