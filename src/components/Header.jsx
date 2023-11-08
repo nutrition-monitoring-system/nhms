@@ -3,37 +3,23 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRef } from "react";
-import Typewriter from "typewriter-effect";
 export default function Header() {
   return (
     <SessionProvider>
       <div className="h-screen relative bg-white text-black grid place-items-center font-opensans">
         <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 h-[85%]">
           <NavBar></NavBar>
-          <div className="text-center grid place-items-center h-full p-2">
+          <div className="text-center grid place-items-center h-full p-2 translate-y-[-50px] animate-enter">
             <h1
-              className="text-[50px] w-3/4 font-black translate-y-[-50px] hover:translate-y-0 animate-enter
+              className="text-[50px] w-3/4 font-black
             sm:text-[35px] sm:w-full"
             >
               A Smart and Personalised Nutrition Management System
             </h1>
             <div className="w-1/2 sm:w-3/4">
-              <Typewriter
-                options={{
-                  autoStart: true,
-                  loop: false,
-                }}
-                onInit={(typewriter) => {
-                  typewriter
-                    .changeDelay(15)
-                    .typeString(
-                      `Explore Link vibrant recipe library, set and monitor health goals,
-                    and integrate with well-being apps. Embark on your journey to Link
-                    healthier you today!`
-                    )
-                    .start();
-                }}
-              />
+              Explore Link vibrant recipe library, set and monitor health goals,
+              and integrate with well-being apps. Embark on your journey to Link
+              healthier you today!`
             </div>
             <ImageIcon
               src={"angle-double-small-down.png"}

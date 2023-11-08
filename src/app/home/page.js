@@ -25,11 +25,9 @@ function Home() {
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
+      return router.push("/login");
     },
   });
-  if (status === "unauthenticated") {
-    return "<></>" && router.push("/login");
-  }
 
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });

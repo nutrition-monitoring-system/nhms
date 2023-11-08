@@ -1,4 +1,5 @@
 "use client";
+import Typewriter from "typewriter-effect";
 export default function Information() {
   return (
     <>
@@ -20,4 +21,23 @@ export default function Information() {
       </div>
     </>
   );
+}
+
+{
+  /* <Typewriter
+options={{
+  autoStart: true,
+  loop: false,
+}}
+onInit={(typewriter) => {
+  typewriter
+    .changeDelay(15)
+    .typeString(
+      `Explore Link vibrant recipe library, set and monitor health goals,
+    and integrate with well-being apps. Embark on your journey to Link
+    healthier you today!`
+    )
+    .start();
+}}
+/> */
 }

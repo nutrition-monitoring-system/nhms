@@ -58,7 +58,7 @@ const Footer = () => (
             <input
               type="text"
               placeholder="Email here"
-              className="shadow-none bg-orange-50"
+              className="shadow-none bg-orange-100 placeholder:text-black"
             ></input>
             <button className="tile w-full bg-black text-white py-5">
               Send Email

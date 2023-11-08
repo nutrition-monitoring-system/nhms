@@ -73,9 +73,7 @@ export default function Home() {
     setIndex((prevIndex) => prevIndex - 1);
   };
   const handleFormSubmit = async (data) => {
-    router.push("/home");
     data = {
-      ...otherFormData,
       forename: data.firstName,
       surname: data.lastName,
       dob: data.date,
@@ -87,7 +85,8 @@ export default function Home() {
     };
     const result = await signIn("credentials", {
       redirect: false, // Don't redirect, we'll handle that manually
-      ...data, // Pass data
+      ...data,
+      ...otherFormData, // Pass data
     });
 
     if (result.error) {
