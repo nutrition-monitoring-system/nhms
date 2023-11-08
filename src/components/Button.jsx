@@ -1,6 +1,6 @@
 export default function Button({ children, href, onClick, type }) {
   return (
-    <a href={href}>
+    <a href={href} type={type}>
       <button
         onClick={onClick}
         type={type}
