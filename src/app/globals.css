@@ -65,6 +65,10 @@ dialog::backdrop {
   pointer-events: all;
 }
 
+.animation-fill-forwards {
+  animation-fill-mode: forwards !important;
+}
+
 @keyframes animateEnter {
   100% {
     transform: translateY(0);

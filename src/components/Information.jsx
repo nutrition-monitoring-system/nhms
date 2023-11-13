@@ -7,7 +7,7 @@ export default function Information() {
         className="h-screen text-black grid place-items-center bg-white relative z"
         id="information"
       >
-        <div className="w-[60%] font-opensans text-xl text-center relative z-10 sm:w-[80%]">
+        <div className="w-[60%] font-opensans text-xl text-center relative z-10 sm:w-[90%] sm:text-left">
           Welcome to the future of nutrition management! Our web application is
           your key to a healthier, more informed lifestyle. Dive into a world of
           personalized nutrition with smart insights, tailored recommendations,

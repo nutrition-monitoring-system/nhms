@@ -43,6 +43,9 @@ const Footer = () => (
               <Image src={"/icons/instagram.png"} width={25} height={25} />
             </Link>
             <Link href="">
+              <Image src={"/icons/linkedin.png"} width={25} height={25} />
+            </Link>
+            <Link href="">
               <Image
                 src={"/icons/twitter.png"}
                 className="bg-white p-1 rounded-sm"

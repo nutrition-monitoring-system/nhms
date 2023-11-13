@@ -40,7 +40,7 @@ export function PersonalInformation({ onClick, formValidation }) {
         </div>
         <select
           {...register("gender", { required: "Gender is required" })}
-          className=""
+          className="border-2 border-gray-200"
           defaultValue={"male"}
         >
           <option className="opacity-70 font-semibold" value="">
@@ -60,6 +60,7 @@ export function PersonalInformation({ onClick, formValidation }) {
         <input
           placeholder={"Date of Birth*"}
           type={type}
+          className="border-2 border-gray-200"
           onFocus={handleFocus}
           {...register("date", { required: true })}
         />
@@ -642,8 +643,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
           })}
         </div>
         <p className="grid place-items-center text-slate text-center opacity-50 my-1">
-          (Please note your changes will be applied after you leave
-          this form.)
+          (Please note your changes will be applied after you leave this form.)
         </p>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>

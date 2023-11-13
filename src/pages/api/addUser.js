@@ -1,6 +1,6 @@
 /* Get user information and add it to the SQL database using MySQL.  */
-import {v1} from 'uuid';
-import { PrismaClient } from '@prisma/client';
+import { v1 } from "uuid";
+import { PrismaClient } from "@prisma/client";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     // Process a POST request
@@ -12,14 +12,16 @@ export default async function handler(req, res) {
     console.log("BACKEND");
     console.log(newUserData);
     newUserData["userID"] = newUUID;
-    if (newUserData["gender"].length > 1){
-      newUserData['gender'] = newUserData['gender'].toString().charAt(0).toUpperCase();
+    if (newUserData["gender"].length > 1) {
+      newUserData["gender"] = newUserData["gender"]
+        .toString()
+        .charAt(0)
+        .toUpperCase();
     }
-    const newUser = await prisma.user.create({data: newUserData});
+    const newUser = await prisma.user.create({ data: newUserData });
     res.send(newUUID);
     res.status(200).json();
-  }
-  else{
+  } else {
     res.status(400).json();
   }
 }

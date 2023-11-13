@@ -127,43 +127,37 @@ export default function Home() {
           </h1>
           <div className="flex justify-center items-center flex-wrap gap-3">
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-one"
               onClick={(event) => handleNavclick(event, 0)}
             >
               1
             </button>
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-two"
               onClick={(event) => handleNavclick(event, 1)}
             >
               2
             </button>
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-three"
               onClick={(event) => handleNavclick(event, 2)}
             >
               3
             </button>
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-four"
               onClick={(event) => handleNavclick(event, 3)}
             >
               4
             </button>
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-five"
               onClick={(event) => handleNavclick(event, 4)}
             >
               5
             </button>
             <button
-              href=""
-              className="rounded-xl opacity-80"
+              className="rounded-xl opacity-80 btn-six"
               onClick={(event) => handleNavclick(event, 5)}
             >
               6

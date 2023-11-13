@@ -4,27 +4,55 @@ import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRef } from "react";
 export default function Header() {
+  const headerIcons = [
+    "/headerIcons/dish.png",
+    "/headerIcons/drink.png",
+    "/headerIcons/hamburger.png ",
+    "/headerIcons/healthy-food.png ",
+    "/headerIcons/recipe.png ",
+    "/headerIcons/hamburger.png ",
+    "/headerIcons/healthy-food.png ",
+    "/headerIcons/recipe.png ",
+  ];
   return (
     <SessionProvider>
-      <div className="h-screen relative bg-white text-black grid place-items-center font-opensans">
-        <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 h-[85%]">
+      <div className="h-screen min-h-fit relative bg-white text-black grid place-items-center font-opensans">
+        <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
           <NavBar></NavBar>
-          <div className="text-center grid place-items-center h-full p-2 translate-y-[-50px] animate-enter">
+          <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
             <h1
               className="text-[50px] w-3/4 font-black
-            sm:text-[35px] sm:w-full"
+            sm:text-[35px] sm:w-full "
             >
               A Smart and Personalised Nutrition Management System
             </h1>
-            <div className="w-1/2 sm:w-3/4">
+            <div className="w-1/2 sm:w-full py-2">
               Explore Link vibrant recipe library, set and monitor health goals,
               and integrate with well-being apps. Embark on your journey to Link
               healthier you today!`
             </div>
-            <ImageIcon
-              src={"angle-double-small-down.png"}
-              link={"#information"}
-            />
+            <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">
+              {headerIcons.map((iconUrl, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="bg-white p-3 rounded-[50px] sm:p-2 backdrop-blur-sm"
+                    style={{
+                      animationDelay: `${idx * 100}ms`,
+                      animationFillMode: "forwards",
+                    }}
+                  >
+                    <ImageIcon href={null} src={iconUrl} />
+                  </div>
+                );
+              })}
+            </div>
+            <div className="w-full grid place-items-center py-5">
+              <ImageIcon
+                src={"angle-double-small-down.png"}
+                href={"#information"}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -45,13 +73,17 @@ function NavBar() {
   });
   if (status === "unauthenticated" || status === "loading") {
     return (
-      <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
+      <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <div className="grid place-items-center text-black font-modak text-[30px]">
           Logo
         </div>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-          <Button href={"/login"}>Login</Button>
-          <Button href={"/register"}>Register</Button>
+          <button className="tile">
+            <Link href="/login">Login</Link>
+          </button>
+          <button className="tile">
+            <Link href="/register">Register</Link>
+          </button>
         </div>
       </div>
     );
@@ -126,33 +158,28 @@ function NavBar() {
   );
 }
 
-function Button({ children, href }) {
-  return (
-    <Link href={href}>
-      <button
-        className="m-2 min-w-fit grid place-items-center rounded-md
-          bg-white px-8 py-3 text-sm
-          shadow-xl transition-all duration-200 ease-in
-          hover:shadow-2xl"
-      >
-        {children}
-      </button>
-    </Link>
-  );
-}
-
-function ImageIcon({ link, src }) {
+function ImageIcon({ href, src }) {
+  // if we have an href value then we conditionally render
   return (
     <>
-      <Link href={link}>
-        {" "}
+      {href ? (
+        <Link href={href}>
+          {" "}
+          <img
+            className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
+            src={"/icons/" + src}
+            width={30}
+            height={30}
+          />
+        </Link>
+      ) : (
         <img
-          className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
+          className="shadow-xl"
           src={"/icons/" + src}
           width={30}
           height={30}
         />
-      </Link>
+      )}
     </>
   );
 }
