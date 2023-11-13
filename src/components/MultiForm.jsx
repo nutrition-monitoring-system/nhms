@@ -38,32 +38,36 @@ export function PersonalInformation({ onClick, formValidation }) {
           <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
           <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
         </div>
-        <select
-          {...register("gender", { required: "Gender is required" })}
-          className="border-2 border-gray-200"
-          defaultValue={"male"}
-        >
-          <option className="opacity-70 font-semibold" value="">
-            Select a gender:
-          </option>
-          <option className="pl-3" value="male">
-            Male
-          </option>
-          <option className="pl-3" value="female">
-            Female
-          </option>
-          <option className="pl-3" value="other">
-            Other
-          </option>
-        </select>
+        <div className="relative h-fit py-7 shadow-lg rounded-lg">
+          <select
+            {...register("gender", { required: "Gender is required" })}
+            className="absolute inset-0"
+            defaultValue={"male"}
+          >
+            <option className="opacity-70 font-semibold" value="">
+              Select a gender:
+            </option>
+            <option className="pl-3" value="male">
+              Male
+            </option>
+            <option className="pl-3" value="female">
+              Female
+            </option>
+            <option className="pl-3" value="other">
+              Other
+            </option>
+          </select>
+        </div>
         <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
-        <input
-          placeholder={"Date of Birth*"}
-          type={type}
-          className="border-2 border-gray-200"
-          onFocus={handleFocus}
-          {...register("date", { required: true })}
-        />
+        <div className="relative flex sm:py-7 shadow-md rounded-md">
+          <input
+            placeholder={"Date of Birth*"}
+            type={type}
+            className="sm:flex-1 sm:absolute sm:inset-0 sm:bg-primarylight"
+            onFocus={handleFocus}
+            {...register("date", { required: true })}
+          />
+        </div>
         <p className="text-rose-600 text-sm">{errors.date?.message}</p>
         <input
           type={"text"}
@@ -710,7 +714,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
     <>
       <dialog
         ref={modal}
-        className="w-[35%] h-fit bg-white rounded-md relative p-1"
+        className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
       >
         <div className="p-2 grid place-items-center gap-1">
           <h1 className="grid place-items-center text-secondary">
@@ -721,7 +725,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             <input type="text" placeholder="Food name" ref={foodName} />
             <input
               type="text"
-              placeholder="Food description"
+              placeholder="Food type"
               className="my-2"
               ref={foodDescription}
             />
@@ -748,8 +752,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         </h1>
         <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
           <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
-            <h1>BreakFast</h1>
-            <div className="min-w-full p-1 flex justify-left items-center gap-1">
+            <div className="flex items-center justify-around gap-3">
+              <h1>BreakFast</h1>
+              <h1>Lunch</h1>
+              <h1>Dinner</h1>
+            </div>
+            <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
@@ -761,22 +769,8 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   height={20}
                 ></img>
               </div>
-              {breakFast.map((food, idx) => {
-                return (
-                  <div key={idx}>
-                    <div className="border-secondary border-2 aspect-[1/1] min-w-fit w-[60px] rounded-md bg-white shadow-xl flex justify-center items-center text-center px-2 cursor-pointer">
-                      {food?.name}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
-            <h1>Lunch</h1>
-            <div className="min-w-full p-1 flex justify-left items-center gap-1">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white  shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "lunch")}
               >
                 <img
@@ -786,20 +780,6 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   height={20}
                 ></img>
               </div>
-              {Lunch.map((food, idx) => {
-                return (
-                  <div key={idx}>
-                    <div className="aspect-[1/1] w-[60px] rounded-md text-sm bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
-                      {food?.name}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
-            <h1>Dinner</h1>
-            <div className="min-w-full p-1 flex justify-left items-center gap-1">
               <div
                 className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "dinner")}
@@ -811,11 +791,57 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   height={20}
                 ></img>
               </div>
-              {Dinner.map((food, idx) => {
+            </div>
+          </div>
+          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
+            <div className="flex items-center justify-around gap-3">
+              <h1>Mood</h1>
+              <h1>Exercise?</h1>
+              <h1>upload</h1>
+            </div>
+            <div className="min-w-full p-1 flex justify-around items-center gap-3">
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "breakfast")}
+              >
+                <img
+                  src={"/icons/add.png"}
+                  alt={"Add img icon"}
+                  width={20}
+                  height={20}
+                ></img>
+              </div>
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "breakfast")}
+              >
+                <img
+                  src={"/icons/add.png"}
+                  alt={"Add img icon"}
+                  width={20}
+                  height={20}
+                ></img>
+              </div>
+              <div
+                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                onClick={(event) => handleAddClick(event, "breakfast")}
+              >
+                <img
+                  src={"/icons/add.png"}
+                  alt={"Add img icon"}
+                  width={20}
+                  height={20}
+                ></img>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
+            <div className="min-w-full p-1 flex justify-left items-center gap-2 overflow-hidden">
+              {[...breakFast, ...Lunch, ...Dinner].map((food, idx) => {
                 return (
                   <div key={idx}>
-                    <div className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
-                      {food?.name}
+                    <div className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
+                      <img src="/icons/headerIcons/hamburger.png" />
                     </div>
                   </div>
                 );

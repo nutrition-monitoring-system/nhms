@@ -100,24 +100,27 @@ function NavBar({ handleLogout }) {
   };
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-1 sm:relative sm:grid-rows-3">
-      <div className="grid grid-cols-4 p-4 shadow-2xl sm:grid-cols-1 sm:grid-rows-4 sm:place-items-center sm:row-span-2">
+      <div className="grid grid-cols-4 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <div className="text-black font-modak text-[30px]">
           <Link href={"/"}>Logo</Link>
         </div>
         <span className="text-black grid place-items-center">
-          Welcome, Mr.Bryan: {/* Test name, will be changed on user authentication. */}
+          Welcome, Mr.Bryan:{" "}
+          {/* Test name, will be changed on user authentication. */}
         </span>
         <div className="relative flex items-center gap-1 p-2">
           <img
             src="/icons/search.png"
+            className="mr-3"
             alt="search icon"
             width={20}
             height={20}
           />
           <input
             type="text"
-            placeholder="Type to search: "
-            className="pl-7 flex-grow ml-3 placeholder:text-black placeholder:font-normal"
+            placeholder="Type to search "
+            className="flex-grow py-2 placeholder:text-white text-white placeholder:font-normal bg-black"
+            autoFocus
           />
         </div>
         <div className="flex justify-center items-center gap-2">
@@ -131,18 +134,16 @@ function NavBar({ handleLogout }) {
             />
             <span>Basket</span>
           </div>
-          <div
-            className="tile relative z-10 flex justify-around items-center gap-3"
-            onClick={handleMenuclick}
-          >
+          <div className="tile relative z-10 flex justify-around items-center gap-3">
             <img
               src="/icons/account.png"
               width={20}
               height={20}
               alt="account icon"
               className="ml-2 "
+              onClick={handleMenuclick}
             />
-            <span>Account</span>
+            <span onClick={handleMenuclick}>Account</span>
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
@@ -156,7 +157,7 @@ function NavBar({ handleLogout }) {
                   width={20}
                   height={20}
                 />
-                <span>Settings</span>
+                <Link href={"/user/userd9f49w"}>Settings</Link>
               </div>
               <div className="tile flex justify-around items-center">
                 {" "}
@@ -186,7 +187,11 @@ function NavBar({ handleLogout }) {
         </div>
       </div>
       <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
-        <div className="tile" ref={home} onClick={() => handleOnclick(home)}>
+        <div
+          className="tile bg-black text-white"
+          ref={home}
+          onClick={() => handleOnclick(home)}
+        >
           Home
         </div>
         <div

@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <>
       <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit sm:grid-cols-1 sm:grid-rows-4">
-        <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2">
+        <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2 sm:gap-2">
           <h1 className="font-extrabold text-[20px]">Welcome back!</h1>
           <p className="text-center">
             Sign in to unlock a world of nutrition opportunities!
