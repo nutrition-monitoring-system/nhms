@@ -38,7 +38,7 @@ export function PersonalInformation({ onClick, formValidation }) {
           <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
           <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
         </div>
-        <div className="relative h-fit py-7 shadow-lg rounded-lg">
+        <div className="relative h-fit py-7 shadow-sm rounded-lg">
           <select
             {...register("gender", { required: "Gender is required" })}
             className="absolute inset-0"
@@ -59,7 +59,7 @@ export function PersonalInformation({ onClick, formValidation }) {
           </select>
         </div>
         <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
-        <div className="relative flex sm:py-7 shadow-md rounded-md">
+        <div className="relative flex sm:py-7 shadow-sm rounded-md">
           <input
             placeholder={"Date of Birth*"}
             type={type}
@@ -717,12 +717,17 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
       >
         <div className="p-2 grid place-items-center gap-1">
-          <h1 className="grid place-items-center text-secondary">
+          <h1 className="grid place-items-center font-extrabold text-xl">
             Did you have any thing today?
-            <p>{type.toUpperCase()}</p>
           </h1>
-          <div className="gap-2">
-            <input type="text" placeholder="Food name" ref={foodName} />
+          <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
+          <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2">
+            <input
+              type="text"
+              placeholder="Food name"
+              ref={foodName}
+              className=""
+            />
             <input
               type="text"
               placeholder="Food type"
@@ -730,19 +735,16 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
               ref={foodDescription}
             />
             <input
+              className=""
               type="text"
               placeholder="a drink? water maybe"
-              defaultValue={"water"}
+              // defaultValue={"water"}
               ref={aDrink}
             />
           </div>
           <div className="flex justify-around items-center mt-2 w-full">
-            <button onClick={handleAddFood} className="tile">
-              add
-            </button>
-            <button onClick={handleModalclose} className="tile">
-              close
-            </button>
+            <Button onClick={handleAddFood}>add</Button>
+            <Button onClick={handleModalclose}>close</Button>
           </div>
         </div>
       </dialog>
@@ -759,7 +761,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             </div>
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
@@ -770,7 +772,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 ></img>
               </div>
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "lunch")}
               >
                 <img
@@ -781,7 +783,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 ></img>
               </div>
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "dinner")}
               >
                 <img
@@ -801,36 +803,36 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             </div>
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
-                  src={"/icons/add.png"}
-                  alt={"Add img icon"}
-                  width={20}
-                  height={20}
+                  src={"/icons/mood.png"}
+                  alt={"Mood icon"}
+                  width={40}
+                  height={40}
                 ></img>
               </div>
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
-                  src={"/icons/add.png"}
-                  alt={"Add img icon"}
-                  width={20}
-                  height={20}
+                  src={"/icons/workout.png"}
+                  alt={"workout icon"}
+                  width={40}
+                  height={40}
                 ></img>
               </div>
               <div
-                className="aspect-[1/1] w-[60px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
+                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
-                  src={"/icons/add.png"}
+                  src={"/icons/image.png"}
                   alt={"Add img icon"}
-                  width={20}
-                  height={20}
+                  width={30}
+                  height={30}
                 ></img>
               </div>
             </div>

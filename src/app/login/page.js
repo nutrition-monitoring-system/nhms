@@ -64,7 +64,12 @@ export default function Home() {
       router.push("/home");
     }
   };
-
+  const handleSendEmail = (event) => {
+    event.preventDefault();
+  };
+  const handleCountDownStart = (event) => {
+    event.preventDefault();
+  };
   return (
     <>
       <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans sm:grid-cols-1 sm:grid-rows-3">
@@ -122,7 +127,14 @@ export default function Home() {
             </h1>
             <form className="flex flex-col justify-center items-left gap-3 w-full p-3 rounded-md">
               <input type={"text"} placeholder={"Email Address.."}></input>
-              <a className="text-purple-600 cursor-pointer">Send</a>
+              <a
+                className="text-purple-600 cursor-pointer"
+                onClick={(event) =>
+                  handleSendEmail(event) && handleCountDownStart(event)
+                }
+              >
+                Send
+              </a>
               <p>You should get a confirmation code on your email</p>
               <input type={"text"} placeholder={"Confirmation Code.."}></input>
               <div className="flex justify-left items-center gap-2">
