@@ -22,3 +22,7 @@ To import the table from a `.sql` file use `mysql -u root -p mydb < test/nhms.sq
 **Updating the Prisma schema.**
 
 To update the Prisma database run `npx prisma db pull`. Then run `npx prisma generate`. 
+
+**Running the tests.**
+
+Navigate to the `src` directory and run `npm i.`. This will install all the required packages, including `cypress`. Then run `npm t` to run the tests in the terminal. Alternatively, you can run `npx run cy:open` to use the Cypress interactive browser, so that you can pick and choose tests to run.
