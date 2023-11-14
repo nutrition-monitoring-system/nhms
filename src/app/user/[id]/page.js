@@ -1,12 +1,12 @@
 //import Image from 'next/image'
 "use client";
-import { useRouter } from "next/navigation";
+import UserAvatar from "../../../components/User.jsx";
+import ChartComponent from "../../../components/User_charts.jsx";
 export default function Home({ params }) {
   return (
     <>
-      <UserAvatar></UserAvatar>
-      <ChartComponent></ChartComponent>
+      <UserAvatar />
+      <ChartComponent />
     </>
   );
-  return <div>{params.id}</div>;
 }

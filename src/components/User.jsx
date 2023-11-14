@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
-import './User.css'; // 导入 CSS 文件
-import { AiOutlinePlus } from 'react-icons/ai'; // 导入加号图标
-import { FaRegAddressCard } from 'react-icons/fa';
-import { FaCamera } from 'react-icons/fa';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import React, { useState } from "react";
+import "./User.css"; // 导入 CSS 文件
+import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
+import { FaRegAddressCard } from "react-icons/fa";
+import { FaCamera } from "react-icons/fa";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 function UserAvatar() {
-  const [avatar, setAvatar] = useState('image/default-avatar.png');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [photo,setAvatarPhoto]=useState(<FaCamera className='camera'/>);
-  
+  const [avatar, setAvatar] = useState("image/default-avatar.png");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [photo, setAvatarPhoto] = useState(<FaCamera className="camera" />);
 
   const userInfo = {
-    id: '1',
-    name: 'John Doe',
-    email: 'johndoe@example.com',
+    id: "1",
+    name: "John Doe",
+    email: "johndoe@example.com",
   };
 
   const handleAvatarChange = (e) => {
@@ -38,18 +37,15 @@ function UserAvatar() {
     }
   };
 
-
   const confirmLogout = () => {
-    const confirmation = window.confirm('Are you sure you want to logout?');
+    const confirmation = window.confirm("Are you sure you want to logout?");
     if (confirmation) {
       // 执行退出操作，例如跳转到退出页面或执行退出逻辑
-      alert('You have been logged out.');
+      alert("You have been logged out.");
     } else {
-      alert('Logout canceled.');
+      alert("Logout canceled.");
     }
   };
- 
-  
 
   const goToPage = () => {
     // 使用window.location.href属性或者window.location.assign方法来跳转到"http://localhost:3001/"
@@ -60,29 +56,26 @@ function UserAvatar() {
     window.location.href = "E:/大三上/NHMS/calendar.html";
   };
 
-  
-
   const handleSearch = () => {
     // 在这里执行搜索操作，例如跳转到搜索结果页面或显示搜索结果
     console.log("开始搜索：" + searchTerm);
   };
 
   const items = [
-    { text: 'Create events' },
-    { text: 'Create Nutrition Plan' },
-    { text: 'Create Health Record Form' },
-    { text: 'Create workout' },
+    { text: "Create events" },
+    { text: "Create Nutrition Plan" },
+    { text: "Create Health Record Form" },
+    { text: "Create workout" },
   ];
 
-  
   return (
-    <div className='body'>
+    <div className="body">
       <div className="user-avatar">
         <img
           id="avatar"
           src={avatar}
           alt="user-avatar"
-          onClick={() => document.getElementById('avatar-upload').click()}
+          onClick={() => document.getElementById("avatar-upload").click()}
         />
         <input
           type="file"
@@ -110,7 +103,6 @@ function UserAvatar() {
           alt="user-logout"
           onClick={confirmLogout}
         />
-
       </div>
 
       <div className="sidebar">
@@ -144,7 +136,9 @@ function UserAvatar() {
         <a href="#section2">Plan</a>
         <a href="#section3">Data Analytics</a>
         <a href="#section1">Health Record Form</a>
-        <a href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html">events</a>
+        <a href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html">
+          events
+        </a>
         <a href="#section3">Change of personal information</a>
         <a href="#section1">Settings</a>
         <a href="#section2">Section 2</a>
@@ -152,72 +146,68 @@ function UserAvatar() {
       </div>
 
       <div class="Calendar">
-        <a class="calendar-text" href='file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html' >Calendar</a>
-        
+        <a
+          class="calendar-text"
+          href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
+        >
+          Calendar
+        </a>
       </div>
 
-      <div className='Health-info'>
-        <p >Healthy information</p>
+      <div className="Health-info">
+        <p>Healthy information</p>
         <p>Name: {userInfo.name}</p>
         <p>Email: {userInfo.email}</p>
         <div className="expand-user-info" onClick={goToPage}>
-          <FaRegAddressCard className='info-icon' />  
+          <FaRegAddressCard className="info-icon" />
         </div>
-        
-        
       </div>
 
       <div className="Creat">
-      {items.map((item, index) => (
-        <div key={index} className="Creat-back">
-          <p className="Creat-text">{item.text}</p>
-          <AiOutlinePlus className="add1" /> {/* 使用加号图标 */}
-        </div>
-      ))}
-    </div>
+        {items.map((item, index) => (
+          <div key={index} className="Creat-back">
+            <p className="Creat-text">{item.text}</p>
+            <AiOutlinePlus className="add1" /> {/* 使用加号图标 */}
+          </div>
+        ))}
+      </div>
 
-    <div className='photo'>
-        <div className='photo-bar'>
+      <div className="photo">
+        <div className="photo-bar">
           <p>before</p>
-          
-          <label htmlFor='upload-photo' onClick={() => document.getElementById('avatar-upload').click()}>
+
+          <label
+            htmlFor="upload-photo"
+            onClick={() => document.getElementById("avatar-upload").click()}
+          >
             {photo}
           </label>
 
           <input
-          id='uploda-photo'
-          type='file'
-          accept='image/*'
-          onChange={handlePhoto}
+            id="uploda-photo"
+            type="file"
+            accept="image/*"
+            onChange={handlePhoto}
           />
         </div>
-        
-        <div className='photo-bar'>
-        <p>after</p>
-        <FaCamera className='camera'/>
+
+        <div className="photo-bar">
+          <p>after</p>
+          <FaCamera className="camera" />
         </div>
-
-    </div>
-
-    <div className='log'>
-      <div className='log-bar'>
-        <AiOutlinePlus className='add2'></AiOutlinePlus>
-        <p>log Food</p>
       </div>
-      <div className='log-bar'>
-      <AiOutlinePlus className='add2'></AiOutlinePlus>
-        <p>log Water</p>
+
+      <div className="log">
+        <div className="log-bar">
+          <AiOutlinePlus className="add2"></AiOutlinePlus>
+          <p>log Food</p>
+        </div>
+        <div className="log-bar">
+          <AiOutlinePlus className="add2"></AiOutlinePlus>
+          <p>log Water</p>
+        </div>
       </div>
-  
     </div>
-        
-    </div>
-      
-
-
-
-
-  
   );
 }
 
