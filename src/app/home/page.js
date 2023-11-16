@@ -145,10 +145,10 @@ function NavBar({ handleLogout }) {
           <div className="tile relative z-10 flex justify-around items-center gap-3">
             <img
               src="/icons/man.png"
-              width={40}
-              height={40}
+              width={20}
+              height={20}
               alt="Person icon"
-              className="ml-2 p-1 rounded-[50px] bg-primarylight"
+              className="ml-2 rounded-[50px] bg-primarylight"
               onClick={handleMenuclick}
             />
             <span onClick={handleMenuclick}>Mr. Bryan</span>
