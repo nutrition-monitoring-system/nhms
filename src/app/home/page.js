@@ -29,6 +29,14 @@ function Home() {
     },
   });
 
+  if (status === "loading") {
+    return (
+      <div className="grid place-items-center absolute inset-0 font-opensans text-[50px]">
+        Loading....
+      </div>
+    );
+  }
+
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
@@ -136,20 +144,30 @@ function NavBar({ handleLogout }) {
           </div>
           <div className="tile relative z-10 flex justify-around items-center gap-3">
             <img
-              src="/icons/account.png"
-              width={20}
-              height={20}
-              alt="account icon"
-              className="ml-2 "
+              src="/icons/man.png"
+              width={40}
+              height={40}
+              alt="Person icon"
+              className="ml-2 p-1 rounded-[50px] bg-primarylight"
               onClick={handleMenuclick}
             />
-            <span onClick={handleMenuclick}>Account</span>
+            <span onClick={handleMenuclick}>Mr. Bryan</span>
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
              shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
             >
-              <div className="tile flex justify-around items-center">
+              <div className="tile grid grid-cols-4">
+                {" "}
+                <img
+                  src="/icons/account.png"
+                  alt="Settings icon"
+                  width={20}
+                  height={20}
+                />
+                <Link href={"/user/userd9f49w"}>Profile</Link>
+              </div>
+              <div className="tile grid grid-cols-4">
                 {" "}
                 <img
                   src="/icons/settings.png"
@@ -159,7 +177,7 @@ function NavBar({ handleLogout }) {
                 />
                 <Link href={"/user/userd9f49w"}>Settings</Link>
               </div>
-              <div className="tile flex justify-around items-center">
+              <div className="tile grid grid-cols-4">
                 {" "}
                 <img
                   src="/icons/translate.png"
@@ -169,10 +187,7 @@ function NavBar({ handleLogout }) {
                 />
                 <span>Languages</span>
               </div>
-              <div
-                className="tile flex justify-left items-center"
-                onClick={handleLogout}
-              >
+              <div className="tile grid grid-cols-4" onClick={handleLogout}>
                 {" "}
                 <img
                   src="/icons/logout.png"
