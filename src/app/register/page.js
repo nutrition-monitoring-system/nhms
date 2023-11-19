@@ -165,6 +165,7 @@ export default function Home() {
           </div>
           <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
+              id="chageTranslte"
               className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
             >

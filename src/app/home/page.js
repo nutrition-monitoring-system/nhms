@@ -125,6 +125,7 @@ function NavBar({ handleLogout }) {
             height={20}
           />
           <input
+            id="search"
             type="text"
             placeholder="Type to search "
             className="flex-grow py-2 placeholder:text-white text-white placeholder:font-normal bg-black"

@@ -89,7 +89,7 @@ export function PersonalInformation({ onClick, formValidation }) {
         <p className="text-rose-600 text-sm">
           {errors.confirmPassword?.message}
         </p>
-        <div className="grid place-items-center">
+        <div className="grid place-items-center" id='RestrictionsNext'>
           <Button onClick={onClick}>Next</Button>
         </div>
       </div>
@@ -224,7 +224,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
               return (
                 <div key={idx}>
                   <div
-                    className="tile"
+                    className="tile Restrictions"
                     ref={(element) => (FoodTypeRefs.current[idx] = element)}
                     onClick={() => handleOptionClick(idx)}
                   >
@@ -244,7 +244,10 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
             })}
         </div>
         <div className="grid grid-cols-2 place-items-center">
+          <div>
           <Button onClick={onClickPrev}>Previous</Button>
+          </div>
+          <div id="AllergiesNext">
           <Button
             onClick={(event) => {
               handleCollectData({ foodCategories: userSelected });
@@ -253,6 +256,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
           >
             Next
           </Button>
+          </div>
         </div>
       </div>
     </>
@@ -366,7 +370,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
             return (
               <div key={idx}>
                 <div
-                  className="tile"
+                  className="tile Allergies"
                   ref={(element) => (AllergyRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
@@ -391,6 +395,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
+          <div id="conditionsNext">
           <Button
             onClick={(event) => {
               handleCollectData({ Allergies: userSelected });
@@ -399,6 +404,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
           >
             Next
           </Button>
+          </div>
         </div>
       </div>
     </>
@@ -493,7 +499,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
         <div className="relative flex items-center gap-1 p-2">
           <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
-            type="text"
+            type="text conditions"
             placeholder="Type to add or search"
             className="pl-7 flex-grow"
             onChange={handleOnChange}
@@ -520,7 +526,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
             return (
               <div key={idx}>
                 <div
-                  className="tile"
+                  className="tile conditions"
                   ref={(element) => (ConditionRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
@@ -545,6 +551,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
+          <div id="conditionsNext">
           <Button
             onClick={(event) => {
               handleCollectData({ chronicConditions: userSelected });
@@ -553,6 +560,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
           >
             Next
           </Button>
+          </div>
         </div>
       </div>
     </>
@@ -630,7 +638,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
             return (
               <div key={idx}>
                 <div
-                  className="tile"
+                  className="tile Settings"
                   ref={(element) => (SettingsRef.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
@@ -651,6 +659,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
         </p>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
+          <div id="SettingsNext">
           <Button
             onClick={(event) => {
               handleCollectData({ accessibilitySettings: userSelected });
@@ -659,6 +668,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
           >
             Next
           </Button>
+          </div>
         </div>
       </div>
     </>
@@ -723,18 +733,21 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
           <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
           <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2">
             <input
+              name="Foodname"
               type="text"
               placeholder="Food name"
               ref={foodName}
               className=""
             />
             <input
+            name="Fooddescription"
               type="text"
               placeholder="Food type"
               className="my-2"
               ref={foodDescription}
             />
             <input
+            name="Fooddewater"
               className=""
               type="text"
               placeholder="a drink? water maybe"
@@ -743,8 +756,8 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             />
           </div>
           <div className="flex justify-around items-center mt-2 w-full">
-            <Button onClick={handleAddFood}>add</Button>
-            <Button onClick={handleModalclose}>close</Button>
+            <button onClick={handleAddFood} className="tile" id="addNext" >add</button>
+            <button onClick={handleModalclose} className="tile" id="closeNext">close</button>
           </div>
         </div>
       </dialog>
@@ -761,6 +774,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             </div>
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
+              id="addBreakFast"
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
@@ -853,7 +867,9 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
+          <div id="DoneNext">
           <Button onClick={handleSubmit}>Done</Button>
+          </div>
         </div>
       </div>
     </>
