@@ -1,23 +1,38 @@
+
 name: Sync files
 
 on:
-  push:
+ push:
     branches:
       - main # Adjust this based on your branch names
 
+# Define the job that will be executed when the event triggers
 jobs:
-  sync-files:
+ sync-files:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Sync the files to another repository
       - name: Sync files
         uses: cpina/github-action-push-to-another-repository@main
         env:
+          # Set the source directory for the files to be synced
           SOURCE_DIR: "."
+
+          # Set the destination directory for the synced files
           DESTINATION_DIR: "."
+
+          # Set the destination repository URL
           DESTINATION_REPOSITORY: "jamm59/temp_nhms.git"
+
+          # Set the destination branch name
           DESTINATION_BRANCH: "main"
+
+          # Set the SSH private key for authentication with the destination repository
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+#
+#This GitHub Actions workflow is designed to sync files from the current repository to another repository. It triggers on a push event to the `main` branch. The workflow checks out the code from the current repository and then uses the `cpina/github-action-push-to-another-repository` action to sync the files to the specified destination repository. The SSH private key is used for authentication with the destination repository..</s>
