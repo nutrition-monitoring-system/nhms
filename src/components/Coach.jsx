@@ -23,7 +23,7 @@ const Coach = () => {
             TV. She offers various programs on her website, such as a 90-day
             plan, a power hour, and daily meal plans.
           </p>
-          <hr className="h-1 bg-black fill-black w-full rounded-sm" />
+          <hr className="h-1 border-black border-2 fill-black w-full rounded-sm" />
           <p className="shadow-sm">
             Whether you're scheduling appointments or seeking diet
             recommendations, Dr. Gostic's expertise in Microbiology, Genetics,

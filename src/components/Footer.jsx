@@ -77,11 +77,12 @@ const Footer = () => (
         <div className="grid place-items-center text-center">
           @{new Date().getFullYear()} All Rights Reserved
         </div>
-        <div className="grid grid-cols-4 place-items-center sm:col-span-2">
+        <div className="grid grid-cols-5 place-items-center sm:col-span-2">
           <Link href="">About</Link>
           <Link href="">Help</Link>
           <Link href="">Contact</Link>
           <Link href="">Settings</Link>
+          <Link href="">FAQ</Link>
         </div>
       </div>
     </div>
