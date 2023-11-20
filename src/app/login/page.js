@@ -81,41 +81,63 @@ export default function Home() {
           </p>
           <Button href={"/register"}>Sign up Now</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-4 sm:row-span-2">
-          <h1 className="font-black text-[45px] font-modak text-center w-1/2 leading-10 sm:w-3/4 sm:text-[35px]">
+        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-7 sm:gap-4 sm:row-span-2 relative">
+          <img
+            src={"/icons/fruits.png"}
+            width={100}
+            height={100}
+            className="absolute top-3 left-10 z-0 sm:hidden"
+          />
+          <img
+            src={"/icons/fruits.png"}
+            width={100}
+            height={100}
+            className="absolute top-3 right-10 z-0 sm:top-[-4rem] sm:right-3"
+          />
+          <h1 className="font-black text-[40px] h-fit font-modak text-center w-1/2 sm:w-3/4 sm:text-[35px] relative z-10">
             Login To Your Account
           </h1>
           <form
-            className="flex flex-col justify-center items-left gap-3 w-[40%] p-3 rounded-md sm:w-[90%]"
+            className="flex flex-col justify-center items-left gap-3 w-[50%] p-3 rounded-md sm:w-[90%]"
             onSubmit={handleSubmit(submitForm)}
           >
-            <input
-              {...register("email", { required: true })}
-              type="text"
-              placeholder={"Email Address"}
-              name="email"
-            ></input>
+            <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+              <img src={"/icons/email.png"} width={35} height={35} />
+              <input
+                {...register("email", { required: true })}
+                type="text"
+                placeholder={"Email Address"}
+                name="email"
+                className="col-span-4"
+              ></input>
+            </div>
             {errors.email && (
               <p className="text-rose-600 text-sm">{errors.email?.message}</p>
             )}
-            <input
-              {...register("password", { required: true })}
-              type={"password"}
-              placeholder={"Password"}
-              name="password"
-            ></input>
+            <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+              <input
+                {...register("password", { required: true })}
+                type={"password"}
+                placeholder={"Password"}
+                name="password"
+                className="col-span-4"
+              ></input>
+              <img src={"/icons/password.png"} width={35} height={35} />
+            </div>
             {errors.password && (
               <p className="text-rose-600 text-sm">
                 {errors.password?.message}
               </p>
             )}
-            <a className="grid place-items-center">
-              <span className="cursor-pointer" onClick={handlePopUP}>
-                Forgot Password?
-              </span>
-            </a>
-            <div className="grid place-items-center">
-              <Button type="submit">Login</Button>
+            <div className="flex justify-between items-center w-full p-2 rounded-md">
+              <button className="tile bg-black text-white px-7 py-3">
+                Login
+              </button>
+              <a className="grid place-items-center">
+                <span className="cursor-pointer" onClick={handlePopUP}>
+                  Forgot Password?
+                </span>
+              </a>
             </div>
           </form>
           <dialog
@@ -147,7 +169,7 @@ export default function Home() {
               <input type={"password"} placeholder={"New Password"}></input>
               <input type={"password"} placeholder={"Confirm Password"}></input>
               <div className="flex justify-between items-center">
-                <Button>Continue</Button>
+                <Button onClick={handleClose}>submit</Button>
                 <Button onClick={handleClose}>close</Button>
               </div>
             </form>

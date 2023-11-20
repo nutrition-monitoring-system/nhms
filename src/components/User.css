@@ -1,294 +1,292 @@
 body {
-    font-family:Trebuchet MS, sans-serif;
+  font-family: Trebuchet MS, sans-serif;
 }
 
 .user-avatar {
-    position: absolute;
-    display: flex;
-    top: 20px;
-    right: 20px;
-    width: 1100px;
-    height: 120px;
-    padding: 10px;
-    border: 2px solid #fb923c;
-    border-radius: 5px;
-    align-items: center;
+  position: absolute;
+  display: flex;
+  top: 20px;
+  right: 20px;
+  width: 1100px;
+  height: 120px;
+  padding: 10px;
+  border: 2px solid #fb923c;
+  border-radius: 5px;
+  align-items: center;
 }
 
 #avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 20px;
-    transition: filter 0.3s ease;
-    /* 添加过渡效果 */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+  transition: filter 0.3s ease;
+  /* 添加过渡效果 */
 }
 
 .user-avatar img:hover {
-    filter: hue-rotate(30deg);
-    /* 鼠标悬停时将图片变色 */
-    cursor: pointer; /* 鼠标指针样式为手形 */
+  filter: hue-rotate(30deg);
+  /* 鼠标悬停时将图片变色 */
+  cursor: pointer; /* 鼠标指针样式为手形 */
 }
 
 #avatar-upload {
-    display: none;
-    /* 隐藏文件输入元素 */
+  display: none;
+  /* 隐藏文件输入元素 */
 }
-#name, #email, #phone {
-    /* 字体改不了 */
-font-family: 'Didot' serif;
-font-size: 16px; /* 设置合适的字体大小 */
+#name,
+#email,
+#phone {
+  /* 字体改不了 */
+  font-family: "Didot" serif;
+  font-size: 16px; /* 设置合适的字体大小 */
 }
 #logout {
-position: absolute;
-right: 20px; /* 调整位置 */
-top: 30px; /* 调整位置 */
-width: 170px; /* 设置图像宽度 */
-height: auto; /* 高度自适应以保持纵横比 */
+  position: absolute;
+  right: 20px; /* 调整位置 */
+  top: 30px; /* 调整位置 */
+  width: 170px; /* 设置图像宽度 */
+  height: auto; /* 高度自适应以保持纵横比 */
 }
 /* 创建一个左侧导航栏的容器 */
 .sidebar {
-    position: fixed; /* 使导航栏固定在页面上 */
-    width: 250px;
-    height: 100%;
-    border-radius: 10px;
-    background-color: #fb923c;
-    overflow: auto; /* 添加滚动条 */
+  position: fixed; /* 使导航栏固定在页面上 */
+  width: 250px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #fb923c;
+  overflow: auto; /* 添加滚动条 */
 }
 
 /* 导航栏中的链接样式 */
 .sidebar a {
-    display: block;
-    width: 230px;
-    height: 30px;
-    margin-top: 5px;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
-    /* background-color: #df8e13; */
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    position: relative; /* 添加相对定位，以便容纳伪元素 */
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  display: block;
+  width: 230px;
+  height: 30px;
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  /* background-color: #df8e13; */
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  position: relative; /* 添加相对定位，以便容纳伪元素 */
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .sidebar a:hover {
-    background-color:  #f0b688;
+  background-color: #f0b688;
 }
 
-    /* 搜索框样式 */
+/* 搜索框样式 */
 .search-box {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    margin-left: 3px;
-
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 3px;
 }
 .search-box svg {
-    cursor: pointer; 
+  cursor: pointer;
 }
 #search-box {
-    width: 200px; /* 设置搜索框宽度 */
-    height: 30px;
-    border: 1px solid #fff; /* 设置边框样式 */
-    background-color: #fff; /* 设置背景颜色 */
-    color: #322d2d;
-    border-radius: 10px;
-    padding: 5px;
-    margin-top: 10px;
-    margin-left: 10px; /* 设置上下外边距，分隔搜索框与其他链接 */
+  width: 200px; /* 设置搜索框宽度 */
+  height: 30px;
+  border: 1px solid #fff; /* 设置边框样式 */
+  background-color: #fff; /* 设置背景颜色 */
+  color: #322d2d;
+  border-radius: 10px;
+  padding: 5px;
+  margin-top: 10px;
+  margin-left: 10px; /* 设置上下外边距，分隔搜索框与其他链接 */
 }
-.free{
-    width: 250px;
-    height: 30px;
+.free {
+  width: 250px;
+  height: 30px;
 }
-.Health-info{
-    width: 450px;
-    height: 450px;
-    position: absolute;
-    display: flex;
-    top: 180px;
-    right: 590px;
-    background-color: #FFF4E3;
-    border-radius: 10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+.Health-info {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  display: flex;
+  top: 180px;
+  right: 590px;
+  background-color: #fff4e3;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-  
-  .user-info-box {
-    width: 450px;
-    height: 450px;
-    background-color: #FFF4E3;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  }
-  .info-icon{
-    font-size: 34px;
-    cursor: pointer;
-    transition: all 0.5s;
-  }
-  .info-icon:hover{
-    font-size: 40px;
-  }
+.user-info-box {
+  width: 450px;
+  height: 450px;
+  background-color: #fff4e3;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.info-icon {
+  font-size: 34px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.info-icon:hover {
+  font-size: 40px;
+}
 .Calendar {
-    width: 450px;
-    height: 450px;
-    position: absolute;
-    display: flex;
-    top: 180px;
-    right: 90px;
-    background-color: #FFF4E3;
-    border-radius: 10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease; 
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    }
-    .calendar-text {
-        font-size: 50px;
-        color: grey;
-        cursor: pointer;
-        transition: all 0.5s;
-    }
-    .calendar-text:hover{
-        font-size: 55px;
-    }
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  display: flex;
+  top: 180px;
+  right: 90px;
+  background-color: #fff4e3;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.calendar-text {
+  font-size: 50px;
+  color: grey;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.calendar-text:hover {
+  font-size: 55px;
+}
 
-    .Creat{
-        width: 960px;
-        height: 400px;
-        position: absolute;
-        top: 700px;
-        right: 90px;
-        background-color: #fb923c;
-        border-radius: 10px;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.3s ease; 
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        white-space: nowrap; /* 防止元素换行 */
-        overflow:auto; /* 允许横向滚动 */
-        }
-        .Creat-back {
-            width: 300px;
-            height: 350px;
-            background-color: #fff;
-            margin: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            display: inline-block;
-            word-wrap: break-word;
-        }
-        .Creat-text {
-            font-size: 30px;
-            color: grey;
-            margin-top: 80px;
-            margin-left: 30px;
-            display: flex;
-            align-items: center; /* 垂直居中对齐 */
-            word-wrap: break-word;
-        }
-        .add1 {
-            margin-top: 80px;
-            margin-left: 16px;
-            width: 50px; 
-            height: auto; 
-            color: grey;
-            cursor: pointer; /* 鼠标指针样式为手形 */
-        }
-        
-.photo{
-    width: 520px;
-    height: 350px;
-    position: absolute;
-    display: flex;
-    top: 1150px;
-    right: 530px;
-    background-color: #FFF4E3;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease; 
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    white-space: nowrap; /* 防止元素换行 */
-    overflow:auto; /* 允许横向滚动 */
+.Creat {
+  width: 960px;
+  height: 400px;
+  position: absolute;
+  top: 700px;
+  right: 90px;
+  background-color: #fb923c;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  white-space: nowrap; /* 防止元素换行 */
+  overflow: auto; /* 允许横向滚动 */
+}
+.Creat-back {
+  width: 300px;
+  height: 350px;
+  background-color: #fff;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  display: inline-block;
+  word-wrap: break-word;
+}
+.Creat-text {
+  font-size: 30px;
+  color: grey;
+  margin-top: 80px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center; /* 垂直居中对齐 */
+  word-wrap: break-word;
+}
+.add1 {
+  margin-top: 80px;
+  margin-left: 16px;
+  width: 50px;
+  height: auto;
+  color: grey;
+  cursor: pointer; /* 鼠标指针样式为手形 */
+}
+
+.photo {
+  width: 520px;
+  height: 350px;
+  position: absolute;
+  display: flex;
+  top: 1150px;
+  right: 530px;
+  background-color: #fff4e3;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  white-space: nowrap; /* 防止元素换行 */
+  overflow: auto; /* 允许横向滚动 */
 }
 .photo-bar {
-    width: 240px;
-    height: 280px;
-    background-color: #fff;
-    margin: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    display: inline-block;
-    word-wrap: break-word;
+  width: 240px;
+  height: 280px;
+  background-color: #fff;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  display: inline-block;
+  word-wrap: break-word;
 }
-#uploda-photo{
-    display:none;
+#uploda-photo {
+  display: none;
 }
-.camera{
-    font-size: 84px;
-    color: rgb(165, 160, 160);
-    margin-top: 50px;
-    cursor: pointer;
-    transition: all 0.5s;
+.camera {
+  font-size: 84px;
+  color: rgb(165, 160, 160);
+  margin-top: 50px;
+  cursor: pointer;
+  transition: all 0.5s;
 }
-.camera:hover{
-    font-size: 90px;
+.camera:hover {
+  font-size: 90px;
 }
-.log{
-    width: 350px;
-    height: 350px;
-    position: absolute;
-    display: flex;
-    top: 1150px;
-    right: 90px;
-    background-color: #FFF4E3;
-    border-radius: 10px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+.log {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  display: flex;
+  top: 1150px;
+  right: 90px;
+  background-color: #fff4e3;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .log-bar {
-    width: 300px;
-    height: 80px;
-    background-color: #fff;
-    margin: 20px;
-    border-radius: 10px;
-    /* 设置 log-bar 的显示方式为 flexbox */
-    display: flex;
-    /* 设置 log-bar 的子元素在主轴方向上的对齐方式为居中 */
-    justify-content: center;
-    /* 设置 log-bar 的子元素在交叉轴方向上的对齐方式为居中 */
-    align-items: center;
+  width: 300px;
+  height: 80px;
+  background-color: #fff;
+  margin: 20px;
+  border-radius: 10px;
+  /* 设置 log-bar 的显示方式为 flexbox */
+  display: flex;
+  /* 设置 log-bar 的子元素在主轴方向上的对齐方式为居中 */
+  justify-content: center;
+  /* 设置 log-bar 的子元素在交叉轴方向上的对齐方式为居中 */
+  align-items: center;
 }
 .add2 {
-    margin-top: 10px;
-    margin-left: 0px;
-    position: relative;
-    width: 30px; 
-    height: auto; 
-    color: grey;
-    cursor: pointer;
-
+  margin-top: 10px;
+  margin-left: 0px;
+  position: relative;
+  width: 30px;
+  height: auto;
+  color: grey;
+  cursor: pointer;
 }
-p{
-    font-size: 0.6cm;
+p {
+  font-size: 0.6cm;
 }
-
