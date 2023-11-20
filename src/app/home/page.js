@@ -108,14 +108,10 @@ function NavBar({ handleLogout }) {
   };
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-1 sm:relative sm:grid-rows-3">
-      <div className="grid grid-cols-4 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
+      <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <div className="text-black font-modak text-[30px]">
           <Link href={"/"}>Logo</Link>
         </div>
-        <span className="text-black grid place-items-center">
-          Welcome, Mr.Bryan:{" "}
-          {/* Test name, will be changed on user authentication. */}
-        </span>
         <div className="relative flex items-center gap-1 p-2">
           <img
             src="/icons/search.png"
@@ -136,8 +132,8 @@ function NavBar({ handleLogout }) {
           <div className="tile flex justify-around items-center">
             <img
               src="/icons/shopping.png"
-              width={20}
-              height={20}
+              width={25}
+              height={25}
               alt="shopping icon"
               className="ml-2"
             />
@@ -146,8 +142,8 @@ function NavBar({ handleLogout }) {
           <div className="tile relative z-10 flex justify-around items-center gap-3">
             <img
               src="/icons/man.png"
-              width={20}
-              height={20}
+              width={25}
+              height={25}
               alt="Person icon"
               className="ml-2 rounded-[50px] bg-primarylight"
               onClick={handleMenuclick}

@@ -24,7 +24,7 @@ module.exports = {
         modak: ["Open Sans", "sans-serif"],
       },
       screens: {
-        xl: { min: "1279px" },
+        xl: { min: "1300px" },
         // => @media (min-width: 1279px) { ... }
 
         lg: { max: "1023px" },

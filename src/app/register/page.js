@@ -76,7 +76,7 @@ export default function Home() {
     data = {
       forename: data.firstName,
       surname: data.lastName,
-      dob: data.date,
+      dob: data.date.toISOString(),
       email: data.email,
       password: data.password,
       gender: data.gender,

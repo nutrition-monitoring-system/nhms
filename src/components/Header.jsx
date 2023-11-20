@@ -22,7 +22,7 @@ export default function Header() {
           <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
             <h1
               className="text-[50px] w-3/4 font-black
-            sm:text-[35px] sm:w-full xl:text-[80px] xl:w-[80%]"
+            sm:text-[35px] sm:w-full xl:text-[90px] xl:w-[80%]"
             >
               A Smart and Personalised Nutrition Management System
             </h1>
@@ -97,28 +97,39 @@ function NavBar() {
         <div className="tile">
           <img
             src="/icons/blog.png"
-            width={20}
-            height={20}
+            width={25}
+            height={25}
             alt="Blog icon"
             className="ml-2 "
           />
           <span>Blog</span>
         </div>
-        <div className="tile relative z-10">
+        <div className="tile relative z-10 flex justify-around items-center gap-3">
           <img
-            src="/icons/account.png"
-            width={20}
-            height={20}
-            alt="account icon"
-            className="ml-2 "
+            src="/icons/man.png"
+            width={25}
+            height={25}
+            alt="Person icon"
+            className="ml-2 rounded-[50px] border-1 border-black"
+            onClick={handleMenuclick}
           />
-          <span onClick={handleMenuclick}>Account</span>
+          <span onClick={handleMenuclick}>Mr. Bryan</span>
           <div
             ref={menuItems}
             className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
              shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
           >
-            <div className="tile flex justify-around items-center">
+            <div className="tile grid grid-cols-4">
+              {" "}
+              <img
+                src="/icons/account.png"
+                alt="Settings icon"
+                width={20}
+                height={20}
+              />
+              <Link href={"/user/userd9f49w"}>Profile</Link>
+            </div>
+            <div className="tile grid grid-cols-4">
               {" "}
               <img
                 src="/icons/settings.png"
@@ -126,9 +137,9 @@ function NavBar() {
                 width={20}
                 height={20}
               />
-              <span>Settings</span>
+              <Link href={"/user/userd9f49w"}>Settings</Link>
             </div>
-            <div className="tile flex justify-around items-center">
+            <div className="tile grid grid-cols-4">
               {" "}
               <img
                 src="/icons/translate.png"
@@ -139,7 +150,7 @@ function NavBar() {
               <span>Languages</span>
             </div>
             <div
-              className="tile flex justify-left items-center"
+              className="tile grid grid-cols-4"
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               {" "}

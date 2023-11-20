@@ -1,16 +1,31 @@
 /* Get user information and add it to the SQL database using MySQL.  */
 import { v1 } from "uuid";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../utils/prismaclientUtil.js";
 export default async function handler(req, res) {
+  // this handles the register page
   if (req.method === "POST") {
     // Process a POST request
-    const prisma = new PrismaClient();
+    //const prisma = new PrismaClient();
     let newUUID = v1().slice(0, 32);
-    /* Check if data is a string or a json object already. */
-    let newUserData = JSON.parse(req.body);
     /* Create a new user in the database. */
-    console.log("BACKEND");
-    console.log(newUserData);
+    // foodCategories;
+    // Allergies;
+    // chronicConditions;
+    // accessibilitySettings;
+    const {
+      redirect,
+      foodCategories,
+      Allergies,
+      chronicConditions,
+      accessibilitySettings,
+      is_admin,
+      registration,
+      csrfToken,
+      callbackUrl,
+      json,
+      ...newUserData
+    } = req.body;
+
     newUserData["userID"] = newUUID;
     if (newUserData["gender"].length > 1) {
       newUserData["gender"] = newUserData["gender"]
@@ -18,10 +33,12 @@ export default async function handler(req, res) {
         .charAt(0)
         .toUpperCase();
     }
-    const newUser = await prisma.user.create({ data: newUserData });
-    res.send(newUUID);
-    res.status(200).json();
-  } else {
-    res.status(400).json();
+    console.log("", newUserData);
+    const newUser = await prisma.user.create({
+      data: { is_admin: Number(is_admin), ...newUserData },
+    });
+    console.log("user data: ", newUserData);
+    return res.status(200).json({ id: newUUID });
   }
+  return res.status(400).json({ error: "Unable to add user" });
 }

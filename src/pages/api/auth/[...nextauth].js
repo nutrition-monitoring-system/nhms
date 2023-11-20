@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
 const authOptions = {
   session: {
     strategy: "jwt",
@@ -11,10 +10,11 @@ const authOptions = {
       type: "credentials",
       credentials: {},
       async authorize(credentials, req) {
-        const userRegistration = credentials.registration == true;
-        console.log(req.body);
+        const userRegistration = credentials.registration === "true";
+        console.log(credentials);
         if (userRegistration) {
-          const url = "http://localhost:3000/api/addUSer";
+          const { email, password, surname } = credentials;
+          const url = "http://localhost:3000/api/addUser";
           const content = await fetch(url, {
             method: "POST",
             headers: {
@@ -24,9 +24,32 @@ const authOptions = {
             body: JSON.stringify(req.body),
           });
           const response = await content.json();
-          console.log(response);
+          if (response.status === 200) {
+            return {
+              id: response.id,
+              email: email,
+              surname: surname,
+            };
+          }
         } else {
-          // check to see if the user's email and password is valid
+          const { email, password } = credentials;
+          const url = "http://localhost:3000/api/getUser";
+          const content = await fetch(url, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+          const response = await content.json();
+          if (response.status === 200) {
+            return {
+              id: response.id,
+              email: response.email,
+              surname: response.surname,
+            };
+          }
         }
         return { email: credentials.email };
       },
