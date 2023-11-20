@@ -16,6 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Debug SSH_PRIVATE_KEY
+        run: echo "SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}"
+
+
       # Sync the files to another repository
       - name: Sync files
         uses: cpina/github-action-push-to-another-repository@main
