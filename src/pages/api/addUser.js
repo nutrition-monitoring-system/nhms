@@ -1,5 +1,6 @@
 /* Get user information and add it to the SQL database using MySQL.  */
 import { v1 } from "uuid";
+import CryptoJS from "crypto-js";
 import prisma from "../../utils/prismaclientUtil.js";
 export default async function handler(req, res) {
   // this handles the register page
@@ -8,10 +9,6 @@ export default async function handler(req, res) {
     //const prisma = new PrismaClient();
     let newUUID = v1().slice(0, 32);
     /* Create a new user in the database. */
-    // foodCategories;
-    // Allergies;
-    // chronicConditions;
-    // accessibilitySettings;
     const {
       redirect,
       foodCategories,
@@ -23,21 +20,24 @@ export default async function handler(req, res) {
       csrfToken,
       callbackUrl,
       json,
+      password,
       ...newUserData
     } = req.body;
+    // Hash the password using SHA-256
+    const hash = CryptoJS.SHA256(password);
 
-    newUserData["userID"] = newUUID;
-    if (newUserData["gender"].length > 1) {
-      newUserData["gender"] = newUserData["gender"]
-        .toString()
-        .charAt(0)
-        .toUpperCase();
-    }
-    console.log("", newUserData);
+    // Convert the hash to a hexadecimal string
+    password = hash.toString(CryptoJS.enc.Hex).substring(0, 30); //database only requires the 32 characters
+    data = {
+      gender: newUserData.toUpperCase(),
+      userID: newUUID,
+      password: password,
+      is_admin: Number(is_admin),
+      ...newUserData,
+    };
     const newUser = await prisma.user.create({
-      data: { is_admin: Number(is_admin), ...newUserData },
+      data: data,
     });
-    console.log("user data: ", newUserData);
     return res.status(200).json({ id: newUUID });
   }
   return res.status(400).json({ error: "Unable to add user" });
