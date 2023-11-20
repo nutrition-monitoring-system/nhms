@@ -29,4 +29,4 @@ jobs:
           # The destination branch
           DESTINATION_BRANCH: "main"
           # The SSH key to access the other repo
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
