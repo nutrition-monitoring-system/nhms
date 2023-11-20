@@ -27,11 +27,11 @@ export default async function handler(req, res) {
     const hash = CryptoJS.SHA256(password);
 
     // Convert the hash to a hexadecimal string
-    password = hash.toString(CryptoJS.enc.Hex).substring(0, 30); //database only requires the 32 characters
+    const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30); //database only requires the 32 characters
     data = {
       gender: newUserData.toUpperCase(),
       userID: newUUID,
-      password: password,
+      password: passwordHash,
       is_admin: Number(is_admin),
       ...newUserData,
     };

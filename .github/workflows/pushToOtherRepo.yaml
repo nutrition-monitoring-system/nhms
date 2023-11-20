@@ -1,0 +1,32 @@
+# This is a workflow to sync files between two repos
+name: Sync files
+
+# Trigger the workflow on push events
+on: push
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This job syncs files from the current repo to another repo
+  sync-files:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Syncs files using the action
+      - name: Sync files
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          # The source directory in the current repo
+          SOURCE_DIR: "."
+          # The destination directory in the other repo
+          DESTINATION_DIR: "."
+          # The destination repository
+          DESTINATION_REPOSITORY: "jamm59/temp_nhms.git"
+          # The destination branch
+          DESTINATION_BRANCH: "main"
+          # The SSH key to access the other repo
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

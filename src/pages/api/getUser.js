@@ -8,8 +8,8 @@ export default function Handle(req, res) {
   // Hash the password using SHA-256
   const hash = CryptoJS.SHA256(password);
   // Convert the hash to a hexadecimal string
-  password = hash.toString(CryptoJS.enc.Hex).substring(0, 30);
-  if (userData && userData.password === password)
+  const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30);
+  if (userData && userData.password === passwordHash)
     // if the user is valid then we want to return data back to the session
     return {
       id: userData.id,

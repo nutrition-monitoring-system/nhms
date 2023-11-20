@@ -4,12 +4,12 @@ const Coach = () => {
     <>
       <div className="min-h-screen bg-white gap-1 grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">
         <div className="row-span-2 p-2 md:row-span-1">
-          <div className="w-full h-full rounded-lg bg-orange-300 border-4 border-white shadow-lg bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
+          <div className="w-full h-full rounded-lg border-4 border-white shadow-lg bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
         </div>
-        <div className="bg-green-300 sm:rounded-none text-md text-black font-opensans mb-2 shadow-2xl rounded-lg flex justify-center items-center flex-col gap-4 py-4 px-6">
+        <div className="bg-primary sm:rounded-none text-md text-black font-opensans mb-2 shadow-2xl rounded-lg flex justify-center items-center flex-col gap-4 py-2 px-6">
           <div className="w-full">
-            <h1 className="text-[30px] font-extrabold grid place-items-start">
-              Dr.Monika Gostic?
+            <h1 className="text-[30px] font-extrabold grid place-items-center">
+              Dr.Monika Gostic
             </h1>
           </div>
           <p className="py-3 shadow-sm">
@@ -23,7 +23,7 @@ const Coach = () => {
             TV. She offers various programs on her website, such as a 90-day
             plan, a power hour, and daily meal plans.
           </p>
-          <hr className="h-2 bg-black fill-black w-full rounded-sm opacity-90" />
+          <hr className="h-1 bg-black fill-black w-full rounded-sm" />
           <p className="shadow-sm">
             Whether you're scheduling appointments or seeking diet
             recommendations, Dr. Gostic's expertise in Microbiology, Genetics,
@@ -31,7 +31,7 @@ const Coach = () => {
             Coaching ensures you receive the most effective and
             scientifically-backed advice.
           </p>
-          <div className="grid place-items-start w-full">
+          <div className="grid place-items-center w-full">
             <Button href={"/register"}>Click Here to Sign Up</Button>
           </div>
         </div>
