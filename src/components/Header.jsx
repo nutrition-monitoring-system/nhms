@@ -22,7 +22,7 @@ export default function Header() {
           <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
             <h1
               className="text-[50px] w-3/4 font-black
-            sm:text-[35px] sm:w-full xl:text-[90px] xl:w-[80%]"
+            sm:text-[35px] sm:w-full xl:text-[70px] xl:w-[80%]"
             >
               A Smart and Personalised Nutrition Management System
             </h1>

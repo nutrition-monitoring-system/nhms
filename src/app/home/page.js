@@ -32,7 +32,7 @@ function Home() {
 
   if (status === "loading") {
     return (
-      <div className="grid place-items-center absolute inset-0 font-opensans text-[50px]">
+      <div className="grid place-items-center absolute inset-0 font-opensans text-[30px]">
         Loading....
       </div>
     );
@@ -131,7 +131,7 @@ function NavBar({ handleLogout }) {
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
-             shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
+             shadow-2xl p-2 grid grid-rows-3 gap-1 translate-y-[-100] pointer-events-none"
             >
               <div className="tile grid grid-cols-4">
                 {" "}

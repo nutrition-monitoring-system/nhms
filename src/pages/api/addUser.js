@@ -21,6 +21,7 @@ export default async function handler(req, res) {
       callbackUrl,
       json,
       password,
+      gender,
       ...newUserData
     } = req.body;
     // Hash the password using SHA-256
@@ -28,8 +29,9 @@ export default async function handler(req, res) {
 
     // Convert the hash to a hexadecimal string
     const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30); //database only requires the 32 characters
-    data = {
-      gender: newUserData.toUpperCase(),
+
+    const data = {
+      gender: gender.toUpperCase()[0], // for MALE, gender[0] = M and gender[0] = F for female
       userID: newUUID,
       password: passwordHash,
       is_admin: Number(is_admin),
