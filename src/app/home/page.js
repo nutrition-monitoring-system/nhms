@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Recipes from "../../components/Recipes.jsx";
 // export const metadata = {
 //   title: "Home",
 //   description: "Home Page",
@@ -40,33 +41,11 @@ function Home() {
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
-
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
       <NavBar handleLogout={handleLogout} />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
-        <div className="flex justify-center items-center flex-wrap gap-4 w-[70%] min-h-fit pt-10 sm:w-full">
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-          <div className="h-[150px] sm:h-[250px] w-[200px] sm:w-[80%] shadow-xl bg-white rounded-md"></div>
-        </div>
+        <Recipes />
       </div>
     </div>
   );
@@ -107,7 +86,7 @@ function NavBar({ handleLogout }) {
     });
   };
   return (
-    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-1 sm:relative sm:grid-rows-3">
+    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <div className="text-black font-modak text-[30px]">
           <Link href={"/"}>Logo</Link>

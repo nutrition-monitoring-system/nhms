@@ -68,6 +68,9 @@ dialog::backdrop {
   animation-fill-mode: forwards !important;
 }
 
+.grid-cols-custom {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
 @keyframes animateEnter {
   100% {
     transform: translateY(0);
