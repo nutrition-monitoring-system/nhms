@@ -749,7 +749,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
               name="Fooddewater"
               className=""
               type="text"
-              placeholder="a drink? water maybe"
+              placeholder="Drinks"
               // defaultValue={"water"}
               ref={aDrink}
             />
@@ -766,7 +766,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       </dialog>
       <div className="min-w-full pb-2">
         <h1 className="grid place-items-center text-secondary">
-          Did you have any thing today?
+          Did you have anything today?
         </h1>
         <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
           <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
