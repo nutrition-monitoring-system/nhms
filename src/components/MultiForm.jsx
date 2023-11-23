@@ -727,7 +727,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       >
         <div className="p-2 grid place-items-center gap-1">
           <h1 className="grid place-items-center font-extrabold text-xl">
-            Did you have any thing today?
+            Did you have anything today?
           </h1>
           <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
           <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2">
@@ -771,7 +771,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
           <div className=" bg-white rounded-md flex flex-col p-3 shadow-2xl">
             <div className="flex items-center justify-around gap-3">
-              <h1>BreakFast</h1>
+              <h1>Breakfast</h1>
               <h1>Lunch</h1>
               <h1>Dinner</h1>
             </div>
@@ -815,8 +815,8 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
           <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl my-1">
             <div className="flex items-center justify-around gap-3">
               <h1>Mood</h1>
-              <h1>Exercise?</h1>
-              <h1>upload</h1>
+              <h1>Exercise</h1>
+              <h1>Upload</h1>
             </div>
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
