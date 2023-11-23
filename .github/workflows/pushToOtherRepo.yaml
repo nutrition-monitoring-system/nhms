@@ -30,3 +30,9 @@ jobs:
           DESTINATION_BRANCH: "main"
           # The SSH key to access the other repo
           SSH_PRIVATE_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: ${{env.SOURCE_DIR}}
+          destination-github-username: jamm59
+          destination-repository-name: "temp_nhms.git"
+          user-email: jammoben@gmail.com
+          target-branch: main
