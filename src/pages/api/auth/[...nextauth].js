@@ -11,7 +11,6 @@ const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const userRegistration = credentials.registration === "true";
-        console.log(credentials);
         if (userRegistration) {
           const { email, password, surname } = credentials;
           const url = "http://localhost:3000/api/addUser";

@@ -75,7 +75,7 @@ function NavBar() {
     return (
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <div className="grid place-items-center text-black font-modak text-[30px]">
-          Logo
+          nhms
         </div>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
           <button className="tile">
@@ -91,7 +91,7 @@ function NavBar() {
   return (
     <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
       <div className="grid place-items-center text-black font-modak text-[30px]">
-        Logo
+        nhms
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
         <div className="tile">
