@@ -11,9 +11,13 @@ const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const userRegistration = credentials.registration === "true";
+        const domainName =
+          process.env.DEPLOYMENT == "true"
+            ? process.env.DEPLOY_URL
+            : "http://localhost:3000";
         if (userRegistration) {
           const { email, password, surname } = credentials;
-          const url = "http://localhost:3000/api/addUser";
+          const url = domainName + "/api/addUser";
           const content = await fetch(url, {
             method: "POST",
             headers: {
@@ -32,7 +36,7 @@ const authOptions = {
           }
         } else {
           const { email, password } = credentials;
-          const url = "http://localhost:3000/api/getUser";
+          const url = domainName + "/api/getUser";
           const content = await fetch(url, {
             method: "POST",
             headers: {
