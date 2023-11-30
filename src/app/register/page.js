@@ -34,23 +34,26 @@ const userSchema = object().shape({
 });
 
 export default function Home() {
-  //form validation
+  //form validation imports
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
+  // State variables using the useState hook
   const [index, setIndex] = useState(0);
   const router = useRouter();
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Function to collect additional form data Dietery Restrictions, allergies, chronic conditions, accessibility settings
   const handleCollectData = (data) => {
     setOtherFormData({ ...otherFormData, ...data });
   };
 
+  // Function to handle next button click
   const handleClick = (e) => {
     const numberOFSubForms = 5;
     e.preventDefault();
@@ -63,7 +66,7 @@ export default function Home() {
     setIndex((prevIndex) => prevIndex + 1);
   };
 
-  // this functions handle's the previous click button
+  // Function to handle previous button click
   const handleClickPrev = (e) => {
     e.preventDefault();
     if (index <= 0) {
@@ -73,6 +76,8 @@ export default function Home() {
 
     setIndex((prevIndex) => prevIndex - 1);
   };
+
+  // Function to handle the final form submission
   const handleFormSubmit = async (data) => {
     data = {
       forename: data.firstName,
@@ -87,31 +92,27 @@ export default function Home() {
     const result = await signIn("credentials", {
       redirect: false, // Don't redirect, we'll handle that manually
       ...data,
-      ...otherFormData, // Pass data
+      ...otherFormData, // Pass additional data
     });
     if (result.error) {
-      // Handle sign-in error, you can display an error message to the user
+      // Handle sign-in error, log error to console
       console.error("Sign-in error:", result.error);
-      setSubmitSuccess(false);
+      // alert("unable to login", result.error);
     } else {
-      // Sign-in was successful
-      setSubmitSuccess(true);
+      // Sign-in was successful, set success flag and redirect to "/home"
       router.push("/home");
     }
   };
 
+  // Function to handle navigation button click
   const handleNavclick = (event, pos) => {
     event.preventDefault();
     setIndex((index) => index * 0 + pos);
   };
 
+  // useEffect to handle changes in errors and submitSuccess states
   useEffect(() => {
-    if (submitSuccess) {
-      setIndex((index) => 1);
-    } else {
-      setIndex((index) => 0);
-    }
-    // making sure to only go back if we have  errors
+    // If there are form errors, reset to the initial step
     if (Object.keys(errors).length > 0) {
       setTitle("Create a new account");
       setIndex((prevIndex) => prevIndex * 0);
@@ -177,7 +178,7 @@ export default function Home() {
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <PersonalInformation
-                onClick={handleSubmit(() => setSubmitSuccess(true))}
+                onClick={handleClick}
                 formValidation={{
                   register,
                   handleSubmit,
