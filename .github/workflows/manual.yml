@@ -13,6 +13,12 @@ jobs:
   cypressTesting:
     runs-on: ubuntu-latest
     steps:
+      - name: Move into the source directory.
+      - run: cd src
+      - name: Install all the required packages.
+      - run: npm install
+      - name: Start the server.
+      - run: npm run dev
       - name: Cypress.io
         uses: cypress-io/github-action@v6.6.0
         with:
