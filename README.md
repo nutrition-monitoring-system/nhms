@@ -48,13 +48,11 @@
 
 ## 📍 Overview
 
-HTTPStatus Exception: 429
 
 ---
 
 ## 📦 Features
 
-HTTPStatus Exception: 429
 
 ---
 
@@ -328,11 +326,11 @@ HTTPStatus Exception: 429
 
 Please ensure you have the following dependencies installed on your system:
 
-`- ℹ️ Dependency 1`
+`node` - to run any commmands.
 
-`- ℹ️ Dependency 2`
+`mysql` - to download and use the database.
 
-`- ℹ️ ...`
+`cypress` - to run tests.
 
 ### 🔧 Installation
 
@@ -342,10 +340,10 @@ Please ensure you have the following dependencies installed on your system:
 git clone https://github.com/nutrition-monitoring-system/nhms.git
 ```
 
-2. Change to the project directory:
+2. Change to the source directory:
 
 ```sh
-cd nhms
+cd nhms/src
 ```
 
 3. Install the dependencies:
@@ -357,22 +355,30 @@ npm install
 ### 🤖 Running nhms
 
 ```sh
-node app.js
+npm run dev
+``` 
+in development and 
+```sh
+npm run build
+npm run start
 ```
+in production.
 
 ### 🧪 Tests
 
 ```sh
-npm test
+npm run test OR npm run cy:run - # for headless mode
+npm run cy:open - # to actively run tests in the Cypress browser.
+
 ```
 
 ---
 
 ## 🛣 Project Roadmap
 
-> - [x] `ℹ️  Task 1: Implement X`
-> - [ ] `ℹ️  Task 2: Implement Y`
-> - [ ] `ℹ️ ...`
+> - [x] `ℹ️  Create a basic scaffolding for the nutrition management system.`
+> - [ ] `ℹ️  Expand out with recommendations for foods, per client.`
+> - [ ] `ℹ️ MORE TO BE ADDED.`
 
 ---
 
@@ -391,22 +397,30 @@ Contributions are welcome! Here are several ways you can contribute:
 
 1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
+
    ```sh
    git clone <your-forked-repo-url>
    ```
+
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
+
    ```sh
    git checkout -b new-feature-x
    ```
+
 4. **Make Your Changes**: Develop and test your changes locally.
 5. **Commit Your Changes**: Commit with a clear and concise message describing your updates.
+
    ```sh
    git commit -m 'Implemented new feature x.'
    ```
+
 6. **Push to GitHub**: Push the changes to your forked repository.
+
    ```sh
    git push origin new-feature-x
    ```
+
 7. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
 
 Once your PR is reviewed and approved, it will be merged into the main branch.
