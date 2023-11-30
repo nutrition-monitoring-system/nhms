@@ -88,29 +88,29 @@ describe("Testing if a new user can log into the database.", () => {
         cy.visit(url + "/login");
       });
   });
-  it('home',() =>{
-    cy.visit(url + "/login");
-    cy.get('input[name="email"]').type("john.doe@email.com");
-    cy.get('input[name="password"]').type("password");
-    cy.get('#handleLogin').click();
-    cy.wait(2000);
-    cy.visit(url + "/home");
-  
-    //search
-    cy.get('#search').click();
-    //tab
-    // cy.get('#Home').click();
-    // cy.get('#Recipes').click();
-    // cy.get('#Collections').click();
-    // cy.get('#Recommendations').click();
-  
-    // user
-    // cy.get('#Account').click();
-    // cy.get('#Settings').click();
-    // cy.get('#Languages').click();
-    // logout  usercontent
-    cy.get('#v').click();
-    cy.get('#Logout').click();
-    cy.url().should("include", '');
-  })
+ it('home',() =>{
+  cy.visit(url + "/login");
+  cy.get('input[name="email"]').type("john.doe@email.com");
+  cy.get('input[name="password"]').type("password");
+  cy.get('#handleLogin').click();
+  cy.wait(2000); 
+  cy.visit(url + "/home");
+
+  //search
+  cy.get('#search').click();
+  //tab
+  // cy.get('#Home').click();
+  // cy.get('#Recipes').click();
+  // cy.get('#Collections').click();
+  // cy.get('#Recommendations').click();
+
+  // user
+  // cy.get('#Account').click();
+  // cy.get('#Settings').click();
+  // cy.get('#Languages').click();
+  // logout  usercontent
+  cy.get('#usercontent').click();
+  cy.get('#Logout').click();
+  cy.url().should("include", '');
+})
 });
