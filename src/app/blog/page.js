@@ -5,5 +5,6 @@ export const metadata = {
 };
 
 export default function Home() {
-  return <div>Blog Page route</div>;
+  //Not implemeted Yet
+  return <div>Blog Page route. Not implemented yet</div>;
 }

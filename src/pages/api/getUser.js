@@ -1,24 +1,32 @@
 import prisma from "../../utils/prismaclientUtil.js"; // this is an import of an existing instance of the client
 import CryptoJS from "crypto-js";
-export default function Handle(req, res) {
+export default async function Handle(req, res) {
   // this handles the login page
   // check to see if the user's email and password is valid
   const { email, password } = req.body;
-  const userData = prisma.user.findMany({ where: { email: email } });
-  // Hash the password using SHA-256
-  const hash = CryptoJS.SHA256(password);
-  // Convert the hash to a hexadecimal string
-  const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30);
-  console.log("User is not equal", userData.password === passwordHash);
-  if (userData && userData.password === passwordHash)
-    // if the user is valid then we want to return data back to the session
-    return {
-      id: userData.id,
-      email: email,
-      surname: userData.surname,
-    };
-  else if (userData.password !== password)
-    return res.status(400).json({ error: "Password is not valid!" });
+  // search the database if there an entry where users.email === email from frontend
+  const userData = await prisma.user.findFirst({ where: { email: email } });
 
-  return res.status(400).json({ error: "user not Found" });
+  if (userData) {
+    // Hash the provided password using SHA-256
+    const hash = CryptoJS.SHA256(password);
+    const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30);
+
+    // Compare the hashed passwords
+    if (userData.password === passwordHash) {
+      return res.status(200).json({
+        ok: "true",
+        id: userData.userGender,
+        email: email,
+        surname: userData.surname,
+        gender: userData.gender,
+      });
+    } else {
+      // return error if the password is invalid
+      return res.status(400).json({ error: "Password is not valid!" });
+    }
+  } else {
+    // return error if user is not found
+    return res.status(400).json({ error: "User not found" });
+  }
 }

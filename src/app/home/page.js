@@ -5,10 +5,6 @@ import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
-// export const metadata = {
-//   title: "Home",
-//   description: "Home Page",
-// };
 
 export default function Page() {
   return (
@@ -21,14 +17,22 @@ export default function Page() {
 }
 
 function Home() {
+  // initialise the router for conditional redirection
   const router = useRouter();
-  const { status } = useSession({
+  // initialise the session.
+  //
+  const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
       return router.push("/login");
     },
   });
+
+  console.log(session);
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/" });
+  };
 
   if (status === "loading") {
     return (
@@ -37,13 +41,9 @@ function Home() {
       </div>
     );
   }
-
-  const handleLogout = () => {
-    signOut({ callbackUrl: "/" });
-  };
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
-      <NavBar handleLogout={handleLogout} />
+      <NavBar handleLogout={handleLogout} data={session} />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
         <Recipes />
       </div>
@@ -51,7 +51,7 @@ function Home() {
   );
 }
 
-function NavBar({ handleLogout }) {
+function NavBar({ handleLogout, data }) {
   const menuItems = useRef(null);
   const handleMenuclick = () => {
     menuItems.current.classList.toggle("slide-down");
@@ -61,6 +61,15 @@ function NavBar({ handleLogout }) {
   const recipesCollections = useRef(null);
   const foodCollection = useRef(null);
   const foodRecommendation = useRef(null);
+
+  let userSurname = "Kelly",
+    userId = "randomuserId",
+    userGender = "F";
+  if (data) {
+    userSurname = data.surname;
+    userId = data.id;
+    userGender = data.gender;
+  }
 
   const refList = [
     home,
@@ -120,14 +129,17 @@ function NavBar({ handleLogout }) {
           </div>
           <div className="tile relative z-10 flex justify-around items-center gap-3">
             <img
-              src="/icons/man.png"
+              src={userGender === "M" ? "/icons/man.png" : "/icons/woman.png"}
               width={25}
               height={25}
               alt="Person icon"
               className="ml-2 rounded-[50px] bg-primarylight"
               onClick={handleMenuclick}
             />
-            <span id="usercontent" onClick={handleMenuclick}>Mr. Bryan</span>
+            <span id="usercontent" onClick={handleMenuclick}>
+              <>{userGender == "M" ? "Mr." : userGender == "F" ? "Ms." : ""}</>
+              {userSurname}
+            </span>
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
@@ -141,7 +153,7 @@ function NavBar({ handleLogout }) {
                   width={20}
                   height={20}
                 />
-                <Link href={"/user/userd9f49w"}>Profile</Link>
+                <Link href={`/user/${userId}`}>Profile</Link>
               </div>
               <div className="tile grid grid-cols-4">
                 {" "}

@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     const newUser = await prisma.user.create({
       data: data,
     });
-    return res.status(200).json({ id: newUUID });
+    return res.status(200).json({ ok: "true", id: newUUID });
   }
   return res.status(400).json({ error: "Unable to add user" });
 }

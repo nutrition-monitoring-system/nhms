@@ -27,7 +27,7 @@ const authOptions = {
             body: JSON.stringify(req.body),
           });
           const response = await content.json();
-          if (response.status === 200) {
+          if (response.ok === "true") {
             return {
               id: response.id,
               email: email,
@@ -49,15 +49,17 @@ const authOptions = {
           if (response.error) {
             return null || undefined || false;
           }
-          if (response.status === 200) {
+          if (response.ok === "true") {
+            // checking if the response is valid
             return {
               id: response.id,
               email: response.email,
               surname: response.surname,
+              gender: response.gender,
             };
           }
         }
-        return { email: credentials.email };
+        return null;
       },
     }),
   ],
