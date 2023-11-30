@@ -941,7 +941,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
           <div id="DoneNext">
-            <Button onClick={handleSubmit}>Done</Button>
+            <Button onClick={handleSubmit} type="submit">Done</Button>
           </div>
         </div>
       </div>
