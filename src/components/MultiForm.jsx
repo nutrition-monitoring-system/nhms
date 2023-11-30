@@ -734,12 +734,15 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
     };
     reader.readAsDataURL(file);
 
-    useEffect(()=> {
-      const eventId = addEventListener("onload", setUploadImageUrl())
+    useEffect(() => {
+      const eventId = addEventListener(
+        "onload",
+        setUploadImageUrl("/icons/add.png")
+      );
       return () => {
-
-      }
-    })
+        removeEventListner(eventId);
+      };
+    }, []);
   }
   return (
     <>
@@ -941,7 +944,9 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         <div className="grid grid-cols-2 place-items-center">
           <Button onClick={onClickPrev}>Previous</Button>
           <div id="DoneNext">
-            <Button onClick={handleSubmit} type="submit">Done</Button>
+            <Button onClick={handleSubmit} type="submit">
+              Done
+            </Button>
           </div>
         </div>
       </div>

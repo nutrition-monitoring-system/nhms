@@ -11,12 +11,25 @@ import { useForm } from "react-hook-form";
 import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+//session
+import { SessionProvider } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+
 const userSchema = object().shape({
   email: string().email().required("Please type in your email."),
   password: string().min(5).max(20).required("Please type in your password."),
 });
 
-export default function Home() {
+export default function Page() {
+  return (
+    <>
+      <SessionProvider>
+        <Home></Home>
+      </SessionProvider>
+    </>
+  );
+}
+function Home() {
   const {
     register,
     handleSubmit,
@@ -58,7 +71,9 @@ export default function Home() {
 
     if (result.error) {
       // Handle sign-in error, you can display an error message to the user
-      console.error("Sign-in error:", result.error);
+      alert("Invalid LogIn details! Redirecting to /register.");
+      //console.error("Sign-in error:", result.error);
+      router.push("/register");
     } else {
       // Sign-in was successful
       router.push("/home");

@@ -9,7 +9,7 @@ export default function Handle(req, res) {
   const hash = CryptoJS.SHA256(password);
   // Convert the hash to a hexadecimal string
   const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30);
-  console.log(userData.password === passwordHash);
+  console.log("User is not equal", userData.password === passwordHash);
   if (userData && userData.password === passwordHash)
     // if the user is valid then we want to return data back to the session
     return {
@@ -17,7 +17,7 @@ export default function Handle(req, res) {
       email: email,
       surname: userData.surname,
     };
-  if (userData && userData.password !== password)
+  else if (userData.password !== password)
     return res.status(400).json({ error: "Password is not valid!" });
 
   return res.status(400).json({ error: "user not Found" });

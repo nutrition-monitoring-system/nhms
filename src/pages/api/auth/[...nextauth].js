@@ -16,7 +16,7 @@ const authOptions = {
             ? process.env.DEPLOY_URL
             : "http://localhost:3000";
         if (userRegistration) {
-          const { email, password, surname } = credentials;
+          const { email, surname } = credentials;
           const url = domainName + "/api/addUser";
           const content = await fetch(url, {
             method: "POST",
@@ -46,6 +46,9 @@ const authOptions = {
             body: JSON.stringify({ email, password }),
           });
           const response = await content.json();
+          if (response.error) {
+            return null || undefined || false;
+          }
           if (response.status === 200) {
             return {
               id: response.id,
