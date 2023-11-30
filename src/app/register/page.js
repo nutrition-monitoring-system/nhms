@@ -45,6 +45,7 @@ export default function Home() {
   const router = useRouter();
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const handleCollectData = (data) => {
     setOtherFormData({ ...otherFormData, ...data });
@@ -88,12 +89,13 @@ export default function Home() {
       ...data,
       ...otherFormData, // Pass data
     });
-
     if (result.error) {
       // Handle sign-in error, you can display an error message to the user
       console.error("Sign-in error:", result.error);
+      setSubmitSuccess(false);
     } else {
       // Sign-in was successful
+      setSubmitSuccess(true);
       router.push("/home");
     }
   };
@@ -104,12 +106,17 @@ export default function Home() {
   };
 
   useEffect(() => {
+    if (submitSuccess) {
+      setIndex((index) => 1);
+    } else {
+      setIndex((index) => 0);
+    }
     // making sure to only go back if we have  errors
     if (Object.keys(errors).length > 0) {
       setTitle("Create a new account");
       setIndex((prevIndex) => prevIndex * 0);
     }
-  }, [errors]);
+  }, [errors, submitSuccess]);
 
   return (
     <>
@@ -120,7 +127,6 @@ export default function Home() {
             Sign in to unlock a world of nutrition opportunities!
           </p>
           <Button href={"/login"}>Login</Button>
-          
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
@@ -171,7 +177,7 @@ export default function Home() {
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <PersonalInformation
-                onClick={handleClick}
+                onClick={handleSubmit(() => setSubmitSuccess(true))}
                 formValidation={{
                   register,
                   handleSubmit,

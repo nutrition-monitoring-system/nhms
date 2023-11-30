@@ -676,10 +676,14 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
 /* Daily Food form.  */
 // adding daily intake
 export function DailyIntake({ onClickPrev, handleSubmit }) {
-  const modal = useRef(null);
+  const foodModal = useRef(null);
+  const exerciseModal = useRef(null);
+  const moodModal = useRef(null);
   const foodName = useRef(null);
   const foodDescription = useRef(null);
   const aDrink = useRef(null);
+
+  const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
 
   const [breakfast, setBreakFast] = useState([]);
   const [Lunch, setLunch] = useState([]);
@@ -689,11 +693,11 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
 
   const handleModalclose = (event) => {
     event.preventDefault();
-    modal.current.close();
+    foodModal.current.close();
   };
   const handleAddClick = (event, type) => {
     event.preventDefault();
-    modal.current.showModal();
+    foodModal.current.showModal();
     setType(type);
   };
   const handleAddFood = (event) => {
@@ -710,7 +714,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       case "lunch":
         setLunch([...Lunch, foodInformation]);
         break;
-      default: // super
+      default: // dinner
         setDinner([...Dinner, foodInformation]);
         break;
     }
@@ -719,10 +723,22 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       (foodDescription.current.value = ""),
       handleModalclose(event);
   };
+
+  function handleUploadImage(input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        setUploadImageUrl(e.target.result);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
   return (
     <>
       <dialog
-        ref={modal}
+        ref={foodModal}
         className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
       >
         <div className="p-2 grid place-items-center gap-1">
@@ -764,6 +780,49 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
           </div>
         </div>
       </dialog>
+
+      <dialog
+        ref={moodModal}
+        className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
+      >
+        <div className="p-2 grid place-items-center gap-1">
+          <h1 className="grid place-items-center font-extrabold text-xl">
+            Mood
+          </h1>
+          <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
+          <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2"></div>
+          <div className="flex justify-around items-center mt-2 w-full">
+            <button onClick={handleAddFood} className="tile" id="addNext">
+              Add
+            </button>
+            <button onClick={handleModalclose} className="tile" id="closeNext">
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
+
+      <dialog
+        ref={exerciseModal}
+        className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
+      >
+        <div className="p-2 grid place-items-center gap-1">
+          <h1 className="grid place-items-center font-extrabold text-xl">
+            Exercise
+          </h1>
+          <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
+          <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2"></div>
+          <div className="flex justify-around items-center mt-2 w-full">
+            <button onClick={handleAddFood} className="tile" id="addNext">
+              Add
+            </button>
+            <button onClick={handleModalclose} className="tile" id="closeNext">
+              Close
+            </button>
+          </div>
+        </div>
+      </dialog>
+
       <div className="min-w-full pb-2">
         <h1 className="grid place-items-center text-secondary">
           Did you have anything today?
@@ -782,7 +841,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
-                  src={"/icons/add.png"}
+                  src={uploadImageUrl}
                   alt={"Add img icon"}
                   width={20}
                   height={20}
@@ -821,7 +880,9 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
-                onClick={(event) => handleAddClick(event, "breakfast")}
+                onClick={(event) =>
+                  event.preventDefault() && moodModal.current.showModal()
+                }
               >
                 <img
                   src={"/icons/mood.png"}
@@ -832,7 +893,9 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
               </div>
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
-                onClick={(event) => handleAddClick(event, "breakfast")}
+                onClick={(event) =>
+                  event.preventDefault() && exerciseModal.current.showModal()
+                }
               >
                 <img
                   src={"/icons/workout.png"}
@@ -841,16 +904,18 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   height={40}
                 ></img>
               </div>
-              <div
-                className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
-                onClick={(event) => handleAddClick(event, "breakfast")}
-              >
+              <div className="relative aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]">
                 <img
-                  src={"/icons/image.png"}
+                  src={uploadImageUrl}
                   alt={"Add img icon"}
                   width={30}
                   height={30}
                 ></img>
+                <input
+                  type="file"
+                  class="absolute inset-0 opacity-0"
+                  onChange={handleUploadImage}
+                />
               </div>
             </div>
           </div>
