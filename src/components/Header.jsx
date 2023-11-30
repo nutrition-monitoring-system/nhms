@@ -26,9 +26,9 @@ export default function Header() {
             >
               A Smart and Personalised Nutrition Management System
             </h1>
-            <div className="w-1/2 sm:w-full py-2">
-              Explore Link vibrant recipe library, set and monitor health goals,
-              and integrate with well-being apps. Embark on your journey to Link
+            <div className="w-1/2 sm:w-full py-2 text-[20px]">
+              Explore a vibrant recipe library, set and monitor your health goals,
+              and integrate with well-being apps. Embark on your journey to a
               healthier you today!`
             </div>
             <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">

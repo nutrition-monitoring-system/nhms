@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 import WhatWeOffer from "../components/Offer.jsx";
 import Coach from "../components/Coach.jsx";
 export const metadata = {
-  title: "nmhs",
-  description: `Explore a vibrant range of recipe libraries, set and monitor your health goals,
+  title: "nhms",
+  description: `Explore a vibrant, healthy range of recipe libraries, set and monitor your health goals,
   and integrate with wellknown well-being apps. Embark on your journey to a healthier you today!`,
 };
 

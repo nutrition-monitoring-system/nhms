@@ -5,8 +5,8 @@ let Logo = "Logo";
 
 const Footer = () => (
   <>
-    <div className="bg-orange-50 flex flex-col h-screen p-4 text-black font-opensans sm:min-h-fit">
-      <div
+    <div className="bg-orange-50 flex flex-col h-fit p-4 text-black font-opensans sm:min-h-fit">
+      {/* <div
         className="bg-white shadow-2xl h-[75%] px-[20%] rounded-lg grid grid-cols-4 grid-rows-1 
       sm:px-[5%] sm:grid-cols-1 sm:flex sm:justify-around sm:items-center sm:flex-col sm:gap-2 sm:py-5 sm:h-fit"
       >
@@ -72,8 +72,8 @@ const Footer = () => (
           </form>
           <form></form>
         </div>
-      </div>
-      <div className="h-[20%] grid grid-cols-2 grid-rows-1 w-[95%] m-auto text-sm sm:h-fit sm:w-full sm:py-3 sm:grid-cols-3">
+      </div> */}
+      <div className="h-full p-3 grid grid-cols-2 grid-rows-1 w-[95%] m-auto text-sm sm:h-fit sm:w-full sm:py-3 sm:grid-cols-3">
         <div className="grid place-items-center text-center">
           @{new Date().getFullYear()} All Rights Reserved
         </div>
