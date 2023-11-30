@@ -127,7 +127,7 @@ function NavBar({ handleLogout }) {
               className="ml-2 rounded-[50px] bg-primarylight"
               onClick={handleMenuclick}
             />
-            <span onClick={handleMenuclick}>Mr. Bryan</span>
+            <span id="usercontent" onClick={handleMenuclick}>Mr. Bryan</span>
             <div
               ref={menuItems}
               className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
@@ -171,7 +171,7 @@ function NavBar({ handleLogout }) {
                   width={20}
                   height={20}
                 />
-                <span>Logout</span>
+                <span id="Logout">Logout</span>
               </div>
             </div>
           </div>

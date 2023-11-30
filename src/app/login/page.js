@@ -145,9 +145,11 @@ function Home() {
               </p>
             )}
             <div className="flex justify-between items-center w-full p-2 rounded-md">
+              <div id = "handleLogin">
               <button className="tile bg-black text-white px-7 py-3" type="submit">
                 Login
               </button>
+              </div>
               <a className="grid place-items-center">
                 <span className="cursor-pointer" onClick={handlePopUP}>
                   Forgot Password?
