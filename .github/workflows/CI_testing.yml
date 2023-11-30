@@ -28,7 +28,6 @@ jobs:
         with:
           build: npm run build
           start: npm start
-          browser: chrome
           working-directory: ./src
           wait-on: "http://localhost:3000"
           # This only prints out one spec for now.
