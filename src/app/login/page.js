@@ -130,7 +130,7 @@ export default function Home() {
               </p>
             )}
             <div className="flex justify-between items-center w-full p-2 rounded-md">
-              <button className="tile bg-black text-white px-7 py-3">
+              <button className="tile bg-black text-white px-7 py-3" type="submit">
                 Login
               </button>
               <a className="grid place-items-center">
