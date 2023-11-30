@@ -16,9 +16,9 @@ describe("Testing if a new user can log into the database.", () => {
     cy.get('input[name="lastName"]').type("John");
     cy.get('select[name="gender"]').select("male");
     cy.get('input[name="date"]').type("2023-12-31");
-    cy.get('input[name="email"]').type("john.doe@email.com");
-    cy.get('input[name="password"]').type("password123456");
-    cy.get('input[name="confirmPassword"]').type("password123456");
+    cy.get('input[name="email"]').type("testaccount@gmail.com");
+    cy.get('input[name="password"]').type("password12345");
+    cy.get('input[name="confirmPassword"]').type("password12345");
     // Simulates clicking through a multi-step form
     // and applies visual changes to indicate progress
     cy.get("#RestrictionsNext")
@@ -93,8 +93,8 @@ describe("Testing if a new user can log into the database.", () => {
  it('home',() =>{
   cy.visit(url + "/login");
   // Logs in with the registered user credentials
-  cy.get('input[name="email"]').type("john.doe@email.com");
-  cy.get('input[name="password"]').type("password123456");
+  cy.get('input[name="email"]').type("testaccount@gmail.com");
+  cy.get('input[name="password"]').type("password12345");
   cy.get('#handleLogin').click();
   cy.wait(2000); 
   cy.visit(url + "/home");
