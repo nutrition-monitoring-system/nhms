@@ -1,19 +1,31 @@
-"use client";
+"use client"; // This tells Next js that the everycode in this fule will be rendered in the client side
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 
 // personal information
 export function PersonalInformation({ onClick, formValidation }) {
-  // for form validation
+  /*
+
+  params: 
+  - onClick : (event) => void -> callback to handle click event on submit button
+  - formValidation : ()=>object -> returns a object containing functions for handling form validation
+   */
+
+  // Form validation callback functions
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = formValidation;
 
+  // This portion configures the input type for date and time as 'datetime'.
+  // Issue: <input type="datatime"> This approach doesn't support placeholder variables.
+  // Resolution:
+  // Change the input type to text with a placeholder "date of birth" and use a click or focus event to trigger handleclick, which will set the type back to datetime.
   const [type, setType] = useState("text");
 
   const handleFocus = (event) => {
+    // Change the input type to text with a placeholder "date of birth" and use a click or focus event to trigger handleclick, which will set the type back to datetime.
     event.preventDefault();
     setType("date");
   };
@@ -35,12 +47,13 @@ export function PersonalInformation({ onClick, formValidation }) {
           />
         </div>
         <div className="flex gap-2 justify-between">
+          {/* Displaying the error message*/}
           <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
           <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
         </div>
         <div className="relative h-fit py-7 shadow-sm rounded-lg">
           <select
-            {...register("gender", { required: "Gender is required" })}
+            {...register("gender", { required: "Gender is required" })} //making sure the user types the right dataype
             className="absolute inset-0"
           >
             <option className="opacity-70 font-semibold" value="">
@@ -57,35 +70,40 @@ export function PersonalInformation({ onClick, formValidation }) {
             </option>
           </select>
         </div>
-        <p className="text-rose-600 text-sm">{errors.gender?.message}</p>
+        <p className="text-rose-600 text-sm">{errors.gender?.message}</p>{" "}
+        {/* Displaying the error message*/}
         <div className="relative flex sm:py-7 shadow-sm rounded-md">
           <input
             placeholder={"Date of Birth*"}
             type={type}
             className="sm:flex-1 sm:absolute sm:inset-0 sm:bg-primarylight"
             onFocus={handleFocus}
-            {...register("date", { required: true })}
+            {...register("date", { required: true })} //making sure the user types the right dataype
           />
         </div>
+        {/* Displaying the error message*/}
         <p className="text-rose-600 text-sm">{errors.date?.message}</p>
         <input
           type={"text"}
           placeholder={"Email Address*"}
-          {...register("email", { required: true })}
+          {...register("email", { required: true })} //making sure the user types the right dataype
         />
+        {/* Displaying the error message*/}
         <p className="text-rose-600 text-sm">{errors.email?.message}</p>
         <input
           type={"password"}
           placeholder={"Password*"}
-          {...register("password", { required: true })}
+          {...register("password", { required: true })} //making sure the user types the right dataype
         />
+        {/* Displaying the error message*/}
         <p className="text-rose-600 text-sm">{errors.password?.message}</p>
         <input
           type={"password"}
           placeholder={"Confirm Password*"}
-          {...register("confirmPassword", { required: true })}
+          {...register("confirmPassword", { required: true })} //making sure the user types the right dataype
         />
         <p className="text-rose-600 text-sm">
+          {/* Displaying the error message*/}
           {errors.confirmPassword?.message}
         </p>
         <div className="grid place-items-center" id="RestrictionsNext">
@@ -98,6 +116,13 @@ export function PersonalInformation({ onClick, formValidation }) {
 
 // food category
 export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
+  // This function returns a search bar and a list of dietery restrictions
+  // params:
+  //    onClick - a callback function responsible for handling the next button click
+  //    onClickPrev - a callback function responsible for handling the previous button click
+  //    handleCollectionData - a callback function responsible for adding data collected
+  //                           from user preferences in to the output into a parent array called otherData
+  // dietery restrictions array and it's descriptions
   const foodTypeInformation = [
     { type: "Vegan", description: "No animal products." },
     { type: "Vegetarian", description: "Plant-based diet without meat." },
@@ -129,20 +154,30 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
     { type: "Low-food", description: "Reduces overall food consumption." },
   ];
 
+  // Ref for the modal element
   const modal = useRef(null);
+
+  // State variables for modal content
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
+  // Ref for the input element
   const inputRef = useRef(null);
+
+  // Function to update searchValue when input changes
   const handleOnChange = () => {
     setSearchValue(inputRef.current.value);
   };
+
+  // Function to close the modal
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
   };
+
+  // Function to open the modal and set type and description
   const handleModalclick = (event, type, description) => {
     event.preventDefault();
     modal.current.showModal();
@@ -150,23 +185,39 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
     setDescription(description);
   };
 
+  // Ref for the "None" button
   const noneButtonRef = useRef(null);
+
+  // Ref for individual food type buttons
   const FoodTypeRefs = useRef({});
 
+  // Function to handle "None" button click
   const handleNone = (event) => {
+    // Remove background color if event is null
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
+
     event.preventDefault();
+
+    // Remove background color from all other food type buttons
     Object.keys(FoodTypeRefs.current).forEach((key) => {
       FoodTypeRefs.current[key].classList.remove("bg-secondary");
     });
+
+    // Clear selected user options and toggle background color for "None"
     SetUserSelected([]);
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
+  // Function to handle food type button click
   const handleOptionClick = (refIdx) => {
+    // Toggle background color for the clicked food type button
     FoodTypeRefs.current[refIdx].classList.toggle("bg-secondary");
+
+    // Deselect all other options and toggle background color for "None"
     handleNone(null);
+
+    // Update selected user options
     SetUserSelected([...userSelected, foodTypeInformation[refIdx].type]);
   };
 
@@ -262,8 +313,14 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
   );
 }
 
-//allergies
 export function Allergies({ onClick, onClickPrev, handleCollectData }) {
+  //allergies
+  // Component to handle allergies selection
+  // Params:
+  //   onClick: Function to handle click events
+  //   onClickPrev: Function to handle click events for going back
+  //   handleCollectData: Function to handle collecting data
+  // List of available allergies with types and descriptions
   const Allergies = [
     { type: "Peanuts", description: "Allergic to peanuts." },
     { type: "Tree Nuts", description: "Allergic to tree nuts." },
@@ -279,21 +336,30 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
     { type: "Meat", description: "Allergic to meat products." },
   ];
 
+  // Ref for the modal element
   const modal = useRef(null);
+
+  // State variables for modal content
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
+  // Ref for the input element
   const inputRef = useRef(null);
+
+  // Function to update searchValue when input changes
   const handleOnChange = () => {
     setSearchValue(inputRef.current.value);
   };
 
+  // Function to close the modal
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
   };
+
+  // Function to open the modal and set type and description
   const handleModalclick = (event, type, description) => {
     event.preventDefault();
     modal.current.showModal();
@@ -301,25 +367,40 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
     setDescription(description);
   };
 
+  // Ref for the "None" button
   const noneButtonRef = useRef(null);
+
+  // Ref for individual allergy buttons
   const AllergyRefs = useRef({});
 
+  // Function to handle "None" button click
   const handleNone = (event) => {
+    // Remove background color if event is null
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
+
     event.preventDefault();
+
+    // Remove background color from all other allergy buttons
     Object.keys(AllergyRefs.current).forEach((key) => {
       AllergyRefs.current[key].classList.remove("bg-secondary");
     });
+
+    // Toggle background color for "None"
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
+  // Function to handle allergy button click
   const handleOptionClick = (refIdx) => {
+    // Toggle background color for the clicked allergy button
     AllergyRefs.current[refIdx].classList.toggle("bg-secondary");
+
+    // Deselect all other options and toggle background color for "None"
     handleNone(null);
+
+    // Update selected user options
     SetUserSelected([...userSelected, Allergies[refIdx].type]);
   };
-
   return (
     <>
       {/* dynamic dialog box */}
@@ -410,8 +491,14 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
   );
 }
 
-// chronic conditions
 export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
+  //Chronic conditions
+  // Component to handle chronic condition selection
+  // Params:
+  //   onClick: Function to handle click events
+  //   onClickPrev: Function to handle click events for going back
+  //   handleCollectData: Function to handle collecting data
+  // List of available allergies with types and descriptions
   const chronicConditions = [
     { type: "Diabetes", description: "Affects blood sugar regulation." },
     { type: "Hypertension", description: "High blood pressure." },
@@ -436,21 +523,30 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
     { type: "COPD", description: "Chronic lung diseases like emphysema." },
   ];
 
+  // Ref for the modal element
   const modal = useRef(null);
+
+  // State variables for modal content
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [userSelected, SetUserSelected] = useState("");
   const [searchValue, setSearchValue] = useState("");
 
+  // Ref for the input element
   const inputRef = useRef(null);
+
+  // Function to update searchValue when input changes
   const handleOnChange = () => {
     setSearchValue(inputRef.current.value);
   };
 
+  // Function to close the modal
   const handleModalclose = (event) => {
     event.preventDefault();
     modal.current.close();
   };
+
+  // Function to open the modal and set type and description
   const handleModalclick = (event, type, description) => {
     event.preventDefault();
     modal.current.showModal();
@@ -458,24 +554,41 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
     setDescription(description);
   };
 
+  // Ref for the "None" button
   const noneButtonRef = useRef(null);
+
+  // Ref for individual condition buttons
   const ConditionRefs = useRef({});
 
+  // Function to handle "None" button click
   const handleNone = (event) => {
+    // Remove background color if event is null
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
+
     event.preventDefault();
+
+    // Remove background color from all other condition buttons
     Object.keys(ConditionRefs.current).forEach((key) => {
       ConditionRefs.current[key].classList.remove("bg-secondary");
     });
+
+    // Toggle background color for "None"
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
+  // Function to handle condition button click
   const handleOptionClick = (refIdx) => {
+    // Toggle background color for the clicked condition button
     ConditionRefs.current[refIdx].classList.toggle("bg-secondary");
+
+    // Deselect all other options and toggle background color for "None"
     handleNone(null);
+
+    // Update selected user options
     SetUserSelected([...userSelected, chronicConditions[refIdx].type]);
   };
+
   return (
     <>
       {/* dynamic dialog box */}
@@ -568,6 +681,13 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
 
 //Accessibility Settings
 export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
+  // Accessibility Settings
+  // Component to handle Accessiblity Settings selection
+  // Params:
+  //   onClick: Function to handle click events
+  //   onClickPrev: Function to handle click events for going back
+  //   handleCollectData: Function to handle collecting data
+  // List of available allergies with types and descriptions
   const settings = [
     { value: "Font Size", src: "/icons/add.png", alt: "add icon" },
     { value: "Use Bold Text", src: "/icons/bold.png", alt: "capital b" },
@@ -584,26 +704,44 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
     },
     { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
   ];
+  // State variable to track selected user options
   const [userSelected, SetUserSelected] = useState([]);
 
+  // Ref for the "None" button
   const noneButtonRef = useRef(null);
+
+  // Ref for individual setting buttons
   const SettingsRef = useRef({});
 
+  // Function to handle "None" button click
   const handleNone = (event) => {
+    // Remove background color if event is null
     if (event === null)
       return noneButtonRef.current.classList.remove("bg-secondary");
+
     event.preventDefault();
+
+    // Remove background color from all other setting buttons
     Object.keys(SettingsRef.current).forEach((key) => {
       SettingsRef.current[key].classList.remove("bg-secondary");
     });
+
+    // Toggle background color for "None"
     return noneButtonRef.current.classList.toggle("bg-secondary");
   };
 
+  // Function to handle setting button click
   const handleOptionClick = (refIdx) => {
+    // Toggle background color for the clicked setting button
     SettingsRef.current[refIdx].classList.toggle("bg-secondary");
+
+    // Deselect all other options and toggle background color for "None"
     handleNone(null);
+
+    // Update selected user options
     SetUserSelected([...userSelected, settings[refIdx].type]);
   };
+
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
@@ -673,33 +811,39 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
     </>
   );
 }
-/* Daily Food form.  */
-// adding daily intake
 export function DailyIntake({ onClickPrev, handleSubmit }) {
+  /* Daily Food form.  */
+  // adding daily intake
+  // Component to handle daily food intake
+  // Params:
+  //   onClickPrev: Function to handle click events for going back
+  //   handleSubmit: Function to handle form submission
+
+  // Refs for modals and form elements
   const foodModal = useRef(null);
   const exerciseModal = useRef(null);
   const moodModal = useRef(null);
   const foodName = useRef(null);
   const foodDescription = useRef(null);
   const aDrink = useRef(null);
-
+  // State variables
   const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
-
   const [breakfast, setBreakFast] = useState([]);
   const [Lunch, setLunch] = useState([]);
   const [Dinner, setDinner] = useState([]);
-
   const [type, setType] = useState("");
-
+  // Function to close the food modal
   const handleModalclose = (event) => {
     event.preventDefault();
     foodModal.current.close();
   };
+  // Function to handle adding food
   const handleAddClick = (event, type) => {
     event.preventDefault();
     foodModal.current.showModal();
     setType(type);
   };
+  // Function to handle submitting food form
   const handleAddFood = (event) => {
     event.preventDefault();
     const foodInformation = {
@@ -707,6 +851,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       description: foodDescription.current.value,
       drink: aDrink.current.value,
     };
+    // Adding food based on the meal type
     switch (type) {
       case "breakfast":
         setBreakFast([...breakfast, foodInformation]);
@@ -718,32 +863,33 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         setDinner([...Dinner, foodInformation]);
         break;
     }
-    // do not need to clear drink because water is the default
-    (foodName.current.value = ""),
-      (foodDescription.current.value = ""),
-      handleModalclose(event);
+    // Clearing form fields
+    foodName.current.value = "";
+    foodDescription.current.value = "";
+    handleModalclose(event);
   };
+  // // Function to handle uploading an image
+  function handleUploadImage(event) {}
+  // function handleUploadImage(event) {
+  //   const file = event.target.files[0];
+  //   const fileName = file.name;
+  //   const reader = new FileReader();
+  //   // Reading the file data
+  //   reader.onload = function (e) {
+  //     console.log("Filename", fileName);
+  //   };
+  //   reader.readAsDataURL(file);
+  //   useEffect(() => {
+  //     // Updating the image URL on successful image upload
+  //     const eventId = addEventListener("load", () =>
+  //       setUploadImageUrl("/icons/add.png")
+  //     );
+  //     return () => {
+  //       removeEventListener(eventId);
+  //     };
+  //   }, []);
+  // }
 
-  function handleUploadImage(event) {
-    const file = event.target.files[0];
-    const fileName = file.name;
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      // The *.txt file text will be printed here
-      console.log("Filename", fileName);
-    };
-    reader.readAsDataURL(file);
-
-    useEffect(() => {
-      const eventId = addEventListener(
-        "onload",
-        setUploadImageUrl("/icons/add.png")
-      );
-      return () => {
-        removeEventListner(eventId);
-      };
-    }, []);
-  }
   return (
     <>
       <dialog
@@ -953,5 +1099,3 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
     </>
   );
 }
-
-// function TemplateForm({ onClick, onClickPrev, handleSubmit }) {}

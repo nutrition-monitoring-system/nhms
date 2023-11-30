@@ -1,5 +1,7 @@
 import Button from "./Button.jsx";
 const Coach = () => {
+  // This function returns 2 sections a pic div and a description div
+  // It tells the user about who the Coach is
   return (
     <>
       <div className="min-h-screen bg-white gap-1 grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">

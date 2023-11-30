@@ -1,8 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-
-// this file creates a single instance of the prisma client javascript object
-// just for efficiency
-
+// this file creates and returns a single global instance of the prisma client javascript object
 const prisma = new PrismaClient();
 
 export default prisma;

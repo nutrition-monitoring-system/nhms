@@ -1,4 +1,6 @@
 export default function handler(req, res) {
+  // This function returns at the moment a short list of  recipes and the meal type
+  // meal type: ["breakfast", "lunch", "dinner"]
   return res.status(200).json({
     Breakfast: [
       {

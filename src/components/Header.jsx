@@ -4,6 +4,9 @@ import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRef } from "react";
 export default function Header() {
+  // The header section returns a description of the page.
+
+  //This are png icons for making the site look more attractive 
   const headerIcons = [
     "/headerIcons/dish.png",
     "/headerIcons/drink.png",
@@ -14,6 +17,9 @@ export default function Header() {
     "/headerIcons/healthy-food.png ",
     "/headerIcons/recipe.png ",
   ];
+
+  // This section is wrapped by a SessionProvider component for accessing session variables
+  // It contains a navigation bar and introductory information into the site
   return (
     <SessionProvider>
       <div className="h-screen min-h-fit relative bg-white text-black grid place-items-center font-opensans">
@@ -61,16 +67,23 @@ export default function Header() {
 }
 
 function NavBar() {
-  const menuItems = useRef(null);
-  const handleMenuclick = () => {
+  // The navigation bar component returns a conditional navigation bar. Wether the user is logged in or not. 
+  // It will render differently
+
+  const menuItems = useRef(null); // a container reference to the list of menuitems
+  const handleMenuclick = () => { 
+    // This function handles the animation for the userMenu. It will animate base on the custom class added
     menuItems.current.classList.toggle("slide-down");
   };
   const { status } = useSession({
+    // useSesstion is for protection. 
+    // Making sure the user does not visit a route they are not allowed to visit
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
     },
   });
+  // checking if the user is authenticated or is in a loading state
   if (status === "unauthenticated" || status === "loading") {
     return (
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
@@ -170,7 +183,7 @@ function NavBar() {
 }
 
 function ImageIcon({ href, src }) {
-  // if we have an href value then we conditionally render
+  // This function will conditionally render if there's an href attribute or not.
   return (
     <>
       {href ? (

@@ -1,15 +1,13 @@
 /* Get user information and add it to the SQL database using MySQL.  */
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../utils/prismaclientUtil.js"; // returns a global instance of prisma client for performance
 export default async function handler(req, res) {
   if (req.method == "GET") {
-    console.log("Get all users.");
-    const prisma = new PrismaClient();
     // Process a GET request
+    // re
     const allUsers = await prisma.user.findMany();
-    res.send(allUsers);
-    res.status(200).json();
+    return res.status(200).send(allUsers);
   } else {
-    console.log("Bad request.");
-    res.status(400).json();
+    // bad request
+    res.status(400).json({ error: "Bad request. Wrong request method" });
   }
 }

@@ -20,10 +20,6 @@
 <img src="https://img.shields.io/badge/Cypress-17202C.svg?style=flat-square&logo=Cypress&logoColor=white" alt="Cypress" />
 <img src="https://img.shields.io/badge/JSON-000000.svg?style=flat-square&logo=JSON&logoColor=white" alt="JSON" />
 </p>
-<img src="https://img.shields.io/github/license/nutrition-monitoring-system/nhms?style=flat-square&color=5D6D7E" alt="GitHub license" />
-<img src="https://img.shields.io/github/last-commit/nutrition-monitoring-system/nhms?style=flat-square&color=5D6D7E" alt="git-last-commit" />
-<img src="https://img.shields.io/github/commit-activity/m/nutrition-monitoring-system/nhms?style=flat-square&color=5D6D7E" alt="GitHub commit activity" />
-<img src="https://img.shields.io/github/languages/top/nutrition-monitoring-system/nhms?style=flat-square&color=5D6D7E" alt="GitHub top language" />
 </div>
 
 ---
@@ -48,11 +44,9 @@
 
 ## 📍 Overview
 
-
 ---
 
 ## 📦 Features
-
 
 ---
 
@@ -356,12 +350,15 @@ npm install
 
 ```sh
 npm run dev
-``` 
-in development and 
+```
+
+in development and
+
 ```sh
 npm run build
 npm run start
 ```
+
 in production.
 
 ### 🧪 Tests

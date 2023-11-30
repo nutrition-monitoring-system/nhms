@@ -1,4 +1,9 @@
 const WhatWeOffer = () => (
+  // WhatWeOffer
+  // This function returns more what we offer as a server and how it can benefit you.
+  // <InfoCardOne /> ---------------|
+  //<InfoCardTwo />  ---------------|----------- These functions just tell you what the site offers by looping through a content array and rendering the data to in the WhatWeOfferSection
+  // <InfoCardThree /> -------------|
   <>
     <div className="bg-orange-50 min-h-screen font-opensans text-black py-3">
       <h1 className="font-extrabold text-[30px] text-center mb-7">
