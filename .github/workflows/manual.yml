@@ -21,10 +21,6 @@ jobs:
         run: |
           cd src
           npm install -y
-        #name: Cache
-        #uses: actions/cache@v3.3.2
-        #with:
-        #path: /node_modules
       - name: Cypress.io
         uses: cypress-io/github-action@v6.6.0
         with:
@@ -33,5 +29,12 @@ jobs:
           browser: chrome
           working-directory: ./src
           wait-on: "http://localhost:3000"
-          
+          # This only prints out one spec for now.
+          spec: cypress/spec.cy.js
+      - name: Cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            src/node_modules
+            src/.next
         
