@@ -16,7 +16,7 @@ export default function Recipes() {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 sm:grid-cols-1 gap-5 sm:gap-3 w-[80%] min-h-fit pt-10 sm:w-full">
+        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 sm:gap-3 w-[80%] min-h-fit pt-10 sm:w-full">
           {recipesList?.map((item, idx) => (
             <div key={idx} className="aspect-w-1 aspect-h-1">
               <RecipeInfo recipe={item} />
@@ -39,21 +39,21 @@ function RecipeInfo({ recipe }) {
               <h1>{recipe.name}</h1>
             </div>
           </div>
-          <div className="text-sm bg-orange-100 grid place-items-center p-1 rounded-md">
+          <div className="text-sm bg-rose-100 shadow-lg grid place-items-center p-1 rounded-md">
             <div className="flex justify-around items-center w-full">
               <img
                 src="/icons/info.png"
                 alt="information icon"
                 width={30}
                 height={30}
-                className="bg-primarylight rounded-[50px] p-1"
+                className="bg-white rounded-[50px] p-1"
               />
               <img
                 src="/icons/add.png"
                 alt="Add icon"
                 width={30}
                 height={30}
-                className="bg-primarylight rounded-[50px] p-1"
+                className="bg-white rounded-[50px] p-1"
               />
             </div>
             <div className="text-center flex justify-around items-center w-full">

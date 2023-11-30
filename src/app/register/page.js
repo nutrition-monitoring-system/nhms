@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../components/Button.jsx";
 import {
   PersonalInformation,
@@ -52,6 +52,17 @@ export default function Home() {
   const handleCollectData = (data) => {
     setOtherFormData({ ...otherFormData, ...data });
   };
+  //loading dialog box
+  const loadingRef = useRef(null);
+  // show loading while backend is validating
+  const showLoadingModal = () => {
+    loadingRef.current.showModal();
+    return true;
+  };
+  // for closing the loading
+  const closeLoadingModal = () => {
+    loadingRef.current.close();
+  };
 
   // Function to handle next button click
   const handleClick = (e) => {
@@ -89,6 +100,7 @@ export default function Home() {
       is_admin: 0,
       registration: true,
     };
+    showLoadingModal();
     const result = await signIn("credentials", {
       redirect: false, // Don't redirect, we'll handle that manually
       ...data,
@@ -118,9 +130,20 @@ export default function Home() {
       setIndex((prevIndex) => prevIndex * 0);
     }
   }, [errors, submitSuccess]);
-
   return (
     <>
+      <dialog
+        ref={loadingRef}
+        className="bg-none bg-transparent outline-none border-none overflow-hidden min-h-fit min-w-fit"
+      >
+        <img
+          src="/icons/loading.png"
+          width={80}
+          height={80}
+          className="animate-spin "
+        />
+        <div className="font-semibold">loading...</div>
+      </dialog>
       <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit sm:grid-cols-1 sm:grid-rows-4">
         <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2 sm:gap-2">
           <h1 className="font-extrabold text-[20px]">Welcome back!</h1>

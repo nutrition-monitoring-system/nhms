@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" // originally used "mysql", but the only free available database for the project is postgres
+  provider = "postgres" // originally used "mysql", but the only free available database for the project is postgres
   url      = env("DATABASE_URL")
 }
 
