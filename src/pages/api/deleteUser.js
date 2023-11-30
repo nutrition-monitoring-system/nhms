@@ -1,7 +1,6 @@
 /* Get user information and add it to the SQL database using MySQL.  */
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/utils/prismaclientUtil";
 export default async function handler(req, res) {
-  const prisma = new PrismaClient();
   if (req.method === "DELETE") {
     // Process a DELETE request
     let deleteUserID = req.body;
