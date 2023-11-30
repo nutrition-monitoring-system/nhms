@@ -120,6 +120,7 @@ export default function Home() {
             Sign in to unlock a world of nutrition opportunities!
           </p>
           <Button href={"/login"}>Login</Button>
+          
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">

@@ -363,7 +363,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
               width={20}
               height={20}
             />
-            none
+            None
           </button>
           {Allergies.map((allergy, idx) => {
             return (
@@ -575,7 +575,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
     {
       value: "Use Descriptive Links",
       src: "/icons/information.png",
-      alt: "descriptive links",
+      alt: "Descriptive Links",
     },
     {
       value: "High Contrast Mode",
@@ -681,7 +681,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
   const foodDescription = useRef(null);
   const aDrink = useRef(null);
 
-  const [breakFast, setBreakFast] = useState([]);
+  const [breakfast, setBreakFast] = useState([]);
   const [Lunch, setLunch] = useState([]);
   const [Dinner, setDinner] = useState([]);
 
@@ -705,7 +705,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
     };
     switch (type) {
       case "breakfast":
-        setBreakFast([...breakFast, foodInformation]);
+        setBreakFast([...breakfast, foodInformation]);
         break;
       case "lunch":
         setLunch([...Lunch, foodInformation]);
@@ -756,10 +756,10 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
           </div>
           <div className="flex justify-around items-center mt-2 w-full">
             <button onClick={handleAddFood} className="tile" id="addNext">
-              add
+              Add
             </button>
             <button onClick={handleModalclose} className="tile" id="closeNext">
-              close
+              Close
             </button>
           </div>
         </div>
@@ -856,7 +856,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
           </div>
           <div className="bg-white rounded-md flex flex-col p-3 shadow-2xl">
             <div className="min-w-full p-1 flex justify-left items-center gap-2 overflow-hidden">
-              {[...breakFast, ...Lunch, ...Dinner].map((food, idx) => {
+              {[...breakfast, ...Lunch, ...Dinner].map((food, idx) => {
                 return (
                   <div key={idx}>
                     <div className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-xl flex justify-center items-center text-center p-2 cursor-pointer">
