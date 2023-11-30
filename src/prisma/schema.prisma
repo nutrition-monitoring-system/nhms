@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql" // originally used "mysql", but the only free available database for the project is postgres
   url      = env("DATABASE_URL")
 }
 
@@ -15,7 +15,7 @@ model user {
   password    String        @db.VarChar(32)
   gender      String?       @db.Char(1)
   userID      String        @id @db.Char(32)
-  is_admin    Int?          @default(0) @db.TinyInt
+  is_admin    Int?          @default(0) //@db.TinyInt  // 
   food        food[]
   health      health[]
   preferences preferences[]
