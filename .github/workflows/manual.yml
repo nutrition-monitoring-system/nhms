@@ -17,16 +17,15 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.0
-      - name: Move into the source directory.
-        run: cd src
-      - name: Install all the required packages.
-        run: npm install
+      - name: Move into the source directory, install all the required packages & start the server.
+        run: |
+          cd src
+          npm install -y
+          npm run dev
         #name: Cache
         #uses: actions/cache@v3.3.2
         #with:
         #path: /node_modules
-      - name: Start the server.
-        run: npm run dev
       - name: Cypress.io
         uses: cypress-io/github-action@v6.6.0
         with:
