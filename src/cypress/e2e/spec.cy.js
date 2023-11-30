@@ -1,6 +1,6 @@
 // This describes a test suite for checking new user registration and login
 describe("Testing if a new user can log into the database.", () => {
-  const url = "http://localhost:3000";// sets the base URL for the tests
+  const url = "nhms.onrender.com";// sets the base URL for the tests
 // Test case for navigating to the base URL and scrolling the view
   it("passes", () => {
     cy.visit(url + "");// Visits the base URL
@@ -94,7 +94,7 @@ describe("Testing if a new user can log into the database.", () => {
   cy.visit(url + "/login");
   // Logs in with the registered user credentials
   cy.get('input[name="email"]').type("john.doe@email.com");
-  cy.get('input[name="password"]').type("password");
+  cy.get('input[name="password"]').type("password123456");
   cy.get('#handleLogin').click();
   cy.wait(2000); 
   cy.visit(url + "/home");
