@@ -1,6 +1,6 @@
 "use client";
 import Button from "./Button.jsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // personal information
 export function PersonalInformation({ onClick, formValidation }) {
@@ -724,16 +724,22 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       handleModalclose(event);
   };
 
-  function handleUploadImage(input) {
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
+  function handleUploadImage(event) {
+    const file = event.target.files[0];
+    const fileName = file.name;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      // The *.txt file text will be printed here
+      console.log("Filename", fileName);
+    };
+    reader.readAsDataURL(file);
 
-      reader.onload = function (e) {
-        setUploadImageUrl(e.target.result);
-      };
+    useEffect(()=> {
+      const eventId = addEventListener("onload", setUploadImageUrl())
+      return () => {
 
-      reader.readAsDataURL(input.files[0]);
-    }
+      }
+    })
   }
   return (
     <>
@@ -766,7 +772,6 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
               className=""
               type="text"
               placeholder="Drinks"
-              // defaultValue={"water"}
               ref={aDrink}
             />
           </div>
@@ -841,7 +846,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
                 <img
-                  src={uploadImageUrl}
+                  src={"/icons/add.png"}
                   alt={"Add img icon"}
                   width={20}
                   height={20}
