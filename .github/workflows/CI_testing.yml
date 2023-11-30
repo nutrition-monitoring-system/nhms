@@ -4,9 +4,7 @@ name: Testing workflow.
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on:
-  workflow_dispatch:
-  push:
+on: [workflow_dispatch, push]
     # Inputs the workflow accepts.
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -30,7 +28,7 @@ jobs:
           working-directory: ./src
           wait-on: "http://localhost:3000"
           # This only prints out one spec for now.
-          spec: cypress/spec.cy.js
+          spec: cypress/e2e/spec.cy.js
       - name: Cache
         uses: actions/cache@v3.3.2
         with:
