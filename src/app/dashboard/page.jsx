@@ -1,3 +1,5 @@
+"use client";
+import { useRef } from "react";
 import Link from "next/link";
 export default function Page() {
   return (
@@ -38,27 +40,90 @@ const NavBar = () => (
     </div>
   </div>
 );
-const MainPage = () => (
-  <div className="col-span-3 rounded-lg p-2 flex flex-col justify-center items-center gap-1">
-    <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3 rounded-md px-4">
+
+const MainPageNavBar = () => {
+  const menuItems = useRef(null);
+  const handleMenuclick = () => {
+    // This function handles the animation for the userMenu. It will animate base on the custom class added
+    menuItems.current.classList.toggle("slide-down");
+  };
+  return (
+    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-4">
       <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
-        Dashboard
+        Admin Dashboard
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <div className="tile relative z-10 flex justify-around items-center gap-3">
+        <div
+          onClick={handleMenuclick}
+          className="tile relative z-10 flex justify-around items-center gap-3 select-none"
+        >
           <img
             src="/icons/woman.png"
-            width={40}
-            height={40}
+            width={25}
+            height={25}
             alt="Person icon"
-            className="ml-2 rounded-[50px] border-2 p-1 border-sky-400"
+            className="ml-2 rounded-[50px]"
           />
           <span>Dr. Monika</span>
+          <div
+            ref={menuItems}
+            className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
+             shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
+          >
+            <div className="tile grid grid-cols-4">
+              <img
+                src="/icons/account.png"
+                alt="Settings icon"
+                width={20}
+                height={20}
+              />
+              <Link href={"/user/userd9f49w"}>Profile</Link>
+            </div>
+            <div className="tile grid grid-cols-4">
+              {" "}
+              <img
+                src="/icons/settings.png"
+                alt="Settings icon"
+                width={20}
+                height={20}
+              />
+              <Link href={"/user/userd9f49w"}>Settings</Link>
+            </div>
+            <div className="tile grid grid-cols-4">
+              {" "}
+              <img
+                src="/icons/translate.png"
+                alt="Language/translate icon"
+                width={20}
+                height={20}
+              />
+              <span>Languages</span>
+            </div>
+            <div
+              className="tile grid grid-cols-4"
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
+              {" "}
+              <img
+                src="/icons/logout.png"
+                alt="Logout icon"
+                width={20}
+                height={20}
+              />
+              <span>Logout</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  );
+};
+
+const MainPage = () => (
+  <div className="col-span-3 rounded-lg p-2 flex flex-col justify-center items-center gap-1">
+    <MainPageNavBar></MainPageNavBar>
     <div className="bg-white h-full w-full grid grid-cols-3 rounded-md overflow-hidden">
-      <div className="bg-sky-500 grid grid-rows-6 place-content-center gap-3 p-4">
+      <div className="bg-sky-400 grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
           <img src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Frontend</div>
@@ -94,21 +159,21 @@ const MainPage = () => (
             Image graph here
           </h2>
         </div>
-        <div className="bg-black rounded-md col-span-2 grid place-items-center">
+        <div className="bg-black rounded-md col-span-2 grid place-items-center py-2">
           <button className="tile text-lg">
             <img src="/icons/add.png" alt="add icon" width={20} height={20} />
             <div>User Analytics</div>
           </button>
           <button className="tile text-lg">
             <img src="/icons/add.png" alt="add icon" width={20} height={20} />
-            <div>User Feedback</div>
+            <div>User Information</div>
           </button>
         </div>
       </div>
       <div className="bg-blue-500 grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Search</div>
+          <img src="/icons/search.png" alt="add icon" width={20} height={20} />
+          <div>Quick Search</div>
         </button>
         <button className="tile text-lg">
           <img src="/icons/add.png" alt="add icon" width={20} height={20} />
@@ -124,7 +189,7 @@ const MainPage = () => (
         </button>
         <button className="tile text-lg">
           <img src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>UserFeedback</div>
+          <div>User Feedback</div>
         </button>
       </div>
     </div>

@@ -1,6 +1,6 @@
-"use client"; // This tells Next js that the everycode in this fule will be rendered in the client side
+"use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 // personal information
 export function PersonalInformation({ onClick, formValidation }) {

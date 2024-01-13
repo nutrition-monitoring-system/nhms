@@ -4,9 +4,9 @@ const Coach = () => {
   // It tells the user about who the Coach is
   return (
     <>
-      <div className="min-h-screen bg-white gap-1 grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">
+      <div className="min-h-screen bg-white grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">
         <div className="row-span-2 p-2 md:row-span-1">
-          <div className="w-full h-full rounded-lg border-4 border-white shadow-lg bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
+          <div className="w-full h-full rounded-lg shadow-lg bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
         </div>
         <div className="bg-primary sm:rounded-none text-md text-black font-opensans mb-2 shadow-2xl rounded-lg flex justify-center items-center flex-col gap-4 py-2 px-6">
           <div className="w-full">
@@ -25,7 +25,6 @@ const Coach = () => {
             TV. She offers various programs on her website, such as a 90-day
             plan, a power hour, and daily meal plans.
           </p>
-          <hr className="h-1 border-black border-2 fill-black w-full rounded-sm" />
           <p className="shadow-sm">
             Whether you're scheduling appointments or seeking diet
             recommendations, Dr. Gostic's expertise in Microbiology, Genetics,
@@ -34,7 +33,7 @@ const Coach = () => {
             scientifically-backed advice.
           </p>
           <div className="grid place-items-center w-full">
-            <Button href={"/register"}>Click Here to Sign Up</Button>
+            <button className="tile text-[1.5rem] md:text-sm p-5">Click Here to Sign Up</button>
           </div>
         </div>
       </div>
