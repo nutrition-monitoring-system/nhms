@@ -64,9 +64,20 @@ export default function Home() {
     loadingRef.current.close();
   };
 
+  // Function to handle initial next button click
+  const handleInitialClick = (formData) => {
+    const numberOFSubForms = 5;
+    if (index >= numberOFSubForms) {
+      return;
+    } else if (index >= numberOFSubForms - 1) {
+      setTitle("Almost done!");
+    }
+    setIndex((prevIndex) => prevIndex + 1);
+  };
   // Function to handle next button click
   const handleClick = (e) => {
     const numberOFSubForms = 5;
+    console.log(e);
     e.preventDefault();
     if (index >= numberOFSubForms) {
       return;
@@ -122,13 +133,16 @@ export default function Home() {
     setIndex((index) => index * 0 + pos);
   };
 
-  // useEffect to handle changes in errors and submitSuccess states
-  useEffect(() => {
-    // If there are form errors, reset to the initial step
+  const resetIndex = (errors) => {
     if (Object.keys(errors).length > 0) {
       setTitle("Create a new account");
       setIndex((prevIndex) => prevIndex * 0);
     }
+  };
+  // useEffect to handle changes in errors and submitSuccess states
+  useEffect(() => {
+    // If there are form errors, reset to the initial step
+    resetIndex(errors);
   }, [errors, submitSuccess]);
   return (
     <>
@@ -201,7 +215,8 @@ export default function Home() {
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <PersonalInformation
-                onClick={handleClick}
+                onClick={handleInitialClick}
+                resetIndex={resetIndex}
                 formValidation={{
                   register,
                   handleSubmit,

@@ -92,10 +92,10 @@ function NavBar() {
         </div>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
           <div className="mx-4">
-            <Link href="/login">Home</Link>
+            <Link href="/home">Recipes</Link>
           </div>
           <div className="mx-4">
-            <Link href="/login">Recipes</Link>
+            <Link href="/blog">Blog</Link>
           </div>
           <button className="tile">
             <Link href="/login">Login</Link>

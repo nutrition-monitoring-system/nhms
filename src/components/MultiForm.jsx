@@ -1,9 +1,9 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // personal information
-export function PersonalInformation({ onClick, formValidation }) {
+export function PersonalInformation({ onClick, formValidation, resetIndex }) {
   /*
 
   params: 
@@ -29,6 +29,9 @@ export function PersonalInformation({ onClick, formValidation }) {
     event.preventDefault();
     setType("date");
   };
+  useEffect(() => {
+    resetIndex(errors);
+  }, [errors]);
 
   return (
     <>
@@ -107,7 +110,7 @@ export function PersonalInformation({ onClick, formValidation }) {
           {errors.confirmPassword?.message}
         </p>
         <div className="grid place-items-center" id="RestrictionsNext">
-          <Button onClick={onClick}>Next</Button>
+          <Button onClick={handleSubmit(onClick)}>Next</Button>
         </div>
       </div>
     </>
@@ -1067,7 +1070,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 ></img>
                 <input
                   type="file"
-                  class="absolute inset-0 opacity-0"
+                  className="absolute inset-0 opacity-0"
                   onChange={handleUploadImage}
                 />
               </div>

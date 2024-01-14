@@ -13,13 +13,21 @@ import { useRef } from "react";
 export default function Home() {
   //Not implemeted Yet
   return (
-    <SessionProvider>
-      <BlogHeader></BlogHeader>
+    <>
+      <BlogHeaderParent></BlogHeaderParent>
       <BlogPage></BlogPage>
       <Footer></Footer>
-    </SessionProvider>
+    </>
   );
 }
+
+const BlogHeaderParent = () => {
+  return (
+    <SessionProvider>
+      <BlogHeader></BlogHeader>
+    </SessionProvider>
+  );
+};
 
 const BlogHeader = () => {
   return (
@@ -38,11 +46,15 @@ const BlogHeader = () => {
             and integrate with well-being apps. Embark on your journey to a
             healthier you today!`
           </div>
+          <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">
+            <img src="icons/blog2.png" alt="blog" width={50} height={50} />
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
 const NavBar = () => {
   const menuItems = useRef(null); // a container reference to the list of menuitems
   const handleMenuclick = () => {
@@ -172,36 +184,37 @@ const BlogPage = () => {
 };
 
 const BlogComponent = () => {
+  const date = new Date().toDateString();
   return (
-    <div className="bg-primary p-1 shadow-lg rounded-md overflow-hidden place-items-center relative">
+    <div className="bg-white p-1 shadow-lg rounded-md overflow-hidden place-items-center relative">
       <img
-        className="row-span-4 rounded-md shadow-xl z-[-10] blur-sm w-1/2 h-1/2"
+        className="row-span-4 rounded-md shadow-xl z-[-10] blur-sm opacity-[90%] w-1/2 h-1/2"
         src={
           "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D"
         }
       />
       <div className="absolute z-[10] inset-0 flex justify-center items-center flex-col gap-3">
-        <div className="rounded-full w-[40px] h-[40px] bg-white z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black">
+        <div
+          className="text-white bg-black rounded-full w-[40px] h-[40px]
+         z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black
+         hover:translate-x-1 hover:shadow-xl duration-100 cursor-pointer transition-all"
+        >
           i
         </div>
-        <h1 aria-name="title" className="text-[2rem] font-extrabold text-white">
-          The Power of Plant-Based Deits
+        <h1 className="text-[2rem] font-extrabold">
+          The Power of Plant-Based diets
         </h1>
-        <h4 aria-name="subtitle" className="font-bold">
-          Unlocking health and Sustainability
-        </h4>
-        <p aria-name="blogtext" className="w-1/2 text-white">
+        <h4 className="font-bold">Unlocking health and Sustainability</h4>
+        <p className="w-1/2">
           Learn how plant-based diets can boost your well-being and contribute
           to a greener planet. Discover the benefits and practical tips for
           embracing a more plant-focused lifestyle.
         </p>
-        <div className="w-1/2 flex justify-center items-center gap-3">
-          <span aria-name="author" className="text-white">
+        <div className="w-1/2 flex justify-between items-center gap-3">
+          <span className="text-white text-[1.2rem] font-extrabold">
             Charles, Jameson
           </span>
-          <strong aria-name="author" className="p-3 rounded-lg">
-            {new Date().getFullYear()}
-          </strong>
+          <span className="p-3 rounded-lg">{date}</span>
         </div>
       </div>
     </div>
