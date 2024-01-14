@@ -6,7 +6,7 @@ import { useRef } from "react";
 export default function Header() {
   // The header section returns a description of the page.
 
-  //This are png icons for making the site look more attractive 
+  //This are png icons for making the site look more attractive
   const headerIcons = [
     "/headerIcons/dish.png",
     "/headerIcons/drink.png",
@@ -67,16 +67,16 @@ export default function Header() {
 }
 
 function NavBar() {
-  // The navigation bar component returns a conditional navigation bar. Wether the user is logged in or not. 
+  // The navigation bar component returns a conditional navigation bar. Wether the user is logged in or not.
   // It will render differently
 
   const menuItems = useRef(null); // a container reference to the list of menuitems
-  const handleMenuclick = () => { 
+  const handleMenuclick = () => {
     // This function handles the animation for the userMenu. It will animate base on the custom class added
     menuItems.current.classList.toggle("slide-down");
   };
   const { status } = useSession({
-    // useSesstion is for protection. 
+    // useSesstion is for protection.
     // Making sure the user does not visit a route they are not allowed to visit
     required: true,
     onUnauthenticated() {
@@ -88,9 +88,15 @@ function NavBar() {
     return (
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <div className="grid place-items-center text-black font-modak text-[30px]">
-          nhms
+          NHMS
         </div>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
+          <div className="mx-4">
+            <Link href="/login">Home</Link>
+          </div>
+          <div className="mx-4">
+            <Link href="/login">Recipes</Link>
+          </div>
           <button className="tile">
             <Link href="/login">Login</Link>
           </button>
@@ -104,7 +110,7 @@ function NavBar() {
   return (
     <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
       <div className="grid place-items-center text-black font-modak text-[30px]">
-        nhms
+        NHMS
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
         <div className="tile">

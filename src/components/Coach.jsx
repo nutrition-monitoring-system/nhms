@@ -33,7 +33,7 @@ const Coach = () => {
             scientifically-backed advice.
           </p>
           <div className="grid place-items-center w-full">
-            <button className="tile text-[1.5rem] md:text-sm p-5">Click Here to Sign Up</button>
+            <button className="tile p-5">Click Here to Sign Up</button>
           </div>
         </div>
       </div>
