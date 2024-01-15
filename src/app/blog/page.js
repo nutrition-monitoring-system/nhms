@@ -171,7 +171,7 @@ const NavBar = () => {
 
 const BlogPage = () => {
   return (
-    <div className="grid grid-cols-1 gap-3 m-auto w-[80%] place-items-center py-5">
+    <div className="grid grid-cols-1 gap-5 m-auto w-[80%] min-h-screen py-5">
       <BlogComponent />
       <BlogComponent />
       <BlogComponent />
@@ -185,14 +185,9 @@ const BlogPage = () => {
 const BlogComponent = () => {
   const date = new Date().toDateString();
   return (
-    <div className="bg-white p-1 shadow-lg rounded-md overflow-hidden place-items-center relative">
-      <img
-        className="row-span-4 rounded-md shadow-xl z-[-10] blur-sm opacity-[90%] w-1/2 h-1/2"
-        src={
-          "https://images.unsplash.com/photo-1606787366850-de6330128bfc?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8OHx8fGVufDB8fHx8fA%3D%3D"
-        }
-      />
-      <div className="absolute z-[10] inset-0 flex justify-center items-center flex-col gap-3">
+    <div className="shadow-lg rounded-md overflow-hidden">
+      <div className="relative flex justify-center items-center flex-col gap-3 p-2">
+        <img className="rounded-md" src="/photos/food.jpeg" alt="food" />
         <div
           className="text-white bg-black rounded-full w-[40px] h-[40px]
          z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black
@@ -210,9 +205,7 @@ const BlogComponent = () => {
           embracing a more plant-focused lifestyle.
         </p>
         <div className="w-1/2 flex justify-between items-center gap-3">
-          <span className="text-white text-[1.2rem] font-extrabold">
-            Charles, Jameson
-          </span>
+          <span className="text-[1.2rem] font-extrabold">Charles, Jameson</span>
           <span className="p-3 rounded-lg">{date}</span>
         </div>
       </div>
