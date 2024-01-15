@@ -1,4 +1,5 @@
 "use client";
+import Logo from "../components/Logo";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
@@ -87,9 +88,7 @@ function NavBar() {
   if (status === "unauthenticated" || status === "loading") {
     return (
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
-        <div className="grid place-items-center text-black font-modak text-[30px]">
-          NHMS
-        </div>
+        <Logo></Logo>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
           <div className="mx-4">
             <Link href="/home">Recipes</Link>

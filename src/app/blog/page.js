@@ -1,6 +1,7 @@
 //import Image from 'next/image'
 "use client";
 import Footer from "../../components/Footer";
+import Logo from "../../components/Logo";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import Link from "next/link";
@@ -73,12 +74,10 @@ const NavBar = () => {
   if (status === "unauthenticated" || status === "loading") {
     return (
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
-        <div className="grid place-items-center text-black font-modak text-[30px]">
-          <Link href="/">NHMS</Link>
-        </div>
+        <Logo></Logo>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
           <div className="mx-4">
-            <Link href="/login">Home</Link>
+            <Link href="/">Home</Link>
           </div>
           <div className="mx-4">
             <Link href="/login">Recipes</Link>
