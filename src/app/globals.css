@@ -11,7 +11,7 @@ html {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
-  --color-primary: #fb923c;
+  --color-primary: #ffb996;
   --color-secondary: #34d399;
   --color-primary-light: #fff7ed;
 }
@@ -38,17 +38,20 @@ dialog::backdrop {
   backdrop-filter: blur(7px);
 }
 @layer components {
+  img {
+    @apply select-none;
+  }
   input,
   select {
-    @apply px-3 pl-5 py-4 bg-white w-full outline-none rounded-md text-black focus:outline-none shadow-xl;
+    @apply px-3 pl-5 py-3 bg-white w-full outline-none rounded-md text-black focus:outline-none shadow-xl;
   }
   input::placeholder {
-    @apply text-gray-700 font-semibold opacity-70;
+    @apply text-black font-semibold opacity-70;
   }
   .tile {
     @apply min-w-fit flex justify-between items-center gap-2 rounded-md
-    bg-white px-5 py-2 text-sm text-black transition-all duration-75 ease-out
-    shadow-lg hover:shadow-2xl cursor-pointer;
+    bg-white px-5 py-2 text-sm text-black transition-all duration-100 ease-out
+    shadow-md hover:shadow-lg hover:translate-x-1  cursor-pointer;
   }
   button:disabled {
     @apply opacity-80 select-none;

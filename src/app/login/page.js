@@ -117,7 +117,6 @@ function Home() {
             onSubmit={handleSubmit(submitForm)}
           >
             <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
-              <img src={"/icons/email.png"} width={35} height={35} />
               <input
                 {...register("email", { required: true })}
                 type="text"
@@ -125,6 +124,7 @@ function Home() {
                 name="email"
                 className="col-span-4"
               ></input>
+              <img src={"/icons/email.png"} width={35} height={35} />
             </div>
             {errors.email && (
               <p className="text-rose-600 text-sm">{errors.email?.message}</p>
@@ -145,10 +145,13 @@ function Home() {
               </p>
             )}
             <div className="flex justify-between items-center w-full p-2 rounded-md">
-              <div id = "handleLogin">
-              <button className="tile bg-black text-white px-7 py-3" type="submit">
-                Login
-              </button>
+              <div id="handleLogin">
+                <button
+                  className="tile bg-black text-white px-7 py-3"
+                  type="submit"
+                >
+                  Login
+                </button>
               </div>
               <a className="grid place-items-center">
                 <span className="cursor-pointer" onClick={handlePopUP}>
