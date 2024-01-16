@@ -37,16 +37,26 @@ body {
 dialog::backdrop {
   backdrop-filter: blur(7px);
 }
-.animate-1 {
-  animation-timeline: scroll(root);
+.blog-information::before {
+  content: "more information";
+  opacity: 0;
+}
+.blog-information:hover::before {
+  opacity: 1;
 }
 @layer components {
+  .blog-information {
+    @apply before:absolute before:shadow-md before:right-[2.5rem] before:bg-secondary
+     before:top-[-2.5rem] before:w-[200px] before:text-center before:px-3 before:py-2 
+     before:rounded-md before:text-black before:font-normal;
+  }
   img {
     @apply select-none;
   }
   input,
   select {
-    @apply px-3 pl-5 py-3 bg-white w-full outline-none rounded-md text-black focus:outline-none shadow-xl;
+    @apply px-3 pl-5 py-3 bg-white w-full outline-none rounded-md text-black
+     focus:outline-none shadow-xl;
   }
   input::placeholder {
     @apply text-black font-semibold opacity-70;

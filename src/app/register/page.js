@@ -53,7 +53,9 @@ export default function Home() {
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [nextButtonOpacity, setNextButtonOpacity] = useState("0");
+  const [nextButtonOpacity, setNextButtonOpacity] = !formIndex
+    ? useState("0")
+    : useState("1");
 
   // if the query is empty then add data to it
   !formIndex && router.replace("/register?formIndex=0");

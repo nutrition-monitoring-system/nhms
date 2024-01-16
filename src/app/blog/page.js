@@ -33,7 +33,7 @@ const BlogHeaderParent = () => {
 const BlogHeader = () => {
   return (
     <div className="h-screen min-h-fit relative bg-white text-black grid place-items-center font-opensans">
-      <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
+      <div className="absolute bg-secondary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
           <h1
@@ -175,7 +175,6 @@ const BlogPage = () => {
       <BlogComponent />
       <BlogComponent />
       <BlogComponent />
-      <BlogComponent />
     </div>
   );
 };
@@ -189,7 +188,7 @@ const BlogComponent = () => {
         <div
           className="text-white bg-black rounded-full w-[40px] h-[40px]
          z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black
-         hover:translate-x-1 hover:shadow-xl duration-100 cursor-pointer transition-all"
+         hover:translate-x-1 hover:shadow-xl duration-100 cursor-pointer transition-all blog-information"
         >
           i
         </div>
@@ -197,7 +196,7 @@ const BlogComponent = () => {
           The Power of Plant-Based diets
         </h1>
         <h4 className="font-bold">Unlocking health and Sustainability</h4>
-        <p className="w-1/2 sm:w-full md:w-3/4">
+        <p className="w-1/2 sm:w-full md:w-3/4 text-center">
           Learn how plant-based diets can boost your well-being and contribute
           to a greener planet. Discover the benefits and practical tips for
           embracing a more plant-focused lifestyle.
