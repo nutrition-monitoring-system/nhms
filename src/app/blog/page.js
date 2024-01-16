@@ -32,8 +32,8 @@ const BlogHeaderParent = () => {
 
 const BlogHeader = () => {
   return (
-    <div className="h-screen min-h-fit relative bg-white text-black grid place-items-center font-opensans">
-      <div className="absolute bg-secondary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
+    <div className="h-screen min-h-fit relative text-black grid place-items-center font-opensans">
+      <div className="absolute flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
           <h1
@@ -182,9 +182,9 @@ const BlogPage = () => {
 const BlogComponent = () => {
   const date = new Date().toDateString();
   return (
-    <div className="shadow-lg rounded-md overflow-hidden">
-      <div className="relative flex justify-center items-center flex-col gap-3 p-2 sm:text-center">
-        <img className="rounded-md h-auto" src="/photos/food.jpeg" alt="food" />
+    <div className="shadow-lg rounded-lg overflow-hidden">
+      <div className="relative flex justify-center items-center flex-col gap-3 sm:text-center">
+        <img className="h-auto" src="/photos/food.jpeg" alt="food" />
         <div
           className="text-white bg-black rounded-full w-[40px] h-[40px]
          z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black

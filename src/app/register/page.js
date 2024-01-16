@@ -230,7 +230,7 @@ export default function Home() {
               6
             </button>
           </div>
-          <div className="w-[50%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
+          <div className="w-[55%] xl:w-[40%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
               id="chageTranslte"
               className="flex transition-transform duration-200 min-h-fit"
