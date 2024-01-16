@@ -16,7 +16,7 @@ export default function Recipes() {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 sm:gap-3 w-[80%] min-h-fit pt-10 sm:w-full">
+        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 sm:gap-3 w-[80%] xl:w-[60%] min-h-fit pt-10 sm:w-full">
           {recipesList?.map((item, idx) => (
             <div key={idx}>
               <RecipeInfo recipe={item} />

@@ -147,7 +147,7 @@ function NavBar({ handleLogout, data }) {
             />
             <span id="usercontent" onClick={handleMenuclick}>
               <>{userGender == "M" ? "Mr." : userGender == "F" ? "Ms." : ""}</>
-              {userSurname ? "MaleGues" : "FemaleGuest"}
+              {userSurname ? userSurname : "current user"}
             </span>
             <div
               ref={menuItems}
