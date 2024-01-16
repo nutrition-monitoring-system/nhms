@@ -186,8 +186,8 @@ const BlogComponent = () => {
   const date = new Date().toDateString();
   return (
     <div className="shadow-lg rounded-md overflow-hidden">
-      <div className="relative flex justify-center items-center flex-col gap-3 p-2">
-        <img className="rounded-md" src="/photos/food.jpeg" alt="food" />
+      <div className="relative flex justify-center items-center flex-col gap-3 p-2 sm:text-center">
+        <img className="rounded-md h-auto" src="/photos/food.jpeg" alt="food" />
         <div
           className="text-white bg-black rounded-full w-[40px] h-[40px]
          z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black
@@ -199,7 +199,7 @@ const BlogComponent = () => {
           The Power of Plant-Based diets
         </h1>
         <h4 className="font-bold">Unlocking health and Sustainability</h4>
-        <p className="w-1/2">
+        <p className="w-1/2 sm:w-full md:w-3/4">
           Learn how plant-based diets can boost your well-being and contribute
           to a greener planet. Discover the benefits and practical tips for
           embracing a more plant-focused lifestyle.

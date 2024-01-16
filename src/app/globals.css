@@ -37,6 +37,9 @@ body {
 dialog::backdrop {
   backdrop-filter: blur(7px);
 }
+.animate-1 {
+  animation-timeline: scroll(root);
+}
 @layer components {
   img {
     @apply select-none;
