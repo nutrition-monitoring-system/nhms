@@ -10,8 +10,7 @@ import {
   Accessibility,
 } from "../../components/MultiForm.jsx";
 
-import { useRouter } from "next/navigation";
-
+import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
 import { signIn } from "next-auth/react";
 
@@ -19,6 +18,7 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { object, string, date, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FaPray } from "react-icons/fa/index.js";
 
 const userSchema = object().shape({
   firstName: string().required("Please type in your first name."),
@@ -41,12 +41,22 @@ export default function Home() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
 
+  // query parameters
+  const queryParams = useSearchParams();
+  const formIndex = queryParams.get("formIndex");
+
   // State variables using the useState hook
-  const [index, setIndex] = useState(0);
   const router = useRouter();
+  const [index, setIndex] = !formIndex
+    ? useState(0)
+    : useState(parseInt(formIndex));
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [nextButtonOpacity, setNextButtonOpacity] = useState("0");
+
+  // if the query is empty then add data to it
+  !formIndex && router.replace("/register?formIndex=0");
 
   // Function to collect additional form data Dietery Restrictions, allergies, chronic conditions, accessibility settings
   const handleCollectData = (data) => {
@@ -65,7 +75,7 @@ export default function Home() {
   };
 
   // Function to handle initial next button click
-  const handleInitialClick = (formData) => {
+  const handleInitialNextClick = (formData) => {
     const numberOFSubForms = 5;
     if (index >= numberOFSubForms) {
       return;
@@ -73,11 +83,12 @@ export default function Home() {
       setTitle("Almost done!");
     }
     setIndex((prevIndex) => prevIndex + 1);
+    router.replace(`/register?formIndex=${index + 1}`);
+    setNextButtonOpacity("1");
   };
   // Function to handle next button click
-  const handleClick = (e) => {
+  const handleNextClick = (e) => {
     const numberOFSubForms = 5;
-    console.log(e);
     e.preventDefault();
     if (index >= numberOFSubForms) {
       return;
@@ -86,6 +97,8 @@ export default function Home() {
     }
 
     setIndex((prevIndex) => prevIndex + 1);
+    router.replace(`/register?formIndex=${index + 1}`);
+    setNextButtonOpacity("1");
   };
 
   // Function to handle previous button click
@@ -97,6 +110,7 @@ export default function Home() {
     setTitle("Create a new account");
 
     setIndex((prevIndex) => prevIndex - 1);
+    router.replace(`/register?formIndex=${index - 1}`);
   };
 
   // Function to handle the final form submission
@@ -137,6 +151,9 @@ export default function Home() {
     if (Object.keys(errors).length > 0) {
       setTitle("Create a new account");
       setIndex((prevIndex) => prevIndex * 0);
+      // hiding the next form buttons so the user
+      // does not visit the next form page until the personal information section is complete i.e (email, pass, dob etc)
+      setNextButtonOpacity("0");
     }
   };
   // useEffect to handle changes in errors and submitSuccess states
@@ -170,7 +187,10 @@ export default function Home() {
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
-          <div className="flex justify-center items-center flex-wrap gap-3">
+          <div
+            className="flex justify-center items-center flex-wrap gap-3 transition-all delay-100"
+            style={{ opacity: nextButtonOpacity }}
+          >
             <button
               className="rounded-xl opacity-80 btn-one"
               onClick={(event) => handleNavclick(event, 0)}
@@ -215,7 +235,7 @@ export default function Home() {
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <PersonalInformation
-                onClick={handleInitialClick}
+                onClick={handleInitialNextClick}
                 resetIndex={resetIndex}
                 formValidation={{
                   register,
@@ -224,22 +244,22 @@ export default function Home() {
                 }}
               />
               <FoodCategories
-                onClick={handleClick}
+                onClick={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <Allergies
-                onClick={handleClick}
+                onClick={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <ChronicConditions
-                onClick={handleClick}
+                onClick={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <Accessibility
-                onClick={handleClick}
+                onClick={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />

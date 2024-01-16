@@ -241,7 +241,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
       </dialog>
       {/*  */}
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary">
+        <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Dietary Restrictions?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
@@ -420,7 +420,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
         </div>
       </dialog>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary">
+        <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Any Allergies?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
@@ -608,7 +608,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
         </div>
       </dialog>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary">
+        <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Chronic Conditions
         </h1>
         <div className="relative flex items-center gap-1 p-2">
@@ -748,7 +748,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
   return (
     <>
       <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
-        <h1 className="grid place-items-center text-secondary text-center">
+        <h1 className="grid place-items-center text-secondary text-center font-extrabold text-[1.3rem]">
           Accessiblity Settings
         </h1>
         <div className="relative flex items-center gap-1 p-2">
@@ -900,7 +900,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
         className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
       >
         <div className="p-2 grid place-items-center gap-1">
-          <h1 className="grid place-items-center font-extrabold text-xl">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             Did you have anything today?
           </h1>
           <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
@@ -981,7 +981,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
       </dialog>
 
       <div className="min-w-full pb-2">
-        <h1 className="grid place-items-center text-secondary">
+        <h1 className="grid place-items-center text-secondary font-extrabold font-[1.2rem]">
           Did you have anything today?
         </h1>
         <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">

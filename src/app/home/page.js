@@ -1,4 +1,5 @@
 "use client";
+import Logo from "../../components/Logo";
 import Link from "next/link";
 import { useRef } from "react";
 import { SessionProvider } from "next-auth/react";
@@ -97,9 +98,7 @@ function NavBar({ handleLogout, data }) {
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
-        <div className="text-black font-modak text-[30px]">
-          <Link href={"/"}>nhms</Link>
-        </div>
+        <Logo></Logo>
         <div className="relative flex items-center gap-1 p-2">
           <img
             src="/icons/search.png"
