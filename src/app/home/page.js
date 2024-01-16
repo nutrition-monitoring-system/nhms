@@ -10,35 +10,45 @@ import Recipes from "../../components/Recipes.jsx";
 export default function Page() {
   return (
     <>
-      <SessionProvider>
+      <Home />
+      {/* <SessionProvider>
         <Home></Home>
-      </SessionProvider>
+      </SessionProvider> */}
     </>
   );
 }
 
 function Home() {
   // initialise the router for conditional redirection
-  const router = useRouter();
-  // initialise the session.
-  //
-  const { session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-      return router.push("/login");
-    },
-  });
+  // const router = useRouter();
+  // // initialise the session.
+  // //
+  // const { session, status } = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     // The user is not authenticated, handle it here.
+  //     return router.push("/login");
+  //   },
+  // });
 
-  console.log(session);
+  const status = "authenticated";
+  const session = {};
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
 
   if (status === "loading") {
     return (
-      <div className="grid place-items-center absolute inset-0 font-opensans text-[30px]">
-        Loading....
+      <div className="bg-none flex dark:bg-black flex-col gap-7 justify-center items-center absolute inset-0">
+        <img
+          src="/icons/loading.png"
+          width={100}
+          height={100}
+          className="animate-spin "
+        />
+        <div className="text-center font-bold text-[2rem] dark:text-white">
+          Loading...
+        </div>
       </div>
     );
   }
@@ -137,7 +147,7 @@ function NavBar({ handleLogout, data }) {
             />
             <span id="usercontent" onClick={handleMenuclick}>
               <>{userGender == "M" ? "Mr." : userGender == "F" ? "Ms." : ""}</>
-              {userSurname}
+              {userSurname ? "MaleGues" : "FemaleGuest"}
             </span>
             <div
               ref={menuItems}

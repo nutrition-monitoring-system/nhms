@@ -147,6 +147,7 @@ export default function Home() {
   const handleNavclick = (event, pos) => {
     event.preventDefault();
     setIndex((index) => index * 0 + pos);
+    router.replace(`/register?formIndex=${pos}`);
   };
 
   const resetIndex = (errors) => {
