@@ -16,7 +16,7 @@ export default function Recipes() {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 sm:gap-3 w-[80%] xl:w-[60%] min-h-fit pt-10 sm:w-full">
+        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[60%] min-h-fit pt-10 sm:w-full">
           {recipesList?.map((item, idx) => (
             <div key={idx}>
               <RecipeInfo recipe={item} />
@@ -34,7 +34,7 @@ function RecipeInfo({ recipe }) {
       <div className=" shadow-xl bg-white rounded-md flex flex-col gap-1 overflow-hidden p-1">
         <div
           className="rounded-md overflow-hidden bg-cover cursor-pointer transition-colors duration-1000 ease-in-out
-        hover:bg-[url('/photos/food.jpeg')] bg-gradient-to-r from-rose-500 via-rose-500 to-sky-500 grid place-items-center p-5"
+        bg-rose-500 grid place-items-center p-5"
         >
           <div className="text-center font-sans font-extrabold text-[1.5rem] text-white">
             {recipe.name}

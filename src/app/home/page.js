@@ -10,29 +10,26 @@ import Recipes from "../../components/Recipes.jsx";
 export default function Page() {
   return (
     <>
-      <Home />
-      {/* <SessionProvider>
+      <SessionProvider>
         <Home></Home>
-      </SessionProvider> */}
+      </SessionProvider>
     </>
   );
 }
 
 function Home() {
-  // initialise the router for conditional redirection
-  // const router = useRouter();
-  // // initialise the session.
-  // //
-  // const { session, status } = useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     // The user is not authenticated, handle it here.
-  //     return router.push("/login");
-  //   },
-  // });
+  //initialise the router for conditional redirection
+  const router = useRouter();
+  // initialise the session.
+  //
+  const { session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      return router.push("/login");
+    },
+  });
 
-  const status = "authenticated";
-  const session = {};
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
@@ -74,7 +71,7 @@ function NavBar({ handleLogout, data }) {
   const foodRecommendation = useRef(null);
 
   let userSurname = "Kelly",
-    userId = "randomuserId",
+    userId = "userfgdf13s",
     userGender = "F";
   if (data) {
     userSurname = data.surname;
@@ -142,7 +139,7 @@ function NavBar({ handleLogout, data }) {
               width={25}
               height={25}
               alt="Person icon"
-              className="ml-2 rounded-[50px] bg-primarylight"
+              className="ml-2 rounded-[50px] bg-primary"
               onClick={handleMenuclick}
             />
             <span id="usercontent" onClick={handleMenuclick}>

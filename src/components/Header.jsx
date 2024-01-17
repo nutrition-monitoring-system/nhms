@@ -110,15 +110,11 @@ function NavBar() {
     <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
       <Logo></Logo>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <div className="tile">
-          <img
-            src="/icons/blog.png"
-            width={25}
-            height={25}
-            alt="Blog icon"
-            className="ml-2 "
-          />
-          <Link href={"/blog"}>Blog</Link>
+        <div className="mx-4">
+          <Link href="/home">Recipes</Link>
+        </div>
+        <div className="mx-4">
+          <Link href="/blog">Blog</Link>
         </div>
         <div className="tile relative z-10 flex justify-around items-center gap-3">
           <img
