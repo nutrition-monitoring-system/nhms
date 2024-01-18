@@ -7,7 +7,6 @@ import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 function Home({ params }) {
-  const { id } = params;
   const router = useRouter();
   const { session, status } = useSession({
     required: true,
