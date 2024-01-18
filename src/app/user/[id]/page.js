@@ -1,12 +1,12 @@
 //import Image from 'next/image'
 "use client";
 import UserAvatar from "../../../components/User.jsx";
-import ChartComponent from "../../../components/User_charts.jsx";
+import Footer from "../../../components/Footer.jsx";
 export default function Home({ params }) {
   return (
     <>
       <UserAvatar />
-      <ChartComponent />
+      <Footer />
     </>
   );
 }
