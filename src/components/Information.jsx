@@ -5,6 +5,7 @@ import SplitType from "split-type";
 import scrollTrigger from "gsap/ScrollTrigger";
 export default function Information() {
   //This function is a more detaied description of the website
+
   useEffect(() => {
     gsap.registerPlugin(scrollTrigger);
     const splitTypes = document.querySelectorAll(".reveal-type");
@@ -33,10 +34,13 @@ export default function Information() {
   return (
     <>
       <div
-        className="min-h-fit text-black grid place-content-center"
+        className="relative min-h-fit text-black grid place-content-center"
         id="information"
       >
-        <section className="h-screen bg-white border-b-[1px] border-gray-900 text-center p-10 grid place-content-center">
+        <section
+          className="h-screen bg-white text-center p-10 grid place-content-center font-sans
+        "
+        >
           <p className="text-lg">
             Welcome to the future of nutrition management!
           </p>
