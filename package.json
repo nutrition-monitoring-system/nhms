@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@gsap/react": "^2.1.0",
-    "@studio-freight/react-lenis": "^0.0.43",
-    "react-scroll-trigger": "^0.6.14",
-    "split-type": "^0.3.4"
-  }
-}
