@@ -13,7 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //session
 import { SessionProvider } from "next-auth/react";
-import { useSession, signOut } from "next-auth/react";
+//import { useSession, signOut } from "next-auth/react";
 
 const userSchema = object().shape({
   email: string().email().required("Please type in your email."),
@@ -71,13 +71,11 @@ function Home() {
 
     if (result.error) {
       // Handle sign-in error, you can display an error message to the user
-      alert("Invalid LogIn details! Redirecting to /register.");
-      //console.error("Sign-in error:", result.error);
-      router.push("/register");
-    } else {
-      // Sign-in was successful
-      router.push("/home");
+      return alert("Invalid LogIn details! Please try again.");
     }
+
+    // Sign-in was successful
+    router.push("/home");
   };
   const handleSendEmail = (event) => {
     event.preventDefault();
@@ -117,6 +115,7 @@ function Home() {
             onSubmit={handleSubmit(submitForm)}
           >
             <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+              <img src={"/icons/email.png"} width={35} height={35} />
               <input
                 {...register("email", { required: true })}
                 type="text"
@@ -124,12 +123,12 @@ function Home() {
                 name="email"
                 className="col-span-4"
               ></input>
-              <img src={"/icons/email.png"} width={35} height={35} />
             </div>
             {errors.email && (
               <p className="text-rose-600 text-sm">{errors.email?.message}</p>
             )}
             <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+              <img src={"/icons/password.png"} width={35} height={35} />
               <input
                 {...register("password", { required: true })}
                 type={"password"}
@@ -137,7 +136,6 @@ function Home() {
                 name="password"
                 className="col-span-4"
               ></input>
-              <img src={"/icons/password.png"} width={35} height={35} />
             </div>
             {errors.password && (
               <p className="text-rose-600 text-sm">
@@ -145,6 +143,11 @@ function Home() {
               </p>
             )}
             <div className="flex justify-between items-center w-full p-2 rounded-md">
+              <a className="grid place-items-center">
+                <span className="cursor-pointer" onClick={handlePopUP}>
+                  Forgot Password?
+                </span>
+              </a>
               <div id="handleLogin">
                 <button
                   className="tile bg-black text-white px-7 py-3"
@@ -153,11 +156,6 @@ function Home() {
                   Login
                 </button>
               </div>
-              <a className="grid place-items-center">
-                <span className="cursor-pointer" onClick={handlePopUP}>
-                  Forgot Password?
-                </span>
-              </a>
             </div>
           </form>
           <dialog
@@ -168,7 +166,11 @@ function Home() {
               Forgot Password?{" "}
             </h1>
             <form className="flex flex-col justify-center items-left gap-3 w-full p-3 rounded-md">
-              <input type={"text"} placeholder={"Email Address.."}></input>
+              <input
+                type={"text"}
+                placeholder={"Email Address.."}
+                name="email"
+              ></input>
               <a
                 className="text-purple-600 cursor-pointer"
                 onClick={(event) =>
@@ -178,7 +180,11 @@ function Home() {
                 Send
               </a>
               <p>You should get a confirmation code on your email</p>
-              <input type={"text"} placeholder={"Confirmation Code.."}></input>
+              <input
+                type={"text"}
+                placeholder={"Confirmation Code.."}
+                name="code"
+              ></input>
               <div className="flex justify-left items-center gap-2">
                 <span className="p-2 mx-1">
                   {timer}
@@ -187,7 +193,10 @@ function Home() {
                 <a className="text-purple-600 cursor-pointer">reset/resend</a>
               </div>
               <input type={"password"} placeholder={"New Password"}></input>
-              <input type={"password"} placeholder={"Confirm Password"}></input>
+              <input
+                type={"password"}
+                placeholder={"Confirm New Password"}
+              ></input>
               <div className="flex justify-between items-center">
                 <Button onClick={handleClose}>submit</Button>
                 <Button onClick={handleClose}>close</Button>

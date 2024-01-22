@@ -33,7 +33,7 @@ const BlogHeaderParent = () => {
 const BlogHeader = () => {
   return (
     <div className="h-screen min-h-fit relative text-black grid place-items-center font-opensans">
-      <div className="absolute flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
+      <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
           <h1

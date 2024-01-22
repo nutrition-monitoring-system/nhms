@@ -11,9 +11,11 @@ html {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
-  --color-primary: #ffb996;
-  --color-secondary: #34d399;
-  --color-primary-light: #fff7ed;
+  --color-primary: #f4ab9b;
+  /* --color-primary:  #faebfa; */
+  --color-secondary: #b8f7d4;
+  --color-primary-light: #fff8e3;
+  --color-secondary-light: #ffdd95;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -43,6 +45,9 @@ dialog::backdrop {
 }
 .blog-information:hover::before {
   opacity: 1;
+}
+.reveal-type {
+  font-size: clamp(3.5rem, 3.5vw, 8rem);
 }
 @layer components {
   .blog-information {
