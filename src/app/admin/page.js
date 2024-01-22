@@ -49,7 +49,7 @@ const MainPageNavBar = () => {
     menuItems.current.classList.toggle("slide-down");
   };
   return (
-    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-4">
+    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-3">
       <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
         Admin Dashboard
       </div>
