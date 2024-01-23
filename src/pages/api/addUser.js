@@ -36,12 +36,27 @@ export default async function handler(req, res) {
       is_admin: Number(is_admin),
       ...newUserData,
     };
-    /* Create a new user in the database. */
-    const newUser = await prisma.user.create({
-      data: data,
+    /* Check if a user with the same email is not already in the database. */
+    let currentEmail = newUserData.email;
+    const emailCheck = await prisma.user.findFirst({
+      where: {
+        email: currentEmail,
+      },
     });
-    // return a valid response
-    return res.status(200).json({ ok: "true", id: newUUID });
+    /* console.log(emailCheck); */
+    /* console.log(emailCheck == null); */
+    /* The email check must be false or undefined in order for a new user to be added to the database. */
+    if (emailCheck == null) {
+      /* Create a new user in the database. */
+      const newUser = await prisma.user.create({
+        data: data,
+      });
+      // return a valid response
+      return res.status(200).json({ ok: "true", id: newUUID });
+    } else {
+      console.log("\n \u001B[31m" + "Email already used. \n")
+      return res.status(400).json({ error: "Email already used." });
+    }
   }
   // return an invalid response if user does not exist
   return res.status(400).json({ error: "Unable to add user" });
