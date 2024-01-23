@@ -19,9 +19,6 @@ function Home({ params }) {
   if ("loading" === status) {
     return <Loading />;
   }
-  if ("authenticated" === status) {
-    return router.push("/user/userfgdf13s");
-  }
 
   return (
     <>
