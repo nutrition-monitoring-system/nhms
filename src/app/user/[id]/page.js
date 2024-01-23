@@ -15,6 +15,7 @@ function Home({ params }) {
       return router.push("/login");
     },
   });
+
   if ("loading" === status) {
     return <Loading />;
   }

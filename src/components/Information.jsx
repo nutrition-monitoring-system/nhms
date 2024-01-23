@@ -33,7 +33,7 @@ export default function Information() {
 
   return (
     <>
-      <div
+      <div5
         className="relative min-h-fit text-black grid place-content-center"
         id="information"
       >
@@ -76,7 +76,7 @@ export default function Information() {
             Start your journey towards a healthier you today!
           </p>
         </section>
-      </div>
+      </div5>
     </>
   );
 }

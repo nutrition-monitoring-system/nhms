@@ -198,16 +198,16 @@ function ChartComponent() {
         User Analytics
       </div>
       <div className="w-full flex justify-center items-center gap-3 p-2 text-center">
-        <button onClick={() => setOption(option4)} className="tile">
+        <button onClick={() => setOption(option4)} className="tile bg-primary">
           Bar chart
         </button>
-        <button onClick={() => setOption(option1)} className="tile">
+        <button onClick={() => setOption(option1)} className="tile bg-primary">
           Pie chart
         </button>
-        <button onClick={() => setOption(option2)} className="tile">
+        <button onClick={() => setOption(option2)} className="tile bg-primary">
           Line chart
         </button>
-        <button onClick={() => setOption(option3)} className="tile">
+        <button onClick={() => setOption(option3)} className="tile bg-primary">
           Bar chart
         </button>
       </div>

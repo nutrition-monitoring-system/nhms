@@ -85,8 +85,8 @@ export default function User({ handsignOut }) {
 
 function CalenderHealthInfo({ userInfo, goToPage }) {
   return (
-    <div className="calendar-health shadow-xl  flex justify-center items-center gap-4">
-      <div className="Health-info bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-xl">
+    <div className="calendar-health shadow-lg  flex justify-center items-center gap-4">
+      <div className="Health-info bg-primary rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <p>Healthy information</p>
         <p>Name: {userInfo.name}</p>
         <p>Email: {userInfo.email}</p>
@@ -94,7 +94,7 @@ function CalenderHealthInfo({ userInfo, goToPage }) {
           <FaRegAddressCard className="info-icon" />
         </div>
       </div>
-      <div className="Calendar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-xl">
+      <div className="Calendar bg-primary rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <Link
           className="calendar-text"
           href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
@@ -113,11 +113,11 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
     email: "johnSmith@gmail.com",
   };
   return (
-    <div className="shadow-xl grid grid-cols-2 gap-3 justify-center items-center px-6 py-3">
+    <div className="shadow-lg grid grid-cols-2 gap-3 justify-center items-center px-6 py-3">
       <div className="user-info bg-white p-5 flex just-center items-center gap-4">
         <div className="user-avatar relative grid justify-center p-1 min-h-fit rounded-lg">
           <Image
-            className="rounded-[50px] shadow-xl "
+            className="rounded-[50px] shadow-lg "
             width={100}
             height={100}
             id="avatar"
@@ -152,7 +152,7 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
         </div>
       </div>
       <div className="grid place-items-center ">
-        <button className="tile">
+        <button className="tile bg-primary">
           <img
             id="logout"
             src="/icons/logout.png"
@@ -175,7 +175,7 @@ function SideNavBar() {
     console.log("开始搜索：" + searchTerm);
   };
   return (
-    <div className="rounded-lg shadow-xl sidebar flex flex-col justify-start items-center p-4">
+    <div className="rounded-lg shadow-lg sidebar flex flex-col justify-start items-center p-4">
       {/* 添加搜索框 */}
 
       {/* 你的导航链接 */}
@@ -183,43 +183,43 @@ function SideNavBar() {
         <Logo></Logo>
         <Link
           href="/blog"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Blogs
         </Link>
         <Link
           href="#section2"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Plan
         </Link>
         <Link
           href="#section3"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Data Analytics
         </Link>
         <Link
           href="#section1"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Health Record Form
         </Link>
         <Link
           href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Calender Events
         </Link>
         <Link
           href="#section3"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Personal information
         </Link>
         <Link
           href="#section1"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg grid place-content-center text-center bg-primary"
         >
           Settings
         </Link>
@@ -231,8 +231,8 @@ function SideNavBar() {
 function Photo({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];
   return (
-    <div className="shadow-xl photo flex justify-center items-center gap-4">
-      <div className="relative photo-bar bg-white rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-xl">
+    <div className="shadow-lg photo flex justify-center items-center gap-4">
+      <div className="relative photo-bar bg-primary rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>initial</p>
         <FaCamera className="camera text-center" />
         {/* <img
@@ -247,7 +247,7 @@ function Photo({ photo, handlePhoto }) {
       {months.map((item, idx) => (
         <div
           key={idx}
-          className="photo-bar bg-white rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-xl"
+          className="photo-bar bg-primary rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
         >
           <p>{item}</p>
           <div>
@@ -261,12 +261,12 @@ function Photo({ photo, handlePhoto }) {
 
 function Log() {
   return (
-    <div className="shadow-xl log flex justify-center items-center gap-4">
-      <div className="log-bar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-xl">
+    <div className="shadow-lg log flex justify-center items-center gap-4">
+      <div className="log-bar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <AiOutlinePlus className="add2"></AiOutlinePlus>
         <p>log Food</p>
       </div>
-      <div className="log-bar  bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-xl">
+      <div className="log-bar  bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <AiOutlinePlus className="add2"></AiOutlinePlus>
         <p>log Water</p>
       </div>
@@ -283,11 +283,11 @@ function CreateHealthRecordForm() {
   ];
 
   return (
-    <div className="Creat shadow-xl  flex justify-center items-center gap-4">
+    <div className="Creat shadow-lg  flex justify-center items-center gap-4">
       {items.map((item, index) => (
         <div
           key={index}
-          className="Creat-back bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-xl"
+          className="Creat-back bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg"
         >
           <div className="Creat-text">{item.text}</div>
           <AiOutlinePlus className="add1" /> {/* 使用加号图标 */}
