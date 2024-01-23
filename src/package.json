@@ -10,6 +10,7 @@
     "cy:run": "npx cypress run",
     "cy:open": "npx cypress open",
     "test": "npx concurrently \"npm run dev\" \"npm run cy:run\"",
+    "testOpen": "npx concurrently \"npm run dev\" \"npm run cy:open\"",
     "database": "npx prisma generate"
   },
   "dependencies": {
