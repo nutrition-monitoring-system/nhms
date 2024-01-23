@@ -13,8 +13,8 @@ describe("Testing if a new user can log into the website.", () => {
     cy.visit(url + "/register"); // Visits the registration page
     // Fills out the registration form with new user details
     cy.get('input[name="firstName"]').type("John");
-    cy.get('input[name="lastName"]').type("John");
-    cy.get('select[name="gender"]').select("male");
+    cy.get('input[name="lastName"]').type("Smith");
+    cy.get('select[name="gender"]').select("Male");
     cy.get('input[name="date"]').type("2023-12-31");
     cy.get('input[name="email"]').type("testaccount@gmail.com");
     cy.get('input[name="password"]').type("password12345");
