@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Link from "next/link";
+import Logo from "../../components/Logo";
 export default function Page() {
   return (
     <div className="absolute inset-0 grid grid-cols-4 p-3 gap-1">
@@ -13,7 +14,7 @@ export default function Page() {
 const NavBar = () => (
   <div className="bg-black text-white rounded-lg grid grid-rows-2">
     <div className="grid place-items-center">
-      <div className="font-opensans font-black text-[2rem]">Logo</div>
+      <Logo />
       <button className="tile text-xl">
         <img src="/icons/add.png" alt="add icon" width={20} height={20} />
         <div>New Blog</div>
@@ -48,7 +49,7 @@ const MainPageNavBar = () => {
     menuItems.current.classList.toggle("slide-down");
   };
   return (
-    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-4">
+    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-3">
       <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
         Admin Dashboard
       </div>
@@ -122,8 +123,8 @@ const MainPageNavBar = () => {
 const MainPage = () => (
   <div className="col-span-3 rounded-lg p-2 flex flex-col justify-center items-center gap-1">
     <MainPageNavBar></MainPageNavBar>
-    <div className="bg-white h-full w-full grid grid-cols-3 rounded-md overflow-hidden">
-      <div className="bg-sky-400 grid grid-rows-6 place-content-center gap-3 p-4">
+    <div className="bg-white h-full w-full grid grid-cols-3 overflow-hidden p-3 gap-2 rounded-lg">
+      <div className="shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
           <img src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Frontend</div>
@@ -170,7 +171,7 @@ const MainPage = () => (
           </button>
         </div>
       </div>
-      <div className="bg-blue-500 grid grid-rows-6 place-content-center gap-3 p-4">
+      <div className="rounded-lg shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
           <img src="/icons/search.png" alt="add icon" width={20} height={20} />
           <div>Quick Search</div>

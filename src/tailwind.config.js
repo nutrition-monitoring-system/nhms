@@ -17,6 +17,7 @@ module.exports = {
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",
         primarylight: "var(--color-primary-light)",
+        secondarylight: "var(--color-secondary-light)",
         // Add more color definitions as needed
       },
       fontFamily: {

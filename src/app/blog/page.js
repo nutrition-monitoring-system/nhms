@@ -33,7 +33,7 @@ const BlogHeaderParent = () => {
 const BlogHeader = () => {
   return (
     <div className="h-screen min-h-fit relative text-black grid place-items-center font-opensans">
-      <div className="absolute flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
+      <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
           <h1
@@ -169,7 +169,8 @@ const NavBar = () => {
 
 const BlogPage = () => {
   return (
-    <div className="grid grid-cols-1 gap-5 m-auto w-[80%] min-h-screen py-5">
+    <div className="flex flex-wrap justify-center items-center gap-3 m-auto min-h-screen p-5">
+      <BlogComponent />
       <BlogComponent />
       <BlogComponent />
       <BlogComponent />
@@ -180,30 +181,28 @@ const BlogPage = () => {
 };
 
 const BlogComponent = () => {
-  const date = new Date().toDateString();
+  //const date = new Date().toDateString();
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden">
-      <div className="relative flex justify-center items-center flex-col gap-3 sm:text-center">
-        <img className="h-auto" src="/photos/food.jpeg" alt="food" />
-        <div
-          className="text-white bg-black rounded-full w-[40px] h-[40px]
-         z-10 shadow-lg grid place-items-center absolute bottom-4 right-4 font-black
-         hover:translate-x-1 hover:shadow-xl duration-100 cursor-pointer transition-all blog-information"
-        >
-          i
-        </div>
-        <h1 className="text-[2rem] font-extrabold">
-          The Power of Plant-Based diets
-        </h1>
-        <h4 className="font-bold">Unlocking health and Sustainability</h4>
-        <p className="w-1/2 sm:w-full md:w-3/4 text-center">
-          Learn how plant-based diets can boost your well-being and contribute
-          to a greener planet. Discover the benefits and practical tips for
-          embracing a more plant-focused lifestyle.
-        </p>
-        <div className="w-1/2 flex justify-between items-center gap-3">
-          <span className="text-[1.2rem] font-extrabold">Charles, Jameson</span>
-          <span className="p-3 rounded-lg">{date}</span>
+    <div className="max-w-lg mx-auto">
+      <div className="bg-primary shadow-md border border-gray-200 rounded-lg max-w-sm mb-5">
+        <a href="#">
+          <img
+            className="rounded-t-lg"
+            src="https://flowbite.com/docs/images/blog/image-1.jpg"
+            alt=""
+          />
+        </a>
+        <div className="p-5">
+          <a href="#">
+            <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
+              Noteworthy technology acquisitions 2021
+            </h5>
+          </a>
+          <p className="font-normal text-gray-700 mb-3">
+            Here are the biggest enterprise technology acquisitions of 2021 so
+            far, in reverse chronological order.
+          </p>
+          <button className="tile bg-black text-white">Read more</button>
         </div>
       </div>
     </div>
