@@ -9,7 +9,7 @@
     "lint": "next lint",
     "cy:run": "npx cypress run",
     "cy:open": "npx cypress open",
-    "test": "npx concurrently \"npm run dev\" \"npm run cy:open\"",
+    "test": "npx concurrently \"npm run dev\" \"npm run cy:run\"",
     "database": "npx prisma generate"
   },
   "dependencies": {

@@ -29,7 +29,7 @@ function Home() {
     },
   });
 
-  console.log(session);
+  /* console.log(session); */
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
