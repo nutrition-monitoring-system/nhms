@@ -1067,7 +1067,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 ></img>
                 <input
                   type="file"
-                  class="absolute inset-0 opacity-0"
+                  className="absolute inset-0 opacity-0"
                   onChange={handleUploadImage}
                 />
               </div>
