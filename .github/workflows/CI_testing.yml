@@ -38,5 +38,6 @@ jobs:
           path: |
             src/node_modules
             src/.next
-          key: ""
+          key: npm-${{ hashFiles('package-lock.json') }}
+
         
