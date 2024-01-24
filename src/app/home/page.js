@@ -1,10 +1,12 @@
 "use client";
+import Logo from "../../components/Logo";
 import Link from "next/link";
 import { useRef } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
+import Loading from "../../components/Loading";
 
 export default function Page() {
   return (
@@ -17,7 +19,7 @@ export default function Page() {
 }
 
 function Home() {
-  // initialise the router for conditional redirection
+  //initialise the router for conditional redirection
   const router = useRouter();
   // initialise the session.
   //
@@ -28,18 +30,13 @@ function Home() {
       return router.push("/login");
     },
   });
-
   /* console.log(session); */
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };
 
   if (status === "loading") {
-    return (
-      <div className="grid place-items-center absolute inset-0 font-opensans text-[30px]">
-        Loading....
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
@@ -63,7 +60,7 @@ function NavBar({ handleLogout, data }) {
   const foodRecommendation = useRef(null);
 
   let userSurname = "Kelly",
-    userId = "randomuserId",
+    userId = "userfgdf13s",
     userGender = "F";
   if (data) {
     userSurname = data.surname;
@@ -97,9 +94,7 @@ function NavBar({ handleLogout, data }) {
   return (
     <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
-        <div className="text-black font-modak text-[30px]">
-          <Link href={"/"}>nhms</Link>
-        </div>
+        <Logo></Logo>
         <div className="relative flex items-center gap-1 p-2">
           <img
             src="/icons/search.png"
@@ -133,12 +128,12 @@ function NavBar({ handleLogout, data }) {
               width={25}
               height={25}
               alt="Person icon"
-              className="ml-2 rounded-[50px] bg-primarylight"
+              className="ml-2 rounded-[50px] bg-primary"
               onClick={handleMenuclick}
             />
             <span id="usercontent" onClick={handleMenuclick}>
               <>{userGender == "M" ? "Mr." : userGender == "F" ? "Ms." : ""}</>
-              {userSurname}
+              {userSurname ? userSurname : "current user"}
             </span>
             <div
               ref={menuItems}

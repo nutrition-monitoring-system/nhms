@@ -1,15 +1,15 @@
-const WhatWeOffer = () => (
-  // WhatWeOffer
+const Offer = () => (
+  // Offer
   // This function returns more what we offer as a server and how it can benefit you.
   // <InfoCardOne /> ---------------|
   //<InfoCardTwo />  ---------------|----------- These functions just tell you what the site offers by looping through a content array and rendering the data to in the WhatWeOfferSection
   // <InfoCardThree /> -------------|
   <>
-    <div className="bg-orange-50 min-h-screen font-opensans text-black py-3">
+    <div className="bg-white min-h-screen font-opensans text-black py-3">
       <h1 className="font-extrabold text-[30px] text-center mb-7">
         What do we offer?
       </h1>
-      <div className="min-h-fit grid grid-cols-3 grid-rows-1 p-7 gap-3 bg-orange-100 sm:grid-cols-1 sm:grid-rows-3 sm:gap-4">
+      <div className="min-h-fit grid grid-cols-3 grid-rows-1 p-7 gap-3 bg-white shadow-lg sm:grid-cols-1 sm:grid-rows-3 sm:gap-4">
         <InfoCardOne />
         <InfoCardTwo />
         <InfoCardThree />
@@ -67,7 +67,7 @@ function InfoCard({ title, content }) {
     <>
       <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-1">
         <img
-          className="w-full rounded-lg shadow-lg"
+          className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
           width={100}
           alt="Sunset in the mountains"
@@ -87,4 +87,4 @@ function InfoCard({ title, content }) {
   );
 }
 
-export default WhatWeOffer;
+export default Offer;
