@@ -10,7 +10,9 @@
     "lint": "next lint",
     "cy:run": "npx cypress run",
     "cy:open": "npx cypress open",
-    "test": "npm run cy:run"
+    "test": "npx concurrently \"npm run dev\" \"npm run cy:run\"",
+    "testOpen": "npx concurrently \"npm run dev\" \"npm run cy:open\"",
+    "database": "npx prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",

@@ -30,7 +30,7 @@ function Home() {
       return router.push("/login");
     },
   });
-
+  /* console.log(session); */
   const handleLogout = () => {
     signOut({ callbackUrl: "/" });
   };

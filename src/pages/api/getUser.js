@@ -16,7 +16,7 @@ export default async function Handle(req, res) {
     if (userData.password === passwordHash) {
       return res.status(200).json({
         ok: "true",
-        id: userData.userGender,
+        id: userData.userID,
         email: email,
         surname: userData.surname,
         gender: userData.gender,
