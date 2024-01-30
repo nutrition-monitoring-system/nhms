@@ -13,8 +13,13 @@ const Footer = () => (
           <Link href="">About</Link>
           <Link href="">Help</Link>
           <Link href="">Contact</Link>
+<<<<<<< HEAD
           <Link href="docs/TermsAndConditions.html">Terms</Link>
           <Link href="">Privacy</Link>
+=======
+          <Link href="TermsAndConditions.html">Terms</Link>
+          <Link href="PrivacyPolicy.html">Privacy</Link>
+>>>>>>> f1076f5b2d929a91b32398d02809ffd27d2a0428
           <Link href="">Settings</Link>
           <Link href="">FAQ</Link>
         </div>
