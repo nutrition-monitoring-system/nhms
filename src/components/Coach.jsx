@@ -3,9 +3,9 @@ const Coach = () => {
   // It tells the user about who the Coach is
   return (
     <>
-      <div className="min-h-screen bg-white grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">
+      <div className="sm:secondary min-h-fit h-screen bg-white grid grid-cols-2 grid-rows-1">
         <div className="relative row-span-2 col-span-2 p-2 md:row-span-1">
-          <div className="w-[98%] m-auto h-full rounded-lg shadow-xl bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
+          <ImagePart />
           <InfoPart />
         </div>
       </div>
@@ -13,13 +13,18 @@ const Coach = () => {
   );
 };
 
+function ImagePart() {
+  return (
+    <div className="w-[98%] sm:w-full m-auto h-full rounded-lg shadow-xl bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
+  );
+}
 function InfoPart() {
   return (
     <div
-      className="absolute top-1 right-10 w-1/2 h-full sm:rounded-none text-center
-    text-md text-black font-opensans rounded-lg flex justify-center items-center flex-col gap-4 py-2 px-6"
+      className="absolute top-1 right-10 w-1/2 sm:w-full sm:text-center sm:text-sm sm:inset-0 h-full sm:rounded-none text-center
+    text-md text-black font-opensans rounded-lg flex justify-center items-center flex-col gap-4 sm:gap-2 py-2 px-6"
     >
-      <p className="py-3 shadow-sm text-lg">
+      <p className="py-3 shadow-sm text-lg sm:text-md sm:backdrop-blur-sm rounded-lg">
         <strong className="font-extrabold">Dr. Monika Gostic</strong> is a
         nutrition coach, scientist, lecturer, and mother. She helps people with
         chronic health issues find the root causes and solutions that suit their
