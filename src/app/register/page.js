@@ -1,14 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../components/Button.jsx";
-import {
-  PersonalInformation,
-  FoodCategories,
-  Allergies,
-  ChronicConditions,
-  DailyIntake,
-  Accessibility,
-} from "../../components/MultiForm.jsx";
+
+import PersonalInformation from "../../components/PersonalInformation.jsx";
+import FoodCategories from "../../components/FoodCategories.jsx";
+import Allergies from "../../components/Allergies.jsx";
+import ChronicConditions from "../../components/ChronicConditions.jsx";
+import DailyIntake from "../../components/DailyIntake.jsx";
+import Accessibility from "../../components/Accessibility.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
