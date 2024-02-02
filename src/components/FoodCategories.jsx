@@ -143,7 +143,7 @@ export default function FoodCategories({
             onSubmit={(e) => e.preventDefault()}
           />
         </div>
-        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+        <div className="min-h-fit rounded-md flex flex-wrap justify-center items-center gap-2 w-full">
           <button
             className="tile bg-secondary"
             ref={noneButtonRef}

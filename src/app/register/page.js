@@ -1,13 +1,14 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Button from "../../components/Button.jsx";
 
+import Button from "../../components/Button.jsx";
 import PersonalInformation from "../../components/PersonalInformation.jsx";
 import FoodCategories from "../../components/FoodCategories.jsx";
 import Allergies from "../../components/Allergies.jsx";
 import ChronicConditions from "../../components/ChronicConditions.jsx";
 import DailyIntake from "../../components/DailyIntake.jsx";
 import Accessibility from "../../components/Accessibility.jsx";
+import TermsAndConditions from "../../components/TermsAndConditions.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
@@ -89,7 +90,7 @@ export default function Home() {
   };
   // Function to handle next button click
   const handleNextClick = (e) => {
-    const numberOFSubForms = 5;
+    const numberOFSubForms = 6;
     e.preventDefault();
     if (index >= numberOFSubForms) {
       return;
@@ -158,6 +159,7 @@ export default function Home() {
       setNextButtonOpacity("0");
     }
   };
+  const handleTermsAndConditions = () => {};
   // useEffect to handle changes in errors and submitSuccess states
   useEffect(() => {
     // If there are form errors, reset to the initial step
@@ -229,11 +231,17 @@ export default function Home() {
             >
               6
             </button>
+            <button
+              className="rounded-xl opacity-80 btn-six"
+              onClick={(event) => handleNavclick(event, 6)}
+            >
+              7
+            </button>
           </div>
           <div className="w-[55%] xl:w-[40%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
               id="chageTranslte"
-              className="flex transition-transform duration-200 min-h-fit"
+              className="flex transition-transform duration-200 min-h-fit bg-yellow-500"
               style={{ transform: `translateX(${index * -100}%)` }}
             >
               <PersonalInformation
@@ -264,6 +272,10 @@ export default function Home() {
                 onClick={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
+              />
+              <TermsAndConditions
+                onClick={handleNextClick}
+                onClickPrev={handleClickPrev}
               />
               <DailyIntake
                 onClickPrev={handleClickPrev}

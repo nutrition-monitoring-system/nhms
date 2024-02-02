@@ -76,7 +76,7 @@ const NavBar = () => {
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <Logo></Logo>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-          <div className="mx-4">
+          <div className="mx-4 sm:hidden">
             <Link href="/">Home</Link>
           </div>
           <div className="mx-4">

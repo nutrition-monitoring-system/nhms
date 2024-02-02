@@ -32,7 +32,10 @@ export default function Information() {
 
   return (
     <>
-      <div className="sm:grid place-items-center hidden h-screen w-full text-lg p-3 text-center">
+      <div
+        className="sm:grid place-items-center hidden h-screen w-full text-lg p-3 text-center"
+        id="information"
+      >
         Welcome to the future of nutrition management!Our web application is
         your key to a healthier, more informed lifestyle Dive into a world of
         personalized nutrition with smart insights, tailored recommendations,

@@ -9,7 +9,7 @@ const Offer = () => (
       <h1 className="font-extrabold text-[30px] text-center mb-7">
         What do we offer?
       </h1>
-      <div className="min-h-fit grid grid-cols-3 grid-rows-1 p-7 gap-3 bg-white shadow-lg sm:grid-cols-1 sm:grid-rows-3 sm:gap-4">
+      <div className="min-h-fit grid grid-cols-3 grid-rows-1 p-7 gap-3 bg-white sm:grid-cols-1 sm:grid-rows-3 sm:gap-4">
         <InfoCardOne />
         <InfoCardTwo />
         <InfoCardThree />

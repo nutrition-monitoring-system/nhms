@@ -3,7 +3,10 @@ const Coach = () => {
   // It tells the user about who the Coach is
   return (
     <>
-      <div className="sm:secondary min-h-fit h-screen bg-white grid grid-cols-2 grid-rows-1">
+      <div
+        id="about"
+        className="sm:secondary min-h-fit h-screen bg-white grid grid-cols-2 grid-rows-1"
+      >
         <div className="relative row-span-2 col-span-2 p-2 md:row-span-1">
           <ImagePart />
           <InfoPart />

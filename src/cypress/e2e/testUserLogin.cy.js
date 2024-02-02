@@ -1,11 +1,31 @@
 // This describes a test suite for checking new user registration and login
 describe("Testing if a new user can log into the website.", () => {
   let url = Cypress.config("baseUrl");
+  process.env.DATABASE_URL =
+    "postgres://nhms_postgres_database_user:XyHHVEidZSyysVY3bJLtirySMUdBG6vE@dpg-clkecmsjtl8s73bbs0m0-a.oregon-postgres.render.com/nhms_postgres_database";
   // Test case for navigating to the base URL and scrolling the view
-  it("passes", () => {
+  it("visits the base URL and scrolls to the center of the page.", () => {
     cy.visit(url); // Visits the base URL
     cy.scrollTo("center"); // Scrolls to the center of the page
     cy.scrollTo("bottom", { duration: 1000 }); // Scrolls to the bottom over 1 second
+  });
+
+  // Test case for user login and interaction with the home page
+  it("visits the login page and logs in.", () => {
+    cy.visit(url + "/login");
+    // Logs in with the registered user credentials
+    cy.get('input[name="email"]').type("testaccount@gmail.com");
+    cy.get('input[name="password"]').type("password12345");
+    cy.get("#handleLogin").click();
+    cy.wait(3000);
+    cy.visit(url + "/home");
+
+    // Interactions with the home page, searching and navigating tabs
+    cy.get("#search").click();
+    // User logout process
+    cy.get("#usercontent").click();
+    cy.get("#Logout").click();
+    cy.url().should("include", "");
   });
 
   // Test case for registering a new account
@@ -88,22 +108,5 @@ describe("Testing if a new user can log into the website.", () => {
       .then(() => {
         cy.visit(url + "/login");
       });
-  });
-  // Test case for user login and interaction with the home page
-  it("home", () => {
-    cy.visit(url + "/login");
-    // Logs in with the registered user credentials
-    cy.get('input[name="email"]').type("testaccount@gmail.com");
-    cy.get('input[name="password"]').type("password12345");
-    cy.get("#handleLogin").click();
-    cy.wait(3000);
-    cy.visit(url + "/home");
-
-    // Interactions with the home page, searching and navigating tabs
-    cy.get("#search").click();
-    // User logout process
-    cy.get("#usercontent").click();
-    cy.get("#Logout").click();
-    cy.url().should("include", "");
   });
 });
