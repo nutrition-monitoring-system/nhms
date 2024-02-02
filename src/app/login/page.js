@@ -165,7 +165,7 @@ function Home() {
               </div>
             </div>
           </form>
-          <dialog
+          {/* <dialog
             ref={modal}
             className="p-3 focus:outline-none rounded-md backdrop-blur-3xl"
           >
@@ -209,7 +209,7 @@ function Home() {
                 <Button onClick={handleClose}>close</Button>
               </div>
             </form>
-          </dialog>
+          </dialog> */}
         </div>
       </div>
       ;
