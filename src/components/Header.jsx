@@ -1,6 +1,7 @@
 "use client";
 import Logo from "../components/Logo";
 import Link from "next/link";
+import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import { useRef } from "react";
@@ -9,14 +10,14 @@ export default function Header() {
 
   //This are png icons for making the site look more attractive
   const headerIcons = [
-    "/headerIcons/dish.png",
-    "/headerIcons/drink.png",
-    "/headerIcons/hamburger.png ",
-    "/headerIcons/healthy-food.png ",
-    "/headerIcons/recipe.png ",
-    "/headerIcons/hamburger.png ",
-    "/headerIcons/healthy-food.png ",
-    "/headerIcons/recipe.png ",
+    "/icons/headerIcons/dish.png",
+    "/icons/headerIcons/drink.png",
+    "/icons/headerIcons/hamburger.png ",
+    "/icons/headerIcons/healthy-food.png ",
+    "/icons/headerIcons/recipe.png ",
+    "/icons/headerIcons/hamburger.png ",
+    "/icons/headerIcons/healthy-food.png ",
+    "/icons/headerIcons/recipe.png ",
   ];
 
   // This section is wrapped by a SessionProvider component for accessing session variables
@@ -49,7 +50,7 @@ export default function Header() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    <ImageIcon href={null} src={iconUrl} />
+                    <Image href={null} src={iconUrl} width={30} height={30} alt="decorative icons" />
                   </div>
                 );
               })}
@@ -96,10 +97,10 @@ function NavBar() {
           <div className="mx-4">
             <Link href="/blog">Blog</Link>
           </div>
-          <button className="tile">
+          <button className="tile ring-white hover:ring-secondary ring-2">
             <Link href="/login">Login</Link>
           </button>
-          <button className="tile">
+          <button className="tile ring-white hover:ring-secondary ring-2">
             <Link href="/register">Register</Link>
           </button>
         </div>
@@ -117,7 +118,7 @@ function NavBar() {
           <Link href="/blog">Blog</Link>
         </div>
         <div className="tile relative z-10 flex justify-around items-center gap-3">
-          <img
+          <Image
             src="/icons/man.png"
             width={25}
             height={25}
@@ -133,7 +134,7 @@ function NavBar() {
           >
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/account.png"
                 alt="Settings icon"
                 width={20}
@@ -143,7 +144,7 @@ function NavBar() {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/settings.png"
                 alt="Settings icon"
                 width={20}
@@ -153,7 +154,7 @@ function NavBar() {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/translate.png"
                 alt="Language/translate icon"
                 width={20}
@@ -166,7 +167,7 @@ function NavBar() {
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               {" "}
-              <img
+              <Image
                 src="/icons/logout.png"
                 alt="Logout icon"
                 width={20}
@@ -188,19 +189,22 @@ function ImageIcon({ href, src }) {
       {href ? (
         <Link href={href}>
           {" "}
-          <img
+          <Image
             className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
             src={"/icons/" + src}
             width={30}
             height={30}
+            alt="Image icon with link."
+
           />
         </Link>
       ) : (
-        <img
-          className="shadow-xl"
+        <Image
+          className="shadow-xl h-30"
           src={"/icons/" + src}
           width={30}
           height={30}
+          alt="Image icon without link."
         />
       )}
     </>

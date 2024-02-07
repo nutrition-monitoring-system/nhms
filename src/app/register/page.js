@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Button from "../../components/Button.jsx";
 import {
   PersonalInformation,
@@ -170,11 +171,12 @@ export default function Home() {
         ref={loadingRef}
         className="bg-none bg-transparent outline-none border-none overflow-hidden min-h-fit min-w-fit"
       >
-        <img
+        <Image
           src="/icons/loading.png"
           width={80}
           height={80}
-          className="animate-spin "
+          className="animate-spin"
+          alt="loading spinner"
         />
         <div className="font-semibold">loading...</div>
       </dialog>

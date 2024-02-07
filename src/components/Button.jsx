@@ -13,7 +13,7 @@ export default function Button({ children, href, onClick, type, className }) {
         type={type}
         className={
           `min-w-fit grid place-items-center rounded-md
-            bg-white px-8 py-3 text-sm text-black
+            bg-white ring-white ring-2 hover:ring-secondary px-8 py-3 text-sm text-black
             shadow-xl transition-all duration-200 ease-in
             hover:shadow-2xl` + className
         }

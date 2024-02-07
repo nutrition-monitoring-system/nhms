@@ -1,6 +1,8 @@
 "use client";
 import { useRef } from "react";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import Logo from "../../components/Logo";
 export default function Page() {
   return (
@@ -16,15 +18,15 @@ const NavBar = () => (
     <div className="grid place-items-center">
       <Logo />
       <button className="tile text-xl">
-        <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+        <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
         <div>New Blog</div>
       </button>
       <button className="tile text-xl">
-        <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+        <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
         <div>New Article</div>
       </button>
       <button className="tile text-xl">
-        <img
+        <Image
           src="/icons/settings.png"
           alt="Settings icon"
           width={20}
@@ -35,7 +37,7 @@ const NavBar = () => (
     </div>
     <div className="grid place-items-center">
       <button className="tile text-lg">
-        <img src="/icons/logout.png" alt="Logout icon" width={20} height={20} />
+        <Image src="/icons/logout.png" alt="Logout icon" width={20} height={20} />
         <div>Logout</div>
       </button>
     </div>
@@ -58,7 +60,7 @@ const MainPageNavBar = () => {
           onClick={handleMenuclick}
           className="tile relative z-10 flex justify-around items-center gap-3 select-none"
         >
-          <img
+          <Image
             src="/icons/woman.png"
             width={25}
             height={25}
@@ -72,7 +74,7 @@ const MainPageNavBar = () => {
              shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
           >
             <div className="tile grid grid-cols-4">
-              <img
+              <Image
                 src="/icons/account.png"
                 alt="Settings icon"
                 width={20}
@@ -82,7 +84,7 @@ const MainPageNavBar = () => {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/settings.png"
                 alt="Settings icon"
                 width={20}
@@ -92,7 +94,7 @@ const MainPageNavBar = () => {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/translate.png"
                 alt="Language/translate icon"
                 width={20}
@@ -105,7 +107,7 @@ const MainPageNavBar = () => {
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               {" "}
-              <img
+              <Image
                 src="/icons/logout.png"
                 alt="Logout icon"
                 width={20}
@@ -126,23 +128,23 @@ const MainPage = () => (
     <div className="bg-white h-full w-full grid grid-cols-3 overflow-hidden p-3 gap-2 rounded-lg">
       <div className="shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Frontend</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Frontend Customisation</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Mobile app</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>System Diagnostics</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Permissions Access</div>
         </button>
       </div>
@@ -162,34 +164,34 @@ const MainPage = () => (
         </div>
         <div className="bg-black rounded-md col-span-2 grid place-items-center py-2">
           <button className="tile text-lg">
-            <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+            <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
             <div>User Analytics</div>
           </button>
           <button className="tile text-lg">
-            <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+            <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
             <div>User Information</div>
           </button>
         </div>
       </div>
       <div className="rounded-lg shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
-          <img src="/icons/search.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/search.png" alt="add icon" width={20} height={20} />
           <div>Quick Search</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Blogs</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Articles</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>User Information</div>
         </button>
         <button className="tile text-lg">
-          <img src="/icons/add.png" alt="add icon" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>User Feedback</div>
         </button>
       </div>

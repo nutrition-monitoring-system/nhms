@@ -1,6 +1,7 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 // personal information
 export function PersonalInformation({ onClick, formValidation, resetIndex }) {
@@ -56,7 +57,7 @@ export function PersonalInformation({ onClick, formValidation, resetIndex }) {
         </div>
         <div className="relative h-fit py-7 shadow-sm rounded-lg">
           <select
-            {...register("gender", { required: "Gender is required" })} //making sure the user types the right dataype
+            {...register("gender", { required: "Gender is required" })} //making sure the user types the right datatype
             className="absolute inset-0"
           >
             <option className="opacity-70 font-semibold" value="">
@@ -245,7 +246,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
           Dietary Restrictions?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -261,7 +262,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
             ref={noneButtonRef}
             onClick={(event) => handleNone(event)}
           >
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -281,7 +282,7 @@ export function FoodCategories({ onClick, onClickPrev, handleCollectData }) {
                     ref={(element) => (FoodTypeRefs.current[idx] = element)}
                     onClick={() => handleOptionClick(idx)}
                   >
-                    <img
+                    <Image
                       onClick={(e) =>
                         handleModalclick(e, food?.type, food?.description)
                       }
@@ -424,7 +425,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
           Any Allergies?
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -440,7 +441,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -457,7 +458,7 @@ export function Allergies({ onClick, onClickPrev, handleCollectData }) {
                   ref={(element) => (AllergyRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
-                  <img
+                  <Image
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -612,7 +613,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
           Chronic Conditions
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text conditions"
             placeholder="Type to add or search"
@@ -628,7 +629,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="add icon"
@@ -645,7 +646,7 @@ export function ChronicConditions({ onClick, onClickPrev, handleCollectData }) {
                   ref={(element) => (ConditionRefs.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
-                  <img
+                  <Image
                     onClick={(event) =>
                       handleModalclick(
                         event,
@@ -752,7 +753,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
           Accessibility Settings
         </h1>
         <div className="relative flex items-center gap-1 p-2">
-          <img src="/icons/add.png" alt="add symbol" width={20} height={20} />
+          <Image src="/icons/add.png" alt="add symbol" width={20} height={20} />
           <input
             type="text"
             placeholder="Type to add or search"
@@ -765,7 +766,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
             onClick={handleNone}
             ref={noneButtonRef}
           >
-            <img
+            <Image
               src="/icons/add.png"
               className="rotate-45"
               alt="go full screen icon"
@@ -782,7 +783,7 @@ export function Accessibility({ onClick, onClickPrev, handleCollectData }) {
                   ref={(element) => (SettingsRef.current[idx] = element)}
                   onClick={() => handleOptionClick(idx)}
                 >
-                  <img
+                  <Image
                     src={setting?.src}
                     alt={setting?.alt}
                     width={20}
@@ -997,34 +998,34 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "breakfast")}
               >
-                <img
+                <Image
                   src={"/icons/add.png"}
                   alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></img>
+                />
               </div>
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "lunch")}
               >
-                <img
+                <Image
                   src={"/icons/add.png"}
                   alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></img>
+                />
               </div>
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={(event) => handleAddClick(event, "dinner")}
               >
-                <img
+                <Image
                   src={"/icons/add.png"}
                   alt={"Add img icon"}
                   width={20}
                   height={20}
-                ></img>
+                />
               </div>
             </div>
           </div>
@@ -1041,12 +1042,12 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   event.preventDefault() && moodModal.current.showModal()
                 }
               >
-                <img
+                <Image
                   src={"/icons/mood.png"}
                   alt={"Mood icon"}
                   width={40}
                   height={40}
-                ></img>
+                />
               </div>
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
@@ -1054,20 +1055,20 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                   event.preventDefault() && exerciseModal.current.showModal()
                 }
               >
-                <img
+                <Image
                   src={"/icons/workout.png"}
                   alt={"workout icon"}
                   width={40}
                   height={40}
-                ></img>
+                />
               </div>
               <div className="relative aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]">
-                <img
+                <Image
                   src={uploadImageUrl}
                   alt={"Add img icon"}
                   width={30}
                   height={30}
-                ></img>
+                />
                 <input
                   type="file"
                   className="absolute inset-0 opacity-0"
@@ -1082,7 +1083,7 @@ export function DailyIntake({ onClickPrev, handleSubmit }) {
                 return (
                   <div key={idx}>
                     <div className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg flex justify-center items-center text-center p-2 cursor-pointer">
-                      <img src="/icons/headerIcons/hamburger.png" />
+                      <Image src="/icons/headerIcons/hamburger.png"  alt="Hamburger Icon." width={30} height={30}/>
                     </div>
                   </div>
                 );
