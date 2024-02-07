@@ -153,7 +153,7 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
       </div>
       <div className="grid place-items-center ">
         <button className="tile bg-primary">
-          <img
+          <Image
             id="logout"
             src="/icons/logout.png"
             alt="user-logout"

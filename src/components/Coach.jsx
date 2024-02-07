@@ -31,8 +31,8 @@ function InfoPart() {
         90-day plan, a power hour, and daily meal plans.
       </p>
       <p className="shadow-lg bg-white rounded-lg p-4">
-        Whether you're scheduling appointments or seeking diet recommendations,
-        Dr. Gostic's expertise in Microbiology, Genetics, Cancer research,
+        Whether you&apos;re scheduling appointments or seeking diet recommendations,
+        Dr. Gostic&apos;s expertise in Microbiology, Genetics, Cancer research,
         Nutrition, Sports Nutrition, Mental health, and Coaching ensures you
         receive the most effective and scientifically-backed advice.
       </p>

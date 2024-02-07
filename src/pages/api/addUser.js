@@ -54,7 +54,7 @@ export default async function handler(req, res) {
       // return a valid response
       return res.status(200).json({ ok: "true", id: newUUID });
     } else {
-      console.log("\n \u001B[31m" + "Email already used. \n")
+      console.log("\n \u001B[31m" + "Email already used. \n");
       return res.status(400).json({ error: "Email already used." });
     }
   }

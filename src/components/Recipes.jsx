@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Recipes() {
   const [recipesList, setRecipeList] = useState([]);
@@ -43,14 +44,14 @@ function RecipeInfo({ recipe }) {
         <div className="">
           <div className="text-sm bg-rose-100 shadow-lg grid place-items-center p-2 rounded-md">
             <div className="flex justify-around items-center w-full">
-              <img
+              <Image
                 src="/icons/info.png"
                 alt="information icon"
                 width={30}
                 height={30}
                 className="bg-white rounded-[50px] p-1"
               />
-              <img
+              <Image
                 src="/icons/add.png"
                 alt="Add icon"
                 width={30}

@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
@@ -78,7 +79,6 @@ function Home() {
       // Sign-in was successful
       router.push("/home");
       return alert("Invalid LogIn details! Please try again.");
-
     }
 
     // Sign-in was successful
@@ -102,17 +102,19 @@ function Home() {
           <Button href={"/register"}>Sign up Now</Button>
         </div>
         <div className="col-span-3 text-black flex flex-col justify-center items-center gap-7 sm:gap-4 sm:row-span-2 relative">
-          <img
+          <Image
             src={"/icons/fruits.png"}
             width={100}
             height={100}
             className="absolute top-3 left-10 z-0 sm:hidden"
+            alt="fruit icon"
           />
-          <img
+          <Image
             src={"/icons/fruits.png"}
             width={100}
             height={100}
             className="absolute top-3 right-10 z-0 sm:top-[-4rem] sm:right-3"
+            alt="fruit icon 2"
           />
           <h1 className="font-black text-[40px] h-fit font-modak text-center w-1/2 sm:w-3/4 sm:text-[35px] relative z-10">
             Login To Your Account
@@ -122,7 +124,12 @@ function Home() {
             onSubmit={handleSubmit(submitForm)}
           >
             <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
-              <img src={"/icons/email.png"} width={35} height={35} />
+              <Image
+                src={"/icons/email.png"}
+                width={35}
+                height={35}
+                alt="email icon"
+              />
               <input
                 {...register("email", { required: true })}
                 type="text"
@@ -135,7 +142,12 @@ function Home() {
               <p className="text-rose-600 text-sm">{errors.email?.message}</p>
             )}
             <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
-              <img src={"/icons/password.png"} width={35} height={35} />
+              <Image
+                src={"/icons/password.png"}
+                width={35}
+                height={35}
+                alt="password icon"
+              />
               <input
                 {...register("password", { required: true })}
                 type={"password"}
@@ -165,7 +177,7 @@ function Home() {
               </div>
             </div>
           </form>
-          <dialog
+          {/* <dialog
             ref={modal}
             className="p-3 focus:outline-none rounded-md backdrop-blur-3xl"
           >
@@ -209,7 +221,7 @@ function Home() {
                 <Button onClick={handleClose}>close</Button>
               </div>
             </form>
-          </dialog>
+          </dialog> */}
         </div>
       </div>
       ;

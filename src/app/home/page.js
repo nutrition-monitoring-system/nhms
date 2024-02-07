@@ -1,6 +1,7 @@
 "use client";
 import Logo from "../../components/Logo";
 import Link from "next/link";
+import Image from "next/image"
 import { useRef } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
@@ -96,7 +97,7 @@ function NavBar({ handleLogout, data }) {
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <Logo></Logo>
         <div className="relative flex items-center gap-1 p-2">
-          <img
+          <Image
             src="/icons/search.png"
             className="mr-3"
             alt="search icon"
@@ -113,7 +114,7 @@ function NavBar({ handleLogout, data }) {
         </div>
         <div className="flex justify-center items-center gap-2">
           <div className="tile flex justify-around items-center">
-            <img
+            <Image
               src="/icons/shopping.png"
               width={25}
               height={25}
@@ -123,7 +124,7 @@ function NavBar({ handleLogout, data }) {
             <span>Basket</span>
           </div>
           <div className="tile relative z-10 flex justify-around items-center gap-3">
-            <img
+            <Image
               src={userGender === "M" ? "/icons/man.png" : "/icons/woman.png"}
               width={25}
               height={25}
@@ -142,7 +143,7 @@ function NavBar({ handleLogout, data }) {
             >
               <div className="tile grid grid-cols-4">
                 {" "}
-                <img
+                <Image
                   src="/icons/account.png"
                   alt="Settings icon"
                   width={20}
@@ -152,7 +153,7 @@ function NavBar({ handleLogout, data }) {
               </div>
               <div className="tile grid grid-cols-4">
                 {" "}
-                <img
+                <Image
                   src="/icons/settings.png"
                   alt="Settings icon"
                   width={20}
@@ -162,7 +163,7 @@ function NavBar({ handleLogout, data }) {
               </div>
               <div className="tile grid grid-cols-4">
                 {" "}
-                <img
+                <Image
                   src="/icons/translate.png"
                   alt="Language/translate icon"
                   width={20}
@@ -172,7 +173,7 @@ function NavBar({ handleLogout, data }) {
               </div>
               <div className="tile grid grid-cols-4" onClick={handleLogout}>
                 {" "}
-                <img
+                <Image
                   src="/icons/logout.png"
                   alt="Logout icon"
                   width={20}

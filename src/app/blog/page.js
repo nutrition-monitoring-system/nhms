@@ -5,6 +5,7 @@ import Logo from "../../components/Logo";
 import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRef } from "react";
 // export const metadata = {
 //   title: "Blog",
@@ -48,7 +49,7 @@ const BlogHeader = () => {
             healthier you today!`
           </div>
           <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">
-            <img src="icons/blog2.png" alt="blog" width={50} height={50} />
+            <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
           </div>
         </div>
       </div>
@@ -103,7 +104,7 @@ const NavBar = () => {
           <Link href="/login">Recipes</Link>
         </div>
         <div className="tile relative z-10 flex justify-around items-center gap-3">
-          <img
+          <Image
             src="/icons/man.png"
             width={25}
             height={25}
@@ -119,7 +120,7 @@ const NavBar = () => {
           >
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/account.png"
                 alt="Settings icon"
                 width={20}
@@ -129,7 +130,7 @@ const NavBar = () => {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/settings.png"
                 alt="Settings icon"
                 width={20}
@@ -139,7 +140,7 @@ const NavBar = () => {
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
-              <img
+              <Image
                 src="/icons/translate.png"
                 alt="Language/translate icon"
                 width={20}
@@ -152,7 +153,7 @@ const NavBar = () => {
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               {" "}
-              <img
+              <Image
                 src="/icons/logout.png"
                 alt="Logout icon"
                 width={20}
@@ -186,9 +187,11 @@ const BlogComponent = () => {
     <div className="max-w-lg mx-auto">
       <div className="bg-primary shadow-md border border-gray-200 rounded-lg max-w-sm mb-5">
         <a href="#">
-          <img
+          <Image
             className="rounded-t-lg"
             src="https://flowbite.com/docs/images/blog/image-1.jpg"
+            width={600}
+            height={300}
             alt=""
           />
         </a>

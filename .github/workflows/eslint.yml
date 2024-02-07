@@ -1,0 +1,36 @@
+# This is a basic workflow that is manually triggered
+
+name: Linting Workflow
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on: [workflow_dispatch, push]
+    # Inputs the workflow accepts.
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4.0.1
+        with:
+            node-version: '>=16.0.0'
+      - name: Move into the source directory, install all the required packages & start the server.
+        run: |
+          cd src
+          npm install -y
+      - name: Run the linter command.
+        run: |
+         cd src
+         npx next lint
+      - name: Cache
+        uses: actions/cache@v3.3.2
+        with:
+          path: |
+            src/node_modules
+            src/.next
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+        

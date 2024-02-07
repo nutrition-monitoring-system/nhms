@@ -1,3 +1,4 @@
+import Image from "next/image"
 const Offer = () => (
   // Offer
   // This function returns more what we offer as a server and how it can benefit you.
@@ -66,10 +67,11 @@ function InfoCard({ title, content }) {
   return (
     <>
       <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-1">
-        <img
+        <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
-          width={100}
+          width={500}
+          height={300}
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
