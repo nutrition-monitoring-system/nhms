@@ -22,7 +22,7 @@ module.exports = {
       },
       fontFamily: {
         opensans: ["Open Sans", "sans-serif"],
-        modak: ["Open Sans", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
       screens: {
         xl: { min: "1300px" },
