@@ -25,9 +25,9 @@ export default function Header() {
   return (
     <SessionProvider>
       <div className="h-screen min-h-fit relative bg-white text-black grid place-items-center font-opensans">
-        <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%] md:h-full">
+        <div className="absolute bg-primary flex justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%] sm:h-[50%] md:h-full">
           <NavBar></NavBar>
-          <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
+          <div className="text-center grid place-items-center sm:flex sm:flex-col sm:gap-7 sm:py-5 min-h-fit h-full p-2 translate-y-[-50px] animate-enter">
             <h1
               className="text-[50px] w-3/4 font-black
             sm:text-[35px] sm:w-full xl:text-[70px] xl:w-[80%]"
@@ -91,7 +91,7 @@ function NavBar() {
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <Logo></Logo>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-          <div className="mx-4">
+          <div className="mx-4 sm:hidden">
             <Link href="/home">Recipes</Link>
           </div>
           <div className="mx-4">
