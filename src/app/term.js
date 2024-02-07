@@ -27,7 +27,8 @@ const TermsAndConditions = () => {
   };
 
   const word = {
-    margin:'20px'
+    margin:'20px',
+    
   }
   const word1 = {
     FontSize: '16px'
