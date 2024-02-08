@@ -1,4 +1,12 @@
-export default function Button({ children, href, onClick, type, className }) {
+export default function Button({
+  children,
+  href,
+  onClick = (e) => {
+    e.preventDefault();
+  },
+  type,
+  className,
+}) {
   // This function returns a button wrapped with a div that gives the functionality of both elements
   // Params:
   // - children (string): The text to be displayed on the button.

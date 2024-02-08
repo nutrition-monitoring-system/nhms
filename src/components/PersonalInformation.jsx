@@ -1,6 +1,7 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 export default function PersonalInformation({
   onClick,
@@ -112,8 +113,18 @@ export default function PersonalInformation({
           {/* Displaying the error message*/}
           {errors.confirmPassword?.message}
         </p>
-        <div className="grid place-items-center" id="RestrictionsNext">
-          <Button onClick={handleSubmit(onClick)}>Next</Button>
+        <div
+          className="grid grid-cols-2 place-items-center"
+          id="RestrictionsNext"
+        >
+          <div>
+            <Link href={"/"} className="tile px-8 py-3 ">
+              Back
+            </Link>
+          </div>
+          <div>
+            <Button onClick={handleSubmit(onClick)}>Next</Button>
+          </div>
         </div>
       </div>
     </>
