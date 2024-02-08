@@ -44,6 +44,8 @@
 
 --- 
 
+NHMS is an easy to use web-based application where users are able to simply log in their nutrition choices, liquids, exercise, mood, energy levels, menstrual cycle and other symptoms that relate to chronic conditions.
+
 ---
 
 ## 📦 Features
