@@ -12,12 +12,12 @@ export default function Header() {
   const headerIcons = [
     "/icons/headerIcons/dish.png",
     "/icons/headerIcons/drink.png",
-    "/icons/headerIcons/hamburger.png",
-    "/icons/headerIcons/healthy-food.png",
-    "/icons/headerIcons/recipe.png",
-    "/icons/headerIcons/hamburger.png",
-    "/icons/headerIcons/healthy-food.png",
-    "/icons/headerIcons/recipe.png",
+    "/icons/headerIcons/hamburger.png ",
+    "/icons/headerIcons/healthy-food.png ",
+    "/icons/headerIcons/recipe.png ",
+    "/icons/headerIcons/hamburger.png ",
+    "/icons/headerIcons/healthy-food.png ",
+    "/icons/headerIcons/recipe.png ",
   ];
 
   // This section is wrapped by a SessionProvider component for accessing session variables
@@ -50,7 +50,7 @@ export default function Header() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    <Image src={iconUrl} width={30} height={30} alt="decorative icons" />
+                    <Image href={null} src={iconUrl} width={30} height={30} alt="decorative icons" />
                   </div>
                 );
               })}
