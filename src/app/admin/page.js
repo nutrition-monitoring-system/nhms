@@ -6,7 +6,7 @@ import Image from "next/image";
 import Logo from "../../components/Logo";
 export default function Page() {
   return (
-    <div className="absolute inset-0 grid grid-cols-4 p-3 gap-1">
+    <div className="w-screen h-screen flex">
       <NavBar />
       <MainPage />
     </div>
@@ -14,7 +14,7 @@ export default function Page() {
 }
 
 const NavBar = () => (
-  <div className="bg-black text-white rounded-lg grid grid-rows-2">
+  <div className="bg-black text-white grid grid-rows-2 w-[22%] xl:w-[18%]">
     <div className="grid place-items-center">
       <Logo />
       <button className="tile text-xl">
@@ -37,7 +37,12 @@ const NavBar = () => (
     </div>
     <div className="grid place-items-center">
       <button className="tile text-lg">
-        <Image src="/icons/logout.png" alt="Logout icon" width={20} height={20} />
+        <Image
+          src="/icons/logout.png"
+          alt="Logout icon"
+          width={20}
+          height={20}
+        />
         <div>Logout</div>
       </button>
     </div>
@@ -51,14 +56,15 @@ const MainPageNavBar = () => {
     menuItems.current.classList.toggle("slide-down");
   };
   return (
-    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 rounded-md px-3">
+    <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 px-3">
       <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
         Admin Dashboard
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
         <div
           onClick={handleMenuclick}
-          className="tile relative z-10 flex justify-around items-center gap-3 select-none"
+          className="relative z-10 flex justify-around items-center gap-3 select-none
+          before:absolute before:top-[95%] before:h-1 before:w-full before:translate-x-[-100%] before:rounded-md before:hover:bg-gray-200 before:hover:translate-x-0 before:transition-all before:duration-300"
         >
           <Image
             src="/icons/woman.png"
@@ -67,7 +73,7 @@ const MainPageNavBar = () => {
             alt="Person icon"
             className="ml-2 rounded-[50px]"
           />
-          <span>Dr. Monika</span>
+          <span className="shadow-none text-lg">Monika, Gostic</span>
           <div
             ref={menuItems}
             className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
@@ -123,10 +129,10 @@ const MainPageNavBar = () => {
 };
 
 const MainPage = () => (
-  <div className="col-span-3 rounded-lg p-2 flex flex-col justify-center items-center gap-1">
+  <div className="col-span-3 p-2 flex flex-col justify-center items-center gap-1">
     <MainPageNavBar></MainPageNavBar>
     <div className="bg-white h-full w-full grid grid-cols-3 overflow-hidden p-3 gap-2 rounded-lg">
-      <div className="shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
+      <div className="grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
           <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Frontend</div>
@@ -148,21 +154,21 @@ const MainPage = () => (
           <div>Permissions Access</div>
         </button>
       </div>
-      <div className="bg-white grid grid-cols-2 grid-rows-3 gap-2 p-2">
-        <div className="bg-black rounded-md text-white text-lg flex flex-col justify-center items-center">
+      <div className="bg-white grid grid-cols-2 grid-rows-3 gap-1 p-2">
+        <div className="bg-white shadow-md rounded-md text-black text-lg flex flex-col justify-center items-center">
           <h4 className="text-[1.4rem] font-bold">2.5k</h4>
           <span className="text-center">Accounts created</span>
         </div>
-        <div className="bg-black rounded-md text-white text-lg flex flex-col justify-center items-center">
+        <div className="bg-white shadow-md rounded-md text-black text-lg flex flex-col justify-center items-center">
           <h4 className="text-[1.4rem] font-bold">376</h4>
           <span className="text-center">Visited today</span>
         </div>
-        <div className="bg-black rounded-md col-span-2 relative flex justify-center items-center p-2">
-          <h2 className="font-opensans font-black text-[1.5rem] text-white">
+        <div className="bg-white shadow-md rounded-md col-span-2 relative flex justify-center items-center p-2">
+          <h2 className="font-opensans font-black text-[1.5rem] text-black">
             Image graph here
           </h2>
         </div>
-        <div className="bg-black rounded-md col-span-2 grid place-items-center py-2">
+        <div className="bg-white shadow-md rounded-md col-span-2 grid place-items-center py-2">
           <button className="tile text-lg">
             <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
             <div>User Analytics</div>
@@ -173,9 +179,14 @@ const MainPage = () => (
           </button>
         </div>
       </div>
-      <div className="rounded-lg shadow-2xl grid grid-rows-6 place-content-center gap-3 p-4">
+      <div className="rounded-lg grid grid-rows-6 place-content-center gap-3 p-4">
         <button className="tile text-lg">
-          <Image src="/icons/search.png" alt="add icon" width={20} height={20} />
+          <Image
+            src="/icons/search.png"
+            alt="add icon"
+            width={20}
+            height={20}
+          />
           <div>Quick Search</div>
         </button>
         <button className="tile text-lg">
