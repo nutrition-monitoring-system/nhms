@@ -24,7 +24,7 @@ function InfoCardOne() {
   const content = [
     "Customized user profiles to track nutrition, exercise, mood, and more.",
     "Visual progress comparisons with before-and-after images.",
-    "Integration with Dr. Monica's Google Calendar for appointments.",
+    "Integration with Dr. Monika's Google Calendar for appointments.",
     "Multiselect chronic condition tracking.",
   ];
   return (

@@ -7,7 +7,7 @@ const Footer = () => (
         <div className="grid place-items-center text-center">
           @{new Date().getFullYear()} All Rights Reserved
           <br></br>
-          Credits go to Dr Monica Gostic.
+          Credits go to Dr Monika Gostic.
         </div>
         <div className="grid grid-cols-5 place-items-center sm:col-span-2">
           <Link href="">About</Link>
