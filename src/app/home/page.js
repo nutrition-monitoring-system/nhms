@@ -101,8 +101,8 @@ function NavBar({ handleLogout, data }) {
             src="/icons/search.png"
             className="mr-3"
             alt="search icon"
-            width={20}
-            height={20}
+            width={35}
+            height={35}
           />
           <input
             id="search"
