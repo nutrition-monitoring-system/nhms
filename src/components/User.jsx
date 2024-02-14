@@ -63,7 +63,7 @@ export default function User({ handsignOut }) {
   return (
     <div className="body flex">
       <SideNavBar></SideNavBar>
-      <div className="grid grid-cols-1 bg-white grid-rows-5 overflow-hidden w-[78%]">
+      <div className="grid grid-cols-1 bg-white grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
         <MiniNavBar
           avatar={avatar}
           handleAvatarChange={handleAvatarChange}
@@ -176,7 +176,7 @@ function SideNavBar() {
     console.log("开始搜索：" + searchTerm);
   };
   return (
-    <div className="w-[22%] sidebar bg-orange h-screen sticky top-0">
+    <div className="w-[22%] xl:w-[18%] sidebar bg-orange h-screen sticky top-0">
       {/* 添加搜索框 */}
 
       {/* 你的导航链接 */}
