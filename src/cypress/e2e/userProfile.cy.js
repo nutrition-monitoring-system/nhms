@@ -8,6 +8,4 @@ it("home", () => {
     cy.get('input[name="password"]').type("password12345");
     cy.get("#handleLogin").click();
     cy.wait(3000);
-    cy.visit(url + "/user");
-
   });
