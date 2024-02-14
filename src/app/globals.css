@@ -58,7 +58,7 @@ dialog::backdrop {
   .tile {
     @apply min-w-fit flex justify-between items-center gap-2 rounded-md
     bg-white px-5 py-2 text-sm text-black transition-all duration-100 ease-out
-    shadow-md hover:shadow-lg hover:translate-x-1 cursor-pointer;
+    shadow-md hover:shadow-lg cursor-pointer;
   }
   button:disabled {
     @apply opacity-80 select-none;
@@ -70,7 +70,9 @@ dialog::backdrop {
 }
 
 .slide-down {
-  animation: slide-down-move 200ms forwards, slide-down-opacity 200ms forwards;
+  animation:
+    slide-down-move 200ms forwards,
+    slide-down-opacity 200ms forwards;
   pointer-events: all;
 }
 

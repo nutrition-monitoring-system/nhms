@@ -32,17 +32,17 @@ export default function Recipes() {
 function RecipeInfo({ recipe }) {
   return (
     <>
-      <div className=" shadow-xl bg-white rounded-md flex flex-col gap-1 overflow-hidden p-1">
+      <div className=" shadow-xl bg-rose-100 rounded-md flex flex-col gap-1 overflow-hidden p-1">
         <div
           className="rounded-md overflow-hidden bg-cover cursor-pointer transition-colors duration-1000 ease-in-out
-        bg-rose-500 grid place-items-center p-5"
+        bg-white grid place-items-center p-5 shadow-lg"
         >
-          <div className="text-center font-sans font-extrabold text-[1.5rem] text-white">
+          <div className="text-center font-sans font-extrabold text-[1.5rem] text-black">
             {recipe.name}
           </div>
         </div>
         <div className="">
-          <div className="text-sm bg-rose-100 shadow-lg grid place-items-center p-2 rounded-md">
+          <div className="text-sm bg-rose-100 shadow-xl grid place-items-center p-2 rounded-md">
             <div className="flex justify-around items-center w-full">
               <Image
                 src="/icons/info.png"
