@@ -48,7 +48,8 @@ export default function Information() {
         </section>
         <section className="h-screen bg-white text-center font-black p-10 grid place-content-center">
           <p className="reveal-type">
-            Our web application is your key to a healthier, more informed lifestyle
+            Our web application is your key to a healthier, more informed
+            lifestyle
           </p>
         </section>
         <section className="h-screen bg-black text-white  text-center font-black p-10 grid place-content-center">
@@ -59,9 +60,9 @@ export default function Information() {
         </section>
         <section className="h-screen bg-white text-center font-black p-10 grid place-content-center">
           <p className="reveal-type">
-            Whether you{'\''}re exploring new dietary preferences, managing
-            chronic conditions, or simply looking to elevate your well-being,
-            we{'\''}ve got you covered. 
+            Whether you{"'"}re exploring new dietary preferences, managing
+            chronic conditions, or simply looking to elevate your well-being, we
+            {"'"}ve got you covered.
           </p>
         </section>
         <section className="h-screen bg-black text-white  text-center font-black p-10 grid place-content-center">
