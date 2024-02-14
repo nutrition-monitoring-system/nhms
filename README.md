@@ -33,6 +33,7 @@
   - [🔧 Installation](#-installation)
   - [🤖 Running nhms](#-running-nhms)
   - [🧪 Tests](#-tests)
+- [🛬 Deployed Version](#-deployed-version)
 - [🛣 Roadmap](#-roadmap)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
@@ -108,6 +109,15 @@ npm run test OR npm run cy:run - # for headless mode
 npm run cy:open - # to actively run tests in the Cypress browser.
 
 ```
+---
+
+## 🛬 Deployed Version
+
+Users can find the deployed version of nhms on Vercel with [this link](https://nhms-beta.vercel.app/).
+
+- User account: Users can register for an account and then login using the [register](https://nhms-beta.vercel.app/register?formIndex=0) page.
+
+- Admin account: The admin account can be accessed [here](https://nhms-beta.vercel.app/admin).
 
 ---
 
