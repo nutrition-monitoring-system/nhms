@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* This API test should print out all the users. */
 describe("This should make a request to the selectAllUsers endpoint. ", () => {
   it("This should select all users.", () => {

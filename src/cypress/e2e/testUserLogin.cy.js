@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // This describes a test suite for checking new user registration and login
 describe("Testing if a new user can log into the website.", () => {
   let url = Cypress.config("baseUrl");

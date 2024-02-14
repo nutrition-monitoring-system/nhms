@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe("A blank test.", () => {
   /* This is how the test should be laid out. */
 
