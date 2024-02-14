@@ -1,7 +1,7 @@
 "use client";
 import Logo from "../../components/Logo";
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
 import { useRef } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
@@ -101,15 +101,14 @@ function NavBar({ handleLogout, data }) {
             src="/icons/search.png"
             className="mr-3"
             alt="search icon"
-            width={20}
-            height={20}
+            width={35}
+            height={35}
           />
           <input
             id="search"
             type="text"
             placeholder="Type to search "
-            className="flex-grow py-2 placeholder:text-white text-white placeholder:font-normal bg-black"
-            autoFocus
+            className="flex-grow placeholder:text-white !text-white placeholder:font-normal !bg-black"
           />
         </div>
         <div className="flex justify-center items-center gap-2">
@@ -123,13 +122,13 @@ function NavBar({ handleLogout, data }) {
             />
             <span>Basket</span>
           </div>
-          <div className="tile relative z-10 flex justify-around items-center gap-3">
+          <div className="tile relative z-10 flex justify-center items-center gap-3">
             <Image
               src={userGender === "M" ? "/icons/man.png" : "/icons/woman.png"}
               width={25}
               height={25}
               alt="Person icon"
-              className="ml-2 rounded-[50px] bg-primary"
+              className="ml-2 rounded-[50px]"
               onClick={handleMenuclick}
             />
             <span id="usercontent" onClick={handleMenuclick}>

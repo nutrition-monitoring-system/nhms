@@ -50,30 +50,6 @@ export default function handler(req, res) {
         },
       },
       {
-        name: "Coco Mint Strawberry Smoothie",
-        servings: 1,
-        ingredients: [
-          "1 cup almond milk",
-          "1 tbsp almond butter",
-          "3/4 cup strawberries",
-          "1 tbsp cacao nibs",
-          "1 scoop collagen peptides",
-          "1 tbsp hemp hearts",
-          "spinach",
-          "cinnamon",
-          "1 tsp honey",
-        ],
-        prep_time: "5 minutes",
-        cooking_time: "0 minutes",
-        directions: "Blend all ingredients until smooth.",
-        nutrition: {
-          calories: 387,
-          carbohydrates: "32g",
-          protein: "19g",
-          fat: "21g",
-        },
-      },
-      {
         name: "Eggless Breakfast Hash",
         servings: 2,
         ingredients: [
@@ -139,27 +115,6 @@ export default function handler(req, res) {
           carbohydrates: "46g",
           protein: "21g",
           fat: "29g",
-        },
-      },
-      {
-        name: "Shredded Brussels & Salmon",
-        servings: 1,
-        ingredients: [
-          "Shredded brussels sprouts",
-          "avocado oil",
-          "turmeric",
-          "salt",
-          "pepper",
-          "avocado",
-          "raw sushi-grade or smoked salmon",
-        ],
-        prep_time: "5 minutes",
-        cooking_time: "5-10 minutes",
-        nutrition: {
-          calories: 419,
-          carbohydrates: "29g",
-          protein: "25g",
-          fat: "26g",
         },
       },
       {

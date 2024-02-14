@@ -9,7 +9,7 @@ const Footer = () => (
           <br></br>
           Credits go to Dr Monika Gostic.
         </div>
-        <div className="grid grid-cols-5 place-items-center sm:col-span-2">
+        <div className="flex justify-around items-center ">
           <Link href="">About</Link>
           <Link href="">Help</Link>
           <Link href="">Contact</Link>
