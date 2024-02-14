@@ -1,8 +1,8 @@
 //import Image from 'next/image'
 "use client";
-import User from "../../../components/User.jsx";
-import Footer from "../../../components/Footer.jsx";
-import Loading from "../../../components/Loading.jsx";
+import User from "../../components/User.jsx";
+import Footer from "../../components/Footer.jsx";
+import Loading from "../../components/Loading.jsx";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,6 @@ function Home({ params }) {
   return (
     <>
       <User handsignOut={() => signOut({ callbackUrl: "/" })} />
-      <Footer />
     </>
   );
 }
