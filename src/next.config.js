@@ -7,6 +7,10 @@ module.exports = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // This is a flag for fixing the issues with the register page.
+    missingSuspenseWithCSRBailout: false,
+  },
   images: {
     remotePatterns: [
       {
