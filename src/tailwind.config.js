@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         opensans: ["Open Sans", "sans-serif"],
         modak: ["Open Sans", "sans-serif"],
+        protest: ["Protest Revolution", "sans-serif"],
       },
       screens: {
         xl: { min: "1300px" },

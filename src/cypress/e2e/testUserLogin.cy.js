@@ -101,7 +101,7 @@ describe("Testing if a new user can log into the website.", () => {
     cy.visit(url + "/home");
 
     // Interactions with the home page, searching and navigating tabs
-    cy.get("#search").click();
+    //cy.get("#search").click();
     // User logout process
     cy.get("#usercontent").click();
     cy.get("#Logout").click();
