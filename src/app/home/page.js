@@ -8,6 +8,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
+import useSWR from "swr";
 
 export default function Page() {
   return (
@@ -17,6 +18,41 @@ export default function Page() {
       </SessionProvider>
     </>
   );
+}
+
+function HomeUserData() {
+  const { data: session, status } = useSession();
+
+  // console.log(`User ID = ${session.user.name}`);
+
+  const sendID = { id: session.user.name };
+  /* Sends the ID of the user to backend. */
+
+  const fetcher = (...args) =>
+    fetch(
+      ...args,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        
+        },
+        body: JSON.stringify(sendID),
+      },
+      {revalidateIfStale: false}
+      
+    ).then((res) => res.json());
+
+  const { data, error } = useSWR("/api/userById", fetcher);
+  /* Uses the SWR Next hook.  */
+
+  if (error || !data) {
+    return null;
+  }
+  console.log(data);
+
+  return data;
 }
 
 function Home() {
@@ -41,7 +77,7 @@ function Home() {
   }
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
-      <NavBar handleLogout={handleLogout} data={session} />
+      <NavBar handleLogout={handleLogout} />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
         <Recipes />
       </div>
@@ -60,12 +96,13 @@ function NavBar({ handleLogout, data }) {
   const foodCollection = useRef(null);
   const foodRecommendation = useRef(null);
 
-  let userSurname = "Kelly",
-    userId = "userfgdf13s",
+  let userSurname = "Smith",
     userGender = "F";
+
+  data = HomeUserData();
+
   if (data) {
     userSurname = data.surname;
-    userId = data.id;
     userGender = data.gender;
   }
 
