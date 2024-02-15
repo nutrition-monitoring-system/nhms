@@ -6,6 +6,7 @@ import Loading from "../../components/Loading.jsx";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+
 function Home({ params }) {
   const router = useRouter();
   const { session, status } = useSession({

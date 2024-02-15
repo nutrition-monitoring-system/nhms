@@ -148,7 +148,7 @@ function NavBar({ handleLogout, data }) {
                   width={20}
                   height={20}
                 />
-                <Link href={`/user/${userId}`}>Profile</Link>
+                <Link href={`/user`}>Profile</Link>
               </div>
               <div className="tile grid grid-cols-4">
                 {" "}
@@ -158,7 +158,7 @@ function NavBar({ handleLogout, data }) {
                   width={20}
                   height={20}
                 />
-                <Link href={"/user/userd9f49w"}>Settings</Link>
+                <Link href={"/user"}>Settings</Link>
               </div>
               <div className="tile grid grid-cols-4">
                 {" "}

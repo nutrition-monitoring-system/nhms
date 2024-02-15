@@ -75,10 +75,10 @@ function Home() {
       alert("Invalid Login details!");
       //console.error("Sign-in error:", result.error);
       /* router.push("/register"); */
+      return alert("Invalid Login details! Please try again.");
     } else {
       // Sign-in was successful
       router.push("/home");
-      return alert("Invalid LogIn details! Please try again.");
     }
 
     // Sign-in was successful
