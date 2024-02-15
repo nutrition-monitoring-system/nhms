@@ -1,13 +1,19 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import Logo from "../../components/Logo";
 import ProfileNavigation from "../../components/ProfileNavigation";
+import { SessionProvider } from "next-auth/react";
+
+
 export default function Page() {
   return (
+    <SessionProvider>
     <div className="w-screen h-screen flex">
       <NavBar />
       <MainPage />
     </div>
+    </SessionProvider>
   );
 }
 

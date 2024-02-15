@@ -53,7 +53,8 @@ export default function ProfileNavigation() {
 
   const { data: session, status } = useSession();
 
-  let name,gender = "";
+  let name = " ";
+  let gender = " ";
 
 
 
