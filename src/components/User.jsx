@@ -8,6 +8,81 @@ import { FaRegAddressCard } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa";
 import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
+
+function UserData({ props }) {
+  const { data: session, status } = useSession();
+
+  // console.log(`User ID = ${session.user.name}`);
+
+  const sendID = { id: session.user.name };
+  /* Sends the ID of the user to backend. */
+
+  const fetcher = (...args) =>
+    fetch(
+      ...args,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendID),
+      },
+      { next: { revalidate: 3600 } }
+    ).then((res) => res.json());
+
+  const { data, error } = useSWR("/api/userById", fetcher);
+  /* Uses the SWR Next hook.  */
+
+  if (error) {
+    return <div>Failed to load user data. </div>;
+  }
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  console.log(data);
+  if (props == "calendar") {
+    return (
+      <div>
+        <h1>
+          {data.name} {data.surname}
+        </h1>
+        <p>{session.user.email}</p>
+      </div>
+    );
+  } else if (props == "nav") {
+    /* Checks if the props are a navbar. */
+    const dob = new Date(data.dob);
+    return (
+      <div>
+        <div className="grid grid-cols-3">
+          <span id="user-name" className="col-span-2">
+            {data.name} {data.surname}
+          </span>
+        </div>
+        <div className="grid grid-cols-3">
+          <span id="user-email" className="col-span-2">
+            {session.user.email}
+          </span>
+        </div>
+        <div className="grid grid-cols-3">
+          <span id="user-id" className="col-span-2">
+            {dob.getDate()}/{dob.getMonth() + 1}/{dob.getFullYear()}
+          </span>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h1>
+        {data.name} {data.surname}
+      </h1>
+    </div>
+  );
+}
 
 export default function User({ handsignOut }) {
   const [avatar, setAvatar] = useState(
@@ -87,9 +162,10 @@ function CalenderHealthInfo({ userInfo, goToPage }) {
   return (
     <div className="calendar-health flex justify-center items-center gap-4">
       <div className="Health-info rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <p>Health information</p>
+        <UserData props={"calendar"}></UserData>
+        {/* <p>Health information</p>
         <p>Name: {userInfo.name}</p>
-        <p>Email: {userInfo.email}</p>
+        <p>Email: {userInfo.email}</p> */}
         <div className="expand-user-info" onClick={goToPage}>
           <FaRegAddressCard className="info-icon" />
         </div>
@@ -133,23 +209,7 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
             onChange={handleAvatarChange}
           />
         </div>
-        <div>
-          <div className="grid grid-cols-3">
-            <span id="user-name" className="col-span-2">
-              {userInfo.name}
-            </span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span id="user-email" className="col-span-2">
-              {userInfo.email}
-            </span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span id="user-id" className="col-span-2">
-              {userInfo.id}
-            </span>
-          </div>
-        </div>
+        <UserData props="nav"></UserData>
       </div>
       <div className="grid place-items-center ">
         <button className="tile">
@@ -264,11 +324,11 @@ function Log() {
     <div className="bg-gray-100 flex justify-center items-center gap-4">
       <div className="log-bar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>log Food</p>
+        <p>Food Log</p>
       </div>
       <div className="log-bar  bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>log Water</p>
+        <p>Water Log</p>
       </div>
     </div>
   );
