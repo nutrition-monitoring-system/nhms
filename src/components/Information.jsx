@@ -50,7 +50,7 @@ export default function Information() {
             our application is your key to a healthier, more informed lifestyle.
           </p>
         </section>
-        <section className="h-screen bg-yellow-400 text-black  text-center font-black p-10 grid place-content-center">
+        <section className="h-screen bg-yellow-400 text-black  text-center protest font-black p-10 grid place-content-center">
           <p className="reveal-type">discover a dynamic library of recipes.</p>
         </section>
         <section className="h-screen bg-black text-white text-center font-black p-10 grid place-content-center">

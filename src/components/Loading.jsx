@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 export default function Loading() {
   return (
     <div className="bg-none flex dark:bg-black flex-col gap-7 justify-center items-center absolute inset-0">
@@ -9,9 +9,7 @@ export default function Loading() {
         className="animate-spin"
         alt="Loading Image"
       />
-      <div className="text-center font-bold text-[2rem] dark:text-white">
-        Loading...
-      </div>
+      <div className="text-center dark:text-white">Loading...</div>
     </div>
   );
 }

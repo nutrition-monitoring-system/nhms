@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 const Offer = () => (
   // Offer
   // This function returns more what we offer as a server and how it can benefit you.
@@ -6,7 +6,7 @@ const Offer = () => (
   //<InfoCardTwo />  ---------------|----------- These functions just tell you what the site offers by looping through a content array and rendering the data to in the WhatWeOfferSection
   // <InfoCardThree /> -------------|
   <>
-    <div className="bg-white min-h-screen font-opensans text-black py-3">
+    <div className="min-h-fit font-opensans text-black py-3">
       <h1 className="font-extrabold text-[30px] text-center mb-7">
         What do we offer?
       </h1>

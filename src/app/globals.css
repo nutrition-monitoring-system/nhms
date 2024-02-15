@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Modak&family=Open+Sans:wght@300;400;800&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap");
 html {
   scroll-behavior: smooth;
 }
@@ -43,6 +43,11 @@ dialog::backdrop {
 .reveal-type {
   font-size: clamp(3.5rem, 3.5vw, 8rem);
 }
+
+.protest {
+  font-family: "Protest Revolution", sans-serif;
+}
+
 @layer components {
   img {
     @apply select-none;
