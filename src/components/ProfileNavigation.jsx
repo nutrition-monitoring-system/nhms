@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
-export default function ProfileNavigation({ name, gender, signOut }) {
+export default function ProfileNavigation({ name, gender }) {
   const menuItems = useRef(null);
   const handleMenuclick = () => {
     // This function handles the animation for the userMenu. It will animate base on the custom class added
@@ -14,6 +14,7 @@ export default function ProfileNavigation({ name, gender, signOut }) {
     <>
       <div
         onClick={handleMenuclick}
+        id="usercontent"
         className="tile shadow-none hover:shadow-none relative z-10 flex justify-around items-center gap-3 select-none
   before:absolute before:top-[95%] before:h-1 before:w-full before:translate-x-[-100%] before:rounded-md before:hover:bg-gray-200 before:hover:translate-x-0 before:transition-all before:duration-300"
       >
@@ -58,6 +59,7 @@ export default function ProfileNavigation({ name, gender, signOut }) {
             <span>Languages</span>
           </div>
           <div
+            id="Logout"
             className="tile grid grid-cols-4"
             onClick={() => signOut({ callbackUrl: "/" })}
           >
