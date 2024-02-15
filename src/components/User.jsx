@@ -8,6 +8,7 @@ import { FaRegAddressCard } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa";
 import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
+import FileUpload from "./fileUpload";
 
 export default function User({ handsignOut }) {
   const [avatar, setAvatar] = useState(
@@ -235,14 +236,7 @@ function Photo({ photo, handlePhoto }) {
       <div className="relative photo-bar bg-primary rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>initial</p>
         <FaCamera className="camera text-center" />
-        {/* <img
-          className="absolute opacity-1"
-          id="uploda-photo"
-          src={photo || "/icons/camera.png"}
-          type="file"
-          accept="image/*"
-          onChange={handlePhoto}
-        /> */}
+        <FileUpload/>
       </div>
       {months.map((item, idx) => (
         <div
@@ -252,7 +246,9 @@ function Photo({ photo, handlePhoto }) {
           <p>{item}</p>
           <div>
             <FaCamera className="camera" />
-          </div>
+				{/* <form><FileUpload/></form> */}
+				
+			 </div>
         </div>
       ))}
     </div>
