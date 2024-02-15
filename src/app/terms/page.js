@@ -19,21 +19,21 @@ function Terms() {
         <strong>Terms and Conditions</strong>
       </h2>
 
-      <p>Welcome to nhms!</p>
+      <p>{`Welcome to nhms!`}</p>
 
-      <p>
+      <p>{`
         These terms and conditions outline the rules and regulations for the use
         of Nutrition and Health Monitoring System's Website, located at
         https://nhms.onrender.com/.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         By accessing this website we assume you accept these terms and
         conditions. Do not continue to use nhms if you do not agree to take all
         of the terms and conditions stated on this page.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         The following terminology applies to these Terms and Conditions, Privacy
         Statement and Disclaimer Notice and all Agreements: "Client", "You" and
         "Your" refers to you, the person log on this website and compliant to
@@ -47,45 +47,45 @@ function Terms() {
         subject to, prevailing law of gb. Any use of the above terminology or
         other words in the singular, plural, capitalization and/or he/she or
         they, are taken as interchangeable and therefore as referring to same.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Who can use the service</strong>
       </h3>
 
-      <p>You must be 18 years old to use nhms.</p>
+      <p>{`You must be 18 years old to use nhms.`}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Cookies</strong>
       </h3>
 
-      <p>
+      <p>{`
         We employ the use of cookies. By accessing nhms, you agreed to use
         cookies in agreement with the Nutrition and Health Monitoring System's
-        Privacy Policy.{" "}
-      </p>
+        Privacy Policy.
+      `}</p>
 
-      <p>
+      <p>{`
         Most interactive websites use cookies to let us retrieve the user's
         details for each visit. Cookies are used by our website to enable the
         functionality of certain areas to make it easier for people visiting our
         website. Some of our affiliate/advertising partners may also use
         cookies.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>License</strong>
       </h3>
 
-      <p>
+      <p>{`
         Unless otherwise stated, Nutrition and Health Monitoring System and/or
         its licensors own the intellectual property rights for all material on
         nhms. All intellectual property rights are reserved. You may access this
         from nhms for your own personal use subjected to restrictions set in
         these terms and conditions.
-      </p>
+      `}</p>
 
-      <p>You must not:</p>
+      <p>{`You must not:`}</p>
       <ul>
         <li>Republish material from nhms</li>
         <li>Sell, rent or sub-license material from nhms</li>
@@ -93,16 +93,16 @@ function Terms() {
         <li>Redistribute content from nhms</li>
       </ul>
 
-      <p>
+      <p>{`
         This Agreement shall begin on the date hereof. Our Terms and Conditions
-        were created with the help of the{" "}
+        were created with the help of the
         <a href="https://www.termsandconditionsgenerator.com/">
           Free Terms and Conditions Generator
         </a>
         .
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         Parts of this website offer an opportunity for users to post and
         exchange opinions and information in certain areas of the website.
         Nutrition and Health Monitoring System does not filter, edit, publish or
@@ -114,15 +114,15 @@ function Terms() {
         shall not be liable for the Comments or for any liability, damages or
         expenses caused and/or suffered as a result of any use of and/or posting
         of and/or appearance of the Comments on this website.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         Nutrition and Health Monitoring System reserves the right to monitor all
         Comments and to remove any Comments which can be considered
         inappropriate, offensive or causes breach of these Terms and Conditions.
-      </p>
+      `}</p>
 
-      <p>You warrant and represent that:</p>
+      <p>{`You warrant and represent that:`}</p>
 
       <ul>
         <li>
@@ -144,20 +144,20 @@ function Terms() {
         </li>
       </ul>
 
-      <p>
+      <p>{`
         You hereby grant Nutrition and Health Monitoring System a non-exclusive
         license to use, reproduce, edit and authorize others to use, reproduce
         and edit any of your Comments in any and all forms, formats or media.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Hyperlinking to our Content</strong>
       </h3>
 
-      <p>
+      <p>{`
         The following organizations may link to our Website without prior
         written approval:
-      </p>
+      `}</p>
 
       <ul>
         <li>Government agencies;</li>
@@ -175,18 +175,18 @@ function Terms() {
         </li>
       </ul>
 
-      <p>
+      <p>{`
         These organizations may link to our home page, to publications or to
         other Website information so long as the link: (a) is not in any way
         deceptive; (b) does not falsely imply sponsorship, endorsement or
         approval of the linking party and its products and/or services; and (c)
         fits within the context of the linking party's site.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         We may consider and approve other link requests from the following types
         of organizations:
-      </p>
+      `}</p>
 
       <ul>
         <li>commonly-known consumer and/or business information sources;</li>
@@ -198,7 +198,7 @@ function Terms() {
         <li>educational institutions and trade associations.</li>
       </ul>
 
-      <p>
+      <p>{`
         We will approve link requests from these organizations if we decide
         that: (a) the link would not make us look unfavorably to ourselves or to
         our accredited businesses; (b) the organization does not have any
@@ -206,16 +206,16 @@ function Terms() {
         the hyperlink compensates the absence of Nutrition and Health Monitoring
         System; and (d) the link is in the context of general resource
         information.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         These organizations may link to our home page so long as the link: (a)
         is not in any way deceptive; (b) does not falsely imply sponsorship,
         endorsement or approval of the linking party and its products or
         services; and (c) fits within the context of the linking party's site.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         If you are one of the organizations listed in paragraph 2 above and are
         interested in linking to our website, you must inform us by sending an
         e-mail to Nutrition and Health Monitoring System. Please include your
@@ -223,88 +223,88 @@ function Terms() {
         your site, a list of any URLs from which you intend to link to our
         Website, and a list of the URLs on our site to which you would like to
         link. Wait 2-3 weeks for a response.
-      </p>
+      `}</p>
 
-      <p>Approved organizations may hyperlink to our Website as follows:</p>
+      <p>{`Approved organizations may hyperlink to our Website as follows:`}</p>
 
       <ul>
         <li>By use of our corporate name; or</li>
         <li>By use of the uniform resource locator being linked to; or</li>
         <li>
-          By use of any other description of our Website being linked to that
+          {`By use of any other description of our Website being linked to that
           makes sense within the context and format of content on the linking
-          party's site.
+          party's site.`}
         </li>
       </ul>
 
-      <p>
+      <p>{`
         No use of Nutrition and Health Monitoring System's logo or other artwork
         will be allowed for linking absent a trademark license agreement.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>iFrames</strong>
       </h3>
 
-      <p>
+      <p>{`
         Without prior approval and written permission, you may not create frames
         around our Webpages that alter in any way the visual presentation or
         appearance of our Website.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Content Liability</strong>
       </h3>
 
-      <p>
+      <p>{`
         We shall not be hold responsible for any content that appears on your
         Website. You agree to protect and defend us against all claims that is
         rising on your Website. No link(s) should appear on any Website that may
         be interpreted as libelous, obscene or criminal, or which infringes,
         otherwise violates, or advocates the infringement or other violation of,
         any third party rights.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Reservation of Rights</strong>
       </h3>
 
-      <p>
+      <p>{`
         We reserve the right to request that you remove all links or any
         particular link to our Website. You approve to immediately remove all
         links to our Website upon request. We also reserve the right to amen
         these terms and conditions and it's linking policy at any time. By
         continuously linking to our Website, you agree to be bound to and follow
         these linking terms and conditions.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Removal of links from our website</strong>
       </h3>
 
-      <p>
+      <p>{`
         If you find any link on our Website that is offensive for any reason,
         you are free to contact and inform us any moment. We will consider
         requests to remove links but we are not obligated to or so or to respond
         to you directly.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         We do not ensure that the information on this website is correct, we do
         not warrant its completeness or accuracy; nor do we promise to ensure
         that the website remains available or that the material on the website
         is kept up to date.
-      </p>
+      `}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Disclaimer</strong>
       </h3>
 
-      <p>
+      <p>{`
         To the maximum extent permitted by applicable law, we exclude all
         representations, warranties and conditions relating to our website and
         the use of this website. Nothing in this disclaimer will:
-      </p>
+      `}</p>
 
       <ul>
         <li>
@@ -324,19 +324,19 @@ function Terms() {
         </li>
       </ul>
 
-      <p>
+      <p>{`
         The limitations and prohibitions of liability set in this Section and
         elsewhere in this disclaimer: (a) are subject to the preceding
         paragraph; and (b) govern all liabilities arising under the disclaimer,
         including liabilities arising in contract, in tort and for breach of
         statutory duty.
-      </p>
+      `}</p>
 
-      <p>
+      <p>{`
         As long as the website and the information and services on the website
         are provided free of charge, we will not be liable for any loss or
         damage of any nature.
-      </p>
+      `}</p>
     </div>
   );
 }

@@ -61,12 +61,6 @@ function NavBar({ data }) {
   const foodCollection = useRef(null);
   const foodRecommendation = useRef(null);
 
-  if (data) {
-    userSurname = data.surname;
-    userId = data.id;
-    userGender = data.gender;
-  }
-
   const refList = [
     home,
     recipes,
