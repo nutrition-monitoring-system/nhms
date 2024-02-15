@@ -54,7 +54,7 @@ const MainPageNavBar = () => {
         Admin Dashboard
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <ProfileNavigation name={"Monika, Gostic"} gender={"F"} />
+        <ProfileNavigation/>
       </div>
     </div>
   );

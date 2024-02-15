@@ -104,7 +104,7 @@ const NavBar = () => {
         <div className="mx-4">
           <Link href="/login">Recipes</Link>
         </div>
-        <ProfileNavigation name={"John, Doe"} gender={"M"} />
+        <ProfileNavigation />
       </div>
     </div>
   );

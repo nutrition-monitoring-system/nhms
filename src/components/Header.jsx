@@ -124,7 +124,7 @@ function NavBar() {
         <div className="mx-4">
           <Link href="/blog">Blog</Link>
         </div>
-        <ProfileNavigation name={"John, Doe"} gender={"M"} />
+        <ProfileNavigation />
       </div>
     </div>
   );
