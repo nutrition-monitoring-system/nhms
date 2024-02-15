@@ -140,7 +140,7 @@ function NavBar() {
                 width={20}
                 height={20}
               />
-              <Link href={"/user/userd9f49w"}>Profile</Link>
+              <Link href={"/user"}>Profile</Link>
             </div>
             <div className="tile grid grid-cols-4">
               {" "}
