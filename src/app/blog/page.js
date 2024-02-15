@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRef } from "react";
+import ProfileNavigation from "@/components/ProfileNavigation";
 // export const metadata = {
 //   title: "Blog",
 //   description: "Blog Page",
@@ -103,66 +104,7 @@ const NavBar = () => {
         <div className="mx-4">
           <Link href="/login">Recipes</Link>
         </div>
-        <div className="tile relative z-10 flex justify-around items-center gap-3">
-          <Image
-            src="/icons/man.png"
-            width={25}
-            height={25}
-            alt="Person icon"
-            className="ml-2 rounded-[50px] border-1 border-black"
-            onClick={handleMenuclick}
-          />
-          <span onClick={handleMenuclick}>Mr. Bryan</span>
-          <div
-            ref={menuItems}
-            className="absolute top-[-6rem] opacity-0 left-0 right-0 rounded-md
-             shadow-2xl p-2 grid grid-rows-3 gap-1 z-[-10] translate-y-[-100] pointer-events-none"
-          >
-            <div className="tile grid grid-cols-4">
-              {" "}
-              <Image
-                src="/icons/account.png"
-                alt="Settings icon"
-                width={20}
-                height={20}
-              />
-              <Link href={"/user/userd9f49w"}>Profile</Link>
-            </div>
-            <div className="tile grid grid-cols-4">
-              {" "}
-              <Image
-                src="/icons/settings.png"
-                alt="Settings icon"
-                width={20}
-                height={20}
-              />
-              <Link href={"/user/userd9f49w"}>Settings</Link>
-            </div>
-            <div className="tile grid grid-cols-4">
-              {" "}
-              <Image
-                src="/icons/translate.png"
-                alt="Language/translate icon"
-                width={20}
-                height={20}
-              />
-              <span>Languages</span>
-            </div>
-            <div
-              className="tile grid grid-cols-4"
-              onClick={() => signOut({ callbackUrl: "/" })}
-            >
-              {" "}
-              <Image
-                src="/icons/logout.png"
-                alt="Logout icon"
-                width={20}
-                height={20}
-              />
-              <span>Logout</span>
-            </div>
-          </div>
-        </div>
+        <ProfileNavigation name={"John, Doe"} gender={"M"} />
       </div>
     </div>
   );
