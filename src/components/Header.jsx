@@ -13,12 +13,12 @@ export default function Header() {
   const headerIcons = [
     "/icons/headerIcons/dish.png",
     "/icons/headerIcons/drink.png",
-    "/icons/headerIcons/hamburger.png ",
-    "/icons/headerIcons/healthy-food.png ",
-    "/icons/headerIcons/recipe.png ",
-    "/icons/headerIcons/hamburger.png ",
-    "/icons/headerIcons/healthy-food.png ",
-    "/icons/headerIcons/recipe.png ",
+    "/icons/headerIcons/hamburger.png",
+    "/icons/headerIcons/healthy-food.png",
+    "/icons/headerIcons/recipe.png",
+    "/icons/headerIcons/hamburger.png",
+    "/icons/headerIcons/healthy-food.png",
+    "/icons/headerIcons/recipe.png",
   ];
 
   // This section is wrapped by a SessionProvider component for accessing session variables
