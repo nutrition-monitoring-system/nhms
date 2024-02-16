@@ -50,16 +50,14 @@ export default function Information() {
             our application is your key to a healthier, more informed lifestyle.
           </p>
         </section>
-        <section className="h-screen bg-yellow-400 text-black  text-center protest font-black p-10 grid place-content-center">
+        <section className="h-screen bg-secondary text-black  text-center protest font-black p-10 grid place-content-center">
           <p className="reveal-type">discover a dynamic library of recipes.</p>
         </section>
         <section className="h-screen bg-black text-white text-center font-black p-10 grid place-content-center">
           <p className="reveal-type">set and track your unique health goals</p>
         </section>
         <section className="h-screen bg-white text-center font-black p-10 grid place-content-center">
-          <p className="reveal-type">
-            start your journey towards a healthier you today!
-          </p>
+          <p className="reveal-type">start a healthier journey today!</p>
         </section>
       </div>
     </>
