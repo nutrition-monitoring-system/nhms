@@ -12,16 +12,28 @@ describe("This test should check that the name is in the corresponding button on
     cy.get('input[name="password"]').type("password12345");
     cy.get("#handleLogin").click();
     cy.wait(3000);
-    cy.url("/home");
+  });
+
+  it("This should check if the data has been received. ", () => {
+    cy.visit("/login");
+    // Logs in with the registered user credentials
+    cy.log("Login to the test profile.")
+    cy.get('input[name="email"]').type("testaccount@gmail.com");
+    cy.get('input[name="password"]').type("password12345");
+    cy.get("#handleLogin").click();
+    cy.wait(3000);
+
+    cy.visit("/home");
     cy.log("Check if the data has been received.")
+    cy.wait(1000);
     cy.get('#usercontent').as("userButton").click()
     cy.get("@userButton").contains("John Smith")
     cy.wait(3000);
     cy.get('a').contains("NHMS").click();
     cy.get('#usercontent').as("userButton").click()
     cy.get("@userButton").contains("John Smith");
-    cy.wait(1000);
     cy.get("@userButton").click()
+    cy.wait(1000);
     cy.get('a').contains("Profile").click()
     /* Redirection to profile. */ 
     cy.log("Go to the user profile.")
@@ -36,5 +48,5 @@ describe("This test should check that the name is in the corresponding button on
     cy.wait(1000);
     cy.url('/login');
 
-  });
+  })
 });
