@@ -34,11 +34,11 @@ export default function Page() {
   };
 
   return (
-    <div className="w-screen h-screen grid place-items-center">
+    <div className="w-screen h-screen flex justify-center items-center flex-col">
       <h1 className="grid place-items-center font-black text-[1.5rem]">
         Update personal information
       </h1>
-      <div className="flex flex-col justify-center items-left gap-2 w-1/2 p-3 rounded-md">
+      <div className="flex flex-col justify-center items-left gap-2 w-1/2 xl:w-[30%] p-3 rounded-md">
         <div className="flex gap-2">
           <input
             type={"text"}

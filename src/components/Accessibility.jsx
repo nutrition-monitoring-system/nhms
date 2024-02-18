@@ -2,9 +2,10 @@
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { settings } from "../utils/dataRegistration.js";
 
 export default function Accessibility({
-  onClick,
+  onClickNext,
   onClickPrev,
   handleCollectData,
 }) {
@@ -14,23 +15,7 @@ export default function Accessibility({
   //   onClick: Function to handle click events
   //   onClickPrev: Function to handle click events for going back
   //   handleCollectData: Function to handle collecting data
-  // List of available allergies with types and descriptions
-  const settings = [
-    { value: "Font Size", src: "/icons/add.png", alt: "add icon" },
-    { value: "Use Bold Text", src: "/icons/bold.png", alt: "capital b" },
-    { value: "Dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
-    {
-      value: "Use Descriptive Links",
-      src: "/icons/information.png",
-      alt: "Descriptive Links",
-    },
-    {
-      value: "High Contrast Mode",
-      src: "/icons/adjustment.png",
-      alt: "High contrast mode",
-    },
-    { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
-  ];
+
   // State variable to track selected user options
   const [userSelected, SetUserSelected] = useState([]);
 
@@ -127,7 +112,7 @@ export default function Accessibility({
             <Button
               onClick={(event) => {
                 handleCollectData({ accessibilitySettings: userSelected });
-                onClick(event);
+                onClickNext(event);
               }}
             >
               Next

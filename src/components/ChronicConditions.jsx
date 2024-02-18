@@ -2,9 +2,9 @@
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-
+import { chronicConditions } from "@/utils/dataRegistration.js";
 export default function ChronicConditions({
-  onClick,
+  onClickNext,
   onClickPrev,
   handleCollectData,
 }) {
@@ -14,31 +14,6 @@ export default function ChronicConditions({
   //   onClick: Function to handle click events
   //   onClickPrev: Function to handle click events for going back
   //   handleCollectData: Function to handle collecting data
-  // List of available allergies with types and descriptions
-  const chronicConditions = [
-    { type: "Diabetes", description: "Affects blood sugar regulation." },
-    { type: "Hypertension", description: "High blood pressure." },
-    {
-      type: "Asthma",
-      description: "Respiratory condition causing breathing difficulties.",
-    },
-    { type: "Heart Disease", description: "Cardiovascular health issues." },
-    { type: "Arthritis", description: "Inflammation of the joints." },
-    { type: "Cancer", description: "Abnormal cell growth." },
-    {
-      type: "Alzheimer's",
-      description: "Progressive memory loss and cognitive decline.",
-    },
-    { type: "Chronic Pain", description: "Persistent, long-term pain." },
-    { type: "Osteoporosis", description: "Weakening of bones." },
-    { type: "Obesity", description: "Excessive body weight." },
-    {
-      type: "Chronic Kidney Disease",
-      description: "Kidney function impairment.",
-    },
-    { type: "COPD", description: "Chronic lung diseases like emphysema." },
-  ];
-
   // Ref for the modal element
   const modal = useRef(null);
 
@@ -183,7 +158,7 @@ export default function ChronicConditions({
             <Button
               onClick={(event) => {
                 handleCollectData({ chronicConditions: userSelected });
-                onClick(event);
+                onClickNext(event);
               }}
             >
               Next

@@ -1,7 +1,7 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
-
+import Link from "next/link.js";
 export default function PersonalInformation({
   onClick,
   formValidation,
@@ -112,7 +112,13 @@ export default function PersonalInformation({
           {/* Displaying the error message*/}
           {errors.confirmPassword?.message}
         </p>
-        <div className="grid place-items-center" id="RestrictionsNext">
+        <div
+          className="w-full flex justify-around items-center"
+          id="RestrictionsNext"
+        >
+          <Link className="tile" href={"/"}>
+            Home
+          </Link>
           <Button onClick={handleSubmit(onClick)}>Next</Button>
         </div>
       </div>
