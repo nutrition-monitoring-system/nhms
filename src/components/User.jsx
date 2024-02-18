@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 //import "./User.css"; // 导入 CSS 文件
 import Image from "next/image";
@@ -6,10 +5,14 @@ import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
 import { FaRegAddressCard } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa";
-import ChartComponent from "../components/UserCharts.jsx";
+// import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
 import useSWR from "swr";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+
+
+
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -46,7 +49,7 @@ function UserData({ props }) {
   if (props == "calendar") {
     return (
       <div>
-        <h1>
+        <h1 id="generatedData">
           {data.name} {data.surname}
         </h1>
         <p>{session.user.email}</p>
@@ -68,7 +71,7 @@ function UserData({ props }) {
           </span>
         </div>
         <div className="grid grid-cols-3">
-          <span id="user-id" className="col-span-2">
+          <span id="user-dob" className="col-span-2">
             {dob.getDate()}/{dob.getMonth() + 1}/{dob.getFullYear()}
           </span>
         </div>
@@ -118,20 +121,16 @@ export default function User({ handsignOut }) {
   };
 
   const confirmLogout = () => {
-    const confirmation = window.confirm("Are you sure you want to logout?");
-    if (confirmation) {
-      // 执行退出操作，例如跳转到退出页面或执行退出逻辑
-      handsignOut();
-    }
+    return signOut();
   };
 
   const goToPage = () => {
-    // 使用window.location.href属性或者window.location.assign方法来跳转到"http://localhost:3001/"
-    window.location.href = "http://localhost:3001/";
+    const router = useRouter();
+    router.push("/home")
   };
   const goToPage2 = () => {
-    // 使用window.location.href属性或者window.location.assign方法来跳转到"http://localhost:3001/"
-    window.location.href = "E:/大三上/NHMS/calendar.html";
+    const router = useRouter();
+    router.push("/")
   };
 
   return (
@@ -152,7 +151,7 @@ export default function User({ handsignOut }) {
 
         <Photo photo={photo} handlePhoto={handlePhoto}></Photo>
         <Log></Log>
-        <ChartComponent />
+        {/* <ChartComponent /> */}
       </div>
     </div>
   );
@@ -173,7 +172,7 @@ function CalenderHealthInfo({ userInfo, goToPage }) {
       <div className="Calendar rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
         <Link
           className="calendar-text"
-          href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
+          href=""
         >
           Calendar
         </Link>
@@ -212,14 +211,14 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
         <UserData props="nav"></UserData>
       </div>
       <div className="grid place-items-center ">
-        <button className="tile">
+        <button className="tile" onClick={confirmLogout}>
           <Image
             id="logout"
             src="/icons/logout.png"
             alt="user-logout"
             width={20}
             height={20}
-            onClick={confirmLogout}
+            
           />
           Logout
         </button>
@@ -266,7 +265,7 @@ function SideNavBar() {
           Health Record Form
         </Link>
         <Link
-          href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
+          href=""
           className="tile text-lg grid place-content-center text-center"
         >
           Calender Events
