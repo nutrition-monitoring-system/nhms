@@ -66,7 +66,7 @@ function InfoCardThree() {
 function InfoCard({ title, content }) {
   return (
     <>
-      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-white p-1">
+      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-secondary p-1">
         <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"

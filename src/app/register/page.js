@@ -2,14 +2,13 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
-import {
-  PersonalInformation,
-  FoodCategories,
-  Allergies,
-  ChronicConditions,
-  DailyIntake,
-  Accessibility,
-} from "../../components/MultiForm.jsx";
+
+import PersonalInformation from "@/components/PersonalInformation.jsx";
+import FoodCategories from "@/components/FoodCategories.jsx";
+import Allergies from "@/components/Allergies.jsx";
+import ChronicConditions from "@/components/ChronicConditions.jsx";
+import DailyIntake from "@/components/DailyIntake.jsx";
+import Accessibility from "@/components/Accessibility.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
@@ -17,22 +16,9 @@ import { signIn } from "next-auth/react";
 
 // form validation imports
 import { useForm } from "react-hook-form";
-import { object, string, date, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FaPray } from "react-icons/fa/index.js";
-
-const userSchema = object().shape({
-  firstName: string().required("Please type in your first name."),
-  lastName: string().required("Please type in your last name."),
-  date: date().required("Please type in your date of birth."),
-  gender: string().required("Please choose your gender. "),
-  email: string().email().required("Please type in your email."),
-  password: string().min(10).max(20).required("Please type in your password."),
-  confirmPassword: string().oneOf(
-    [ref("password"), null],
-    "Passwords must match"
-  ),
-});
+import userSchema from "../../utils/otherUtils";
 
 export default function Home() {
   //form validation imports
