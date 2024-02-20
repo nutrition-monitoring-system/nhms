@@ -1,13 +1,23 @@
-import Link from "next/link";
+"use client";
 import Image from "next/image";
 import Logo from "../../components/Logo";
 import ProfileNavigation from "../../components/ProfileNavigation";
+import { SessionProvider } from "next-auth/react";
 export default function Page() {
   return (
-    <div className="w-screen h-screen flex">
-      <NavBar />
-      <MainPage />
-    </div>
+    <SessionProvider>
+      <Home />
+    </SessionProvider>
+  );
+}
+function Home() {
+  return (
+    <>
+      <div className="w-screen h-screen flex">
+        <NavBar />
+        <MainPage />
+      </div>
+    </>
   );
 }
 
@@ -54,7 +64,7 @@ const MainPageNavBar = () => {
         Admin Dashboard
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <ProfileNavigation/>
+        <ProfileNavigation />
       </div>
     </div>
   );
