@@ -23,9 +23,10 @@ describe("This test should check that the name is in the corresponding button on
     cy.get("#handleLogin").click();
     cy.wait(3000);
 
-    const userName = "Test Account";
+    const userName = "John Smith";
     const email = "testaccount@gmail.com";
-    const dob = "18/11/2023";
+    const dob = "31/12/2023";
+
     cy.visit("/home");
     cy.log("Check if the data has been received.");
     cy.wait(1000);
