@@ -236,7 +236,7 @@ function Photo({ photo, handlePhoto }) {
       <div className="relative photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>initial</p>
         <FaCamera className="camera text-center" />
-        <FileUpload/>
+        <FileUpload identifier="0"/>
       </div>
       {months.map((item, idx) => (
         <div
@@ -246,8 +246,7 @@ function Photo({ photo, handlePhoto }) {
           <p>{item}</p>
           <div>
             <FaCamera className="camera" />
-				{/* <form><FileUpload/></form> */}
-				
+				<FileUpload identifier={idx+1}/>
 			 </div>
         </div>
       ))}
