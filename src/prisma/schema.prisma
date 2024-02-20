@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgres" // originally used "mysql", but the only free available database for the project is postgres
+  provider = "postgres"
   url      = env("DATABASE_URL")
 }
 
@@ -15,7 +15,7 @@ model user {
   password    String        @db.VarChar(32)
   gender      String?       @db.Char(1)
   userID      String        @id @db.Char(32)
-  is_admin    Int?          @default(0) //@db.TinyInt  // 
+  is_admin    Int?          @default(0)
   food        food[]
   health      health[]
   preferences preferences[]
@@ -29,9 +29,10 @@ model allergies {
 }
 
 model chronic_condition {
-  ChronicID      String   @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
-  Condition_Type String   @default("IBS") @map("Condition Type") @db.VarChar(45)
+  ChronicID      String     @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
+  Condition_Type String     @default("IBS") @map("Condition Type") @db.VarChar(45)
   health         health[]
+  symptoms       symptoms[]
 }
 
 model food {
@@ -83,4 +84,11 @@ model preferences {
 
   @@id([Preference_ID, user_userID])
   @@index([user_userID], map: "fk_preferences_user1_idx")
+}
+
+model symptoms {
+  symptom_id          String            @id(map: "symptoms_pk") @db.VarChar
+  symptom_name        String?           @db.VarChar
+  chroniccondition_id String            @db.Char
+  chronic_condition   chronic_condition @relation(fields: [chroniccondition_id], references: [ChronicID], onDelete: NoAction, onUpdate: NoAction, map: "fk_chronic")
 }
