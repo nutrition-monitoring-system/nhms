@@ -98,6 +98,9 @@ function NavBar() {
       <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
         <Logo></Logo>
         <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
+          <button className="tile bg-green-500 text-white hover:ring-secondary ring-2">
+            <Link href="https://scheduler.zoom.us/mgostic">Book a Consultation</Link>
+          </button>
           <div className="mx-4">
             <Link href="/home">Recipes</Link>
           </div>
