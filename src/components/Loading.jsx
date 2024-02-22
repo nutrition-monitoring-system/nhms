@@ -9,7 +9,7 @@ export default function Loading() {
         className="animate-spin"
         alt="Loading Image"
       />
-      <div className="text-center dark:text-white">Loading...</div>
+      <div className="text-center dark:text-white text-3xl">Loading...</div>
     </div>
   );
 }

@@ -7,15 +7,15 @@ const Footer = () => (
         <div className="grid place-items-center text-center">
           @{new Date().getFullYear()} All Rights Reserved
           <br></br>
-          Credits go to Dr Monika Gostic.
+          <p>
+          Credits go to <a href="https://monikagostic.com/"style={{ textDecoration: 'underline' }}>Dr Monika Gostic</a>.
+          </p>
         </div>
         <div className="flex justify-around items-center ">
           <Link href="">About</Link>
-          <Link href="">Help</Link>
           <Link href="">Contact</Link>
           <Link href="/terms">Terms</Link>
           <Link href="/privacy">Privacy</Link>
-          <Link href="">Settings</Link>
           <Link href="">FAQ</Link>
         </div>
       </div>

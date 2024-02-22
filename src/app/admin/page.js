@@ -3,6 +3,9 @@ import Image from "next/image";
 import Logo from "../../components/Logo";
 import ProfileNavigation from "../../components/ProfileNavigation";
 import { SessionProvider } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 export default function Page() {
   return (
     <SessionProvider>
@@ -11,15 +14,31 @@ export default function Page() {
   );
 }
 function Home() {
-  return (
-    <>
-      <div className="w-screen h-screen flex">
-        <NavBar />
-        <MainPage />
-      </div>
-    </>
-  );
+  const router = useRouter();
+  const { session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      return router.push("/login");
+    },
+  });
+
+  if (status == "authenticated") {
+    return (
+      <>
+        <div className="w-screen h-screen flex">
+          <NavBar />
+          <MainPage />
+        </div>
+      </>
+    );
+  }
+  else{
+    return <Loading></Loading>
+  }
 }
+
+
 
 const NavBar = () => (
   <div className="bg-black text-white grid grid-rows-2 w-[22%] xl:w-[18%]">

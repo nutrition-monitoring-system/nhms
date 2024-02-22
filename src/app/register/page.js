@@ -9,6 +9,7 @@ import Allergies from "@/components/Allergies.jsx";
 import ChronicConditions from "@/components/ChronicConditions.jsx";
 import DailyIntake from "@/components/DailyIntake.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
+import TermsAndConditions from "@/components/TermsAndConditons.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
@@ -17,7 +18,6 @@ import { signIn } from "next-auth/react";
 // form validation imports
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FaPray } from "react-icons/fa/index.js";
 import userSchema from "../../utils/otherUtils";
 
 export default function Home() {
@@ -39,10 +39,8 @@ export default function Home() {
     : useState(parseInt(formIndex));
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [nextButtonOpacity, setNextButtonOpacity] = !formIndex
-    ? useState("0")
-    : useState("1");
+  const [nextButtonOpacity, setNextButtonOpacity] =
+    parseInt(formIndex) <= 0 ? useState("0") : useState("1");
 
   // if the query is empty then add data to it
   !formIndex && router.replace("/register?formIndex=0");
@@ -65,7 +63,7 @@ export default function Home() {
 
   // Function to handle initial next button click
   const handleInitialNextClick = (formData) => {
-    const numberOFSubForms = 5;
+    const numberOFSubForms = 6;
     if (index >= numberOFSubForms) {
       return;
     } else if (index >= numberOFSubForms - 1) {
@@ -77,7 +75,7 @@ export default function Home() {
   };
   // Function to handle next button click
   const handleNextClick = (e) => {
-    const numberOFSubForms = 5;
+    const numberOFSubForms = 6;
     e.preventDefault();
     if (index >= numberOFSubForms) {
       return;
@@ -131,7 +129,7 @@ export default function Home() {
   };
 
   // Function to handle navigation button click
-  const handleNavclick = (event, pos) => {
+  const handleNavClick = (event, pos) => {
     event.preventDefault();
     setIndex((index) => index * 0 + pos);
     router.replace(`/register?formIndex=${pos}`);
@@ -150,7 +148,7 @@ export default function Home() {
   useEffect(() => {
     // If there are form errors, reset to the initial step
     resetIndex(errors);
-  }, [errors, submitSuccess]);
+  }, [errors]);
   return (
     <>
       <dialog
@@ -178,47 +176,11 @@ export default function Home() {
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
-          <div
-            className="flex justify-center items-center flex-wrap gap-3 transition-all delay-100"
-            style={{ opacity: nextButtonOpacity }}
-          >
-            <button
-              className="rounded-xl opacity-80 btn-one"
-              onClick={(event) => handleNavclick(event, 0)}
-            >
-              1
-            </button>
-            <button
-              className="rounded-xl opacity-80 btn-two"
-              onClick={(event) => handleNavclick(event, 1)}
-            >
-              2
-            </button>
-            <button
-              className="rounded-xl opacity-80 btn-three"
-              onClick={(event) => handleNavclick(event, 2)}
-            >
-              3
-            </button>
-            <button
-              className="rounded-xl opacity-80 btn-four"
-              onClick={(event) => handleNavclick(event, 3)}
-            >
-              4
-            </button>
-            <button
-              className="rounded-xl opacity-80 btn-five"
-              onClick={(event) => handleNavclick(event, 4)}
-            >
-              5
-            </button>
-            <button
-              className="rounded-xl opacity-80 btn-six"
-              onClick={(event) => handleNavclick(event, 5)}
-            >
-              6
-            </button>
-          </div>
+          <ButtonArray
+            handleNavClick={handleNavClick}
+            nextButtonOpacity={nextButtonOpacity}
+          />
+
           <div className="w-[55%] xl:w-[40%] min-h-fit relative overflow-x-hidden overflow-hidde sm:w-[90%]">
             <form
               id="chageTranslte"
@@ -235,34 +197,92 @@ export default function Home() {
                 }}
               />
               <FoodCategories
-                onClick={handleNextClick}
+                onClickNext={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <Allergies
-                onClick={handleNextClick}
+                onClickNext={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <ChronicConditions
-                onClick={handleNextClick}
+                onClickNext={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <Accessibility
-                onClick={handleNextClick}
+                onClickNext={handleNextClick}
                 onClickPrev={handleClickPrev}
                 handleCollectData={handleCollectData}
               />
               <DailyIntake
+                onClickNext={handleNextClick}
                 onClickPrev={handleClickPrev}
+              />
+              <TermsAndConditions
                 handleSubmit={handleSubmit(handleFormSubmit)}
+                onClickPrev={handleClickPrev}
               />
             </form>
           </div>
         </div>
       </div>
       ;
+    </>
+  );
+}
+
+function ButtonArray({ handleNavClick, nextButtonOpacity }) {
+  return (
+    <>
+      <div
+        className="flex justify-center items-center flex-wrap gap-3 transition-all delay-100"
+        style={{ opacity: nextButtonOpacity }}
+      >
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 0)}
+        >
+          1
+        </button>
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 1)}
+        >
+          2
+        </button>
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 2)}
+        >
+          3
+        </button>
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 3)}
+        >
+          4
+        </button>
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 4)}
+        >
+          5
+        </button>
+        <button
+          className="rounded-xl opacity-80 hover:font-bold"
+          onClick={(event) => handleNavClick(event, 5)}
+        >
+          6
+        </button>
+        <button
+          className="rounded-xl opacity-80"
+          onClick={(event) => handleNavClick(event, 6)}
+        >
+          7
+        </button>
+      </div>
     </>
   );
 }

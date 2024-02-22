@@ -2,29 +2,19 @@
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { AllergiesInformation } from "../utils/dataRegistration.js";
 
-export default function Allergies({ onClick, onClickPrev, handleCollectData }) {
+export default function Allergies({
+  onClickNext,
+  onClickPrev,
+  handleCollectData,
+}) {
   //allergies
   // Component to handle allergies selection
   // Params:
   //   onClick: Function to handle click events
   //   onClickPrev: Function to handle click events for going back
   //   handleCollectData: Function to handle collecting data
-  // List of available allergies with types and descriptions
-  const Allergies = [
-    { type: "Peanuts", description: "Allergic to peanuts." },
-    { type: "Tree Nuts", description: "Allergic to tree nuts." },
-    { type: "Milk", description: "Lactose or milk allergy." },
-    { type: "Mustard", description: "Allergic to mustard." },
-    { type: "Fish", description: "Allergic to fish." },
-    { type: "Egg", description: "Allergic to eggs." },
-    { type: "Soy", description: "Allergic to soy products." },
-    { type: "Wheat", description: "Wheat or gluten allergy." },
-    { type: "Sesame", description: "Allergic to sesame seeds." },
-    { type: "Corn", description: "Allergic to corn products." },
-    { type: "Shellfish", description: "Allergic to shellfish." },
-    { type: "Meat", description: "Allergic to meat products." },
-  ];
 
   // Ref for the modal element
   const modal = useRef(null);
@@ -89,7 +79,7 @@ export default function Allergies({ onClick, onClickPrev, handleCollectData }) {
     handleNone(null);
 
     // Update selected user options
-    SetUserSelected([...userSelected, Allergies[refIdx].type]);
+    SetUserSelected([...userSelected, AllergiesInformation[refIdx].type]);
   };
   return (
     <>
@@ -136,7 +126,7 @@ export default function Allergies({ onClick, onClickPrev, handleCollectData }) {
             />
             None
           </button>
-          {Allergies.map((allergy, idx) => {
+          {AllergiesInformation.map((allergy, idx) => {
             return (
               <div key={idx}>
                 <div
@@ -169,7 +159,7 @@ export default function Allergies({ onClick, onClickPrev, handleCollectData }) {
             <Button
               onClick={(event) => {
                 handleCollectData({ Allergies: userSelected });
-                onClick(event);
+                onClickNext(event);
               }}
             >
               Next

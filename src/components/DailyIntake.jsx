@@ -3,7 +3,7 @@ import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-export default function DailyIntake({ onClickPrev, handleSubmit }) {
+export default function DailyIntake({ onClickNext, onClickPrev }) {
   /* Daily Food form.  */
   // adding daily intake
   // Component to handle daily food intake
@@ -285,12 +285,12 @@ export default function DailyIntake({ onClickPrev, handleSubmit }) {
           </div>
         </div>
         <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <div id="DoneNext">
-            <Button onClick={handleSubmit} type="submit">
-              Done
-            </Button>
-          </div>
+          <button className="tile" onClick={onClickPrev}>
+            Previous
+          </button>
+          <button className="tile" id="DoneNext" onClick={onClickNext}>
+            Next
+          </button>
         </div>
       </div>
     </>

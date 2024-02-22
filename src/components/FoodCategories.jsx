@@ -2,9 +2,10 @@
 import Button from "./Button.jsx";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { foodTypeInformation } from "../utils/dataRegistration.js";
 
 export default function FoodCategories({
-  onClick,
+  onClickNext,
   onClickPrev,
   handleCollectData,
 }) {
@@ -14,38 +15,6 @@ export default function FoodCategories({
   //    onClickPrev - a callback function responsible for handling the previous button click
   //    handleCollectionData - a callback function responsible for adding data collected
   //                           from user preferences in to the output into a parent array called otherData
-  // dietery restrictions array and it's descriptions
-  const foodTypeInformation = [
-    { type: "Vegan", description: "No animal products." },
-    { type: "Vegetarian", description: "Plant-based diet without meat." },
-    { type: "Omnivore", description: "Eats both plants and animals." },
-    {
-      type: "Paleo",
-      description: "Emphasizes whole foods, like our ancestors.",
-    },
-    { type: "Pescatarian", description: "Vegetarian with fish and seafood." },
-    { type: "Carnivore", description: "Primarily meat-based diet." },
-    {
-      type: "Flexitarian",
-      description: "Mainly plant-based with occasional meat.",
-    },
-    { type: "Keto", description: "High-fat, low-carb diet for ketosis." },
-    { type: "Gluten-free", description: "Avoids gluten-containing foods." },
-    { type: "Lactose-free", description: "Avoids lactose in dairy products." },
-    { type: "Dairy-free", description: "Excludes all dairy products." },
-    {
-      type: "Shellfish-free",
-      description: "Avoids shellfish due to allergies.",
-    },
-    { type: "Soy-free", description: "Excludes soy-based foods." },
-    { type: "Allergen-free", description: "Avoids common allergens." },
-    { type: "Low-carb", description: "Restricts carbohydrates." },
-    { type: "Mediterranean", description: "Based on Mediterranean cuisine." },
-    { type: "Low-fat", description: "Emphasizes low-fat foods." },
-    { type: "Low-sugar", description: "Limits sugar intake." },
-    { type: "Low-food", description: "Reduces overall food consumption." },
-  ];
-
   // Ref for the modal element
   const modal = useRef(null);
 
@@ -187,17 +156,20 @@ export default function FoodCategories({
         </div>
         <div className="grid grid-cols-2 place-items-center">
           <div>
-            <Button onClick={onClickPrev}>Previous</Button>
+            <button className="tile" onClick={onClickPrev}>
+              Previous
+            </button>
           </div>
           <div id="AllergiesNext">
-            <Button
+            <button
+              className="tile"
               onClick={(event) => {
                 handleCollectData({ foodCategories: userSelected });
-                onClick(event);
+                onClickNext(event);
               }}
             >
               Next
-            </Button>
+            </button>
           </div>
         </div>
       </div>

@@ -104,6 +104,11 @@ function NavBar() {
           <div className="mx-4">
             <Link href="/blog">Blog</Link>
           </div>
+          <button className="tile ring-white hover:ring-secondary ring-2 font-semibold">
+            <Link href="https://scheduler.zoom.us/mgostic">
+              Book a Consultation
+            </Link>
+          </button>
           <button className="tile ring-white hover:ring-secondary ring-2">
             <Link href="/login">Login</Link>
           </button>
@@ -124,6 +129,11 @@ function NavBar() {
         <div className="mx-4">
           <Link href="/blog">Blog</Link>
         </div>
+        <button className="tile text-black ring-white hover:ring-secondary ring-2">
+          <Link href="https://scheduler.zoom.us/mgostic">
+            Book a Consultation
+          </Link>
+        </button>
         <ProfileNavigation />
       </div>
     </div>
