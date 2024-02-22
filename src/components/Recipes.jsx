@@ -62,11 +62,11 @@ function RecipeInfo({ recipe }) {
             <div className="text-center flex justify-around items-center w-full">
               <span>Prep time</span> <span>{recipe.prep_time}</span>
             </div>
-            <div className="text-center flex justify-around items-center w-full">
+            <div className="text-left flex justify-around items-center w-full">
               <span>Cook time</span> <span>{recipe.cooking_time}</span>
             </div>
-            <div className="text-center flex justify-around items-center w-full">
-              <span>Meal type</span> <strong>BreakFast</strong>
+            <div className="text-left flex justify-around items-center w-full">
+              <span>Meal type</span> <strong>Breakfast</strong>
             </div>
           </div>
         </div>
