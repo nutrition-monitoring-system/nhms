@@ -29,10 +29,10 @@ model allergies {
 }
 
 model chronic_condition {
-  ChronicID      String     @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
-  Condition_Type String     @default("IBS") @map("Condition Type") @db.VarChar(45)
+  ChronicID      String         @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
+  Condition_Type String         @default("IBS") @map("Condition Type") @db.VarChar(45)
   health         health[]
-  symptoms       symptoms[]
+  scc_junction   scc_junction[]
 }
 
 model food {
@@ -87,8 +87,20 @@ model preferences {
 }
 
 model symptoms {
-  symptom_id          String            @id(map: "symptoms_pk") @db.VarChar
-  symptom_name        String?           @db.VarChar
-  chroniccondition_id String            @db.Char
-  chronic_condition   chronic_condition @relation(fields: [chroniccondition_id], references: [ChronicID], onDelete: NoAction, onUpdate: NoAction, map: "fk_chronic")
+  symptom_id   String         @id(map: "symptoms_pk") @db.VarChar
+  symptom_name String?        @db.VarChar
+  scc_junction scc_junction[]
+}
+
+model log {
+  logid  String @id(map: "log_table_pk") @db.VarChar(32)
+  userid String @db.VarChar(32)
+}
+
+model scc_junction {
+  scc_chronicID     String            @db.Char
+  scc_symptomID     String            @db.VarChar
+  junctionid        String            @id(map: "scc_junction_pk") @unique(map: "scc_junction_junctionid_idx") @db.VarChar
+  chronic_condition chronic_condition @relation(fields: [scc_chronicID], references: [ChronicID], onDelete: Cascade, map: "fk_chronicid")
+  symptoms          symptoms          @relation(fields: [scc_symptomID], references: [symptom_id], onDelete: Cascade, map: "fk_symptomid")
 }

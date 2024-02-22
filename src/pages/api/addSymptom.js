@@ -29,18 +29,26 @@ export default async function handler(req, res) {
               data: {
                 symptom_name: symptomName,
                 symptom_id: newUUID,
-                chroniccondition_id: checkCondition.ChronicID,
               },
             })
+            .then(async () => {
+              const newJunction = await prisma.scc_junction.create({
+                data: {
+                  junctionid: v1().slice(0, 32),
+                  scc_chronicID: checkCondition.ChronicID,
+                  scc_symptomID: newUUID,
+                },
+              });
+            })
             .then(() => {
-              console.log("Symptom added to database.")
+              console.log("Symptom added to database.");
               return res.status(201).json({ ok: "true" });
             })
             .catch(() => {
-              res.status(404).json({ error: "Unable to add symptom." });
+              return res.status(404).json({ error: "Unable to add symptom." });
             });
         }
-        console.log("Symptom already in database.")
+        console.log("Symptom already in database.");
         return res.status(202).json({ ok: "true" });
       } else {
         res.status(404).json({ error: "Could not find condition." });
