@@ -101,7 +101,7 @@ function NavBar({ data }) {
             />
             <span>Search</span>
           </div>
-          <div className="tile shadow-none hover:shadow-none text-lg">
+          {/* <div className="tile shadow-none hover:shadow-none text-lg">
             <Image
               src="/icons/shopping.png"
               width={25}
@@ -109,7 +109,7 @@ function NavBar({ data }) {
               alt="shopping icon"
             />
             <span>Basket</span>
-          </div>
+          </div> */}
           <ProfileNavigation/>
         </div>
       </div>
