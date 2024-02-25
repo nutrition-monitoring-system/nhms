@@ -48,15 +48,20 @@ function UserData({ props }) {
     return <div>Failed to load user data. </div>;
   }
   if (!data) {
-    return <div>Loading...</div>;
+    return <div className="">Loading...</div>;
   }
   if (props == "calendar") {
     return (
-      <div>
-        <h1 id="generatedData">
-          {data.name} {data.surname}
+      <div className="container space-y-5 py-3">
+        <h1
+          id="generatedData"
+          className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white"
+        >
+          Name: {data.name} {data.surname}
         </h1>
-        <p>{session.user.email}</p>
+        <p className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white">
+          Email: {session.user.email}
+        </p>
       </div>
     );
   } else if (props == "nav") {
@@ -85,7 +90,7 @@ function UserData({ props }) {
   return (
     <div>
       <h1>
-        {data.name} {data.surname}
+        Name: {data.name} {data.surname}
       </h1>
     </div>
   );
@@ -140,31 +145,24 @@ export default function User({ handsignOut }) {
   return (
     <div className="body flex">
       <SideNavBar></SideNavBar>
-      <div className="grid grid-cols-1 bg-white grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
-        <MiniNavBar
-          avatar={avatar}
-          handleAvatarChange={handleAvatarChange}
-          confirmLogout={confirmLogout}
-        ></MiniNavBar>
-        <CalenderHealthInfo
-          userInfo={userInfo}
-          goToPage={goToPage}
-        ></CalenderHealthInfo>
-
+      <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
+        <TopInformation></TopInformation>
+        <HealthAndUserSettings></HealthAndUserSettings>
+        <div className="flex space-x-10 container place-content-center bg-gray-100">
+          <PhotoLog photo={photo} handlePhoto={handlePhoto}></PhotoLog>
+          <Log></Log>
+        </div>
         <CreateHealthRecordForm></CreateHealthRecordForm>
-
-        <Photo photo={photo} handlePhoto={handlePhoto}></Photo>
-        <Log></Log>
         {/* <ChartComponent /> */}
       </div>
     </div>
   );
 }
 
-function CalenderHealthInfo({ userInfo, goToPage }) {
+function HealthAndUserSettings({ userInfo, goToPage }) {
   return (
-    <div className="calendar-health flex justify-center items-center gap-4 py-5 ">
-      <div className="Health-info bg-primary rounded-md grid place-items-center h-[90%] w-[30%] p-3 shadow-lg">
+    <div className="bg-white calendar-health flex justify-center items-center gap-4 p-3">
+      <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] p-3 shadow-lg h-full">
         <h1 className="text-md font-bold text-left place-self-start container">
           Health Information:
         </h1>
@@ -181,24 +179,24 @@ function CalenderHealthInfo({ userInfo, goToPage }) {
           Calendar
         </Link>
       </div> */}
-      <div className="bg-primary rounded-md grid place-items-center h-[90%] w-[30%] md:h-full md:w-[50%] max-w-max p-3 shadow-lg">
+      <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[50%] max-w-max p-3 shadow-lg h-full">
         <h1 className="text-md font-bold text-left place-self-start">
           {"My Settings: "}
         </h1>
         <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
-          <button className="tile bg-white text-sm flex space-x-1.5">
-            <FaUserAlt className="size-6" />
+          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
+            <FaUserAlt className="size-6 " />
             <span className="text-left">User Information</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-1.5">
+          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
             <FaAccessibleIcon className="size-6 " />
             <span className="text-left">Accessibility Settings</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-1.5">
+          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
             <FaMoneyBillWaveAlt className="size-6 " />
             <span className="text-left ">Payment Details</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-1.5">
+          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
             <MdLocalHospital className="size-6 " />
             <span className="text-left">Chronic Conditions</span>
           </button>
@@ -208,18 +206,13 @@ function CalenderHealthInfo({ userInfo, goToPage }) {
   );
 }
 
-function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
-  const userInfo = {
-    id: "user123js3",
-    name: "John, Smith",
-    email: "johnSmith@gmail.com",
-  };
+function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   return (
     <div className="bg-gray-100 grid grid-cols-2 gap-3 justify-center items-center px-6 py-3">
-      <div className="user-info p-5 flex just-center items-center gap-4">
+      <div className="user-info p-5 flex justify-center items-center gap-4">
         <div className="user-avatar relative grid justify-center p-1 min-h-fit rounded-lg">
           <Image
-            className="rounded-[50px] shadow-lg "
+            className="rounded-[50px] shadow-lg"
             width={100}
             height={100}
             id="avatar"
@@ -260,7 +253,7 @@ function SideNavBar() {
     console.log("开始搜索：" + searchTerm);
   };
   return (
-    <div className="w-[20%] xl:w-[18%] sidebar bg-orange h-screen sticky top-0">
+    <div className="w-[20%] xl:w-[18%] sidebar h-screen sticky top-0">
       {/* 添加搜索框 */}
 
       {/* 你的导航链接 */}
@@ -318,11 +311,11 @@ function SideNavBar() {
   );
 }
 
-function Photo({ photo, handlePhoto }) {
+function PhotoLog({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];
   return (
-    <div className="photo flex justify-center items-center gap-4">
-      <div className="relative photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
+    <div className=" photo flex justify-center items-center gap-4">
+      <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>Initial</p>
         <FaCamera className="camera text-center" />
         {/* <img
@@ -337,7 +330,7 @@ function Photo({ photo, handlePhoto }) {
       {months.map((item, idx) => (
         <div
           key={idx}
-          className="photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
+          className="photo-bar bg-white rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
         >
           <p>{item}</p>
           <div>
@@ -351,15 +344,15 @@ function Photo({ photo, handlePhoto }) {
 
 function Log() {
   return (
-    <div className="bg-gray-100 flex justify-center items-center gap-4">
-      <div className="log-bar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>Food Log</p>
-      </div>
-      <div className="log-bar  bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>Water Log</p>
-      </div>
+    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3">
+      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-sm">
+        <AiOutlinePlus className="add2 size-6"></AiOutlinePlus>
+        <p className="text-left w-full">Food Log</p>
+      </button>
+      <button className="log-bar bg-white  flex px-5 space-x-3 py-2 shadow-lg w-full rounded-sm">
+        <AiOutlinePlus className="add2 size-6"></AiOutlinePlus>
+        <p className="text-left w-full">Water Log</p>
+      </button>
     </div>
   );
 }
@@ -373,7 +366,7 @@ function CreateHealthRecordForm() {
   ];
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center gap-4">
+    <div className=" flex justify-center items-center gap-4">
       {items.map((item, index) => (
         <div
           key={index}
