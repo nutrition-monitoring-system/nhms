@@ -3,16 +3,21 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
-import { FaRegAddressCard } from "react-icons/fa";
-import { FaCamera } from "react-icons/fa";
+import {
+  FaRegAddressCard,
+  FaAccessibleIcon,
+  FaMoneyBillWaveAlt,
+  FaUserAlt,
+  FaBlog,
+  FaCamera,
+  FaPencilAlt,
+} from "react-icons/fa";
+import { MdSettings, MdLocalHospital } from "react-icons/md";
 // import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
 import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-
-
-
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -45,7 +50,6 @@ function UserData({ props }) {
   if (!data) {
     return <div>Loading...</div>;
   }
-  console.log(data);
   if (props == "calendar") {
     return (
       <div>
@@ -59,7 +63,7 @@ function UserData({ props }) {
     /* Checks if the props are a navbar. */
     const dob = new Date(data.dob);
     return (
-      <div>
+      <div className="container">
         <div className="grid grid-cols-3">
           <span id="user-name" className="col-span-2">
             {data.name} {data.surname}
@@ -126,11 +130,11 @@ export default function User({ handsignOut }) {
 
   const goToPage = () => {
     const router = useRouter();
-    router.push("/home")
+    router.push("/home");
   };
   const goToPage2 = () => {
     const router = useRouter();
-    router.push("/")
+    router.push("/");
   };
 
   return (
@@ -159,23 +163,46 @@ export default function User({ handsignOut }) {
 
 function CalenderHealthInfo({ userInfo, goToPage }) {
   return (
-    <div className="calendar-health flex justify-center items-center gap-4">
-      <div className="Health-info rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
+    <div className="calendar-health flex justify-center items-center gap-4 py-5 ">
+      <div className="Health-info bg-primary rounded-md grid place-items-center h-[90%] w-[30%] p-3 shadow-lg">
+        <h1 className="text-md font-bold text-left place-self-start container">
+          Health Information:
+        </h1>
         <UserData props={"calendar"}></UserData>
         {/* <p>Health information</p>
         <p>Name: {userInfo.name}</p>
         <p>Email: {userInfo.email}</p> */}
         <div className="expand-user-info" onClick={goToPage}>
-          <FaRegAddressCard className="info-icon" />
+          <FaRegAddressCard className="size-6" />
         </div>
       </div>
-      <div className="Calendar rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <Link
-          className="calendar-text"
-          href=""
-        >
+      {/* <div className="Calendar bg-secondary rounded-md grid place-items-center h-[70%] w-[20%] px-5 py-2 shadow-lg">
+        <Link className="calendar-text" href="">
           Calendar
         </Link>
+      </div> */}
+      <div className="bg-primary rounded-md grid place-items-center h-[90%] w-[30%] md:h-full md:w-[50%] max-w-max p-3 shadow-lg">
+        <h1 className="text-md font-bold text-left place-self-start">
+          {"My Settings: "}
+        </h1>
+        <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
+          <button className="tile bg-white text-sm flex space-x-1.5">
+            <FaUserAlt className="size-6" />
+            <span className="text-left">User Information</span>
+          </button>
+          <button className="tile bg-white text-sm flex space-x-1.5">
+            <FaAccessibleIcon className="size-6 " />
+            <span className="text-left">Accessibility Settings</span>
+          </button>
+          <button className="tile bg-white text-sm flex space-x-1.5">
+            <FaMoneyBillWaveAlt className="size-6 " />
+            <span className="text-left ">Payment Details</span>
+          </button>
+          <button className="tile bg-white text-sm flex space-x-1.5">
+            <MdLocalHospital className="size-6 " />
+            <span className="text-left">Chronic Conditions</span>
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -218,7 +245,6 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
             alt="user-logout"
             width={20}
             height={20}
-            
           />
           Logout
         </button>
@@ -234,7 +260,7 @@ function SideNavBar() {
     console.log("开始搜索：" + searchTerm);
   };
   return (
-    <div className="w-[22%] xl:w-[18%] sidebar bg-orange h-screen sticky top-0">
+    <div className="w-[20%] xl:w-[18%] sidebar bg-orange h-screen sticky top-0">
       {/* 添加搜索框 */}
 
       {/* 你的导航链接 */}
@@ -242,44 +268,49 @@ function SideNavBar() {
         <Logo></Logo>
         <Link
           href="/blog"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          {" "}
+          <FaBlog className="size-6" />
           Blogs
         </Link>
         <Link
           href="#section2"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg md:text-xl place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          {" "}
+          <FaPencilAlt className="size-6" />
           Plan
         </Link>
-        <Link
+        {/*  <Link
           href="#section3"
           className="tile text-lg grid place-content-center text-center"
         >
           Data Analytics
-        </Link>
-        <Link
+        </Link> */}
+        {/* <Link
           href="#section1"
           className="tile text-lg grid place-content-center text-center"
         >
           Health Record Form
-        </Link>
-        <Link
+        </Link> */}
+        {/* <Link
           href=""
           className="tile text-lg grid place-content-center text-center"
         >
           Calender Events
-        </Link>
-        <Link
+      </Link> */}
+        {/* <Link
           href="#section3"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
-          Personal information
-        </Link>
+          Personal Information
+        </Link>} */}
         <Link
           href="#section1"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          <MdSettings className="size-6" />
           Settings
         </Link>
       </div>
@@ -292,7 +323,7 @@ function Photo({ photo, handlePhoto }) {
   return (
     <div className="photo flex justify-center items-center gap-4">
       <div className="relative photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
-        <p>initial</p>
+        <p>Initial</p>
         <FaCamera className="camera text-center" />
         {/* <img
           className="absolute opacity-1"
