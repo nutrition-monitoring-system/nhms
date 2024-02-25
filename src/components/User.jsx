@@ -6,13 +6,18 @@ import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
 import {
   FaRegAddressCard,
   FaAccessibleIcon,
-  FaMoneyBillWaveAlt,
+  FaPills,
   FaUserAlt,
   FaBlog,
   FaCamera,
   FaPencilAlt,
 } from "react-icons/fa";
-import { MdSettings, MdLocalHospital } from "react-icons/md";
+import {
+  MdSettings,
+  MdLocalHospital,
+  MdLocalDrink,
+  MdDining,
+} from "react-icons/md";
 // import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
 import useSWR from "swr";
@@ -184,20 +189,20 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
           {"My Settings: "}
         </h1>
         <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
-          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
             <FaUserAlt className="size-6 " />
             <span className="text-left">User Information</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
             <FaAccessibleIcon className="size-6 " />
             <span className="text-left">Accessibility Settings</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
-            <FaMoneyBillWaveAlt className="size-6 " />
-            <span className="text-left ">Payment Details</span>
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <FaPills className="size-6" />
+            <span className="text-left">Symptoms</span>
           </button>
-          <button className="tile bg-white text-sm flex space-x-0.5 hover:bg-white/75 w-full">
-            <MdLocalHospital className="size-6 " />
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <MdLocalHospital className="size-6" />
             <span className="text-left">Chronic Conditions</span>
           </button>
         </div>
@@ -346,11 +351,11 @@ function Log() {
   return (
     <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3">
       <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-sm">
-        <AiOutlinePlus className="add2 size-6"></AiOutlinePlus>
+        <MdDining className="size-6" />
         <p className="text-left w-full">Food Log</p>
       </button>
-      <button className="log-bar bg-white  flex px-5 space-x-3 py-2 shadow-lg w-full rounded-sm">
-        <AiOutlinePlus className="add2 size-6"></AiOutlinePlus>
+      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-sm">
+        <MdLocalDrink className="size-6" />
         <p className="text-left w-full">Water Log</p>
       </button>
     </div>
