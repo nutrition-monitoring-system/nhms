@@ -1,32 +1,24 @@
 /* eslint-disable no-undef */
+
+beforeEach(() => {
+  cy.visit("/login");
+  // Logs in with the registered user credentials
+  cy.log("Login to the test profile.");
+  cy.get('input[name="email"]').type("testaccount@gmail.com");
+  cy.get('input[name="password"]').type("password12345");
+  cy.get("#handleLogin").click();
+  cy.wait(3000);
+});
 describe("This test should check that the name is in the corresponding button once the user has logged in.", () => {
   /* This is how the test should be laid out. */
 
+  const userName = "John Smith";
+  const email = "testaccount@gmail.com";
+  const dob = "31/12/2023";
   /* To access the url when TESTING use the baseUrl, like this 
     let endpoint = Cypress.config("baseUrl") + "/api/selectAllUsers";  */
-  it("This should log the user in.", () => {
-    cy.visit("/login");
-    // Logs in with the registered user credentials
-    cy.log("Login to the test profile.");
-    cy.get('input[name="email"]').type("testaccount@gmail.com");
-    cy.get('input[name="password"]').type("password12345");
-    cy.get("#handleLogin").click();
-    cy.wait(3000);
-  });
-
   it("This should check if the data has been received. ", () => {
-    cy.visit("/login");
-    // Logs in with the registered user credentials
-    cy.log("Login to the test profile.");
-    cy.get('input[name="email"]').type("testaccount@gmail.com");
-    cy.get('input[name="password"]').type("password12345");
-    cy.get("#handleLogin").click();
-    cy.wait(3000);
-
-    const userName = "John Smith";
-    const email = "testaccount@gmail.com";
-    const dob = "31/12/2023";
-
+    cy.visit("/");
     cy.visit("/home");
     cy.log("Check if the data has been received.");
     cy.wait(1000);
