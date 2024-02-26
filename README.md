@@ -43,12 +43,12 @@
 
 ## 📍 Overview
 
-
 NHMS is an easy to use web-based application where users are able to simply log in their nutrition choices, liquids, exercise, mood, energy levels, menstrual cycle and other symptoms that relate to chronic conditions.
 
 ---
 
 ## 📦 Features
+
 - User profiles: Users can create and login to personalised profiles.
 - Admin dashboard: Selected administrators can view settings not available to regular users.
 - Blog: Explore and view articles on different foods and recipes.
@@ -63,7 +63,7 @@ Please ensure you have the following dependencies installed on your system:
 
 `node` - to run any commmands.
 
-`mysql` - to download and use the database provided.
+`postgres` - to download and use the database provided.
 
 `cypress` - to run tests.
 
@@ -109,13 +109,14 @@ npm run test OR npm run cy:run - # for headless mode
 npm run cy:open - # to actively run tests in the Cypress browser.
 
 ```
+
 ---
 
 ## 🛬 Deployed Version
 
 Users can find the deployed version of nhms on Vercel with [this link](https://nhms-beta.vercel.app/).
 
-- User account: Users can register for an account and then login using the [register](https://nhms-beta.vercel.app/register?formIndex=0) page.
+- User account: Users can register for an account and then login using the [register](https://nhms-beta.vercel.app/register) page.
 
 - Admin account: The admin account can be accessed [here](https://nhms-beta.vercel.app/admin).
 
@@ -125,7 +126,7 @@ Users can find the deployed version of nhms on Vercel with [this link](https://n
 
 > - [x] `ℹ️  Create a basic scaffolding for the nutrition management system.`
 > - [ ] `ℹ️  Expand out with recommendations for foods, per client.`
-> - [ ] `ℹ️ MORE TO BE ADDED.`
+> - [ ] `ℹ️  MORE TO BE ADDED.`
 
 ---
 
@@ -178,7 +179,9 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 ## 📄 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License.
+
+For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---
 

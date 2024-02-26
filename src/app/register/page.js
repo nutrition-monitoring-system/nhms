@@ -9,7 +9,7 @@ import Allergies from "@/components/Allergies.jsx";
 import ChronicConditions from "@/components/ChronicConditions.jsx";
 import DailyIntake from "@/components/DailyIntake.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
-import TermsAndConditions from "@/components/TermsAndConditons.jsx";
+import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
 // authentication for protected routes
