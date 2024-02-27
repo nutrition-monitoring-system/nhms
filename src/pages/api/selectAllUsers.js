@@ -3,7 +3,16 @@ import prisma from "../../utils/prismaclientUtil.js"; // returns a global instan
 export default async function handler(req, res) {
   if (req.method == "GET") {
     // Process a GET request
-    const allUsers = await prisma.user.findMany();
+    const allUsers = await prisma.user.findMany({
+      select: {
+        forename: true,
+        surname: true,
+        email: true,
+        dob: true,
+        gender: true,
+        is_admin: true,
+      },
+    });
     return res.status(200).send(allUsers);
   } else {
     // bad request
