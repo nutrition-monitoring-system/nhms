@@ -13,12 +13,12 @@ export default function Header() {
   const headerIcons = [
     "/icons/headerIcons/dish.png",
     "/icons/headerIcons/drink.png",
-    "/icons/headerIcons/hamburger.png ",
-    "/icons/headerIcons/healthy-food.png ",
-    "/icons/headerIcons/recipe.png ",
-    "/icons/headerIcons/hamburger.png ",
-    "/icons/headerIcons/healthy-food.png ",
-    "/icons/headerIcons/recipe.png ",
+    "/icons/headerIcons/hamburger.png",
+    "/icons/headerIcons/healthy-food.png",
+    "/icons/headerIcons/recipe.png",
+    "/icons/headerIcons/hamburger.png",
+    "/icons/headerIcons/healthy-food.png",
+    "/icons/headerIcons/recipe.png",
   ];
 
   // This section is wrapped by a SessionProvider component for accessing session variables
@@ -104,6 +104,11 @@ function NavBar() {
           <div className="mx-4">
             <Link href="/blog">Blog</Link>
           </div>
+          <button className="tile ring-white hover:ring-secondary ring-2 font-semibold">
+            <Link href="https://scheduler.zoom.us/mgostic">
+              Book a Consultation
+            </Link>
+          </button>
           <button className="tile ring-white hover:ring-secondary ring-2">
             <Link href="/login">Login</Link>
           </button>
@@ -124,7 +129,12 @@ function NavBar() {
         <div className="mx-4">
           <Link href="/blog">Blog</Link>
         </div>
-        <ProfileNavigation name={"John, Doe"} gender={"M"} />
+        <button className="tile text-black ring-white hover:ring-secondary ring-2">
+          <Link href="https://scheduler.zoom.us/mgostic">
+            Book a Consultation
+          </Link>
+        </button>
+        <ProfileNavigation />
       </div>
     </div>
   );

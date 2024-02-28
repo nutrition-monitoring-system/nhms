@@ -1,14 +1,106 @@
-"use client";
 import { useState } from "react";
 //import "./User.css"; // 导入 CSS 文件
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
-import { FaRegAddressCard } from "react-icons/fa";
-import { FaCamera } from "react-icons/fa";
-import ChartComponent from "../components/UserCharts.jsx";
+import {
+  FaRegAddressCard,
+  FaAccessibleIcon,
+  FaPills,
+  FaUserAlt,
+  FaBlog,
+  FaCamera,
+  FaPencilAlt,
+} from "react-icons/fa";
+import {
+  MdSettings,
+  MdLocalHospital,
+  MdLocalDrink,
+  MdDining,
+} from "react-icons/md";
+// import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
-import FileUpload from "./fileUpload";
+import useSWR from "swr";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import FileUpload from "../components/fileUpload";
+
+function UserData({ props }) {
+  const { data: session, status } = useSession();
+
+  // console.log(`User ID = ${session.user.name}`);
+
+  const sendID = { id: session.user.name };
+  /* Sends the ID of the user to backend. */
+
+  const fetcher = (...args) =>
+    fetch(
+      ...args,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendID),
+      },
+      { next: { revalidate: 3600 } }
+    ).then((res) => res.json());
+
+  const { data, error } = useSWR("/api/userById", fetcher);
+  /* Uses the SWR Next hook.  */
+
+  if (error) {
+    return <div>Failed to load user data. </div>;
+  }
+  if (!data) {
+    return <div className="">Loading...</div>;
+  }
+  if (props == "calendar") {
+    return (
+      <div className="container space-y-5 py-3">
+        <h1
+          id="generatedData"
+          className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white"
+        >
+          Name: {data.name} {data.surname}
+        </h1>
+        <p className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white">
+          Email: {session.user.email}
+        </p>
+      </div>
+    );
+  } else if (props == "nav") {
+    /* Checks if the props are a navbar. */
+    const dob = new Date(data.dob);
+    return (
+      <div className="container">
+        <div className="grid grid-cols-3">
+          <span id="user-name" className="col-span-2">
+            {data.name} {data.surname}
+          </span>
+        </div>
+        <div className="grid grid-cols-3">
+          <span id="user-email" className="col-span-2">
+            {session.user.email}
+          </span>
+        </div>
+        <div className="grid grid-cols-3">
+          <span id="user-dob" className="col-span-2">
+            {dob.getDate()}/{dob.getMonth() + 1}/{dob.getFullYear()}
+          </span>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h1>
+        Name: {data.name} {data.surname}
+      </h1>
+    </div>
+  );
+}
 
 export default function User({ handsignOut }) {
   const [avatar, setAvatar] = useState(
@@ -44,81 +136,89 @@ export default function User({ handsignOut }) {
   };
 
   const confirmLogout = () => {
-    const confirmation = window.confirm("Are you sure you want to logout?");
-    if (confirmation) {
-      // 执行退出操作，例如跳转到退出页面或执行退出逻辑
-      handsignOut();
-    }
+    return signOut();
   };
 
   const goToPage = () => {
-    // 使用window.location.href属性或者window.location.assign方法来跳转到"http://localhost:3001/"
-    window.location.href = "http://localhost:3001/";
+    const router = useRouter();
+    router.push("/home");
   };
   const goToPage2 = () => {
-    // 使用window.location.href属性或者window.location.assign方法来跳转到"http://localhost:3001/"
-    window.location.href = "E:/大三上/NHMS/calendar.html";
+    const router = useRouter();
+    router.push("/");
   };
 
   return (
     <div className="body flex">
       <SideNavBar></SideNavBar>
-      <div className="grid grid-cols-1 bg-white grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
-        <MiniNavBar
-          avatar={avatar}
-          handleAvatarChange={handleAvatarChange}
-          confirmLogout={confirmLogout}
-        ></MiniNavBar>
-        <CalenderHealthInfo
-          userInfo={userInfo}
-          goToPage={goToPage}
-        ></CalenderHealthInfo>
-
+      <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
+        <TopInformation></TopInformation>
+        <HealthAndUserSettings></HealthAndUserSettings>
+        <div className="flex space-x-10 container place-content-center bg-gray-100">
+          <PhotoLog photo={photo} handlePhoto={handlePhoto}></PhotoLog>
+          <Log></Log>
+        </div>
         <CreateHealthRecordForm></CreateHealthRecordForm>
-
-        <Photo photo={photo} handlePhoto={handlePhoto}></Photo>
-        <Log></Log>
-        <ChartComponent />
+        {/* <ChartComponent /> */}
       </div>
     </div>
   );
 }
 
-function CalenderHealthInfo({ userInfo, goToPage }) {
+function HealthAndUserSettings({ userInfo, goToPage }) {
   return (
-    <div className="calendar-health flex justify-center items-center gap-4">
-      <div className="Health-info rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <p>Health information</p>
+    <div className="bg-white calendar-health flex justify-center items-center gap-4 p-3">
+      <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] p-3 shadow-lg h-full">
+        <h1 className="text-md font-bold text-left place-self-start container">
+          Health Information:
+        </h1>
+        <UserData props={"calendar"}></UserData>
+        {/* <p>Health information</p>
         <p>Name: {userInfo.name}</p>
-        <p>Email: {userInfo.email}</p>
+        <p>Email: {userInfo.email}</p> */}
         <div className="expand-user-info" onClick={goToPage}>
-          <FaRegAddressCard className="info-icon" />
+          <FaRegAddressCard className="size-6" />
         </div>
       </div>
-      <div className="Calendar rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <Link
-          className="calendar-text"
-          href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
-        >
+      {/* <div className="Calendar bg-secondary rounded-md grid place-items-center h-[70%] w-[20%] px-5 py-2 shadow-lg">
+        <Link className="calendar-text" href="">
           Calendar
         </Link>
+      </div> */}
+      <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[50%] max-w-max p-3 shadow-lg h-full">
+        <h1 className="text-md font-bold text-left place-self-start">
+          {"My Settings: "}
+        </h1>
+        <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <FaUserAlt className="size-6 " />
+            <span className="text-left">User Information</span>
+          </button>
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <FaAccessibleIcon className="size-6 " />
+            <span className="text-left">Accessibility Settings</span>
+          </button>
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <FaPills className="size-6" />
+            <span className="text-left">Symptoms</span>
+          </button>
+          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
+            <MdLocalHospital className="size-6" />
+            <span className="text-left">Chronic Conditions</span>
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
-function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
-  const userInfo = {
-    id: "user123js3",
-    name: "John, Smith",
-    email: "johnSmith@gmail.com",
-  };
+function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   return (
     <div className="bg-gray-100 grid grid-cols-2 gap-3 justify-center items-center px-6 py-3">
-      <div className="user-info p-5 flex just-center items-center gap-4">
+      <div className="user-info p-5 flex justify-center items-center gap-4">
         <div className="user-avatar relative grid justify-center p-1 min-h-fit rounded-lg">
           <Image
-            className="rounded-[50px] shadow-lg "
+            className="rounded-[50px] shadow-lg"
             width={100}
             height={100}
             id="avatar"
@@ -134,33 +234,16 @@ function MiniNavBar({ avatar, handleAvatarChange, confirmLogout }) {
             onChange={handleAvatarChange}
           />
         </div>
-        <div>
-          <div className="grid grid-cols-3">
-            <span id="user-name" className="col-span-2">
-              {userInfo.name}
-            </span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span id="user-email" className="col-span-2">
-              {userInfo.email}
-            </span>
-          </div>
-          <div className="grid grid-cols-3">
-            <span id="user-id" className="col-span-2">
-              {userInfo.id}
-            </span>
-          </div>
-        </div>
+        <UserData props="nav"></UserData>
       </div>
       <div className="grid place-items-center ">
-        <button className="tile">
+        <button className="tile" onClick={confirmLogout}>
           <Image
             id="logout"
             src="/icons/logout.png"
             alt="user-logout"
             width={20}
             height={20}
-            onClick={confirmLogout}
           />
           Logout
         </button>
@@ -176,7 +259,7 @@ function SideNavBar() {
     console.log("开始搜索：" + searchTerm);
   };
   return (
-    <div className="w-[22%] xl:w-[18%] sidebar bg-orange h-screen sticky top-0">
+    <div className="w-[20%] xl:w-[18%] sidebar h-screen sticky top-0">
       {/* 添加搜索框 */}
 
       {/* 你的导航链接 */}
@@ -184,44 +267,49 @@ function SideNavBar() {
         <Logo></Logo>
         <Link
           href="/blog"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          {" "}
+          <FaBlog className="size-6" />
           Blogs
         </Link>
         <Link
           href="#section2"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg md:text-xl place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          {" "}
+          <FaPencilAlt className="size-6" />
           Plan
         </Link>
-        <Link
+        {/*  <Link
           href="#section3"
           className="tile text-lg grid place-content-center text-center"
         >
           Data Analytics
-        </Link>
-        <Link
+        </Link> */}
+        {/* <Link
           href="#section1"
           className="tile text-lg grid place-content-center text-center"
         >
           Health Record Form
-        </Link>
-        <Link
-          href="file:///E:/%E5%A4%A7%E4%B8%89%E4%B8%8A/NHMS/calender.html"
+        </Link> */}
+        {/* <Link
+          href=""
           className="tile text-lg grid place-content-center text-center"
         >
           Calender Events
-        </Link>
-        <Link
+      </Link> */}
+        {/* <Link
           href="#section3"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
-          Personal information
-        </Link>
+          Personal Information
+        </Link>} */}
         <Link
           href="#section1"
-          className="tile text-lg grid place-content-center text-center"
+          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
         >
+          <MdSettings className="size-6" />
           Settings
         </Link>
       </div>
@@ -229,25 +317,25 @@ function SideNavBar() {
   );
 }
 
-function Photo({ photo, handlePhoto }) {
+function PhotoLog({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];
   return (
-    <div className="photo flex justify-center items-center gap-4">
-      <div className="relative photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
-        <p>initial</p>
+    <div className=" photo flex justify-center items-center gap-4">
+      <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
+        <p>Initial</p>
         <FaCamera className="camera text-center" />
-        <FileUpload identifier="0"/>
+        {/* <FileUpload identifier="0" /> */}
       </div>
       {months.map((item, idx) => (
         <div
           key={idx}
-          className="photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
+          className="photo-bar bg-white rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
         >
           <p>{item}</p>
           <div>
             <FaCamera className="camera" />
-				<FileUpload identifier={idx+1}/>
-			 </div>
+            {/* <FileUpload identifier={idx + 1} /> */}
+          </div>
         </div>
       ))}
     </div>
@@ -256,15 +344,15 @@ function Photo({ photo, handlePhoto }) {
 
 function Log() {
   return (
-    <div className="bg-gray-100 flex justify-center items-center gap-4">
-      <div className="log-bar bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>log Food</p>
-      </div>
-      <div className="log-bar  bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg">
-        <AiOutlinePlus className="add2"></AiOutlinePlus>
-        <p>log Water</p>
-      </div>
+    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3">
+      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-sm">
+        <MdDining className="size-6" />
+        <p className="text-left w-full">Food Log</p>
+      </button>
+      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-sm">
+        <MdLocalDrink className="size-6" />
+        <p className="text-left w-full">Water Log</p>
+      </button>
     </div>
   );
 }
@@ -278,7 +366,7 @@ function CreateHealthRecordForm() {
   ];
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center gap-4">
+    <div className=" flex justify-center items-center gap-4">
       {items.map((item, index) => (
         <div
           key={index}

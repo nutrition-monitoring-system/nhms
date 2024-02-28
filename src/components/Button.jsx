@@ -8,16 +8,7 @@ export default function Button({ children, href, onClick, type, className }) {
   // - className: CSS class names for styling
   return (
     <a href={href} type={type}>
-      <button
-        onClick={onClick}
-        type={type}
-        className={
-          `min-w-fit grid place-items-center rounded-md
-            bg-white ring-white ring-2 hover:ring-secondary px-8 py-3 text-sm text-black
-            shadow-xl transition-all duration-200 ease-in
-            hover:shadow-2xl` + className
-        }
-      >
+      <button onClick={onClick} type={type} className="tile">
         {children}
       </button>
     </a>

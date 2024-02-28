@@ -23,9 +23,9 @@ function Terms() {
 
       <p>{`
         These terms and conditions outline the rules and regulations for the use
-        of Nutrition and Health Monitoring System's Website, located at
-        https://nhms.onrender.com/.
-      `}</p>
+        of Nutrition and Health Monitoring System's Website, located at `}
+        <a href="https://nhms-beta.vercel.app/" target="_blank" rel="noopener noreferrer"style={{ color: 'blue', textDecoration: 'underline' }}>https://nhms-beta.vercel.app/</a>.
+      </p>
 
       <p>{`
         By accessing this website we assume you accept these terms and
@@ -53,7 +53,7 @@ function Terms() {
         <strong>Who can use the service</strong>
       </h3>
 
-      <p>{`You must be 18 years old to use nhms.`}</p>
+      <p>{`You must be at least 18 years old to use nhms.`}</p>
 
       <h3 className="font-bold text-lg m-3 text-center">
         <strong>Cookies</strong>

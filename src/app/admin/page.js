@@ -1,15 +1,44 @@
-import Link from "next/link";
+"use client";
 import Image from "next/image";
 import Logo from "../../components/Logo";
 import ProfileNavigation from "../../components/ProfileNavigation";
+import { SessionProvider } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Loading from "@/components/Loading";
 export default function Page() {
   return (
-    <div className="w-screen h-screen flex">
-      <NavBar />
-      <MainPage />
-    </div>
+    <SessionProvider>
+      <Home />
+    </SessionProvider>
   );
 }
+function Home() {
+  const router = useRouter();
+  const { session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+      return router.push("/login");
+    },
+  });
+
+  if (status == "authenticated") {
+    return (
+      <>
+        <div className="w-screen h-screen flex">
+          <NavBar />
+          <MainPage />
+        </div>
+      </>
+    );
+  }
+  else{
+    return <Loading></Loading>
+  }
+}
+
+
 
 const NavBar = () => (
   <div className="bg-black text-white grid grid-rows-2 w-[22%] xl:w-[18%]">
@@ -54,7 +83,7 @@ const MainPageNavBar = () => {
         Admin Dashboard
       </div>
       <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <ProfileNavigation name={"Monika, Gostic"} gender={"F"} />
+        <ProfileNavigation />
       </div>
     </div>
   );

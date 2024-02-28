@@ -8,6 +8,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
+import useSWR from "swr";
 import ProfileNavigation from "@/components/ProfileNavigation";
 
 export default function Page() {
@@ -19,6 +20,7 @@ export default function Page() {
     </>
   );
 }
+
 
 function Home() {
   //initialise the router for conditional redirection
@@ -42,7 +44,7 @@ function Home() {
   }
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
-      <NavBar handleLogout={handleLogout} data={session} />
+      <NavBar handleLogout={handleLogout} />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
         <Recipes />
       </div>
@@ -99,7 +101,7 @@ function NavBar({ data }) {
             />
             <span>Search</span>
           </div>
-          <div className="tile shadow-none hover:shadow-none text-lg">
+          {/* <div className="tile shadow-none hover:shadow-none text-lg">
             <Image
               src="/icons/shopping.png"
               width={25}
@@ -107,8 +109,8 @@ function NavBar({ data }) {
               alt="shopping icon"
             />
             <span>Basket</span>
-          </div>
-          <ProfileNavigation name={"John, Doe"} gender={"M"} />
+          </div> */}
+          <ProfileNavigation/>
         </div>
       </div>
       <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">

@@ -35,9 +35,10 @@ const authOptions = {
           // if the response is valid then login user
           if (response.ok === "true") {
             return {
-              id: response.id,
-              email: email,
-              surname: surname,
+              name: response.id,
+              email: response.email,
+              surname: response.surname,
+              gender: response.gender,
             };
           }
         } else {
@@ -63,7 +64,7 @@ const authOptions = {
           // checking if the response is valid then returning user data to frontend
           if (response.ok === "true") {
             return {
-              id: response.id,
+              name: response.id,
               email: response.email,
               surname: response.surname,
               gender: response.gender,

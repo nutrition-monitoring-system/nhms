@@ -21,7 +21,9 @@ function Privacy() {
       </h1>
 
       <p>{`
-        At nhms, accessible from https://nhms-beta.vercel.app/, one of our main
+        At nhms, accessible from `}
+          <a href="https://nhms-beta.vercel.app/" target="_blank" rel="noopener noreferrer"style={{ color: 'blue', textDecoration: 'underline' }}>https://nhms-beta.vercel.app/</a>
+      {`, one of our main
         priorities is the privacy of our visitors. This Privacy Policy document
         contains types of information that is collected and recorded by nhms and
         how we use it.
@@ -87,8 +89,8 @@ function Privacy() {
         <li>The right of rectification.</li>
         <li>The right to object.</li>
         <li>The right of restriction.</li>
-        <li>The right to data portability</li>
-        <li>The right to withdraw consent</li>
+        <li>The right to data portability.</li>
+        <li>The right to withdraw consent.</li>
       </ul>
 
       <h2 className="font-bold text-lg m-3 text-center">Log Files</h2>
@@ -170,9 +172,10 @@ function Privacy() {
       </p>
 
       <p>{`
-        nhms does not knowingly collect any Personal Identifiable Information
-        from children under the age of 13. If you think that your child provided
-        this kind of information on our website, we strongly encourage you to
+        As stated in our terms and conditions, you must be at least 18 years of age
+        to use nhms. nhms does not knowingly collect any Personal Identifiable
+        Information from children under the age of 13. If you think that your child
+        provided this kind of information on our website, we strongly encourage you to
         contact us immediately and we will do our best efforts to promptly
         remove such information from our records.
       `}</p>

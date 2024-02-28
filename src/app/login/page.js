@@ -72,10 +72,9 @@ function Home() {
 
     if (result.error) {
       // Handle sign-in error, you can display an error message to the user
-      alert("Invalid Login details!");
       //console.error("Sign-in error:", result.error);
       /* router.push("/register"); */
-      return alert("Invalid Login details! Please try again.");
+      return alert("Invalid login details! Please try again.");
     } else {
       // Sign-in was successful
       router.push("/home");
