@@ -1,6 +1,7 @@
 import Footer from '@/components/Footer'
 export default function Symptoms() {
   return (
+
     <>
       <div className="flex justify-center items-center flex-col py-4 h-full w-full">
         <h1 className="font-extrabold text-[20px]">Symptoms:</h1>
@@ -12,11 +13,7 @@ export default function Symptoms() {
             placeholder="Type to search symptoms:"
             className="appearance-none w-full p-2 rounded-lg bg-primary text-black"
           />
-          {/* <select>
-            <option value="1">Select a symptom</option>
-
-          </select> */}
-        </div> 
+        </div>
         {/* <div className="flex items-center gap-8 p-2">
           <ColorCard />
           <ColorCard />
