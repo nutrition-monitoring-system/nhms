@@ -23,6 +23,7 @@ import Logo from "../components/Logo";
 import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
+import FileUpload from "./fileUpload";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -100,6 +101,8 @@ function UserData({ props }) {
     </div>
   );
 }
+
+
 
 export default function User({ handsignOut }) {
   const [avatar, setAvatar] = useState(
@@ -323,14 +326,7 @@ function PhotoLog({ photo, handlePhoto }) {
       <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>Initial</p>
         <FaCamera className="camera text-center" />
-        {/* <img
-          className="absolute opacity-1"
-          id="uploda-photo"
-          src={photo || "/icons/camera.png"}
-          type="file"
-          accept="image/*"
-          onChange={handlePhoto}
-        /> */}
+        <FileUpload identifier="0"/>
       </div>
       {months.map((item, idx) => (
         <div
@@ -340,7 +336,8 @@ function PhotoLog({ photo, handlePhoto }) {
           <p>{item}</p>
           <div>
             <FaCamera className="camera" />
-          </div>
+				<FileUpload identifier={idx+1}/>
+			 </div>
         </div>
       ))}
     </div>
