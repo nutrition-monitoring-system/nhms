@@ -23,7 +23,7 @@ import Logo from "../components/Logo";
 import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import FileUpload from "./fileUpload";
+import FileUpload from "../components/fileUpload";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
