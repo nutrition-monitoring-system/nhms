@@ -136,7 +136,7 @@ export default function User({ handsignOut }) {
   };
 
   const confirmLogout = () => {
-    return signOut();
+    signOut();
   };
 
   const goToPage = () => {
@@ -239,7 +239,7 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
         <UserData props="nav"></UserData>
       </div>
       <div className="grid place-items-center ">
-        <button className="tile" onClick={confirmLogout}>
+        <button className="tile" onClick={signOut}>
           <Image
             id="logout"
             src="/icons/logout.png"
