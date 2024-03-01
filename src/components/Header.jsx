@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Logo from "./Logo";
 import ProfileNavigation from "./ProfileNavigation";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
 export default function Header() {
   // The header section returns a description of the page.

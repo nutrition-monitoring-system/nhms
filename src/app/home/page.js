@@ -1,6 +1,5 @@
 "use client";
 import Logo from "../../components/Logo";
-import Link from "next/link";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { SessionProvider } from "next-auth/react";
@@ -8,7 +7,6 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
-import useSWR from "swr";
 import ProfileNavigation from "@/components/ProfileNavigation";
 
 export default function Page() {
@@ -20,7 +18,6 @@ export default function Page() {
     </>
   );
 }
-
 
 function Home() {
   //initialise the router for conditional redirection
@@ -110,7 +107,7 @@ function NavBar({ data }) {
             />
             <span>Basket</span>
           </div> */}
-          <ProfileNavigation/>
+          <ProfileNavigation />
         </div>
       </div>
       <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">

@@ -32,13 +32,10 @@ function Home() {
         </div>
       </>
     );
-  }
-  else{
-    return <Loading></Loading>
+  } else {
+    return <Loading></Loading>;
   }
 }
-
-
 
 const NavBar = () => (
   <div className="bg-black text-white grid grid-rows-2 w-[22%] xl:w-[18%]">

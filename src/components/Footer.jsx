@@ -8,7 +8,14 @@ const Footer = () => (
           @{new Date().getFullYear()} All Rights Reserved
           <br></br>
           <p>
-          Credits go to <a href="https://monikagostic.com/"style={{ textDecoration: 'underline' }}>Dr Monika Gostic</a>.
+            Credits go to{" "}
+            <a
+              href="https://monikagostic.com/"
+              style={{ textDecoration: "underline" }}
+            >
+              Dr Monika Gostic
+            </a>
+            .
           </p>
         </div>
         <div className="flex justify-around items-center ">
