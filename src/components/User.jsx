@@ -169,16 +169,18 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
   return (
     <div className="bg-white calendar-health flex justify-center items-center gap-4 p-3">
       <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] p-3 shadow-lg h-full">
-        <h1 className="text-md font-bold text-left place-self-start container">
-          Health Information:
-        </h1>
+        <span className="place-self-start container flex place-content-between w-full">
+          <h1 className="text-md font-bold text-left">Health Information:</h1>
+          <span>
+            <FaRegAddressCard className="size-6" />
+          </span>
+        </span>
+
         <UserData props={"calendar"}></UserData>
         {/* <p>Health information</p>
         <p>Name: {userInfo.name}</p>
         <p>Email: {userInfo.email}</p> */}
-        <div className="expand-user-info" onClick={goToPage}>
-          <FaRegAddressCard className="size-6" />
-        </div>
+        <div className="expand-user-info" onClick={goToPage}></div>
       </div>
       {/* <div className="Calendar bg-secondary rounded-md grid place-items-center h-[70%] w-[20%] px-5 py-2 shadow-lg">
         <Link className="calendar-text" href="">
@@ -344,14 +346,18 @@ function PhotoLog({ photo, handlePhoto }) {
 
 function Log() {
   return (
-    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3">
-      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-sm">
+    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3 gap-2">
+      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
         <MdDining className="size-6" />
         <p className="text-left w-full">Food Log</p>
       </button>
-      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-sm">
+      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
         <MdLocalDrink className="size-6" />
         <p className="text-left w-full">Water Log</p>
+      </button>
+      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+        <FaCamera className="size-6" />
+        <p className="text-left w-full">Add Photo</p>
       </button>
     </div>
   );
