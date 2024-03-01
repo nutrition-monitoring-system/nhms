@@ -4,8 +4,9 @@ name: Testing workflow.
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
-on: [workflow_dispatch, push]
-    # Inputs the workflow accepts.
+on:
+  [workflow_dispatch, push]
+  # Inputs the workflow accepts.
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   cypressTesting:
@@ -16,17 +17,20 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4.0.1
         with:
-            node-version: '>=16.0.0'
+          node-version: ">=16.0.0"
       - name: Move into the source directory, install all the required packages & start the server.
         run: |
           cd src
           npm install -y
+          npm install -D
+        #Installed the dev dependencies.
       - name: Cypress.io
         uses: cypress-io/github-action@v6.6.0
         env:
-            NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
-            NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
-            DATABASE_URL: ${{secrets.DATABASE_URL}}
+          NODE_ENV: "development"
+          NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+          NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
         with:
           build: npm run build
           start: npm start
@@ -41,5 +45,3 @@ jobs:
             src/node_modules
             src/.next
           key: npm-${{ hashFiles('package-lock.json') }}
-
-        
