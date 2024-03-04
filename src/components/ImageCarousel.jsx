@@ -1,58 +1,82 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from "flowbite-react";
-import { TrashIcon, PencilIcon } from '@heroicons/react/outline';
+import { TrashIcon, PencilIcon } from '@heroicons/react/outline'; // introduce pencil icon
 
-const defaultImageUrl = "../public/photos/person.jpg"; // 替换为你的默认图片路径
+// function CarouselElement({ date, image }) {
+//   if (image == null || date == null) {
+//     return (
+//       <div className="flex h-full p-2 bg-primary text-black flex-col place-items-center">
+//         <MdBrokenImage className="size-10" />
+//         {/* <Image
+//           src={"/photos/image.png"}
+//           alt="Carousel broken image"
+//           className="p-2 object-scale-down"
+//           width={200} height={200}
+//         ></Image> */}
+//         <div className="w-full h-[40%]"></div>
+//         <div className="p-1 justify-self-end">Placeholder Image</div>
+//       </div>
+//     );
+//   }
+//   return (
+//     <div className="flex h-full items-center justify-center bg-primary text-black">
+//       <Image src={image} alt="Carousel Image"></Image>
+//       <div>{date}</div>
+//     </div>
+//   );
+// }
+
+const defaultImageUrl = "../public/photos/person.jpg";
 
 export default function ImageCarousel() {
-  const [db, setDb] = useState(null);
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    const request = indexedDB.open('myDB', 1);
-    request.onerror = (event) => console.error('IndexedDB error:', event.target.error);
-    request.onupgradeneeded = (event) => {
-      const db = event.target.result;
-      if (!db.objectStoreNames.contains('files')) {
-        db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
-      }
-    };
-    request.onsuccess = (event) => {
-      setDb(event.target.result);
-      fetchImages(event.target.result);
-    };
-  }, []);
-
-  const fetchImages = (dbInstance) => {
-    const transaction = dbInstance.transaction(['files'], 'readonly');
-    const store = transaction.objectStore('files');
-    const getRequest = store.getAll();
-    getRequest.onerror = (event) => console.error('Error fetching images:', event.target.error);
-    getRequest.onsuccess = (event) => {
-      const imageFiles = event.target.result.map(record => ({
-        id: record.id,
-        url: URL.createObjectURL(record.file)
-      }));
-      if (imageFiles.length === 0) {
-        // 没有图片时显示默认图片
-        setImages([{ id: 'default', url: defaultImageUrl }]);
-      } else {
-        setImages(imageFiles);
-      }
-    };
-  };
-
-  const deleteImage = (id) => {
-    const transaction = db.transaction(['files'], 'readwrite');
-    const store = transaction.objectStore('files');
-    const deleteRequest = store.delete(id);
-
-    deleteRequest.onsuccess = () => {
-      console.log('Image deleted successfully');
-      // 删除后重新获取图片，如果没有图片则显示默认图片
-      fetchImages(db);
-    };
-  };
+	const [db, setDb] = useState(null);
+	const [images, setImages] = useState([]);
+ 
+	useEffect(() => {
+	  const request = indexedDB.open('myDB', 1);
+	  request.onerror = (event) => console.error('IndexedDB error:', event.target.error);
+	  request.onupgradeneeded = (event) => {
+		 const db = event.target.result;
+		 if (!db.objectStoreNames.contains('files')) {
+			db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+		 }
+	  };
+	  request.onsuccess = (event) => {
+		 setDb(event.target.result);
+		 fetchImages(event.target.result);
+	  };
+	}, []);
+ 
+	const fetchImages = (dbInstance) => {
+	  const transaction = dbInstance.transaction(['files'], 'readonly');
+	  const store = transaction.objectStore('files');
+	  const getRequest = store.getAll();
+	  getRequest.onerror = (event) => console.error('Error fetching images:', event.target.error);
+	  getRequest.onsuccess = (event) => {
+		 const imageFiles = event.target.result.map(record => ({
+			id: record.id,
+			url: URL.createObjectURL(record.file)
+		 }));
+		 if (imageFiles.length === 0) {
+			// if no image, dispaly default
+			setImages([{ id: 'default', url: defaultImageUrl }]);
+		 } else {
+			setImages(imageFiles);
+		 }
+	  };
+	};
+ 
+	const deleteImage = (id) => {
+	  const transaction = db.transaction(['files'], 'readwrite');
+	  const store = transaction.objectStore('files');
+	  const deleteRequest = store.delete(id);
+ 
+	  deleteRequest.onsuccess = () => {
+		 console.log('Image deleted successfully');
+		 // re-fetch image after delete, if no image, dispaly default
+		 fetchImages(db);
+	  };
+	};
 
   const replaceImage = (id) => {
     const fileInput = document.createElement('input');
@@ -65,10 +89,10 @@ export default function ImageCarousel() {
       const request = store.get(id);
       request.onsuccess = () => {
         const data = request.result;
-        data.file = file; // 更新文件
+        data.file = file; // refresh file
         store.put(data).onsuccess = () => {
           console.log('Image replaced successfully');
-          fetchImages(db); // 重新获取所有图片
+          fetchImages(db); // re-fetch all image
         };
       };
     };
@@ -82,7 +106,7 @@ export default function ImageCarousel() {
 			<div key={image.id} className="relative flex h-full items-center justify-center bg-primary text-black">
 			  <img src={image.url} alt={`Image ${image.id}`} />
 			  <div className="absolute top-2 right-2 flex space-x-2">
-				 {image.id !== 'default' && ( // 避免对默认图片显示删除或替换按钮
+				 {image.id !== 'default' && ( // avoid delete or replace button for default image
 					<>
 					  <button onClick={() => deleteImage(image.id)} className="p-2 text-white bg-red-600 rounded-full focus:outline-none focus:ring">
 						 <TrashIcon className="h-6 w-6" />
