@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 import Button from "@/components/Button";
 export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
   const [termsConditions, setTermsConditions] = useState(false);
@@ -23,8 +22,16 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
               />
             </div>
             <p>
-              By ticking this box, you agree to the <a href="/terms" className="text-secondary">Terms and Conditions</a> and 
-              <a href="/privacy" className="text-secondary"> Privacy Policy</a>.{" "}
+              By ticking this box, you agree to the{" "}
+              <a href="/terms" className="text-secondary">
+                Terms and Conditions
+              </a>{" "}
+              and
+              <a href="/privacy" className="text-secondary">
+                {" "}
+                Privacy Policy
+              </a>
+              .{" "}
             </p>
           </div>
           <div className="flex">
@@ -40,8 +47,8 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
             </div>
             <p>
               {" "}
-              By ticking this box, you also consent to the admin of the
-              site viewing your health data.
+              By ticking this box, you also consent to the admin of the site
+              viewing your health data.
             </p>
           </div>
         </div>

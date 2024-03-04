@@ -21,10 +21,19 @@ function Terms() {
 
       <p>{`Welcome to nhms!`}</p>
 
-      <p>{`
+      <p>
+        {`
         These terms and conditions outline the rules and regulations for the use
         of Nutrition and Health Monitoring System's Website, located at `}
-        <a href="https://nhms-beta.vercel.app/" target="_blank" rel="noopener noreferrer"style={{ color: 'blue', textDecoration: 'underline' }}>https://nhms-beta.vercel.app/</a>.
+        <a
+          href="https://nhms-beta.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "blue", textDecoration: "underline" }}
+        >
+          https://nhms-beta.vercel.app/
+        </a>
+        .
       </p>
 
       <p>{`

@@ -1,6 +1,6 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "@/components/Button";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import userSchema from "../../utils/otherUtils";
