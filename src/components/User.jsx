@@ -356,10 +356,7 @@ function Log() {
         <MdLocalDrink className="size-6" />
         <p className="text-left w-full">Water Log</p>
       </button>
-      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <FaCamera className="size-6" />
-        <p className="text-left w-full">Add Photo</p>
-      </button>
+      <FileUpload></FileUpload>
     </div>
   );
 }
