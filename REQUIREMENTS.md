@@ -1,4 +1,6 @@
-# Client Requirements:
+# Client Requirements
+
+## 2023
 
 - [ ]  User profile with measurements of:
   - [ ]  Nutrition choices(what they eat)?
@@ -22,5 +24,24 @@
 - [ ]  Habit tracker.
 - [ ]  Integration with other health/wellbeing apps that may be on someone’s phone
 - [ ]  Shopping list integration with Tesco/Asda/Lidl.
-- [ ]  Free vs Premium features(?)
 - [ ]  May need an admin dashboard.
+- [ ]  Free vs Premium features(?)
+
+---
+
+## 2024
+
+- [ ] **Meals**:
+  - [ ] Commonly used foods.
+  - [ ] Options for meals(meal filtering.)
+  - [ ] Prelabelled list of foods, with ability to order by colour, time to prepare.
+  - [ ] Alternative recommendations for food.
+  - [ ] Tips for planning meals.
+- [ ] **Symptoms**:
+  - [ ] *Immediate* symptoms feedback + tips on how to handle the symptom.
+  - [ ] Type of symptom being felt.
+  - [ ] When was this symptom last felt?
+  - [ ] Statistics calculation.
+- [ ] Traffic light system for mood.
+- [ ] Weekly feedback report.
+- [ ] Notification for daily medication, and reminders during the day.
