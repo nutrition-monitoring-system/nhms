@@ -85,15 +85,15 @@ function NavBar({ data }) {
     });
   };
   return (
-    <div className="w-full grid grid-rows-2 bg-white h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+    <div className="w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <Logo></Logo>
-        <div className="flex justify-center items-center col-span-2 gap-4">
-          <div className="tile shadow-none hover:shadow-none text-lg">
+        <div className="flex justify-center items-center col-span-2">
+          <div className="tile hover:shadow-none text-lg bg-secondary font-black">
             <Image
               src="/icons/search.png"
-              width={25}
-              height={25}
+              width={20}
+              height={20}
               alt="Search icon"
             />
             <span>Search</span>
