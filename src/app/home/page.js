@@ -89,15 +89,6 @@ function NavBar({ data }) {
       <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
         <Logo></Logo>
         <div className="flex justify-center items-center col-span-2">
-          <div className="tile hover:shadow-none text-lg bg-secondary font-black">
-            <Image
-              src="/icons/search.png"
-              width={20}
-              height={20}
-              alt="Search icon"
-            />
-            <span>Search</span>
-          </div>
           {/* <div className="tile shadow-none hover:shadow-none text-lg">
             <Image
               src="/icons/shopping.png"
@@ -107,7 +98,7 @@ function NavBar({ data }) {
             />
             <span>Basket</span>
           </div> */}
-          <ProfileNavigation />
+          <ProfileNavigation search={true} />
         </div>
       </div>
       <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
