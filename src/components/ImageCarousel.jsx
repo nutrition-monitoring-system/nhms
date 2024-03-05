@@ -118,13 +118,13 @@ export default function ImageCarousel() {
                     onClick={() => deleteImage(image.id)}
                     className="p-2 text-white bg-red-600 rounded-full focus:outline-none focus:ring"
                   >
-					<FaTrash className="h-6 w-6"/>
+                    <FaTrash className="h-6 w-6" />
                   </button>
                   <button
                     onClick={() => replaceImage(image.id)}
                     className="p-2 text-white bg-blue-600 rounded-full focus:outline-none focus:ring"
                   >
-					<FaPencilAlt className="h-6 w-6"/>
+                    <FaPencilAlt className="h-6 w-6" />
                   </button>
                 </>
               )}
