@@ -1,29 +1,77 @@
-import Footer from '@/components/Footer'
+'use client'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import TomSelect from 'tom-select'
+import 'tom-select/dist/css/tom-select.bootstrap5.css'
+import './index.css'
+
 export default function Symptoms() {
+  const [selected, setSelected] = useState([])
+  const router = useRouter()
+
+  const options = [
+    { value: 'Bloating', text: 'Bloating' },
+    { value: 'Diarrhoea', text: 'Diarrhoea' },
+    { value: 'Stomach Pain', text: 'Stomach Pain' },
+    { value: 'Other', text: 'Other' },
+  ]
+
+  const handleSelect = value => {
+    setSelected(value)
+  }
+
+  useEffect(() => {
+    const inst = new TomSelect('#select-state', {
+      options,
+      plugins: ['remove_button', 'clear_button'],
+      onChange: handleSelect,
+    })
+    return () => inst.destroy()
+  }, [])
+
+
+  const handleSubmit = () => {
+    if(selected.length === 0) return
+    console.log(selected)
+    const params = new URLSearchParams()
+    params.append('selected', selected.join(','))
+    router.push(`/symptoms/slide?${params.toString()}`)
+  }
+
   return (
-
     <>
-      <div className="flex justify-center items-center flex-col py-4 h-full w-full">
-        <h1 className="font-extrabold text-[20px]">Symptoms:</h1>
+      <div className="flex justify-center items-center flex-col gap-4 py-4">
+        <h1 className="text-4xl font-bold">Symptoms:</h1>
 
-        <div className="w-1/3 h-full my-4 pt-10 flex items-center flex-col gap-10">
-          <input type="date" className="block appearance-none w-full p-2 rounded-lg bg-primary text-black " />
-          <input
+        <div className="w-1/2 min-h-[40vh] flex items-center flex-col gap-6">
+          <input type="date" className="w-full p-2 rounded-lg" style={{ backgroundColor: 'rgb(220,150,150)' }} />
+          {/* <input
             type="search"
-            placeholder="Type to search symptoms:"
-            className="appearance-none w-full p-2 rounded-lg bg-primary text-black"
+            placeholder="Type to search symptoms"
+            className="w-full p-2 rounded-lg"
+            style={{ backgroundColor: 'rgb(220,150,150)' }}
+          /> */}
+          <select
+            id="select-state"
+            name="state[]"
+            multiple
+            placeholder="Type to search symptoms"
+            autocomplete="off"
+            className="w-full form-control"
+            // onChange={handleSelect}
           />
         </div>
-        {/* <div className="flex items-center gap-8 p-2">
-          <ColorCard />
-          <ColorCard />
-        </div> */}
+
+        <div className="flex justify-end w-1/2">
+          <button
+            disabled={selected.length === 0}
+            className="bg-black text-white p-2 px-10 rounded-lg text-xl cursor-pointer disabled:opacity-25"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        </div>
       </div>
-      <div className="absolute inset-x-0 bottom-0 flex-col"><Footer /></div>
     </>
   )
-}
-
-function ColorCard() {
-  return <div className="w-96 h-96 rounded-lg bg-primary"></div>
 }

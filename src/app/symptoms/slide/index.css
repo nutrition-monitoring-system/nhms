@@ -1,0 +1,30 @@
+input[type="range"] {
+  all: unset;
+  width: 100%;
+  background-color: #000;
+  height: 4px;
+}
+
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 30px;
+  width: 30px;
+  background: #eee;
+  border-radius: 50%;
+  border: solid 3px #000;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="range"]::-webkit-slider-thumb::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: #000;
+  border-radius: 50%;
+}
