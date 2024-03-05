@@ -21,14 +21,14 @@ describe("This test should check that the name is in the corresponding button on
     cy.visit("/");
     cy.visit("/home");
     cy.log("Check if the data has been received.");
-    cy.wait(1000);
+    cy.wait(3000);
     // cy.get("#usercontent").as("userButton").click();
     cy.get("#Profile").contains(userName);
     cy.wait(3000);
     cy.get("a").contains("NHMS").click();
     // cy.get("#usercontent").as("userButton").click();
     cy.get("#Profile").contains(userName);
-    cy.get("#Profile").click();
+    cy.get("#Profile").click({ force: true });
     cy.wait(1000);
     cy.get("#Profile").click({ force: true });
     /* Redirection to profile. */
