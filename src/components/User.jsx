@@ -194,21 +194,41 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
           {"My Settings: "}
         </h1>
         <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
-          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
-            <FaUserAlt className="size-6 " />
-            <span className="text-left">User Information</span>
+          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
+            <Link
+              href={"/404"}
+              className="flex content-center items-center justify-start w-full gap-2"
+            >
+              <FaUserAlt className="size-6" />
+              <span className="text-left">User Information</span>
+            </Link>
           </button>
-          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
-            <FaAccessibleIcon className="size-6 " />
-            <span className="text-left">Accessibility Settings</span>
+          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
+            <Link
+              href={"/404"}
+              className="flex content-center items-center justify-start w-full gap-2"
+            >
+              <FaAccessibleIcon className="size-6" />
+              <span className="text-left">Accessibility Settings</span>
+            </Link>
           </button>
-          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
-            <FaPills className="size-6" />
-            <span className="text-left">Symptoms</span>
+          <button className="tile bg-white text-sm hover:bg-white/75 ">
+            <Link
+              href={"/symptoms"}
+              className="flex content-center items-center justify-start w-full gap-2"
+            >
+              <FaPills className="size-6" />
+              <span className="text-left">Symptoms</span>
+            </Link>
           </button>
-          <button className="tile bg-white text-sm flex content-center justify-start hover:bg-white/75 w-full">
-            <MdLocalHospital className="size-6" />
-            <span className="text-left">Chronic Conditions</span>
+          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
+            <Link
+              href={"/404"}
+              className="flex content-center items-center justify-start w-full gap-2"
+            >
+              <MdLocalHospital className="size-6" />
+              <span className="text-left">Chronic Conditions</span>
+            </Link>
           </button>
         </div>
       </div>
