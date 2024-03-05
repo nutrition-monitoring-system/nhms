@@ -8,6 +8,11 @@ import "./index.css";
 export default function Symptoms() {
   const [selected, setSelected] = useState([]);
   const router = useRouter();
+  const [date, setDate] = useState('') 
+  const handleDateChange = (event) => {
+    setDate(event.target.value)
+  }
+
 
   const options = [
     { value: "Bloating", text: "Bloating" },
@@ -52,6 +57,7 @@ export default function Symptoms() {
             type="date"
             className="appearance-none w-full p-3 rounded-lg !bg-primary "
             placeholder="Enter a date: "
+            onChange={handleDateChange}
             required
           />
           {/* <input
@@ -73,7 +79,7 @@ export default function Symptoms() {
 
         <div className="flex justify-end w-1/2">
           <button
-            disabled={selected.length === 0}
+            disabled={selected.length === 0 || date === ''}
             className="bg-black text-white p-2 px-10 rounded-lg text-xl cursor-pointer disabled:opacity-25"
             onClick={handleSubmit}
           >
