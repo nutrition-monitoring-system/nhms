@@ -103,7 +103,6 @@ describe("Testing if a new user can log into the website.", () => {
     // Interactions with the home page, searching and navigating tabs
     //cy.get("#search").click();
     // User logout process
-    cy.get("#usercontent").click();
     cy.get("#Logout").click();
     cy.url().should("include", "");
   });
