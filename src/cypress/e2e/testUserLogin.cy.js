@@ -91,7 +91,7 @@ describe("Testing if a new user can log into the website.", () => {
       });
   });
   // Test case for user login and interaction with the home page
-  it("home", () => {
+  it("logs the user into the webpage.", () => {
     cy.visit(url + "/login");
     // Logs in with the registered user credentials
     cy.get('input[name="email"]').type("testaccount@gmail.com");
