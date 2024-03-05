@@ -12,7 +12,8 @@
     "cy:open": "npx cypress open",
     "test": "npx concurrently \"npm run dev\" \"npm run cy:run\"",
     "testOpen": "npx concurrently \"npm run dev\" \"npm run cy:open\"",
-    "database": "npx prisma generate"
+    "database": "npx prisma generate",
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
