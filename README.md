@@ -110,6 +110,12 @@ npm run cy:open - # to actively run tests in the Cypress browser.
 
 ```
 
+**Make sure that the `dev dependencies` are installed using:**
+
+```sh
+npm install -D
+```
+
 ---
 
 ## 🛬 Deployed Version

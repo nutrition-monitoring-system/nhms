@@ -20,14 +20,23 @@ function Privacy() {
         Privacy Policy for Nutrition and Health Monitoring System
       </h1>
 
-      <p>{`
+      <p>
+        {`
         At nhms, accessible from `}
-          <a href="https://nhms-beta.vercel.app/" target="_blank" rel="noopener noreferrer"style={{ color: 'blue', textDecoration: 'underline' }}>https://nhms-beta.vercel.app/</a>
-      {`, one of our main
+        <a
+          href="https://nhms-beta.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: "blue", textDecoration: "underline" }}
+        >
+          https://nhms-beta.vercel.app/
+        </a>
+        {`, one of our main
         priorities is the privacy of our visitors. This Privacy Policy document
         contains types of information that is collected and recorded by nhms and
         how we use it.
-      `}</p>
+      `}
+      </p>
 
       <p>{`
         If you have additional questions or require more information about our
