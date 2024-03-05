@@ -1,4 +1,6 @@
-.ts-wrapper {
-  background-color: rgb(220, 150, 150);
+/* .ts-wrapper {
+  background-color: var(--color-primary);
   border-radius: 0.5rem;
-}
+  display: none;
+  outline: none;
+} */
