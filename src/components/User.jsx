@@ -24,6 +24,7 @@ import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import FileUpload from "../components/fileUpload";
+import ImageCarousel from "./ImageCarousel";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -154,8 +155,9 @@ export default function User({ handsignOut }) {
       <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
         <TopInformation></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
-        <div className="flex space-x-10 container place-content-center bg-gray-100">
-          <PhotoLog photo={photo} handlePhoto={handlePhoto}></PhotoLog>
+        <div className="flex gap-4 container place-content-center w-full bg-gray-100">
+          {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
+          <ImageCarousel></ImageCarousel>
           <Log></Log>
         </div>
         <CreateHealthRecordForm></CreateHealthRecordForm>
@@ -342,13 +344,13 @@ function SideNavBar() {
 function PhotoLog({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];
   return (
-    <div className=" photo flex justify-center items-center gap-4">
-      <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
+    <div className=" photo flex justify-center items-center gap-4 w-[50%]">
+      {/* <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>Initial</p>
         <FaCamera className="camera text-center" />
-        {/* <FileUpload identifier="0" /> */}
-      </div>
-      {months.map((item, idx) => (
+      </div> */}
+      <ImageCarousel></ImageCarousel>
+      {/* {months.map((item, idx) => (
         <div
           key={idx}
           className="photo-bar bg-white rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg"
@@ -356,10 +358,9 @@ function PhotoLog({ photo, handlePhoto }) {
           <p>{item}</p>
           <div>
             <FaCamera className="camera" />
-            {/* <FileUpload identifier={idx + 1} /> */}
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
@@ -375,10 +376,7 @@ function Log() {
         <MdLocalDrink className="size-6" />
         <p className="text-left w-full">Water Log</p>
       </button>
-      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <FaCamera className="size-6" />
-        <p className="text-left w-full">Add Photo</p>
-      </button>
+      <FileUpload></FileUpload>
     </div>
   );
 }
