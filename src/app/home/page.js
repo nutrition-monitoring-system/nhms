@@ -67,17 +67,10 @@ function NavBar({ recipesList }) {
   const home = useRef(null);
   const recipes = useRef(null);
   const recipesCollections = useRef(null);
-  const foodCollection = useRef(null);
-  const foodRecommendation = useRef(null);
+  const search = useRef(null);
   const [searchInformation, setSearchInformation] = useState("");
 
-  const refList = [
-    home,
-    recipes,
-    recipesCollections,
-    foodCollection,
-    foodRecommendation,
-  ];
+  const refList = [home, recipes, recipesCollections, search];
 
   const handleOnclick = (reference) => {
     const refIndex = refList.findIndex((refValue) => refValue === reference);
@@ -217,8 +210,8 @@ function NavBar({ recipesList }) {
           </div>
           <div
             className="tile"
-            ref={recipesCollections}
-            onClick={() => handleOnclick(recipesCollections)}
+            ref={search}
+            onClick={() => handleOnclick(search)}
           >
             Search
           </div>
