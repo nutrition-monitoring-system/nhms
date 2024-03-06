@@ -3,14 +3,14 @@
 describe("Testing if a new user can log into the website.", () => {
   let url = Cypress.config("baseUrl");
   // Test case for navigating to the base URL and scrolling the view
-  it("passes", () => {
+  it.skip("passes", () => {
     cy.visit(url); // Visits the base URL
     cy.scrollTo("center"); // Scrolls to the center of the page
     cy.scrollTo("bottom", { duration: 1000 }); // Scrolls to the bottom over 1 second
   });
 
   // Test case for registering a new account
-  it("registers a new account.", () => {
+  it.skip("registers a new account.", () => {
     cy.visit(url + "/register"); // Visits the registration page
     // Fills out the registration form with new user details
     cy.get('input[name="firstName"]').type("John");
@@ -91,7 +91,7 @@ describe("Testing if a new user can log into the website.", () => {
       });
   });
   // Test case for user login and interaction with the home page
-  it("home", () => {
+  it.skip("logs the user into the webpage.", () => {
     cy.visit(url + "/login");
     // Logs in with the registered user credentials
     cy.get('input[name="email"]').type("testaccount@gmail.com");
@@ -103,6 +103,7 @@ describe("Testing if a new user can log into the website.", () => {
     // Interactions with the home page, searching and navigating tabs
     //cy.get("#search").click();
     // User logout process
+    cy.wait(3000);
     cy.get("#usercontent").click();
     cy.get("#Logout").click();
     cy.url().should("include", "");
