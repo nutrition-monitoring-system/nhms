@@ -1,17 +1,6 @@
-"use client";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function Recipes() {
-  const [recipesList, setRecipeList] = useState([]);
-  useEffect(() => {
-    (function RequestRecipes() {
-      fetch("/api/getRecipes")
-        .then((response) => response.json())
-        .then((data) => setRecipeList([...data.Breakfast]));
-    })();
-  }, []);
-
+export default function Recipes({ recipesList }) {
   return (
     <>
       {recipesList.length === 0 ? (
