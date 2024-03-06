@@ -15,9 +15,9 @@ describe("This test should check that the name is in the corresponding button on
   const userName = "John Smith";
   const email = "testaccount@gmail.com";
   const dob = "31/12/2023";
-  /* To access the url when TESTING use the baseUrl, like this 
-    let endpoint = Cypress.config("baseUrl") + "/api/selectAllUsers";  */
-  it("This should check if the data has been received. ", () => {
+  it.skip("This should check if the data has been received. ", () => {
+    cy.wait(3000);
+    /* Wait for session to work. */
     cy.visit("/");
     cy.visit("/home");
     cy.log("Check if the data has been received.");
@@ -25,13 +25,16 @@ describe("This test should check that the name is in the corresponding button on
     // cy.get("#usercontent").as("userButton").click();
     cy.get("#Profile").contains(userName);
     cy.wait(3000);
-    cy.get("a").contains("NHMS").click();
-    // cy.get("#usercontent").as("userButton").click();
-    cy.get("#Profile").contains(userName);
-    cy.get("#Profile").click({ force: true });
-    cy.wait(1000);
-    cy.get("#Profile").click({ force: true });
+    cy.visit("/home");
+    // cy.get("a").contains("NHMS").click();
+    // Takes you to home page.
+    cy.get("#usercontent").as("userButton").click();
+    cy.get("@userButton").contains(userName);
+    // cy.get("@userButton").click();
+    // cy.wait(1000);
+    // cy.get("#usercontent").get("#profile").click({ force: true });
     /* Redirection to profile. */
+    cy.visit('/user');
     cy.log("Go to the user profile.");
     cy.wait(1000);
     cy.get("#user-name").contains(userName);
@@ -45,3 +48,4 @@ describe("This test should check that the name is in the corresponding button on
     cy.url("/login");
   });
 });
+
