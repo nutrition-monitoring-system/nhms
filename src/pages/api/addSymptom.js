@@ -8,54 +8,36 @@ export default async function handler(req, res) {
       // Process a POST request
       let newUUID = v1().slice(0, 32);
       // getting the data needed for the right table
-      const { conditionName, symptomName } = req.body;
-
-      /* Check if condition is in the database.  */
-
-      const checkCondition = await prisma.chronic_condition.findFirst({
-        where: { Condition_Type: conditionName },
-      });
+      const { symptomName } = req.body;
 
       /* The condition must be true to add a new symptom. */
-      if (checkCondition != null || checkCondition != undefined) {
-        console.log(`Condition ${conditionName} is in database.`);
-        console.log(`Adding new symptom ${symptomName}.`);
-        const checkSymptom = await prisma.symptoms.findFirst({
-          where: { symptom_name: symptomName },
-        });
-        if (checkSymptom == null) {
-          const newSymptom = await prisma.symptoms
-            .create({
-              data: {
-                symptom_name: symptomName,
-                symptom_id: newUUID,
-              },
-            })
-            .then(async () => {
-              const newJunction = await prisma.scc_junction.create({
-                data: {
-                  junctionid: v1().slice(0, 32),
-                  scc_chronicID: checkCondition.ChronicID,
-                  scc_symptomID: newUUID,
-                },
-              });
-            })
-            .then(() => {
-              console.log("Symptom added to database.");
-              return res.status(201).json({ ok: "true" });
-            })
-            .catch(() => {
-              return res.status(404).json({ error: "Unable to add symptom." });
-            });
-        }
-        console.log("Symptom already in database.");
-        return res.status(202).json({ ok: "true" });
-      } else {
-        res.status(404).json({ error: "Could not find condition." });
+      console.log(`Adding new symptom ${symptomName}.`);
+
+      const checkSymptom = await prisma.symptom.findFirst({
+        where: { symptomName: symptomName },
+      });
+
+      if (checkSymptom == null) {
+        const newSymptom = await prisma.symptom
+          .create({
+            data: {
+              symptomID: newUUID,
+              symptomName: symptomName,
+            },
+          })
+          .then(() => {
+            console.log("Symptom added to database.");
+            return res.status(201).json({ ok: "true" });
+          })
+          .catch(() => {
+            return res.status(404).json({ error: "Unable to add symptom." });
+          });
       }
+      console.log("Symptom already in database.");
+      return res.status(202).json({ ok: "true" });
     }
-    return res.status(404).json({ error: "Nothing in body." });
+    // return an invalid response if user does not exist
+    return res.status(404).json({ error: "Nothing in request body." });
   }
-  // return an invalid response if user does not exist
   return res.status(501).json({ error: "Wrong HTTP method." });
 }
