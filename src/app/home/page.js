@@ -99,9 +99,31 @@ function NavBar({ recipesList }) {
     e.preventDefault();
     modalRef.current.close();
   };
-  useEffect(() => {
-    modalRef.current.close();
-  }, []);
+  const capitalise = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const handleDropdown = (recipeObject) => {
+    switch (typeof recipeObject) {
+      case "object":
+        try {
+          return recipeObject?.map((item, idx) => (
+            <option value={item} key={idx}>
+              {item}
+            </option>
+          ));
+        } catch (err) {
+          return <></>;
+        }
+      default:
+        return (
+          <option value={recipeObject} key={recipeObject}>
+            {recipeObject}
+          </option>
+        );
+    }
+  };
+
   return (
     <>
       <dialog
@@ -114,7 +136,10 @@ function NavBar({ recipesList }) {
               <h1 className="text-center font-black text-[1.5rem]">
                 Search Recipes
               </h1>
-              <button className="tile bg-primary" onClick={handleClose}>
+              <button
+                className="tile bg-primary focus:outline-none"
+                onClick={handleClose}
+              >
                 <Image
                   src="/icons/add.png"
                   width={20}
@@ -133,6 +158,7 @@ function NavBar({ recipesList }) {
                 alt="Search icon"
               />
               <input
+                autoFocus
                 type="text"
                 placeholder="Search recipes..."
                 className="outline-black border-black"
@@ -145,11 +171,7 @@ function NavBar({ recipesList }) {
               return (
                 <div key={idx} className="">
                   <select className="tile bg-primary border-none ">
-                    <option
-                      value={key.charAt(0).toUpperCase() + key.substring(1)}
-                    >
-                      {key.charAt(0).toUpperCase() + key.substring(1)}
-                    </option>
+                    <option value={capitalise(key)}>{capitalise(key)}</option>
                   </select>
                 </div>
               );
