@@ -7,100 +7,121 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  forename    String        @db.VarChar(16)
-  surname     String?       @db.VarChar(32)
-  dob         DateTime?     @db.Date
-  email       String?       @db.VarChar(255)
-  password    String        @db.VarChar(32)
-  gender      String?       @db.Char(1)
-  userID      String        @id @db.Char(32)
-  is_admin    Int?          @default(0)
-  food        food[]
-  health      health[]
-  preferences preferences[]
+model User {
+  // This is the user schema.
+  forename               String                   @db.VarChar(16)
+  surname                String?                  @db.VarChar(32)
+  dob                    DateTime?                @db.Date
+  email                  String                   @unique @db.VarChar(255)
+  password               String                   @db.VarChar(32)
+  gender                 String?                  @db.Char(1)
+  userID                 String                   @id @unique @db.Char(32)
+  isAdmin                Int?                     @default(0)
+  // These are one to one relationships.
+  Preferences            Preference?
+  // These are one to many relationships.
+  Logs                   Log[]
+  // These are many to many relationships, represented via junction tables.
+  UserToChronicCondition UserToChronicCondition[]
+  UserToAllergy          UserToAllergy[]
 }
 
-model allergies {
-  AllergiesID        String   @id @unique(map: "AllergiesID_UNIQUE") @db.Char(32)
-  Allergy_Type       String   @map("Allergy Type") @db.VarChar(45)
-  Alternative_Choice String   @map("Alternative Choice") @db.VarChar(45)
-  health             health[]
+model Allergy {
+  // These are the list of allergies. 
+  // Many users may have many allergies.
+  allergyID         String          @id @unique @db.Char(32)
+  allergyType       String          @db.VarChar(45)
+  alternativeChoice String          @ignore @db.VarChar(45)
+  UserToAllergy     UserToAllergy[]
 }
 
-model chronic_condition {
-  ChronicID      String         @id @unique(map: "ChronicID_UNIQUE") @db.Char(32)
-  Condition_Type String         @default("IBS") @map("Condition Type") @db.VarChar(45)
-  health         health[]
-  scc_junction   scc_junction[]
+model UserToAllergy {
+  // This acts as a junction table from the user to the allergy.
+  userID    String
+  user      User    @relation(fields: [userID], references: [userID])
+  allergyID String
+  allergy   Allergy @relation(fields: [allergyID], references: [allergyID])
+
+  // This acts as a compound ID.
+  @@id([userID, allergyID])
 }
 
-model food {
-  FoodID        String  @unique(map: "FoodID_UNIQUE") @db.Char(32)
-  FoodName      String  @unique(map: "FoodName_UNIQUE") @db.VarChar(45)
+model ChronicCondition {
+  // This is the list of chronic conditions. 
+  // Many users may have many chronic conditions.
+  chronicID              String                   @id @unique @db.Char(32)
+  conditionType          String                   @default("IBS") @db.VarChar(45)
+  UserToChronicCondition UserToChronicCondition[]
+}
+
+model UserToChronicCondition {
+  // This acts as a junction table from the user to the chronic condition.
+  userID           String
+  user             User             @relation(fields: [userID], references: [userID])
+  chronicID        String
+  chronicCondition ChronicCondition @relation(fields: [chronicID], references: [chronicID])
+
+  // This acts as a compound ID.
+  @@id([userID, chronicID])
+}
+
+model Food {
+  // This is the list of foods that are kept in the database. 
+  foodID        String  @id @unique @db.Char(32)
+  foodName      String  @unique @db.VarChar(45)
   isDrink       Boolean
-  Protein       Int
-  Fat           Int
-  Carbohydrates Int
-  Vitamins      Int
-  Calcium       Int
-  Iron          Int
-  Potassium     Int
-  user_userID   String  @db.Char(32)
-  user          user    @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_Food Database_user1")
-
-  @@id([FoodID, user_userID])
-  @@index([user_userID], map: "fk_Food Database_user1_idx")
+  protein       Int
+  fat           Int
+  carbohydrates Int
+  vitamins      Int
+  calcium       Int
+  iron          Int
+  potassium     Int
 }
 
-model health {
-  HealthID                    String            @unique(map: "HeathID_UNIQUE") @db.Char(32)
-  Height                      Int?
-  Weight                      Int?
-  Blood_Pressure              Int?              @map("Blood Pressure")
-  Blood_Glucose_Levels        Int?              @map("Blood Glucose Levels")
-  user_userID                 String            @db.Char(32)
-  chronic_condition_ChronicID String            @db.Char(32)
-  allergies_AllergiesID       String            @db.Char(32)
-  user                        user              @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_Healrh Information_user1")
-  allergies                   allergies         @relation(fields: [allergies_AllergiesID], references: [AllergiesID], onDelete: NoAction, onUpdate: NoAction, map: "fk_health_allergies1")
-  chronic_condition           chronic_condition @relation(fields: [chronic_condition_ChronicID], references: [ChronicID], onDelete: NoAction, onUpdate: NoAction, map: "fk_health_chronic_condition1")
+model Preference {
+  // There is a one-to-one mapping between the user and the preferences, 
+  // Each User has one Preference.
+  preferenceID     String  @id @unique @db.Char(32)
+  fontSize         Int     @default(20)
+  boldText         Boolean @default(false)
+  highContrastMode Boolean @default(false)
+  descriptiveLinks Boolean @default(true)
+  darkMode         Boolean @default(false)
 
-  @@id([HealthID, user_userID, chronic_condition_ChronicID, allergies_AllergiesID])
-  @@index([user_userID], map: "fk_Healrh Information_user1_idx")
-  @@index([allergies_AllergiesID], map: "fk_health_allergies1_idx")
-  @@index([chronic_condition_ChronicID], map: "fk_health_chronic_condition1_idx")
+  user_userID String @unique @db.Char(32)
+  user        User   @relation(fields: [user_userID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model preferences {
-  Preference_ID      String  @unique(map: "Preference ID_UNIQUE") @map("Preference ID") @db.Char(32)
-  Font_Size          Int     @default(20) @map("Font Size")
-  Bold_Text          Boolean @default(false) @map("Bold Text")
-  High_Contrast_Mode Boolean @default(false) @map("High Contrast Mode")
-  Descriptive_Links  Boolean @default(true) @map("Descriptive Links")
-  Dark_Mode          Boolean @default(false) @map("Dark Mode")
-  user_userID        String  @db.Char(32)
-  user               user    @relation(fields: [user_userID], references: [userID], onDelete: NoAction, onUpdate: NoAction, map: "fk_preferences_user1")
-
-  @@id([Preference_ID, user_userID])
-  @@index([user_userID], map: "fk_preferences_user1_idx")
+model Symptom {
+  // This is where all the symptoms are kept.
+  symptomID   String  @id @unique @db.VarChar
+  symptomName String? @db.VarChar
 }
 
-model symptoms {
-  symptom_id   String         @id(map: "symptoms_pk") @db.VarChar
-  symptom_name String?        @db.VarChar
-  scc_junction scc_junction[]
+model Log {
+  // This is where all the log entries are.
+  logID     String   @id @db.VarChar(32)
+  timestamp DateTime @db.Timestamp()
+  logType   String   @db.VarChar(12)
+
+  // One to many relation between a user and their log.
+  user        User?      @relation(fields: [user_UserID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
+  user_UserID String?    @db.Char(32)
+  // One to one relationship between a logID and the health log.
+  logHealth   HealthLog?
 }
 
-model log {
-  logid  String @id(map: "log_table_pk") @db.VarChar(32)
-  userid String @db.VarChar(32)
-}
+model HealthLog {
+  // This is where the health log entries can be found. These will have a tag of health
+  // in the logtype.
+  healthID           String @id @unique @db.Char(32)
+  height             Int?
+  weight             Int?
+  bloodPressure      Int?
+  bloodGlucoselevels Int?
 
-model scc_junction {
-  scc_chronicID     String            @db.Char
-  scc_symptomID     String            @db.VarChar
-  junctionid        String            @id(map: "scc_junction_pk") @unique(map: "scc_junction_junctionid_idx") @db.VarChar
-  chronic_condition chronic_condition @relation(fields: [scc_chronicID], references: [ChronicID], onDelete: Cascade, map: "fk_chronicid")
-  symptoms          symptoms          @relation(fields: [scc_symptomID], references: [symptom_id], onDelete: Cascade, map: "fk_symptomid")
+  //This maps the relation to the logID. 
+  log_logID String @unique @db.VarChar(32)
+  LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
 }
