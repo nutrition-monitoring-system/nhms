@@ -33,6 +33,7 @@ export default function Symptoms() {
   };
 
   const handleKeyDown = (e) => {
+    /* Enter the symptom. */
     if (
       e.key === "Enter" &&
       currentSymptom !== "" &&
@@ -45,6 +46,7 @@ export default function Symptoms() {
   };
 
   const updateSymptom = (symptom, intensity) => {
+    /* Update a symptom with the new intensity. */
     const updatedSymptoms = symptoms.map((s) => {
       if (s.name === symptom.name) {
         return { ...s, intensity };
@@ -81,14 +83,15 @@ export default function Symptoms() {
         />
       </WithLabel>
       <WithLabel name="Date">
-        <DatePicker placeholder="Select a date:" />
+        <DatePicker placeholder="Enter a date:" />
       </WithLabel>
 
       <Card className="w-full max-w-xl">
         <CardHeader>
           <CardTitle>My Symptoms</CardTitle>
           <CardDescription>
-            Here are the symptoms you&apos;ve entered:
+            Here are the symptoms you&apos;ve entered.<br></br> Add the
+            intensity below:
           </CardDescription>
           <hr></hr>
         </CardHeader>
@@ -96,6 +99,7 @@ export default function Symptoms() {
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
             {symptoms.map((symptom, idx) => (
+              /* Each item gets put into the accordion component. */
               <AccordionItem
                 value={`${symptom.name}-${idx}`}
                 key={`${symptom.name}-${idx}`}
@@ -114,8 +118,7 @@ export default function Symptoms() {
           </Accordion>
         </CardContent>
 
-        <CardFooter className="flex justify-between">
-          <div />
+        <CardFooter className="flex justify-end">
           <Button onClick={onSubmit} disabled={symptoms.length === 0}>
             Submit
           </Button>
@@ -141,12 +144,12 @@ function Intensity({ onChange, value }) {
     onChange && onChange(value);
   };
   return (
-    <div className="w-full py-2 px-4 grid gap-2 h-[70vh]">
+    <div className="w-full py-2 px-4 grid gap-2">
       <p className="font-bold">
         Intensity Strength: <span className="text-blue-500">{intensity}</span>
       </p>
       <Slider
-        className="cursor-pointer"
+        className="cursor-pointer bg-black rounded-sm"
         defaultValue={[intensity]}
         max={10}
         min={1}
