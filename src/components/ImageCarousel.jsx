@@ -37,7 +37,6 @@ export default function ImageCarousel() {
         id: record.id,
         url: URL.createObjectURL(record.file),
       }));
-      console.log(imageFiles.length);
       if (imageFiles.length === 0) {
         // if no image, dispaly default
         setImages([{ id: "default", url: defaultImageUrl }]);

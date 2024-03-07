@@ -53,6 +53,7 @@ const FileUpload = ({ fetchImages }) => {
 
     request.onsuccess = () => {
       console.log("File uploaded successfully");
+      fetchImages(db);
     };
 
     request.onerror = (event) => {
@@ -63,7 +64,6 @@ const FileUpload = ({ fetchImages }) => {
   // Modified handleUpload to trigger file input click
   const triggerFileInputClick = () => {
     fileInputRef.current.click(); // Programmatically click the hidden file input
-    fetchImages();
   };
 
   return (
