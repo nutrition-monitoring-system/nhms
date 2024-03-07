@@ -21,6 +21,7 @@ model User {
   Preferences            Preference?
   // These are one to many relationships.
   Logs                   Log[]
+  Collections            Collection[]
   // These are many to many relationships, represented via junction tables.
   UserToChronicCondition UserToChronicCondition[]
   UserToAllergy          UserToAllergy[]
@@ -209,4 +210,35 @@ model MenstrualLogToSymptoms {
   symptom           Symptom      @relation(fields: [symptomID], references: [symptomID])
 
   @@id([menstruallogID, symptomID])
+}
+
+model Collection {
+  //Each collection has one user. There is a one to many relationship between the user and the collections.
+  collectionID   String @id @unique @db.Char(32)
+  collectionName String @default("My Collection") @db.VarChar(45)
+
+  userUserID           String?                @db.Char(32)
+  User                 User?                  @relation(fields: [userUserID], references: [userID])
+  CollectionsToRecipes CollectionsToRecipes[]
+}
+
+model Recipe {
+  recipeID             String                 @id @unique @db.Char(32)
+  recipeName           String                 @db.VarChar(45)
+  recipeInstructions   String                 @db.VarChar(100)
+  cookTime             Int
+  prepTime             Int
+  recipeIngredients    String                 @db.VarChar(200)
+  CollectionsToRecipes CollectionsToRecipes[]
+}
+
+model CollectionsToRecipes {
+  // There is a junction table between the recipes and collections, as it is a many to many relationship.
+
+  collectionID  String
+  newCollection Collection @relation(fields: [collectionID], references: [collectionID])
+  recipeID      String
+  recipe        Recipe     @relation(fields: [recipeID], references: [recipeID])
+
+  @@id([collectionID, recipeID])
 }
