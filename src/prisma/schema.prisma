@@ -67,8 +67,8 @@ model UserToChronicCondition {
 
 model Food {
   // This is the list of foods that are kept in the database. 
-  foodID        String  @id @unique @db.Char(32)
-  foodName      String  @unique @db.VarChar(45)
+  foodID        String   @id @unique @db.Char(32)
+  foodName      String   @unique @db.VarChar(45)
   isDrink       Boolean
   protein       Int
   fat           Int
@@ -77,6 +77,7 @@ model Food {
   calcium       Int
   iron          Int
   potassium     Int
+  FoodLog       FoodLog?
 }
 
 model Preference {
@@ -95,8 +96,10 @@ model Preference {
 
 model Symptom {
   // This is where all the symptoms are kept.
-  symptomID   String  @id @unique @db.VarChar
-  symptomName String? @db.VarChar
+  symptomID              String                   @id @unique @db.VarChar
+  symptomName            String?                  @db.VarChar
+  SymptomLog             SymptomLog?
+  MenstrualLogToSymptoms MenstrualLogToSymptoms[]
 }
 
 model Log {
@@ -106,16 +109,21 @@ model Log {
   logType   String   @db.VarChar(12)
 
   // One to many relation between a user and their log.
-  user        User?      @relation(fields: [user_UserID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
-  user_UserID String?    @db.Char(32)
-  // One to one relationship between a logID and the health log.
-  logHealth   HealthLog?
+  user         User?         @relation(fields: [user_UserID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
+  user_UserID  String?       @db.Char(32)
+  // One to one relationship between a logID and different log elements.
+  HealthLog    HealthLog?
+  MoodLog      MoodLog?
+  FoodLog      FoodLog?
+  WaterLog     WaterLog?
+  MenstrualLog MenstrualLog?
+  SymptomLog   SymptomLog?
 }
 
 model HealthLog {
   // This is where the health log entries can be found. These will have a tag of health
   // in the logtype.
-  healthID           String @id @unique @db.Char(32)
+  healthID           String @unique @db.Char(32)
   height             Int?
   weight             Int?
   bloodPressure      Int?
@@ -124,4 +132,81 @@ model HealthLog {
   //This maps the relation to the logID. 
   log_logID String @unique @db.VarChar(32)
   LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+
+  //Creates a compound ID.
+  @@id([healthID, log_logID])
+}
+
+model MoodLog {
+  // This is where the mood log entries can be found. These will have a tag of mood
+  // in the logtype.
+  moodID     String @id @unique @db.Char(32)
+  moodStatus String
+
+  //This maps the relation to the logID. 
+  log_logID String @unique @db.VarChar(32)
+  LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model FoodLog {
+  // This is where the food log entries can be found. These will have a tag of food
+  // in the logtype.
+  foodQuantity Int
+
+  //This maps the relation to the logID + the food ID.
+  log_logID   String @unique @db.VarChar(32)
+  LogID       Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+  food_foodID String @unique @db.VarChar(32)
+  foodID      Food   @relation(fields: [food_foodID], references: [foodID], onDelete: Cascade, onUpdate: Cascade)
+
+  //Creates a compound ID.
+  @@id([log_logID, food_foodID])
+}
+
+model SymptomLog {
+  // These map any symptoms to a log.
+  intensity Int
+
+  //This maps the relation to the logID + the symptom ID.
+  log_logID         String  @unique @db.VarChar(32)
+  LogID             Log     @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+  symptom_symptomID String  @unique @db.VarChar(32)
+  symptom           Symptom @relation(fields: [symptom_symptomID], references: [symptomID], onDelete: Cascade, onUpdate: Cascade)
+
+  //Creates a compound ID.
+  @@id([log_logID, symptom_symptomID])
+}
+
+model WaterLog {
+  // This is where the water log entries can be found. These will have a tag of water
+  // in the logtype.
+  waterAmount Int
+
+  //This maps the relation to the logID. 
+  log_logID String @unique @db.VarChar(32)
+  LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model MenstrualLog {
+  // This is where the menstrual log entries can be found. These will have a tag of menstrual
+  // in the logtype.
+  lastDate       DateTime @db.Timestamp()
+  cycleLength    Int
+  periodDuration Int
+
+  //This maps the relation to the logID. 
+  log_logID String @unique @db.VarChar(32)
+  LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+
+  MenstrualLogToSymptoms MenstrualLogToSymptoms[]
+}
+
+model MenstrualLogToSymptoms {
+  //Many symptoms can be mapped to many menstrual logs. This acts as a junction table.
+  menstruallogID    String
+  menstrualLogEntry MenstrualLog @relation(fields: [menstruallogID], references: [log_logID])
+  symptomID         String
+  symptom           Symptom      @relation(fields: [symptomID], references: [symptomID])
+
+  @@id([menstruallogID, symptomID])
 }
