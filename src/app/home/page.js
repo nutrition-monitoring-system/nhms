@@ -143,20 +143,50 @@ function NavBar({
             Collections
           </div>
           <div className="relative flex items-center gap-1 p-2">
-            <Image
-              src="/icons/add.png"
-              alt="add symbol"
-              width={20}
-              height={20}
-            />
-            <input
-              type="text conditions"
-              placeholder="Type to search recipes..."
-              className="pl-7 flex-grow"
-              onChange={handleSearch}
-              ref={inputRef}
-            />
-          </div>
+
+    <div className="w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+      <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
+        <Logo></Logo>
+        <div className="flex justify-center items-center col-span-2">
+          <ProfileNavigation search={true} />
+        </div>
+      </div>
+      <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
+        <div
+          className="tile bg-black text-white"
+          ref={home}
+          onClick={() => handleOnclick(home)}
+        >
+          Home
+        </div>
+        <div
+          className="tile"
+          ref={recipes}
+          onClick={() => handleOnclick(recipes)}
+        >
+          Recipes
+        </div>
+        <div
+          className="tile"
+          ref={recipesCollections}
+          onClick={() => handleOnclick(recipesCollections)}
+        >
+          Collections
+        </div>
+        <div
+          className="tile"
+          ref={foodRecommendation}
+          onClick={() => handleOnclick(foodRecommendation)}
+        >
+          Food Recommendations
+        </div>
+        {/* I want to suggest maybe getting rid of food collections? It isn't clear what it is. - Harry */}
+        <div
+          className="tile"
+          ref={foodCollection}
+          onClick={() => handleOnclick(foodCollection)}
+        >
+          Food Collections
         </div>
       </div>
     </>

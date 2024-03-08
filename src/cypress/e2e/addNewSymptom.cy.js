@@ -44,4 +44,23 @@ describe("This should make a request to the addSymptom endpoint. ", () => {
         }
     });
   });
+  it("This should pass, due to a symptom in the field.", () => {
+    let endpoint = Cypress.config("baseUrl") + "/api/addSymptom";
+    let data = {
+      symptomName: "Headaches"
+    };
+    cy.request({
+      url: endpoint,
+      method: "POST",
+      body:data,
+    }).then((response) => {
+        if (response.body.ok == null){
+            cy.log(response.body.error);
+        }
+        else{
+          cy.log(" ");
+            cy.log(response.body);
+        }
+    });
+  });
 });

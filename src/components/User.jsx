@@ -18,7 +18,7 @@ import {
   MdLocalDrink,
   MdDining,
 } from "react-icons/md";
-// import ChartComponent from "../components/UserCharts.jsx";
+import ChartComponent from "../components/UserCharts.jsx";
 import Logo from "../components/Logo";
 import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
@@ -155,11 +155,11 @@ export default function User({ handsignOut }) {
       <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
         <TopInformation></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
-        <div className="flex gap-4 container place-content-center w-full bg-gray-100">
-          {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
-          <ImageCarousel></ImageCarousel>
-          <Log></Log>
-        </div>
+        {/* <div className="flex gap-4 container place-content-center w-full bg-gray-100"> */}
+        {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
+        <ImageCarousel></ImageCarousel>
+        {/* <Log></Log> */}
+        {/* </div> */}
         <CreateHealthRecordForm></CreateHealthRecordForm>
         {/* <ChartComponent /> */}
       </div>
@@ -365,21 +365,21 @@ function PhotoLog({ photo, handlePhoto }) {
   );
 }
 
-function Log() {
-  return (
-    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3 gap-2">
-      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <MdDining className="size-6" />
-        <p className="text-left w-full">Food Log</p>
-      </button>
-      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <MdLocalDrink className="size-6" />
-        <p className="text-left w-full">Water Log</p>
-      </button>
-      <FileUpload></FileUpload>
-    </div>
-  );
-}
+// function Log() {
+//   return (
+//     <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3 gap-2">
+//       <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+//         <MdDining className="size-6" />
+//         <p className="text-left w-full">Food Log</p>
+//       </button>
+//       <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+//         <MdLocalDrink className="size-6" />
+//         <p className="text-left w-full">Water Log</p>
+//       </button>
+//       <FileUpload></FileUpload>
+//     </div>
+//   );
+// }
 
 function CreateHealthRecordForm() {
   const items = [

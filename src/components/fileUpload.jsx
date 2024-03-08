@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaCamera } from "react-icons/fa";
+import {
+  MdSettings,
+  MdLocalHospital,
+  MdLocalDrink,
+  MdDining,
+} from "react-icons/md";
 
 const dbName = "myDB";
 const storeName = "files";
 const dbVersion = 1;
 
-const FileUpload = () => {
+const FileUpload = ({ fetchImages }) => {
   const [db, setDb] = useState(null);
   const fileInputRef = useRef(null); // Step 2: Use a ref for the file input
 
@@ -47,6 +53,7 @@ const FileUpload = () => {
 
     request.onsuccess = () => {
       console.log("File uploaded successfully");
+      fetchImages(db);
     };
 
     request.onerror = (event) => {
@@ -60,22 +67,32 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
-      {/* Hidden file input */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileChange}
-        style={{ display: "none" }}
-      />
-      {/* Visible button */}
-      <button
-        className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
-        onClick={triggerFileInputClick} // Use the new method here
-      >
-        <FaCamera className="size-6" />
-        <p className="text-left w-full">Add Photo</p>
+    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md min-h-fit p-3 gap-2">
+      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+        <MdDining className="size-6" />
+        <p className="text-left w-full">Food Log</p>
       </button>
+      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+        <MdLocalDrink className="size-6" />
+        <p className="text-left w-full">Water Log</p>
+      </button>
+      <div>
+        {/* Hidden file input */}
+        <input
+          type="file"
+          ref={fileInputRef}
+          onChange={handleFileChange}
+          style={{ display: "none" }}
+        />
+        {/* Visible button */}
+        <button
+          className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
+          onClick={triggerFileInputClick} // Use the new method here
+        >
+          <FaCamera className="size-6" />
+          <p className="text-left w-full">Add Photo</p>
+        </button>
+      </div>
     </div>
   );
 };
