@@ -1,86 +1,161 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import TomSelect from "tom-select";
-import "tom-select/dist/css/tom-select.bootstrap5.css";
-import "./index.css";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { DatePicker } from "@/components/ui/datePicker";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Slider } from "@/components/ui/slider";
+import "./main.css";
 
 export default function Symptoms() {
-  const [selected, setSelected] = useState([]);
-  const router = useRouter();
+  const [symptoms, setSymptoms] = useState([]);
+  const [currentSymptom, setCurrentSymptom] = useState("");
 
-  const options = [
-    { value: "Bloating", text: "Bloating" },
-    { value: "Diarrhoea", text: "Diarrhoea" },
-    { value: "Stomach Pain", text: "Stomach Pain" },
-    { value: "Other", text: "Other" },
-  ];
-
-  const handleSelect = (value) => {
-    setSelected(value);
+  const handleSymptomsInput = (e) => {
+    console.log(e.target.value);
+    let capitalised =
+      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+    setCurrentSymptom(capitalised);
   };
 
-  useEffect(() => {
-    const inst = new TomSelect("#select-state", {
-      options,
-      plugins: ["remove_button", "clear_button"],
-      onChange: handleSelect,
-      create: true, createOnBlur: true,
-      render: {
-        item: function(data, escape) {
-          return '<div class=" !px-3 !bg-primarylight !rounded-lg !hover:bg-primarylight/75">' + escape(data.text) + '</div>';
-        },
-      }
-    });
-    return () => inst.destroy();
-  }, []);
+  const handleKeyDown = (e) => {
+    /* Enter the symptom. */
+    if (
+      e.key === "Enter" &&
+      currentSymptom !== "" &&
+      !symptoms.some((s) => s.name === currentSymptom)
+    ) {
+      console.log("Enter key pressed");
+      setSymptoms([...symptoms, { name: currentSymptom, intensity: 5 }]);
+      setCurrentSymptom("");
+    }
+  };
 
-  const handleSubmit = () => {
-    if (selected.length === 0) return;
-    console.log(selected);
-    const params = new URLSearchParams();
-    params.append("selected", selected.join(","));
-    router.push(`/symptoms/slide?${params.toString()}`);
+  const updateSymptom = (symptom, intensity) => {
+    /* Update a symptom with the new intensity. */
+    const updatedSymptoms = symptoms.map((s) => {
+      if (s.name === symptom.name) {
+        return { ...s, intensity };
+      }
+      return s;
+    });
+    setSymptoms(updatedSymptoms);
+  };
+
+  const removeSymptom = (symptom) => {
+    const updatedSymptoms = symptoms.filter((s) => s.name !== symptom.name);
+    setSymptoms(updatedSymptoms);
+  };
+
+  const onSubmit = () => {
+    console.log("Symptoms submitted.");
+    console.log(symptoms);
   };
 
   return (
-    <>
-      <div className="flex justify-center items-center flex-col gap-10 py-4 ">
-        <h1 className="text-4xl font-bold">Symptoms:</h1>
-        <div className="w-1/2 min-h-[40vh] flex items-center flex-col gap-6">
-          <input
-            type="date"
-            className="appearance-none w-full p-3 rounded-lg !bg-primary "
-            placeholder="Enter a date: "
-            required
-          />
-          {/* <input
-            type="search"
-            placeholder="Type to search symptoms"
-            className="w-full p-2 rounded-lg"
-            style={{ backgroundColor: 'rgb(220,150,150)' }}
-          /> */}
-          <select
-            id="select-state"
-            name="state[]"
-            multiple
-            placeholder="Type to search symptoms:"
-            autoComplete="off"
-            className="w-full form-control bg-primary"
-            // onChange={handleSelect}
-          />
-        </div>
+    <div className="flex justify-center items-center flex-col gap-10 py-4 bg-primary h-[100vh]">
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        What are your symptoms?
+      </h1>
 
-        <div className="flex justify-end w-1/2">
-          <button
-            disabled={selected.length === 0}
-            className="bg-black text-white p-2 px-10 rounded-lg text-xl cursor-pointer disabled:opacity-25"
-            onClick={handleSubmit}
-          >
+      <WithLabel name="Symptoms">
+        <Input
+          type="text"
+          id="Symptoms"
+          placeholder="Type your main symptoms here:"
+          value={currentSymptom}
+          onInput={handleSymptomsInput}
+          onKeyDown={handleKeyDown}
+        />
+      </WithLabel>
+      <WithLabel name="Date">
+        <DatePicker placeholder="Enter a date:" />
+      </WithLabel>
+
+      <Card className="w-full max-w-xl">
+        <CardHeader>
+          <CardTitle>My Symptoms</CardTitle>
+          <CardDescription>
+            Here are the symptoms you&apos;ve entered.<br></br> Add the
+            intensity below:
+          </CardDescription>
+          <hr></hr>
+        </CardHeader>
+
+        <CardContent>
+          <Accordion type="single" collapsible className="w-full">
+            {symptoms.map((symptom, idx) => (
+              /* Each item gets put into the accordion component. */
+              <AccordionItem
+                value={`${symptom.name}-${idx}`}
+                key={`${symptom.name}-${idx}`}
+              >
+                <AccordionTrigger onRemove={() => removeSymptom(symptom)}>
+                  {symptom.name}
+                </AccordionTrigger>
+                <AccordionContent>
+                  <Intensity
+                    value={symptom.intensity}
+                    onChange={([value]) => updateSymptom(symptom, value)}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
+
+        <CardFooter className="flex justify-end">
+          <Button onClick={onSubmit} disabled={symptoms.length === 0}>
             Submit
-          </button>
-        </div>
-      </div>
-    </>
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+function WithLabel({ name, children }) {
+  return (
+    <div className="grid w-full max-w-xl items-center gap-1.5">
+      <Label htmlFor={name}>{name}</Label>
+      {children}
+    </div>
+  );
+}
+
+function Intensity({ onChange, value }) {
+  const [intensity, setIntensity] = useState(value);
+  const handleIntensityChange = (value) => {
+    setIntensity(value);
+    onChange && onChange(value);
+  };
+  return (
+    <div className="w-full py-2 px-4 grid gap-2">
+      <p className="font-bold">
+        Intensity Strength: <span className="text-blue-500">{intensity}</span>
+      </p>
+      <Slider
+        className="cursor-pointer bg-black rounded-sm"
+        defaultValue={[intensity]}
+        max={10}
+        min={1}
+        step={1}
+        onValueChange={handleIntensityChange}
+      />
+    </div>
   );
 }
