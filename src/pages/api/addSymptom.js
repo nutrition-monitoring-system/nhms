@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       const checkSymptom = await prisma.symptom.findFirst({
         where: { symptomName: symptomName },
       });
-
+      
       if (checkSymptom == null) {
         const newSymptom = await prisma.symptom
           .create({
