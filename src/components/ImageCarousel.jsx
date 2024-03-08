@@ -2,30 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Carousel } from "flowbite-react";
 import { FaTrash, FaPencilAlt } from "react-icons/fa";
-
-// function CarouselElement({ date, image }) {
-//   if (image == null || date == null) {
-//     return (
-//       <div className="flex h-full p-2 bg-primary text-black flex-col place-items-center">
-//         <MdBrokenImage className="size-10" />
-//         {/* <Image
-//           src={"/photos/image.png"}
-//           alt="Carousel broken image"
-//           className="p-2 object-scale-down"
-//           width={200} height={200}
-//         ></Image> */}
-//         <div className="w-full h-[40%]"></div>
-//         <div className="p-1 justify-self-end">Placeholder Image</div>
-//       </div>
-//     );
-//   }
-//   return (
-//     <div className="flex h-full items-center justify-center bg-primary text-black">
-//       <Image src={image} alt="Carousel Image"></Image>
-//       <div>{date}</div>
-//     </div>
-//   );
-// }
+import FileUpload from "./fileUpload";
 
 const defaultImageUrl = "/photos/person.jpg";
 
@@ -103,35 +80,39 @@ export default function ImageCarousel() {
   };
 
   return (
-    <div className="w-[50%] min-w-[500px] h-[70%] max-h-[90%] place-self-center text-black">
-      <Carousel slide={false}>
-        {images.map((image) => (
-          <div
-            key={image.id}
-            className="relative flex h-full items-center justify-center bg-primary text-black"
-          >
-            <Image src={image.url} fill={true} alt={`Image ${image.id}`} />
-            <div className="absolute top-2 right-2 flex space-x-2">
-              {image.id !== "default" && ( // avoid delete or replace button for default image
-                <>
-                  <button
-                    onClick={() => deleteImage(image.id)}
-                    className="p-2 text-white bg-red-600 rounded-full focus:outline-none focus:ring"
-                  >
-                    <FaTrash className="h-6 w-6" />
-                  </button>
-                  <button
-                    onClick={() => replaceImage(image.id)}
-                    className="p-2 text-white bg-blue-600 rounded-full focus:outline-none focus:ring"
-                  >
-                    <FaPencilAlt className="h-6 w-6" />
-                  </button>
-                </>
-              )}
+    <div className="flex gap-4 place-content-center w-full bg-gray-100">
+      <div className="min-w-[40%] h-full flex justify-center items-center gap-2 text-black p-2">
+        <Carousel slide={false}>
+          {images.map((image) => (
+            <div
+              key={image.id}
+              className="relative flex h-full items-center justify-center bg-primary text-black"
+            >
+              <Image src={image.url} fill={true} alt={`Image ${image.id}`} />
+              <div className="absolute top-2 right-[30%] flex space-x-2">
+                {image.id !== "default" && ( // avoid delete or replace button for default image
+                  <>
+                    <button
+                      onClick={() => deleteImage(image.id)}
+                      className="p-2 text-white bg-red-600 rounded-full focus:outline-none focus:ring"
+                    >
+                      <FaTrash className="h-6 w-6" />
+                    </button>
+                    <button
+                      onClick={() => replaceImage(image.id)}
+                      className="p-2 text-white bg-blue-600 rounded-full focus:outline-none focus:ring"
+                    >
+                      <FaPencilAlt className="h-6 w-6" />
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </Carousel>
+          ))}
+        </Carousel>
+
+        <FileUpload fetchImages={() => fetchImages(db)}></FileUpload>
+      </div>
     </div>
   );
 }
