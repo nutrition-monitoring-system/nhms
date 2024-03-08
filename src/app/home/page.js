@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
+import { ref } from "yup";
 
 export default function Page() {
   return (
@@ -21,6 +22,9 @@ export default function Page() {
 
 function Home() {
   const [recipesList, setRecipeList] = useState([]);
+  const [currentSectionName, setCurrentSectionName] = useState("Home");
+  const [currentSectionList, setCurrentSectionList] = useState([]);
+  const [searchInformation, setSearchInformation] = useState("");
   //initialise the router for conditional redirection
   const router = useRouter();
   // initialise the session.
@@ -51,26 +55,38 @@ function Home() {
 
   return (
     <div className="h-screen bg-white flex flex-col min-h-fit">
-      <NavBar handleLogout={handleLogout} recipesList={recipesList} />
+      <NavBar
+        handleLogout={handleLogout}
+        recipesList={recipesList}
+        setCurrentSectionName={setCurrentSectionName}
+        searchInformation={searchInformation}
+        setSearchInformation={setSearchInformation}
+      />
       <div className="p-4 min-h-fit grid place-items-center bg-white">
-        <Recipes recipesList={recipesList} />
+        <Recipes
+          searchInformation={searchInformation}
+          setSearchInformation={setSearchInformation}
+          recipesList={recipesList}
+          currentSectionName={currentSectionName}
+          currentSectionList={currentSectionList}
+          setCurrentSectionList={setCurrentSectionList}
+        />
       </div>
     </div>
   );
 }
 
-function NavBar({ recipesList }) {
-  const menuItems = useRef(null);
-  const handleMenuclick = () => {
-    menuItems.current.classList.toggle("slide-down");
-  };
+function NavBar({
+  recipesList,
+  setCurrentSectionName,
+  searchInformation,
+  setSearchInformation,
+}) {
   const home = useRef(null);
   const recipes = useRef(null);
   const recipesCollections = useRef(null);
-  const search = useRef(null);
-  const [searchInformation, setSearchInformation] = useState("");
 
-  const refList = [home, recipes, recipesCollections, search];
+  const refList = [home, recipes, recipesCollections];
 
   const handleOnclick = (reference) => {
     const refIndex = refList.findIndex((refValue) => refValue === reference);
@@ -87,125 +103,21 @@ function NavBar({ recipesList }) {
       !reference.current.classList.contains(className) &&
         reference.current.classList.add(className);
     });
+    setCurrentSectionName(reference.current.innerText); // home, recipes, collections etc
   };
-  const modalRef = useRef(null);
-
-  const handlePopUP = (e) => {
-    e.preventDefault();
-    modalRef.current.showModal();
-    // this is a timer for forgot password verification.
-  };
-  const handleClose = (e) => {
-    e.preventDefault();
-    modalRef.current.close();
-  };
-  const capitalise = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
-  const handleDropdown = (recipeObject) => {
-    switch (typeof recipeObject) {
-      case "object":
-        try {
-          return recipeObject?.map((item, idx) => (
-            <option value={item} key={idx}>
-              {item}
-            </option>
-          ));
-        } catch (err) {
-          return <></>;
-        }
-      default:
-        return (
-          <option value={recipeObject} key={recipeObject}>
-            {recipeObject}
-          </option>
-        );
-    }
+  const inputRef = useRef(null);
+  const handleSearch = () => {
+    const searchValue = inputRef.current.value;
+    setSearchInformation(searchValue);
   };
 
   return (
     <>
-      <dialog
-        ref={modalRef}
-        className="w-[50%] h-[80%] backdrop-blur-3xl focus:outline-none rounded-md "
-      >
-        <div className="w-full h-full p-3 grid grid-rows-4">
-          <div className="flex justify-around items-center flex-col">
-            <div className="w-full flex justify-around items-center ">
-              <h1 className="text-center font-black text-[1.5rem]">
-                Search Recipes
-              </h1>
-              <button
-                className="tile bg-primary focus:outline-none"
-                onClick={handleClose}
-              >
-                <Image
-                  src="/icons/add.png"
-                  width={20}
-                  height={20}
-                  alt="plus icon"
-                  className="rotate-45"
-                />
-                <span>close</span>
-              </button>
-            </div>
-            <div className="w-full flex justify-around items-center gap-3 p-2 rounded-md">
-              <Image
-                src="/icons/search.png"
-                width={20}
-                height={20}
-                alt="Search icon"
-              />
-              <input
-                autoFocus
-                type="text"
-                placeholder="Search recipes..."
-                className="outline-black border-black"
-                onChange={(e) => setSearchInformation(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className="flex justify-center gap-2 items-center flex-wrap py-5 rounded-md">
-            {Object.keys(recipesList[0]).map((key, idx) => {
-              return (
-                <div key={idx} className="">
-                  <select className="tile bg-primary border-none ">
-                    <option value={capitalise(key)}>{capitalise(key)}</option>
-                  </select>
-                </div>
-              );
-            })}
-          </div>
-          <div className="bg-white row-span-4 flex flex-col justify-center items-center gap-1 overflow-y-scroll">
-            {recipesList
-              ?.filter((item) =>
-                item.name
-                  .toLowerCase()
-                  .includes(searchInformation.toLowerCase())
-              )
-              .map((item, idx) => (
-                <div
-                  key={idx}
-                  className="text-left bg-white shadow-lg hover:bg-gray-200 w-full p-3 rounded-md flex justify-between items-center"
-                >
-                  <div>{item.name}</div>
-                  <Image
-                    src="/icons/info.png"
-                    width={20}
-                    height={20}
-                    alt="Information icon"
-                  />
-                </div>
-              ))}
-          </div>
-        </div>
-      </dialog>
-      <div className="w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+      <div className="bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
         <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
           <div className="flex justify-center items-center col-span-2">
-            <ProfileNavigation search={true} onClick={handlePopUP} />
+            <ProfileNavigation />
           </div>
         </div>
         <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
@@ -230,12 +142,20 @@ function NavBar({ recipesList }) {
           >
             Collections
           </div>
-          <div
-            className="tile"
-            ref={search}
-            onClick={() => handleOnclick(search)}
-          >
-            Search
+          <div className="relative flex items-center gap-1 p-2">
+            <Image
+              src="/icons/add.png"
+              alt="add symbol"
+              width={20}
+              height={20}
+            />
+            <input
+              type="text conditions"
+              placeholder="Type to search recipes..."
+              className="pl-7 flex-grow"
+              onChange={handleSearch}
+              ref={inputRef}
+            />
           </div>
         </div>
       </div>

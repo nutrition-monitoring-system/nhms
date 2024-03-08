@@ -6,7 +6,7 @@ import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
-export default function ProfileNavigation({ search, onClick }) {
+export default function ProfileNavigation() {
   const { data: session, status } = useSession();
 
   const sendID = { id: session?.user?.name };
@@ -49,22 +49,6 @@ export default function ProfileNavigation({ search, onClick }) {
               {data.name + " " + data.surname}
             </span>
           </Link>
-          {search === true && (
-            <>
-              <div
-                className="tile hover:shadow-none bg-secondary"
-                onClick={onClick}
-              >
-                <Image
-                  src="/icons/search.png"
-                  width={20}
-                  height={20}
-                  alt="Search icon"
-                />
-                <span>Search</span>
-              </div>
-            </>
-          )}
           <Link
             href={""}
             id="Logout"
