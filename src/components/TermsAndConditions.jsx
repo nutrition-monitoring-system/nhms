@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Button from "@/components/Button";
-export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
+export default function TermsAndConditions({ onClickPrev, onClickNext }) {
   const [termsConditions, setTermsConditions] = useState(false);
   const [shareHealthDate, setShareHealthData] = useState(false);
   return (
@@ -57,7 +57,10 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
           <Button
             onClick={(event) =>
               termsConditions && shareHealthDate
-                ? handleSubmit()
+                ? (function () {
+                    event.preventDefault();
+                    onClickNext();
+                  })()
                 : event.preventDefault()
             }
           >

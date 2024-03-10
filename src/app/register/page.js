@@ -221,7 +221,7 @@ export default function Home() {
                 onClickPrev={handleClickPrev}
               />
               <TermsAndConditions
-                handleSubmit={handleSubmit(handleFormSubmit)}
+                onClickNext={handleSubmit(handleFormSubmit)}
                 onClickPrev={handleClickPrev}
               />
             </form>
