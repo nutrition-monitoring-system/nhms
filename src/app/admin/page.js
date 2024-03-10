@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
+import SideNavBar from "@/components/SideNav";
 export default function Page() {
   return (
     <SessionProvider>
@@ -27,7 +28,7 @@ function Home() {
     return (
       <>
         <div className="w-screen h-screen flex">
-          <NavBar />
+          <SideNavBar/>
           <MainPage />
         </div>
       </>
@@ -87,7 +88,7 @@ const MainPageNavBar = () => {
 };
 
 const MainPage = () => (
-  <div className="col-span-3 p-2 flex flex-col justify-center items-center gap-1">
+  <div className="col-span-3 p-2 flex flex-col justify-center items-center gap-1 w-screen">
     <MainPageNavBar></MainPageNavBar>
     <div className="bg-white h-full w-full grid grid-cols-3 overflow-hidden p-3 gap-2 rounded-lg">
       <div className="grid grid-rows-6 place-content-center gap-3 p-4">
@@ -115,7 +116,7 @@ const MainPage = () => (
       <div className="bg-white grid grid-cols-2 grid-rows-3 gap-1 p-2">
         <div className="bg-white shadow-md rounded-md text-black text-lg flex flex-col justify-center items-center">
           <h4 className="text-[1.4rem] font-bold">2.5k</h4>
-          <span className="text-center">Accounts created</span>
+          <span className="text-center">accounts <br></br> created</span>
         </div>
         <div className="bg-white shadow-md rounded-md text-black text-lg flex flex-col justify-center items-center">
           <h4 className="text-[1.4rem] font-bold">376</h4>
