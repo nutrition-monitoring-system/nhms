@@ -38,42 +38,6 @@ function Home() {
   }
 }
 
-const NavBar = () => (
-  <div className="bg-black text-white grid grid-rows-2 w-[22%] xl:w-[18%]">
-    <div className="grid place-items-center">
-      <Logo />
-      <button className="tile text-xl">
-        <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-        <div>New Blog</div>
-      </button>
-      <button className="tile text-xl">
-        <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-        <div>New Article</div>
-      </button>
-      <button className="tile text-xl">
-        <Image
-          src="/icons/settings.png"
-          alt="Settings icon"
-          width={20}
-          height={20}
-        />
-        <div>Settings</div>
-      </button>
-    </div>
-    <div className="grid place-items-center">
-      <button className="tile text-lg">
-        <Image
-          src="/icons/logout.png"
-          alt="Logout icon"
-          width={20}
-          height={20}
-        />
-        <div>Logout</div>
-      </button>
-    </div>
-  </div>
-);
-
 const MainPageNavBar = () => {
   return (
     <div className="w-full grid grid-cols-2 py-2 sm:grid-cols-3 px-3">
