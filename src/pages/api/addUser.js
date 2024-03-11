@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   // this handles the register page
   if (req.method === "POST") {
     // Process a POST request
-    let newUUID = v1().slice(0, 32);
+    let newUserID = v1().slice(0, 32);
     // getting the data needed for the right table
     const {
       redirect,
@@ -25,13 +25,13 @@ export default async function handler(req, res) {
     } = req.body;
     // Hash the password using SHA-256
     const hash = CryptoJS.SHA256(password);
-
+    console.log(accessibilitySettings, chronicConditions, Allergies);
     // Convert the hash to a hexadecimal string
     const passwordHash = hash.toString(CryptoJS.enc.Hex).substring(0, 30); //database only requires the 32 characters
     // creating the right structure for the database
     const data = {
       gender: gender.toUpperCase()[0], // for MALE, gender[0] = M and gender[0] = F for female
-      userID: newUUID,
+      userID: newUserID,
       password: passwordHash,
       is_admin: Number(is_admin),
       ...newUserData,
@@ -48,11 +48,37 @@ export default async function handler(req, res) {
     /* The email check must be false or undefined in order for a new user to be added to the database. */
     if (emailCheck == null) {
       /* Create a new user in the database. */
+      console.log("New user created.");
       const newUser = await prisma.user.create({
         data: data,
       });
+      console.log(Allergies);
+      /* This will be changed in the new database. */
+      if (Allergies.length != 0) {
+        let allergyArray = Allergies.split(",");
+        console.log(allergyArray);
+        let allergyData = allergyArray.map((element) => {
+          return {
+            AllergiesID: v1().slice(0, 32),
+            Allergy_Type: element,
+            Alternative_Choice: "None",
+          };
+        });
+        const newAllergy = await prisma.allergies.createMany({
+          data: allergyData,
+          skipDuplicates: true,
+        });
+
+        /* In the new table, the allergies that the user has will be linked to their userID. */
+
+      }
+
+
+
+      console.log("New user created.");
+
       // return a valid response
-      return res.status(200).json({ ok: "true", id: newUUID });
+      return res.status(200).json({ ok: "true", id: newUserID });
     } else {
       console.log("\n \u001B[31m" + "Email already used. \n");
       return res.status(400).json({ error: "Email already used." });
