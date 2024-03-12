@@ -15,8 +15,8 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
             <div className="grid place-items-center p-5">
               <input
                 type="checkbox"
-                id="termsCheckbox"
-                name="termsCheckbox"
+                id="terms-privacy"
+                name="terms-privacy"
                 value={termsConditions ? "1" : "0"}
                 onChange={() => setTermsConditions((prev) => !prev)}
               />
@@ -39,8 +39,8 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
               <input
                 className="w-10"
                 type="checkbox"
-                id="healthDataCheckbox"
-                name="healthDataCheckbox"
+                id="sharing-data"
+                name="sharing-data"
                 value={shareHealthDate ? "1" : "0"}
                 onChange={() => setShareHealthData((prev) => !prev)}
               />
@@ -53,8 +53,12 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
           </div>
         </div>
         <div className="w-full flex justify-around items-center ">
-          <Button onClick={onClickPrev}>previous</Button>
-          <Button
+          <button className="tile" onClick={onClickPrev}>
+            previous
+          </button>
+          <button
+            id="register-next"
+            className="tile"
             onClick={(event) =>
               termsConditions && shareHealthDate
                 ? (function () {
@@ -65,7 +69,7 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
             }
           >
             Finish
-          </Button>
+          </button>
         </div>
       </div>
     </>

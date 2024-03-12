@@ -162,6 +162,7 @@ export default function FoodCategories({
           <div id="AllergiesNext">
             <button
               className="tile"
+              id="#DoneNext"
               onClick={(event) => {
                 handleCollectData({ foodCategories: userSelected });
                 onClickNext(event);

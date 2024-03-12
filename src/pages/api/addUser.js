@@ -70,10 +70,7 @@ export default async function handler(req, res) {
         });
 
         /* In the new table, the allergies that the user has will be linked to their userID. */
-
       }
-
-
 
       console.log("New user created.");
 
@@ -85,5 +82,5 @@ export default async function handler(req, res) {
     }
   }
   // return an invalid response if user does not exist
-  return res.status(400).json({ error: "Unable to add user" });
+  return res.status(400).json({ error: "Invalid request method." });
 }
