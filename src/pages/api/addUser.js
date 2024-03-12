@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       gender: gender.toUpperCase()[0], // for MALE, gender[0] = M and gender[0] = F for female
       userID: newUserID,
       password: passwordHash,
-      is_admin: Number(is_admin),
+      isAdmin: Number(is_admin),
       ...newUserData,
     };
     /* Check if a user with the same email is not already in the database. */
@@ -49,9 +49,9 @@ export default async function handler(req, res) {
     if (emailCheck == null) {
       /* Create a new user in the database. */
       console.log("New user created.");
-      const newUser = await prisma.user.create({
-        data: data,
-      });
+      
+
+      /* Check if user added allergies. */
       console.log(Allergies);
       /* This will be changed in the new database. */
       if (Allergies.length != 0) {
@@ -59,17 +59,28 @@ export default async function handler(req, res) {
         console.log(allergyArray);
         let allergyData = allergyArray.map((element) => {
           return {
-            AllergiesID: v1().slice(0, 32),
-            Allergy_Type: element,
-            Alternative_Choice: "None",
+            allergyID: v1().slice(0, 32),
+            allergyType: element
           };
         });
-        const newAllergy = await prisma.allergies.createMany({
+        const newAllergy = await prisma.allergy.createMany({
           data: allergyData,
           skipDuplicates: true,
         });
 
         /* In the new table, the allergies that the user has will be linked to their userID. */
+
+        /* Find all the entries where the allergies are linked to the user. */
+
+        const newUser = await prisma.user.create({
+          data: data,
+        });
+        const linkAllergyToTable = await prisma.userToAllergy.createMany({
+          data: allergyData.map((element) => {
+            return { userID: newUserID, allergyID: element["allergyID"] };
+          }),
+          skipDuplicates: true,
+        });
       }
 
       console.log("New user created.");
