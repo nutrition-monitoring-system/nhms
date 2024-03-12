@@ -121,6 +121,11 @@ export default function Home() {
     if (result.error) {
       // Handle sign-in error, log error to console
       console.error("Sign-in error:", result.error);
+      const error = JSON.parse(result.error); // convert from json to javascript object
+      if (error.message === "Email already used.") {
+        alert("Email already used. SignIn instead");
+        closeLoadingModal();
+      }
       // alert("unable to login", result.error);
     } else {
       // Sign-in was successful, set success flag and redirect to "/home"

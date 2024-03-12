@@ -48,16 +48,15 @@ export default async function handler(req, res) {
     /* The email check must be false or undefined in order for a new user to be added to the database. */
     if (emailCheck == null) {
       /* Create a new user in the database. */
-      const newUser = await prisma.user.create({
+      await prisma.user.create({
         data: data,
       });
       // return a valid response
       return res.status(200).json({ ok: "true", id: newUUID });
-    } else {
-      console.log("\n \u001B[31m" + "Email already used. \n");
-      return res.status(400).json({ error: "Email already used." });
     }
+    console.log("\n \u001B[31m" + "Email already used. \n");
+    return res.status(400).json({ error: "Email already used." });
   }
   // return an invalid response if user does not exist
-  return res.status(400).json({ error: "Unable to add user" });
+  return res.status(400).json({ error: "Invalid request method." });
 }
