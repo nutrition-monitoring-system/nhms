@@ -33,6 +33,11 @@ const authOptions = {
           });
           const response = await content.json();
           // if the response is valid then login user
+          if (response?.error && response?.error === "Email already used.") {
+            throw new Error(
+              JSON.stringify({ message: "Email already used.", error: true })
+            );
+          }
           if (response.ok === "true") {
             return {
               name: response.id,
