@@ -30,17 +30,17 @@ model User {
 model Allergy {
   // These are the list of allergies. 
   // Many users may have many allergies.
-  allergyID         String          @id @unique @db.Char(32)
-  allergyType       String          @db.VarChar(45)
-  UserToAllergy     UserToAllergy[]
+  allergyID     String          @id @unique @db.Char(32)
+  allergyType   String          @db.VarChar(45)
+  UserToAllergy UserToAllergy[]
 }
 
 model UserToAllergy {
   // This acts as a junction table from the user to the allergy.
   userID    String
-  user      User    @relation(fields: [userID], references: [userID])
+  user      User    @relation(fields: [userID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
   allergyID String
-  allergy   Allergy @relation(fields: [allergyID], references: [allergyID])
+  allergy   Allergy @relation(fields: [allergyID], references: [allergyID], onDelete: Cascade, onUpdate: Cascade)
 
   // This acts as a compound ID.
   @@id([userID, allergyID])
@@ -57,9 +57,9 @@ model ChronicCondition {
 model UserToChronicCondition {
   // This acts as a junction table from the user to the chronic condition.
   userID           String
-  user             User             @relation(fields: [userID], references: [userID])
+  user             User             @relation(fields: [userID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
   chronicID        String
-  chronicCondition ChronicCondition @relation(fields: [chronicID], references: [chronicID])
+  chronicCondition ChronicCondition @relation(fields: [chronicID], references: [chronicID], onDelete: Cascade, onUpdate: Cascade)
 
   // This acts as a compound ID.
   @@id([userID, chronicID])
@@ -118,6 +118,7 @@ model Log {
   WaterLog     WaterLog?
   MenstrualLog MenstrualLog?
   SymptomLog   SymptomLog?
+  PhotoLog     PhotoLog?
 }
 
 model HealthLog {
@@ -187,6 +188,16 @@ model WaterLog {
   LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
 }
 
+model PhotoLog {
+  // This is where the water log entries can be found. These will have a tag of water
+  // in the logtype.
+  photoLink String
+
+  //This maps the relation to the logID. 
+  log_logID String @unique @db.VarChar(32)
+  LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
+}
+
 model MenstrualLog {
   // This is where the menstrual log entries can be found. These will have a tag of menstrual
   // in the logtype.
@@ -204,9 +215,9 @@ model MenstrualLog {
 model MenstrualLogToSymptoms {
   //Many symptoms can be mapped to many menstrual logs. This acts as a junction table.
   menstruallogID    String
-  menstrualLogEntry MenstrualLog @relation(fields: [menstruallogID], references: [log_logID])
+  menstrualLogEntry MenstrualLog @relation(fields: [menstruallogID], references: [log_logID], onDelete: Cascade, onUpdate: Cascade)
   symptomID         String
-  symptom           Symptom      @relation(fields: [symptomID], references: [symptomID])
+  symptom           Symptom      @relation(fields: [symptomID], references: [symptomID], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([menstruallogID, symptomID])
 }
@@ -214,10 +225,10 @@ model MenstrualLogToSymptoms {
 model Collection {
   //Each collection has one user. There is a one to many relationship between the user and the collections.
   collectionID   String @id @unique @db.Char(32)
-  collectionName String @default("My Collection") @db.VarChar(45)
+  collectionName String @unique @default("My Collection") @db.VarChar(45)
 
   userUserID           String?                @db.Char(32)
-  User                 User?                  @relation(fields: [userUserID], references: [userID])
+  User                 User?                  @relation(fields: [userUserID], references: [userID], onDelete: Cascade, onUpdate: Cascade)
   CollectionsToRecipes CollectionsToRecipes[]
 }
 
@@ -235,9 +246,9 @@ model CollectionsToRecipes {
   // There is a junction table between the recipes and collections, as it is a many to many relationship.
 
   collectionID  String
-  newCollection Collection @relation(fields: [collectionID], references: [collectionID])
+  newCollection Collection @relation(fields: [collectionID], references: [collectionID], onDelete: Cascade, onUpdate: Cascade)
   recipeID      String
-  recipe        Recipe     @relation(fields: [recipeID], references: [recipeID])
+  recipe        Recipe     @relation(fields: [recipeID], references: [recipeID], onDelete: Cascade, onUpdate: Cascade)
 
   @@id([collectionID, recipeID])
 }
