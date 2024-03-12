@@ -49,40 +49,40 @@ export default async function handler(req, res) {
     if (emailCheck == null) {
       /* Create a new user in the database. */
       console.log("New user created.");
-      
+
+      const newUser = await prisma.user.create({
+        data: data,
+      });
 
       /* Check if user added allergies. */
       console.log(Allergies);
-      /* This will be changed in the new database. */
       if (Allergies.length != 0) {
-        let allergyArray = Allergies.split(",");
-        console.log(allergyArray);
-        let allergyData = allergyArray.map((element) => {
-          return {
-            allergyID: v1().slice(0, 32),
-            allergyType: element
-          };
+        /* Split allergies into an array. */
+        let allergyData = Allergies.split(",");
+        allergyData.forEach(async (element) => {
+          /* Find each allergy in the table. */
+          const checkAllergy = await prisma.allergy
+            .findFirst({
+              where: {
+                allergyType: element,
+              },
+            })
+            .then(async (response) => {
+              // console.log(response)
+              if (response != null) {
+                /* Add the allergyID with the userID */
+                const linkAllergyToTable = await prisma.userToAllergy.create({
+                  data: { userID: newUserID, allergyID: response.allergyID },
+                });
+              }
+            });
         });
-        const newAllergy = await prisma.allergy.createMany({
-          data: allergyData,
-          skipDuplicates: true,
-        });
-
-        /* In the new table, the allergies that the user has will be linked to their userID. */
-
-        /* Find all the entries where the allergies are linked to the user. */
-
-        const newUser = await prisma.user.create({
-          data: data,
-        });
-        const linkAllergyToTable = await prisma.userToAllergy.createMany({
-          data: allergyData.map((element) => {
-            return { userID: newUserID, allergyID: element["allergyID"] };
-          }),
-          skipDuplicates: true,
-        });
+        console.log(`Added ${Allergies} for user ${newUserData.forename}.`)
       }
 
+      /* In the new table, the allergies that the user has will be linked to their userID. */
+
+      /* Find all the ids of the allergies using the names. */
       console.log("New user created.");
 
       // return a valid response
