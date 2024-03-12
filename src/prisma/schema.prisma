@@ -32,7 +32,6 @@ model Allergy {
   // Many users may have many allergies.
   allergyID         String          @id @unique @db.Char(32)
   allergyType       String          @db.VarChar(45)
-  alternativeChoice String          @ignore @db.VarChar(45)
   UserToAllergy     UserToAllergy[]
 }
 
