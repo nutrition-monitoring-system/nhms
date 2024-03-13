@@ -12,6 +12,7 @@ import Accessibility from "@/components/Accessibility.jsx";
 import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
+
 // authentication for protected routes
 import { signIn } from "next-auth/react";
 
