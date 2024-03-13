@@ -90,5 +90,5 @@ module.exports = {
       // },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('flowbite/plugin'), require("tailwindcss-animate")],
+  plugins: [require('@tailwindcss/forms'), require('flowbite/plugin'), require("tailwindcss-animate"),require('@tailwindcss/typography'),],
 };

@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-
 export default function Recipes(props) {
   const { recipesList, searchInformation, setSearchInformation } = props;
   const [currentRecipe, setCurrentRecipe] = useState({});
@@ -65,88 +64,81 @@ function RecipesModal({ recipe }) {
 
   useEffect(() => {
     // checking if the object is empty
+    console.log(recipe);
     if (Object.keys(recipe).length !== 0) {
       modal.current.showModal();
     }
   }, [recipe]);
+
   return (
     <>
-      <dialog ref={modal} className="w-[60%] min-h-[90%] rounded-lg">
-        <div className="w-full h-full grid grid-rows-4 p-2 bg-rose-100">
-          <div className="bg-white rounded-md shadow-md">
-            <div className="flex justify-around items-center p-3">
-              <h1 className="text-center font-black text-[1.5rem]">
-                {recipe.name}
-              </h1>
-              <button
-                className="tile bg-black text-white focus:outline-none"
-                onClick={() => modal.current.close()}
-              >
-                <span>close</span>
-              </button>
-            </div>
+      <dialog
+        ref={modal}
+        className="w-[50%] min-h-fit rounded-lg p-3 bg-primarylight focus:outline-none"
+      >
+        <div className="flex justify-end items-center py-1 px-7">
+          <button
+            className="tile bg-black text-white"
+            onClick={() => modal.current.close()}
+          >
+            Close
+          </button>
+        </div>
+        <article class="prose lg:prose-xl mx-auto prose-gray p-4">
+          <h1 className="">{recipe.name}</h1>
+          {/* <Image
+            className="w-full rounded-lg shadow-xl"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
+            width={500}
+            height={300}
+            alt="Sunset in the mountains"
+          /> */}
+          <div className="flex justify-between items-center text-lg p-1">
+            <strong>Servings</strong>
+            <div className="">{recipe.servings || 0}</div>
+            <strong>Prep Time</strong>
+            <div className="">{recipe.prep_time || "0 minutes"}</div>
+            <strong>Cook Time</strong>
+            <div className="">{recipe.cooking_time || "0 minutes"}</div>
           </div>
-          <div className="rounded-md grid grid-cols-1 grid-rows-6 gap-2 row-span-3 py-5 overflow-y-scroll">
-            <div className="grid grid-cols-2 place-items-center text-sm rounded-md shadow-md p-2">
-              <div>Servings</div>
-              <div className="font-black text-[3rem] bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.servings}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <ul className="p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-start gap-1">
+
+          <div className="grid grid-cols-2 md:grid-cols-1">
+            <div>
+              <h3>Ingredients</h3>
+              <ul className="">
                 {recipe?.ingredients?.map((item, idx) => (
-                  <ul
-                    key={idx}
-                    className="bg-gray-100 w-full text-left p-2 rounded-md shadow-md"
-                  >
+                  <li key={idx} className="">
                     {item}
-                  </ul>
+                  </li>
                 ))}
               </ul>
-              <div>Ingredients</div>
             </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div>Prep Time</div>
-              <div className="font-black text-[3rem] p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.prep_time}
+            <div className="place-self-end text-right">
+              <h3 className="">Nutrition</h3>
+              <div className="">
+                <strong>Calories</strong>
+                <div>{recipe?.nutrition?.calories || 0}</div>
               </div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div className="font-black text-[3rem] p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.cooking_time}
+              <div className="">
+                <strong>Carbohydrates</strong>
+                <div>{recipe?.nutrition?.carbohydates || 0}</div>
               </div>
-              <div>Cook times</div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div>Directions</div>
-              <div className="p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.directions}
+              <div className="">
+                <strong>Protein</strong>
+                <div>{recipe?.nutrition?.protein || 0}</div>
               </div>
-            </div>
-            <div className="grid  grid-rows-2 grid-cols-4 gap-1 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div className="bg-white shadow-lg rounded-md w-full h-full col-span-full grid place-items-center">
-                Nutrition
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Calories</div>
-                <div>{recipe?.nutrition?.calories}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Carbohydrates</div>
-                <div>{recipe?.nutrition?.carbohydates}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Protein</div>
-                <div>{recipe?.nutrition?.protein}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Fat</div>
-                <div>{recipe?.nutrition?.fat}</div>
+              <div className="">
+                <strong>Fat</strong>
+                <div>{recipe?.nutrition?.fat || 0}</div>
               </div>
             </div>
           </div>
-        </div>
+
+          <div className="">
+            <h3>Directions</h3>
+            <div className="">{recipe.directions}</div>
+          </div>
+        </article>
       </dialog>
     </>
   );

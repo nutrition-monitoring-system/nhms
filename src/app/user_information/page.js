@@ -116,8 +116,8 @@ export default function Page() {
           className="w-full flex justify-around itemss-center"
           id="RestrictionsNext"
         >
-          <Button>My Profile</Button>
-          <Button>Submit</Button>
+          <button>My Profile</button>
+          <button onClick={() => {}}>Submit</button>
         </div>
       </div>
     </div>
