@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Button from "@/components/Button";
+import Link from "next/link";
 export default function TermsAndConditions({ onClickPrev, onClickNext }) {
   const [termsConditions, setTermsConditions] = useState(false);
   const [shareHealthDate, setShareHealthData] = useState(false);
@@ -53,9 +53,9 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
           </div>
         </div>
         <div className="w-full flex justify-around items-center ">
-          <button className="tile" onClick={onClickPrev}>
-            previous
-          </button>
+          <Link href={"/"} className="tile">
+            Home
+          </Link>
           <button
             id="register-next"
             className="tile"
@@ -68,7 +68,7 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
                 : event.preventDefault()
             }
           >
-            Finish
+            Next
           </button>
         </div>
       </div>
