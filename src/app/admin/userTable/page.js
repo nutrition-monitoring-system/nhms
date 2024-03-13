@@ -1,6 +1,6 @@
 import React from 'react';
 
-import BasicTableComponent from '../../../components/userTable';
+import BasicTableComponent from '../../../components/UserTable';
 
 
 

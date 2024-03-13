@@ -54,6 +54,7 @@
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.12.0",
     "react-router-dom": "^6.18.0",
+    "react-table": "^7.8.0",
     "salted-md5": "^4.0.5",
     "sharp": "^0.33.2",
     "split-type": "^0.3.4",
