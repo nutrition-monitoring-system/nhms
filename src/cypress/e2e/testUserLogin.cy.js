@@ -12,6 +12,11 @@ describe("Testing if a new user can log into the website.", () => {
   // Test case for registering a new account
   it("registers a new account.", () => {
     cy.visit(url + "/register"); // Visits the registration page
+    // check terms and conditions box
+    cy.get('[id="terms-privacy"]').check();
+    cy.get('[id="sharing-data"]').check();
+    cy.get("#register-next").click();
+    cy.wait(1000);
     // Fills out the registration form with new user details
     cy.get('input[name="firstName"]').type("John");
     cy.get('input[name="lastName"]').type("Smith");
@@ -86,11 +91,6 @@ describe("Testing if a new user can log into the website.", () => {
       });
     cy.get("#DoneNext").click();
 
-    cy.get('[id="terms-privacy"]').check();
-    cy.get('[id="sharing-data"]').check();
-
-    cy.get("#register-next").click();
-    cy.wait(1000);
     // cy.on("window:alert", (t) => {
     //   //assertions
     //   expect(t).to.equal("Email already used. Sign in instead");

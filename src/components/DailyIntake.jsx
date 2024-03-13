@@ -60,26 +60,6 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
     handleModalclose(event);
   };
   // // Function to handle uploading an image
-  function handleUploadImage(event) {}
-  // function handleUploadImage(event) {
-  //   const file = event.target.files[0];
-  //   const fileName = file.name;
-  //   const reader = new FileReader();
-  //   // Reading the file data
-  //   reader.onload = function (e) {
-  //     console.log("Filename", fileName);
-  //   };
-  //   reader.readAsDataURL(file);
-  //   useEffect(() => {
-  //     // Updating the image URL on successful image upload
-  //     const eventId = addEventListener("load", () =>
-  //       setUploadImageUrl("/icons/add.png")
-  //     );
-  //     return () => {
-  //       removeEventListener(eventId);
-  //     };
-  //   }, []);
-  // }
 
   return (
     <>
@@ -220,7 +200,6 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
             <div className="flex items-center justify-around gap-3">
               <h1>Mood</h1>
               <h1>Exercise</h1>
-              <h1>Upload</h1>
             </div>
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
@@ -249,19 +228,6 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
                   height={40}
                 />
               </div>
-              <div className="relative aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]">
-                <Image
-                  src={uploadImageUrl}
-                  alt={"Add img icon"}
-                  width={30}
-                  height={30}
-                />
-                <input
-                  type="file"
-                  className="absolute inset-0 opacity-0"
-                  onChange={handleUploadImage}
-                />
-              </div>
             </div>
           </div>
           <div className="bg-white rounded-md flex flex-col p-3 shadow-lg">
@@ -288,7 +254,7 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
             Previous
           </button>
           <button className="tile" id="DoneNext" onClick={onClickNext}>
-            Next
+            Finish
           </button>
         </div>
       </div>
