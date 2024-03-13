@@ -10,7 +10,7 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] min-h-fit pt-10 sm:w-full">
+        <div className="grid grid-cols-4 p-2 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
           {recipesList
             ?.filter((item) =>
@@ -20,13 +20,13 @@ export default function Recipes(props) {
               <div key={idx}>
                 <RecipeInfo
                   {...props}
-                  customColor={"green-100"}
+                  customColor={"bg-amber-100"}
                   recipe={item}
                   setCurrentRecipe={setCurrentRecipe}
                 />
               </div>
             ))}
-          <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} />
+          {/* <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} /> */}
         </div>
       )}
     </>
@@ -74,9 +74,9 @@ function RecipesModal({ recipe }) {
     <>
       <dialog
         ref={modal}
-        className="w-[50%] min-h-fit rounded-lg p-3 bg-primarylight focus:outline-none"
+        className="w-[50%] min-h-fit rounded-lg p-3 bg-primarylight focus:outline-none overflow-hidden"
       >
-        <div className="flex justify-end items-center py-1 px-7">
+        <div className="flex justify-end items-center py-1 px-7 sticky top-0">
           <button
             className="tile bg-black text-white"
             onClick={() => modal.current.close()}
@@ -85,20 +85,15 @@ function RecipesModal({ recipe }) {
           </button>
         </div>
         <article class="prose lg:prose-xl mx-auto prose-gray p-4">
-          <h1 className="">{recipe.name}</h1>
-          {/* <Image
-            className="w-full rounded-lg shadow-xl"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
-            width={500}
-            height={300}
-            alt="Sunset in the mountains"
-          /> */}
+          <h1 className="text-center">{recipe.name}</h1>
           <div className="flex justify-between items-center text-lg p-1">
-            <strong>Servings</strong>
-            <div className="">{recipe.servings || 0}</div>
-            <strong>Prep Time</strong>
-            <div className="">{recipe.prep_time || "0 minutes"}</div>
-            <strong>Cook Time</strong>
+            <strong className="">Servings</strong>
+            <div className="border-r-2 p-2">{recipe.servings || 0}</div>
+            <strong className="">Prep Time</strong>
+            <div className="border-r-2 px-4">
+              {recipe.prep_time || "0 minutes"}
+            </div>
+            <strong className="">Cook Time</strong>
             <div className="">{recipe.cooking_time || "0 minutes"}</div>
           </div>
 
@@ -113,22 +108,24 @@ function RecipesModal({ recipe }) {
                 ))}
               </ul>
             </div>
-            <div className="place-self-end text-right">
+            <div className="text-right">
               <h3 className="">Nutrition</h3>
               <div className="">
-                <strong>Calories</strong>
+                <strong className="border-b-2 border-gray-200">Calories</strong>
                 <div>{recipe?.nutrition?.calories || 0}</div>
               </div>
               <div className="">
-                <strong>Carbohydrates</strong>
+                <strong className="border-b-2 border-gray-200">
+                  Carbohydrates
+                </strong>
                 <div>{recipe?.nutrition?.carbohydates || 0}</div>
               </div>
               <div className="">
-                <strong>Protein</strong>
+                <strong className="border-b-2 border-gray-200">Protein</strong>
                 <div>{recipe?.nutrition?.protein || 0}</div>
               </div>
               <div className="">
-                <strong>Fat</strong>
+                <strong className="border-b-2 border-gray-200">Fat</strong>
                 <div>{recipe?.nutrition?.fat || 0}</div>
               </div>
             </div>
@@ -172,7 +169,7 @@ function RecipeInfo({
       <div
         className={
           `shadow-xl rounded-md flex flex-col gap-1 overflow-hidden p-1` +
-          ` ${customColor ? `bg-${customColor}` : "bg-rose-100"}`
+          ` ${customColor ? `${customColor}` : "bg-rose-100"}`
         }
       >
         <div
@@ -186,9 +183,9 @@ function RecipeInfo({
         <div className="">
           <div
             className={
-              `text-sm bg-rose-100 shadow-xl grid place-items-center p-2 rounded-md` +
+              `text-sm shadow-xl grid place-items-center p-2 rounded-md` +
               `${customColor}`
-                ? `bg-${customColor}`
+                ? `${customColor}`
                 : "bg-rose-100"
             }
           >
