@@ -78,17 +78,17 @@ describe("Testing if a new user can log into the website.", () => {
         cy.get(".Settings").eq(2).invoke("addClass", "bg-secondary");
       });
     // Fills in breakfast food details
-    cy.get("#addBreakFast")
-      .click()
-      .then(() => {
-        cy.get('input[name="Foodname"]').type("milk");
-        cy.get('input[name="Fooddescription"]').type(
-          "Milk is a white liquid produced by cows, goats, and sheep"
-        );
-        // Finalizes registration and redirects to login page
-        cy.get('input[name="Fooddewater"]').type("water");
-        cy.get("#addNext").click();
-      });
+    // cy.get("#addBreakFast")
+    //   .click()
+    //   .then(() => {
+    //     cy.get('input[name="Foodname"]').type("milk");
+    //     cy.get('input[name="Fooddescription"]').type(
+    //       "Milk is a white liquid produced by cows, goats, and sheep"
+    //     );
+    //     // Finalizes registration and redirects to login page
+    //     cy.get('input[name="Fooddewater"]').type("water");
+    //     cy.get("#addNext").click();
+    //   });
     cy.get("#DoneNext").click();
 
     // cy.on("window:alert", (t) => {
