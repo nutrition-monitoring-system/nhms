@@ -12,6 +12,7 @@ import Accessibility from "@/components/Accessibility.jsx";
 import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 
 import { useRouter, useSearchParams } from "next/navigation";
+
 // authentication for protected routes
 import { signIn } from "next-auth/react";
 
@@ -74,9 +75,10 @@ export default function Home() {
     setNextButtonOpacity("1");
   };
   // Function to handle next button click
-  const handleNextClick = (e) => {
+  const handleNextClick = (event) => {
     const numberOFSubForms = 6;
-    e.preventDefault();
+
+    event?.preventDefault && event.preventDefault();
     if (index >= numberOFSubForms) {
       return;
     } else if (index >= numberOFSubForms - 1) {
@@ -143,7 +145,7 @@ export default function Home() {
   const resetIndex = (errors) => {
     if (Object.keys(errors).length > 0) {
       setTitle("Create a new account");
-      setIndex((prevIndex) => prevIndex * 0);
+      setIndex((prevIndex) => prevIndex * 0 + 1);
       // hiding the next form buttons so the user
       // does not visit the next form page until the personal information section is complete i.e (email, pass, dob etc)
       setNextButtonOpacity("0");
@@ -192,8 +194,13 @@ export default function Home() {
               className="flex transition-transform duration-200 min-h-fit"
               style={{ transform: `translateX(${index * -100}%)` }}
             >
+              <TermsAndConditions
+                onClickNext={handleInitialNextClick}
+                onClickPrev={handleClickPrev}
+              />
               <PersonalInformation
-                onClick={handleInitialNextClick}
+                onClick={handleNextClick}
+                onClickPrev={handleClickPrev}
                 resetIndex={resetIndex}
                 formValidation={{
                   register,
@@ -222,10 +229,6 @@ export default function Home() {
                 handleCollectData={handleCollectData}
               />
               <DailyIntake
-                onClickNext={handleNextClick}
-                onClickPrev={handleClickPrev}
-              />
-              <TermsAndConditions
                 onClickNext={handleSubmit(handleFormSubmit)}
                 onClickPrev={handleClickPrev}
               />
