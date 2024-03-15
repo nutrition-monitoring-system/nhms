@@ -17,7 +17,7 @@ const FoodAndWaterLog = () => {
   /* This changes the colour + value of what tab is currently selected based on the press. */
   const [ColorLogToggle, setColorLogToggle] = useState("food");
   return (
-    <Tabs defaultValue="food" className="min-h-full" value={ColorLogToggle}>
+    <Tabs defaultValue="food" className="min-h-[200px]" value={ColorLogToggle}>
       <TabsList className="flex flex-row w-full place-content-evenly mb-4 h-auto bg-primarylight rounded-md p-2 shadow-inner shadow-primary/75 bg-blend-multiply">
         <TabsTrigger
           value="food"
@@ -48,7 +48,7 @@ const FoodAndWaterLog = () => {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="food" className="">
-        <div className="min-h-full">
+        <div className="min-h-full grid grid-cols-2 grid-rows-2">
           <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
             <Image
               src="/icons/add.png"
