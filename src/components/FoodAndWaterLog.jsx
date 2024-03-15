@@ -23,8 +23,8 @@ const FoodAndWaterLog = () => {
           value="food"
           className={
             ColorLogToggle === "food"
-              ? "bg-primary px-4 rounded-md shadow-inner shadow-black/10"
-              : "px-4 rounded-md"
+              ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+              : "tile px-4 bg-transparent shadow-none rounded-md"
           }
           onClick={() => {
             setColorLogToggle("food");
@@ -37,8 +37,8 @@ const FoodAndWaterLog = () => {
           value="water"
           className={
             ColorLogToggle === "water"
-              ? "bg-primary px-4 rounded-md shadow-inner shadow-black/10"
-              : "px-4 rounded-md"
+              ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+              : "tile bg-transparent shadow-none px-4 rounded-md"
           }
           onClick={() => {
             setColorLogToggle("water");
