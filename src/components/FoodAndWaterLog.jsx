@@ -11,16 +11,44 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useState } from "react";
 
 const FoodAndWaterLog = () => {
+  /* This changes the colour + value of what tab is currently selected based on the press. */
+  const [ColorLogToggle, setColorLogToggle] = useState("food");
   return (
-    <Tabs defaultValue="account" className="h-full w-[400px]">
-      <TabsList className="grid w-full grid-cols-2 mb-4 h-auto">
-        <TabsTrigger value="account">Food Log</TabsTrigger>
-        <TabsTrigger value="password">Water Log</TabsTrigger>
+    <Tabs defaultValue="food" className="min-h-[200px]" value={ColorLogToggle}>
+      <TabsList className="flex flex-row w-full place-content-evenly mb-4 h-auto bg-primarylight rounded-md p-2 shadow-inner shadow-primary/75 bg-blend-multiply">
+        <TabsTrigger
+          value="food"
+          className={
+            ColorLogToggle === "food"
+              ? "bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+              : "px-4 rounded-md"
+          }
+          onClick={() => {
+            setColorLogToggle("food");
+          }}
+        >
+          Food Log
+        </TabsTrigger>
+        <span className="w-0.5 min-h-full bg-[#C2897C]"></span>
+        <TabsTrigger
+          value="water"
+          className={
+            ColorLogToggle === "water"
+              ? "bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+              : "px-4 rounded-md"
+          }
+          onClick={() => {
+            setColorLogToggle("water");
+          }}
+        >
+          Water Log
+        </TabsTrigger>
       </TabsList>
-      <TabsContent value="account" className="">
-        <div className="min-h-full">
+      <TabsContent value="food" className="">
+        <div className="min-h-full grid grid-cols-2 grid-rows-2">
           <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
             <Image
               src="/icons/add.png"
@@ -35,7 +63,7 @@ const FoodAndWaterLog = () => {
             <Image
               src="/icons/add.png"
               alt="add symbol"
-              className="bg-primary rounded-full p-3"
+              className="bg-primary rounded-full p-3 hover:bg-primarylight"
               width={40}
               height={40}
             />
@@ -63,9 +91,9 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </TabsContent>
-      <TabsContent value="password">
+      <TabsContent value="water">
         <div className="min-h-full">
-          <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
+          <button className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md w-full">
             <Image
               src="/icons/add.png"
               alt="add symbol"
@@ -73,38 +101,8 @@ const FoodAndWaterLog = () => {
               width={40}
               height={40}
             />
-            <div htmlFor="name">Quantity of water</div>
-          </div>
-          <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
-            <Image
-              src="/icons/add.png"
-              alt="add symbol"
-              className="bg-primary rounded-full p-3"
-              width={40}
-              height={40}
-            />
-            <div htmlFor="name">Time of consumption</div>
-          </div>
-          <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
-            <Image
-              src="/icons/add.png"
-              alt="add symbol"
-              className="bg-primary rounded-full p-3"
-              width={40}
-              height={40}
-            />
-            <div htmlFor="name">Type of water</div>
-          </div>
-          <div className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md">
-            <Image
-              src="/icons/add.png"
-              alt="add symbol"
-              className="bg-primary rounded-full p-3"
-              width={40}
-              height={40}
-            />
-            <div htmlFor="name">Additional information</div>
-          </div>
+            <div htmlFor="name">Water Amount</div>
+          </button>
         </div>
       </TabsContent>
     </Tabs>
