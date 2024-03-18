@@ -27,8 +27,9 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
             <div className="min-w-full p-1 flex justify-around items-center gap-3">
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
-                onClick={(event) =>
-                  event.preventDefault() && moodModal.current.showModal()
+                onClick={
+                  (event) => {}
+                  //event.preventDefault() && moodModal.current.showModal()
                 }
               >
                 <Image
@@ -40,8 +41,9 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
               </div>
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
-                onClick={(event) =>
-                  event.preventDefault() && exerciseModal.current.showModal()
+                onClick={
+                  (event) => {}
+                  //event.preventDefault() && exerciseModal.current.showModal()
                 }
               >
                 <Image

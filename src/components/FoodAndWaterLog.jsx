@@ -50,8 +50,6 @@ const FoodAndWaterLog = () => {
     event.preventDefault();
     const foodInformation = {
       name: foodName.current.value,
-      description: foodDescription.current.value,
-      drink: aDrink.current.value,
     };
     // Adding food based on the meal type
     switch (type) {
@@ -65,9 +63,6 @@ const FoodAndWaterLog = () => {
         setDinner([...Dinner, foodInformation]);
         break;
     }
-    // Clearing form fields
-    foodName.current.value = "";
-    foodDescription.current.value = "";
     handleModalclose(event);
   };
 
