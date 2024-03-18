@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { FaCamera } from "react-icons/fa";
 import {
@@ -68,26 +69,28 @@ const FileUpload = ({ fetchImages }) => {
   };
 
   return (
-    <div className="flex flex-col self-center justify-evenly bg-primary rounded-md min-h-fit p-3 gap-2">
-      <div>
-        <FoodAndWaterLog />
+    <>
+      <div className="flex flex-col self-center justify-evenly bg-primary rounded-md min-h-fit p-3 gap-2">
+        <div>
+          <FoodAndWaterLog />
+        </div>
+        <div>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+          />
+          <button
+            className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
+            onClick={triggerFileInputClick} // Use the new method here
+          >
+            <FaCamera className="size-6" />
+            <p className="text-left w-full">Add Photo</p>
+          </button>
+        </div>
       </div>
-      <div>
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFileChange}
-          style={{ display: "none" }}
-        />
-        <button
-          className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
-          onClick={triggerFileInputClick} // Use the new method here
-        >
-          <FaCamera className="size-6" />
-          <p className="text-left w-full">Add Photo</p>
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 
