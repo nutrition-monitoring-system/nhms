@@ -6,6 +6,7 @@ import {
   MdLocalDrink,
   MdDining,
 } from "react-icons/md";
+import FoodAndWaterLog from "./FoodAndWaterLog";
 
 const dbName = "myDB";
 const storeName = "files";
@@ -68,23 +69,16 @@ const FileUpload = ({ fetchImages }) => {
 
   return (
     <div className="flex flex-col self-center justify-evenly bg-primary rounded-md min-h-fit p-3 gap-2">
-      <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <MdDining className="size-6" />
-        <p className="text-left w-full">Food Log</p>
-      </button>
-      <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
-        <MdLocalDrink className="size-6" />
-        <p className="text-left w-full">Water Log</p>
-      </button>
       <div>
-        {/* Hidden file input */}
+        <FoodAndWaterLog />
+      </div>
+      <div>
         <input
           type="file"
           ref={fileInputRef}
           onChange={handleFileChange}
           style={{ display: "none" }}
         />
-        {/* Visible button */}
         <button
           className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
           onClick={triggerFileInputClick} // Use the new method here
