@@ -1,6 +1,7 @@
 import React from 'react';
 
 import BasicTableComponent from '../../../components/userTable';
+// import Table from '../../../components/userTable1'
 
 
 
@@ -16,10 +17,19 @@ function App() {
     <BasicTableComponent />
 </div>
 
- 
-   
-
     </div>
+// {/* <div className="App">
+//       <header className="App-header">
+//         <p>
+//           My Table App
+//         </p>
+//       </header>
+//       <Table />
+//     </div> */}
+
+
+
+
   );
 }
 
