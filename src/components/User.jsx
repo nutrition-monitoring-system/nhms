@@ -25,6 +25,7 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import FileUpload from "../components/fileUpload";
 import ImageCarousel from "./ImageCarousel";
+import SideNavBar from "./SideNav.jsx";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -152,7 +153,7 @@ export default function User({ handsignOut }) {
   return (
     <div className="body flex">
       <SideNavBar></SideNavBar>
-      <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-[78%] xl:w-[82%]">
+      <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-full xl-[95%]">
         <TopInformation></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
         {/* <div className="flex gap-4 container place-content-center w-full bg-gray-100"> */}
@@ -276,70 +277,7 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   );
 }
 
-function SideNavBar() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const handleSearch = () => {
-    // 在这里执行搜索操作，例如跳转到搜索结果页面或显示搜索结果
-    console.log("开始搜索：" + searchTerm);
-  };
-  return (
-    <div className="w-[20%] xl:w-[18%] sidebar h-screen sticky top-0">
-      {/* 添加搜索框 */}
 
-      {/* 你的导航链接 */}
-      <div className="bg-black p-5 grid grid-cols-1 gap-2 w-full h-full">
-        <Logo></Logo>
-        <Link
-          href="/blog"
-          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
-        >
-          {" "}
-          <FaBlog className="size-6" />
-          Blogs
-        </Link>
-        <Link
-          href="#section2"
-          className="tile text-lg md:text-xl place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
-        >
-          {" "}
-          <FaPencilAlt className="size-6" />
-          Plan
-        </Link>
-        {/*  <Link
-          href="#section3"
-          className="tile text-lg grid place-content-center text-center"
-        >
-          Data Analytics
-        </Link> */}
-        {/* <Link
-          href="#section1"
-          className="tile text-lg grid place-content-center text-center"
-        >
-          Health Record Form
-        </Link> */}
-        {/* <Link
-          href=""
-          className="tile text-lg grid place-content-center text-center"
-        >
-          Calender Events
-      </Link> */}
-        {/* <Link
-          href="#section3"
-          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
-        >
-          Personal Information
-        </Link>} */}
-        <Link
-          href="#section1"
-          className="tile text-lg place-content-center text-center min-h-[30%] max-h-[50%] min-w-[20%] w-full"
-        >
-          <MdSettings className="size-6" />
-          Settings
-        </Link>
-      </div>
-    </div>
-  );
-}
 
 function PhotoLog({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];

@@ -5,7 +5,8 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    'node_modules/flowbite-react/lib/esm/**/*.js',
+    "./@/**/*.{ts,tsx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
     extend: {
@@ -20,7 +21,7 @@ module.exports = {
         primarylight: "var(--color-primary-light)",
         secondarylight: "var(--color-secondary-light)",
         // Add more color definitions as needed
-        
+
         /* shadcn config */
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

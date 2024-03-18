@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Button from "@/components/Button";
-export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
+import Link from "next/link";
+export default function TermsAndConditions({ onClickPrev, onClickNext }) {
   const [termsConditions, setTermsConditions] = useState(false);
   const [shareHealthDate, setShareHealthData] = useState(false);
   return (
@@ -15,8 +15,8 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
             <div className="grid place-items-center p-5">
               <input
                 type="checkbox"
-                id="termsCheckbox"
-                name="termsCheckbox"
+                id="terms-privacy"
+                name="terms-privacy"
                 value={termsConditions ? "1" : "0"}
                 onChange={() => setTermsConditions((prev) => !prev)}
               />
@@ -39,8 +39,8 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
               <input
                 className="w-10"
                 type="checkbox"
-                id="healthDataCheckbox"
-                name="healthDataCheckbox"
+                id="sharing-data"
+                name="sharing-data"
                 value={shareHealthDate ? "1" : "0"}
                 onChange={() => setShareHealthData((prev) => !prev)}
               />
@@ -53,16 +53,23 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
           </div>
         </div>
         <div className="w-full flex justify-around items-center ">
-          <Button onClick={onClickPrev}>previous</Button>
-          <Button
+          <Link href={"/"} className="tile">
+            Home
+          </Link>
+          <button
+            id="register-next"
+            className="tile"
             onClick={(event) =>
               termsConditions && shareHealthDate
-                ? handleSubmit()
+                ? (function () {
+                    event.preventDefault();
+                    onClickNext();
+                  })()
                 : event.preventDefault()
             }
           >
-            Finish
-          </Button>
+            Next
+          </button>
         </div>
       </div>
     </>

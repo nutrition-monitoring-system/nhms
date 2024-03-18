@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link.js";
 export default function PersonalInformation({
   onClick,
+  onClickPrev,
   formValidation,
   resetIndex,
 }) {
@@ -116,9 +117,7 @@ export default function PersonalInformation({
           className="w-full flex justify-around items-center"
           id="RestrictionsNext"
         >
-          <Link className="tile" href={"/"}>
-            Home
-          </Link>
+          <Button onClick={onClickPrev}>Previous</Button>
           <Button onClick={handleSubmit(onClick)}>Next</Button>
         </div>
       </div>
