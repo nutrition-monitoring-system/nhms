@@ -69,17 +69,17 @@ model Food {
   // This is the list of foods that are kept in the database. 
   foodID        String   @id @unique @db.Char(32)
   foodName      String   @unique @db.VarChar(45)
-  isDrink       Boolean @default(false)
-  protein       Int @default(0)
-  fat           Int @default(0)
-  carbohydrates Int @default(0)
-  vitamins      Int @default(0)
-  calcium       Int @default(0)
-  iron          Int @default(0)
-  potassium     Int @default(0)
-  sugar         Int @default(0)
-  sodium        Int @default(0)
-  fibre         Int @default(0)
+  isDrink       Boolean  @default(false)
+  protein       Int      @default(0)
+  fat           Int      @default(0)
+  carbohydrates Int      @default(0)
+  vitamins      Int      @default(0)
+  calcium       Int      @default(0)
+  iron          Int      @default(0)
+  potassium     Int      @default(0)
+  sugar         Int      @default(0)
+  sodium        Int      @default(0)
+  fibre         Int      @default(0)
   FoodLog       FoodLog?
 }
 
@@ -239,9 +239,16 @@ model Recipe {
   recipeID             String                 @id @unique @db.Char(32)
   recipeName           String                 @db.VarChar(45)
   recipeInstructions   String                 @db.VarChar(100)
-  cookTime             Int
-  prepTime             Int
+  recipeType           String                 @db.VarChar(20)
+  cookTime             String?                @default("0 minutes") @db.VarChar(20)
+  prepTime             String?                @default("0 minutes") @db.VarChar(20)
+  freezeTime           String?                @default("0 minutes") @db.VarChar(20)
   recipeIngredients    String                 @db.VarChar(200)
+  calories             Int                    @default(0)
+  carbohydrates        Int                    @default(0)
+  protein              Int                    @default(0)
+  fat                  Int                    @default(0)
+  serving              Int                    @default(0)
   CollectionsToRecipes CollectionsToRecipes[]
 }
 
