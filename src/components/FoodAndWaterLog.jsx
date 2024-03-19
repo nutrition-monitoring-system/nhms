@@ -112,7 +112,7 @@ const FoodAndWaterLog = () => {
     <>
       <dialog
         ref={foodModal}
-        className="w-[40%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
+        className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
       >
         <div className="p-2 grid place-items-center gap-1">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
@@ -128,7 +128,7 @@ const FoodAndWaterLog = () => {
               onChange={(e) => (foodName.current.value = e.target.value)}
             />
             <div
-              className="flex w-full gap-3 p-3 select-none cursor-pointer bg-orange-200"
+              className="flex w-full gap-3 p-3 select-none cursor-pointer"
               onClick={handleOnChange}
             >
               <div className="flex">
@@ -139,7 +139,10 @@ const FoodAndWaterLog = () => {
                 />
               </div>
               <label className="cursor-pointer">
-                Use A.I to get nutritional information
+                <p>Use A.I to get nutritional information</p>
+                <p className="grid place-items-center text-slate text-center opacity-50 my-1">
+                  Please note that A.I generated content is not 100% accurate
+                </p>
               </label>
             </div>
           </div>
@@ -151,7 +154,7 @@ const FoodAndWaterLog = () => {
               </span>
             )}
             {nutrition.map((item, idx) => (
-              <div key={idx} className="flex gap-1 items-center">
+              <div key={idx} className="grid grid-cols-2 m-1">
                 <label>{item}</label>
                 <input
                   ref={(elem) => (nutritionRef.current[idx] = elem)}
