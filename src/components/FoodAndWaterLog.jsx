@@ -128,7 +128,7 @@ const FoodAndWaterLog = () => {
               onChange={(e) => (foodName.current.value = e.target.value)}
             />
             <div
-              className="flex w-full gap-3 p-3 select-none cursor-pointer"
+              className="flex w-full gap-3 p-2 my-2 select-none cursor-pointer ring-black ring rounded-md"
               onClick={handleOnChange}
             >
               <div className="flex">
@@ -149,12 +149,15 @@ const FoodAndWaterLog = () => {
           <details className="gap-1 flex flex-col justify-center items-center w-3/4">
             <summary>More nutritional information</summary>
             {loadingNutrionalInformation && (
-              <span className="w-full text-black font-lg text-center">
+              <span className="w-full text-secondary font-lg text-center">
                 Loading...
               </span>
             )}
             {nutrition.map((item, idx) => (
-              <div key={idx} className="grid grid-cols-2 m-1">
+              <div
+                key={idx}
+                className="grid grid-cols-2 m-1 place-items-center"
+              >
                 <label>{item}</label>
                 <input
                   ref={(elem) => (nutritionRef.current[idx] = elem)}
