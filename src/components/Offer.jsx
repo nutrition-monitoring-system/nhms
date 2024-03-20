@@ -66,7 +66,7 @@ function InfoCardThree() {
 function InfoCard({ title, content }) {
   return (
     <>
-      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-secondary p-1">
+      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-gradient-to-t from-primary to-secondary p-1">
         <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
@@ -76,7 +76,7 @@ function InfoCard({ title, content }) {
         />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{title}</div>
-          <ul className="text-gray-700 text-sm p-2">
+          <ul className="text-gray-900 text-sm p-2">
             {content.map((item, idx) => (
               <li key={idx} className="list-disc">
                 {item}

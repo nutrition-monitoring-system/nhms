@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
+import { Slider } from "@/components/ui/slider";
 
 const FoodAndWaterLog = () => {
   // Refs for modals and form elements
@@ -10,10 +11,13 @@ const FoodAndWaterLog = () => {
   const exerciseModal = useRef(null);
   const moodModal = useRef(null);
   const foodName = useRef(null);
+  const waterModal = useRef(null);
+  const sliderRef = useRef(null);
   // State variables
   const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
   const [breakfast, setBreakFast] = useState([]);
   const [Lunch, setLunch] = useState([]);
+  const [sliderValue, setSliderValue] = useState(250);
   const [Dinner, setDinner] = useState([]);
   const [loadingNutrionalInformation, setLoadingNutrionalInformation] =
     useState(false);
@@ -192,19 +196,44 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
-
       <dialog
-        ref={moodModal}
-        className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
+        ref={waterModal}
+        className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
       >
-        <div className="p-2 grid place-items-center gap-1">
-          <h1 className="grid place-items-center font-extrabold text-xl">
-            Mood
+        <div className="p-2 grid place-items-center gap-1 overflow-y-hidden">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            How much did you drink?
           </h1>
-          <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
-          <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2"></div>
+          <div className="w-3/4 grid place-items-center">
+            <div className="h-[150px] shadow-lg w-3/4 bg-gray-100 p-1 rounded-md m-2 flex flex-col justify-end items-center">
+              <div
+                style={{
+                  height: `${(sliderValue / 1000) * 100}%`,
+                }}
+                className="h-full bg-blue-500 w-full rounded-md grid place-items-center transition-all duration-300 ease-in-out"
+              ></div>
+            </div>
+            <div>{sliderValue} ml</div>
+            <Slider
+              defaultValue={[sliderValue]}
+              ref={sliderRef}
+              max={1000}
+              step={50}
+              onValueChange={(value) => {
+                setSliderValue(value[0]);
+              }}
+              className="bg-gray-100 rounded-md w-3/4 m-2"
+            />
+          </div>
           <div className="flex justify-around items-center mt-2 w-full">
-            <button onClick={handleAddFood} className="tile" id="addNext">
+            <button
+              className="tile"
+              id="addNext"
+              onClick={(event) => {
+                event.preventDefault();
+                waterModal.current.close();
+              }}
+            >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
@@ -214,7 +243,14 @@ const FoodAndWaterLog = () => {
               />
               Add
             </button>
-            <button onClick={handleModalclose} className="tile" id="closeNext">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                waterModal.current.close();
+              }}
+              className="tile"
+              id="closeNext"
+            >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
@@ -222,27 +258,6 @@ const FoodAndWaterLog = () => {
                 width={25}
                 height={25}
               />
-              Close
-            </button>
-          </div>
-        </div>
-      </dialog>
-
-      <dialog
-        ref={exerciseModal}
-        className="w-[35%] h-fit bg-white rounded-md relative p-1 sm:w-[90%]"
-      >
-        <div className="p-2 grid place-items-center gap-1">
-          <h1 className="grid place-items-center font-extrabold text-xl">
-            Exercise
-          </h1>
-          <h3 className="font-bold text-secondary">{type.toUpperCase()}</h3>
-          <div className="gap-1 flex justify-center items-center flex-col w-3/4 p-2"></div>
-          <div className="flex justify-around items-center mt-2 w-full">
-            <button onClick={handleAddFood} className="tile" id="addNext">
-              Add
-            </button>
-            <button onClick={handleModalclose} className="tile" id="closeNext">
               Close
             </button>
           </div>
@@ -341,7 +356,13 @@ const FoodAndWaterLog = () => {
         </TabsContent>
         <TabsContent value="water">
           <div className="min-h-full">
-            <button className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md w-full">
+            <button
+              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md w-full"
+              onClick={(event) => {
+                event.preventDefault();
+                waterModal.current.showModal();
+              }}
+            >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
