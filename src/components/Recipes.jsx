@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-
 export default function Recipes(props) {
   const { recipesList, searchInformation, setSearchInformation } = props;
   const [currentRecipe, setCurrentRecipe] = useState({});
@@ -11,7 +10,7 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] min-h-fit pt-10 sm:w-full">
+        <div className="grid grid-cols-4 p-2 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
           {recipesList
             ?.filter((item) =>
@@ -21,13 +20,13 @@ export default function Recipes(props) {
               <div key={idx}>
                 <RecipeInfo
                   {...props}
-                  customColor={"green-100"}
+                  customColor={"bg-amber-100"}
                   recipe={item}
                   setCurrentRecipe={setCurrentRecipe}
                 />
               </div>
             ))}
-          <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} />
+          {/* <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} /> */}
         </div>
       )}
     </>
@@ -65,88 +64,78 @@ function RecipesModal({ recipe }) {
 
   useEffect(() => {
     // checking if the object is empty
+    console.log(recipe);
     if (Object.keys(recipe).length !== 0) {
       modal.current.showModal();
     }
   }, [recipe]);
+
   return (
     <>
-      <dialog ref={modal} className="w-[60%] min-h-[90%] rounded-lg">
-        <div className="w-full h-full grid grid-rows-4 p-2 bg-rose-100">
-          <div className="bg-white rounded-md shadow-md">
-            <div className="flex justify-around items-center p-3">
-              <h1 className="text-center font-black text-[1.5rem]">
-                {recipe.name}
-              </h1>
-              <button
-                className="tile bg-black text-white focus:outline-none"
-                onClick={() => modal.current.close()}
-              >
-                <span>close</span>
-              </button>
+      <dialog
+        ref={modal}
+        className="w-[50%] min-h-fit rounded-lg p-3 bg-primarylight focus:outline-none overflow-hidden"
+      >
+        <div className="flex justify-end items-center py-1 px-7 sticky top-0">
+          <button
+            className="tile bg-black text-white"
+            onClick={() => modal.current.close()}
+          >
+            Close
+          </button>
+        </div>
+        <article class="prose lg:prose-xl mx-auto prose-gray p-4">
+          <h1 className="text-center">{recipe.name}</h1>
+          <div className="flex justify-between items-center text-lg p-1">
+            <strong className="">Servings</strong>
+            <div className="border-r-2 p-2">{recipe.servings || 0}</div>
+            <strong className="">Prep Time</strong>
+            <div className="border-r-2 px-4">
+              {recipe.prep_time || "0 minutes"}
             </div>
+            <strong className="">Cook Time</strong>
+            <div className="">{recipe.cooking_time || "0 minutes"}</div>
           </div>
-          <div className="rounded-md grid grid-cols-1 grid-rows-6 gap-2 row-span-3 py-5 overflow-y-scroll">
-            <div className="grid grid-cols-2 place-items-center text-sm rounded-md shadow-md p-2">
-              <div>Servings</div>
-              <div className="font-black text-[3rem] bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.servings}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <ul className="p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-start gap-1">
+
+          <div className="grid grid-cols-2 md:grid-cols-1">
+            <div>
+              <h3>Ingredients</h3>
+              <ul className="">
                 {recipe?.ingredients?.map((item, idx) => (
-                  <ul
-                    key={idx}
-                    className="bg-gray-100 w-full text-left p-2 rounded-md shadow-md"
-                  >
+                  <li key={idx} className="">
                     {item}
-                  </ul>
+                  </li>
                 ))}
               </ul>
-              <div>Ingredients</div>
             </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div>Prep Time</div>
-              <div className="font-black text-[3rem] p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.prep_time}
+            <div className="text-right">
+              <h3 className="">Nutrition</h3>
+              <div className="">
+                <strong className="border-b-2 border-gray-200">Calories</strong>
+                <div>{recipe?.nutrition?.calories || 0}</div>
               </div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div className="font-black text-[3rem] p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.cooking_time}
+              <div className="">
+                <strong className="border-b-2 border-gray-200">
+                  Carbohydrates
+                </strong>
+                <div>{recipe?.nutrition?.carbohydates || 0}</div>
               </div>
-              <div>Cook times</div>
-            </div>
-            <div className="grid grid-cols-2 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div>Directions</div>
-              <div className="p-2 bg-white h-full w-full rounded-md shadow-md grid place-items-center">
-                {recipe.directions}
+              <div className="">
+                <strong className="border-b-2 border-gray-200">Protein</strong>
+                <div>{recipe?.nutrition?.protein || 0}</div>
               </div>
-            </div>
-            <div className="grid  grid-rows-2 grid-cols-4 gap-1 place-items-center text-center text-sm rounded-md shadow-md p-2">
-              <div className="bg-white shadow-lg rounded-md w-full h-full col-span-full grid place-items-center">
-                Nutrition
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Calories</div>
-                <div>{recipe?.nutrition?.calories}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Carbohydrates</div>
-                <div>{recipe?.nutrition?.carbohydates}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Protein</div>
-                <div>{recipe?.nutrition?.protein}</div>
-              </div>
-              <div className="bg-white shadow-lg rounded-md w-full h-full grid grid-rows-2 place-items-center">
-                <div>Fat</div>
-                <div>{recipe?.nutrition?.fat}</div>
+              <div className="">
+                <strong className="border-b-2 border-gray-200">Fat</strong>
+                <div>{recipe?.nutrition?.fat || 0}</div>
               </div>
             </div>
           </div>
-        </div>
+
+          <div className="">
+            <h3>Directions</h3>
+            <div className="">{recipe.directions}</div>
+          </div>
+        </article>
       </dialog>
     </>
   );
@@ -180,7 +169,7 @@ function RecipeInfo({
       <div
         className={
           `shadow-xl rounded-md flex flex-col gap-1 overflow-hidden p-1` +
-          ` ${customColor ? `bg-${customColor}` : "bg-rose-100"}`
+          ` ${customColor ? `${customColor}` : "bg-rose-100"}`
         }
       >
         <div
@@ -194,9 +183,9 @@ function RecipeInfo({
         <div className="">
           <div
             className={
-              `text-sm bg-rose-100 shadow-xl grid place-items-center p-2 rounded-md` +
+              `text-sm shadow-xl grid place-items-center p-2 rounded-md` +
               `${customColor}`
-                ? `bg-${customColor}`
+                ? `${customColor}`
                 : "bg-rose-100"
             }
           >
