@@ -62,6 +62,7 @@ export default async function handler(req, res) {
             if (response == null) {
               /* Add the new data into the database. */
               try {
+                /* Doing it this way makes sure that no recipes with no directions are added. */
                 let addNewRecipe = await prisma.recipe.create({
                   data: {
                     recipeID: v1().slice(0, 32),
@@ -69,15 +70,13 @@ export default async function handler(req, res) {
                     serving: recipeEntry.servings,
                     recipeType: recipeEntry.type,
                     recipeIngredients: recipeEntry.ingredients.join(","),
-                    recipeInstructions: recipeEntry.directions
-                      ? recipeEntry.directions
-                      : "",
+                    recipeInstructions: recipeEntry.directions,
                     cookTime: recipeEntry.cooking_time,
-                    prepTime: recipeEntry.prepTime
-                      ? recipeEntry.prepTime
+                    prepTime: recipeEntry.prep_time
+                      ? recipeEntry.prep_time
                       : "0 minutes",
-                    freezeTime: recipeEntry.freezeTime
-                      ? recipeEntry.freezeTime
+                    freezeTime: recipeEntry.freeze_time
+                      ? recipeEntry.freeze_time
                       : "0 minutes",
                     calories: recipeEntry.nutrition["calories"],
                     carbohydrates: recipeEntry.nutrition["carbohydrates"],
@@ -86,9 +85,7 @@ export default async function handler(req, res) {
                   },
                 });
               } catch {
-                console.log(
-                  `${recipeEntry.name} was unable to be added.`
-                );
+                console.log(`${recipeEntry.name} was unable to be added.`);
               }
             }
           });
