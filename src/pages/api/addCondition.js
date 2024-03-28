@@ -13,18 +13,18 @@ export default async function handler(req, res) {
 
       /* Check if condition is in the database.  */
 
-      const checkCondition = await prisma.chronic_condition.findFirst({
-        where: { Condition_Type: conditionName },
+      const checkCondition = await prisma.chronicCondition.findFirst({
+        where: { conditionType: conditionName },
       });
 
       /* The condition must be true to add a new symptom. */
       if (checkCondition == null) {
         console.log(`Adding condition ${conditionName} to database.`);
-        const newCondition = await prisma.chronic_condition
+        const newCondition = await prisma.chronicCondition
           .create({
             data: {
-              ChronicID: newUUID,
-              Condition_Type: conditionName,
+              chronicID: newUUID,
+              conditionType: conditionName,
             },
           })
           .then(() => {

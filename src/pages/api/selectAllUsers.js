@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         email: true,
         dob: true,
         gender: true,
-        is_admin: true,
+        isAdmin: true,
       },
     });
     return res.status(200).send(allUsers);

@@ -21,10 +21,10 @@ export default async function handler(req, res) {
       // selectUser["password"] = "*" * length(selectUser[password]);
       // console.log(`Deleted user with userID ${deleteUserID}`);
       // sending a valid response back
-      res.status(200).json({ value: "user deleted Successfully" });
+      res.status(200).json({ value: "User deleted successfully" });
     } catch (e) {
       // unable to delete the user
-      res.status(200).json({ value: "Unable to delete user", error: e });
+      res.status(400).json({ value: "Unable to delete user", error: e });
     }
   } else {
     // wrong request type
