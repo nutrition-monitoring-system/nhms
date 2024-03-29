@@ -1,7 +1,6 @@
 import React from 'react';
 
 import BasicTableComponent from '../../../components/userTable';
-// import Table from '../../../components/userTable1'
 
 
 
