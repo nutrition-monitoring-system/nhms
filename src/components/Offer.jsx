@@ -10,10 +10,12 @@ const Offer = () => (
       <h1 className="font-extrabold text-[30px] text-center mb-7">
         What do we offer?
       </h1>
-      <div className="min-h-fit grid grid-cols-3 p-5 gap-3 xl:bg-primary shadow-lg sm:grid-cols-1 sm:grid-rows-3 sm:gap-4 xl:flex xl:flex-wrap xl:justify-center">
+      <div className="min-h-fit grid grid-cols-3 p-5 gap-3 xl:bg-prim shadow-lg sm:grid-cols-1 sm:grid-rows-3 sm:gap-4 xl:flex xl:flex-wrap xl:justify-center">
         <>
           {Information.map((item, idx) => (
-            <InfoCard title={item.title} content={item.content} idx={idx} />
+            <div key={idx}>
+              <InfoCard title={item.title} content={item.content} />
+            </div>
           ))}
         </>
       </div>
@@ -51,13 +53,10 @@ const Information = [
   },
 ];
 
-function InfoCard({ title, content, idx }) {
+function InfoCard({ title, content }) {
   return (
     <>
-      <div
-        className="max-w-md rounded-lg overflow-hidden shadow-xl bg-primarylight p-1 xl:flex xl:max-w-full"
-        key={idx}
-      >
+      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-primarylight p-1 xl:flex xl:max-w-full">
         <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
