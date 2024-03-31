@@ -78,7 +78,7 @@ const FoodAndWaterLog = () => {
         method: "GET",
         headers: { "X-Api-Key": apiKey },
         contentType: "application/json",
-      }
+      },
     )
       .then((response) => response.json())
       .then((data) => {

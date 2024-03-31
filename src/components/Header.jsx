@@ -63,9 +63,12 @@ export default function Header() {
               })}
             </div>
             <div className="w-full min-h-fit grid place-items-center py-5">
-              <ImageIcon
-                src={"angle-double-small-down.png"}
-                href={"#information"}
+              <Image
+                className="h-30"
+                src={"/icons/angle-double-small-down.png"}
+                width={30}
+                height={30}
+                alt="Image icon without link."
               />
             </div>
           </div>
@@ -95,9 +98,9 @@ function NavBar() {
   // checking if the user is authenticated or is in a loading state
   if (status === "unauthenticated" || status === "loading") {
     return (
-      <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
+      <div className="w-full grid grid-cols-2 py-3 bg-white md:grid-cols-1 ">
         <Logo></Logo>
-        <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
+        <div className="flex md:flex-wrap justify-center items-center gap-2 md:gap-4 sm:gap-1 sm:col-span-2">
           <div className="mx-4">
             <Link href="/home">Recipes</Link>
           </div>
@@ -120,9 +123,9 @@ function NavBar() {
     );
   }
   return (
-    <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
+    <div className="w-full grid grid-cols-2 py-3 bg-white md:grid-cols-1 ">
       <Logo></Logo>
-      <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
+      <div className="flex md:flex-wrap justify-center items-center gap-2 md:gap-4 sm:gap-1 sm:col-span-2">
         <div className="mx-4">
           <Link href="/home">Recipes</Link>
         </div>
@@ -137,33 +140,5 @@ function NavBar() {
         <ProfileNavigation />
       </div>
     </div>
-  );
-}
-
-function ImageIcon({ href, src }) {
-  // This function will conditionally render if there's an href attribute or not.
-  return (
-    <>
-      {href ? (
-        <Link href={href}>
-          {" "}
-          <Image
-            className="hover:translate-y-2 transition-transform duration-200 ease-in-out"
-            src={"/icons/" + src}
-            width={30}
-            height={30}
-            alt="Image icon with link."
-          />
-        </Link>
-      ) : (
-        <Image
-          className="shadow-xl h-30"
-          src={"/icons/" + src}
-          width={30}
-          height={30}
-          alt="Image icon without link."
-        />
-      )}
-    </>
   );
 }

@@ -1,11 +1,23 @@
+import Image from "next/image";
 const Coach = () => {
   // This function returns 2 sections a pic div and a description div
   // It tells the user about who the Coach is
   return (
     <>
-      <div className="min-h-screen bg-white grid grid-cols-2 grid-rows-1 py-4 md:grid-rows-2 md:grid-cols-1">
-        <div className="relative row-span-2 col-span-2 p-2 md:row-span-1">
-          <div className="w-[98%] m-auto h-full rounded-lg shadow-xl bg-[url('https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg')] bg-cover"></div>
+      <div className="h-fit py-4 md:grid-rows-2">
+        <div className="relative row-span-2 col-span-2 p-2 md:row-span-1 grid grid-cols-2 md:grid-cols-1 md:grid-rows-1">
+          <div
+            style={{ position: "relative", width: "100%", height: "100%" }}
+            className="md:hidden"
+          >
+            <Image
+              alt="Coach's Main photo"
+              className="rounded-lg bg-primarylight"
+              src="https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg"
+              fill={true}
+              objectFit="contain"
+            />
+          </div>
           <InfoPart />
         </div>
       </div>
@@ -16,8 +28,8 @@ const Coach = () => {
 function InfoPart() {
   return (
     <div
-      className="absolute top-1 right-10 w-1/2 h-full sm:rounded-none text-center
-    text-md text-black font-opensans rounded-lg flex justify-center items-center flex-col gap-4 py-2 px-6"
+      className="w-auto h-full sm:rounded-none text-center
+    text-md text-black font-opensans rounded-lg flex justify-center items-center flex-col gap-4 px-6 py-10 "
     >
       <p className="py-3 shadow-sm text-lg">
         <strong className="font-extrabold">Dr. Monika Gostic</strong> is a

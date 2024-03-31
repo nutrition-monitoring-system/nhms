@@ -14,7 +14,7 @@ export default function Recipes(props) {
           <RecipesModal recipe={currentRecipe} />
           {recipesList
             ?.filter((item) =>
-              item.name.toLowerCase().includes(searchInformation.toLowerCase())
+              item.name.toLowerCase().includes(searchInformation.toLowerCase()),
             )
             .map((item, idx) => (
               <div key={idx}>
