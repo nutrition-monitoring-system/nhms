@@ -122,21 +122,21 @@ function NavBar({
         </div>
         <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
           <div
-            className="tile bg-black text-white"
+            className="tile bg-black text-white border-none"
             ref={home}
             onClick={() => handleOnclick(home)}
           >
             Home
           </div>
           <div
-            className="tile"
+            className="tile border-none"
             ref={recipes}
             onClick={() => handleOnclick(recipes)}
           >
             Recipes
           </div>
           <div
-            className="tile"
+            className="tile border-none"
             ref={recipesCollections}
             onClick={() => handleOnclick(recipesCollections)}
           >
