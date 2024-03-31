@@ -1,13 +1,9 @@
 //import Image from 'next/image'
 "use client";
 import Footer from "../../components/Footer";
-import Logo from "../../components/Logo";
-import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
-import ProfileNavigation from "@/components/ProfileNavigation";
+import NavBar from "@/components/LogoNavigationBar";
 // export const metadata = {
 //   title: "Blog",
 //   description: "Blog Page",
@@ -53,63 +49,6 @@ const BlogHeader = () => {
             <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
           </div>
         </div>
-      </div>
-    </div>
-  );
-};
-
-const NavBar = () => {
-  const menuItems = useRef(null); // a container reference to the list of menuitems
-  const handleMenuclick = () => {
-    // This function handles the animation for the userMenu. It will animate base on the custom class added
-    menuItems.current.classList.toggle("slide-down");
-  };
-  const { status } = useSession({
-    // useSesstion is for protection.
-    // Making sure the user does not visit a route they are not allowed to visit
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-    },
-  });
-  // checking if the user is authenticated or is in a loading state
-  if (status === "unauthenticated" || status === "loading") {
-    return (
-      <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
-        <Logo></Logo>
-        <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-          <div className="mx-4">
-            <Link href="/">Home</Link>
-          </div>
-          <div className="mx-4">
-            <Link href="/login">Recipes</Link>
-          </div>
-          <button className="tile">
-            <Link href="/login">Login</Link>
-          </button>
-          <button className="tile">
-            <Link href="/register">Register</Link>
-          </button>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
-      <Logo />
-      <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <div className="mx-4">
-          <Link href="/login">Home</Link>
-        </div>
-        <div className="mx-4">
-          <Link href="/login">Recipes</Link>
-        </div>
-        <button className="tile ring-white hover:ring-secondary ring-2 font-semibold">
-          <Link href="https://scheduler.zoom.us/mgostic">
-            Book a Consultation
-          </Link>
-        </button>
-        <ProfileNavigation />
       </div>
     </div>
   );
