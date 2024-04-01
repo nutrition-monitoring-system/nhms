@@ -6,11 +6,11 @@ const Offer = () => (
   //<InfoCardTwo />  ---------------|----------- These functions just tell you what the site offers by looping through a content array and rendering the data to in the WhatWeOfferSection
   // <InfoCardThree /> -------------|
   <>
-    <div className="min-h-fit font-opensans text-black py-3">
+    <div className="py-3 text-black min-h-fit font-opensans">
       <h1 className="font-extrabold text-[30px] text-center mb-7">
         What do we offer?
       </h1>
-      <div className="min-h-fit grid grid-cols-3 p-5 gap-3 xl:bg-prim shadow-lg sm:grid-cols-1 sm:grid-rows-3 sm:gap-4 xl:flex xl:flex-wrap xl:justify-center">
+      <div className="grid grid-cols-3 gap-3 p-5 shadow-lg min-h-fit xl:bg-prim sm:grid-cols-1 sm:grid-rows-3 sm:gap-4 xl:flex xl:flex-wrap xl:justify-center">
         <>
           {Information.map((item, idx) => (
             <div key={idx}>
@@ -56,7 +56,7 @@ const Information = [
 function InfoCard({ title, content }) {
   return (
     <>
-      <div className="max-w-md rounded-lg overflow-hidden shadow-xl bg-primarylight p-1 xl:flex xl:max-w-full">
+      <div className="max-w-md p-1 overflow-hidden rounded-lg shadow-xl bg-primarylight xl:flex xl:max-w-full">
         <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
@@ -65,8 +65,8 @@ function InfoCard({ title, content }) {
           alt="Sunset in the mountains"
         />
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{title}</div>
-          <ul className="text-gray-900 text-sm p-2">
+          <div className="mb-2 text-xl font-bold">{title}</div>
+          <ul className="p-2 text-sm text-gray-900">
             {content.map((item, idx) => (
               <li key={idx} className="list-disc">
                 {item}

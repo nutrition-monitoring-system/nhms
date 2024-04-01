@@ -30,7 +30,7 @@ const BlogHeaderParent = () => {
 
 const BlogHeader = () => {
   return (
-    <div className="h-screen min-h-fit relative text-black grid place-items-center font-opensans">
+    <div className="relative grid h-screen text-black min-h-fit place-items-center font-opensans">
       <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%] sm:h-[70%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
@@ -45,7 +45,7 @@ const BlogHeader = () => {
             and integrate with well-being apps. Embark on your journey to a
             healthier you today!`
           </div>
-          <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">
+          <div className="flex items-center justify-center py-1 min-h-auto sm:gap-3 gap-7 sm:flex-wrap">
             <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
           </div>
         </div>
@@ -56,7 +56,7 @@ const BlogHeader = () => {
 
 const BlogPage = () => {
   return (
-    <div className="flex flex-wrap justify-center items-center gap-3 m-auto min-h-screen p-5">
+    <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto">
       <BlogComponent />
       <BlogComponent />
     </div>
@@ -66,7 +66,7 @@ const BlogPage = () => {
 const BlogComponent = () => {
   //const date = new Date().toDateString();
   return (
-    <ol className="relative border-s border-gray-200 dark:border-gray-700">
+    <ol className="relative border-gray-200 border-s dark:border-gray-700">
       <li className="mb-10 ms-4">
         <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
         <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
@@ -81,10 +81,7 @@ const BlogComponent = () => {
         </p>
         <a
           href="#"
-          className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white 
-          border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10
-           focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800
-            dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+          className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
         >
           Learn more{" "}
           <svg

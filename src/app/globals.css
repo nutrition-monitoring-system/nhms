@@ -54,19 +54,16 @@ dialog::backdrop {
   }
   input:not([type="file"]),
   select {
-    @apply px-3 pl-5 py-3 bg-white w-full outline-none rounded-md text-black
-     focus:outline-none shadow-xl;
+    @apply w-full px-3 py-3 pl-5 text-black bg-white rounded-md shadow-xl outline-none focus:outline-none;
   }
   input::placeholder {
-    @apply text-black font-normal opacity-70;
+    @apply font-normal text-black opacity-70;
   }
   .tile {
-    @apply inline-flex gap-2 items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200
-     rounded-lg focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 cursor-pointer
-     dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700;
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg cursor-pointer focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700;
   }
   button:disabled {
-    @apply opacity-80 select-none;
+    @apply select-none opacity-80;
   }
 }
 

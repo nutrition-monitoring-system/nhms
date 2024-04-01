@@ -78,7 +78,7 @@ const FoodAndWaterLog = () => {
         method: "GET",
         headers: { "X-Api-Key": apiKey },
         contentType: "application/json",
-      },
+      }
     )
       .then((response) => response.json())
       .then((data) => {
@@ -118,12 +118,12 @@ const FoodAndWaterLog = () => {
         ref={foodModal}
         className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
       >
-        <div className="p-2 grid place-items-center gap-1">
+        <div className="grid gap-1 p-2 place-items-center">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             Did you have anything today?
           </h1>
-          <h3 className="font-bold text-secondary uppercase">{type}</h3>
-          <div className="gap-1 flex-col flex justify-center items-center w-3/4">
+          <h3 className="font-bold uppercase text-secondary">{type}</h3>
+          <div className="flex flex-col items-center justify-center w-3/4 gap-1">
             <input
               name="Foodname"
               type="text"
@@ -132,28 +132,28 @@ const FoodAndWaterLog = () => {
               onChange={(e) => (foodName.current.value = e.target.value)}
             />
             <div
-              className="flex w-full gap-3 p-2 my-2 select-none cursor-pointer ring-black ring rounded-md"
+              className="flex w-full gap-3 p-2 my-2 rounded-md cursor-pointer select-none ring-black ring"
               onClick={handleOnChange}
             >
               <div className="flex">
                 <input
                   ref={checkboxRef}
                   type="checkbox"
-                  className="text-secondary cursor-pointer"
+                  className="cursor-pointer text-secondary"
                 />
               </div>
               <label className="cursor-pointer">
                 <p>Use A.I to get nutritional information</p>
-                <p className="grid place-items-center text-slate text-center opacity-50 my-1">
+                <p className="grid my-1 text-center opacity-50 place-items-center text-slate">
                   Please note that A.I generated content is not 100% accurate
                 </p>
               </label>
             </div>
           </div>
-          <details className="gap-1 flex flex-col justify-center items-center w-3/4">
+          <details className="flex flex-col items-center justify-center w-3/4 gap-1">
             <summary>More nutritional information</summary>
             {loadingNutrionalInformation && (
-              <span className="w-full text-secondary font-lg text-center">
+              <span className="w-full text-center text-secondary font-lg">
                 Loading...
               </span>
             )}
@@ -166,13 +166,13 @@ const FoodAndWaterLog = () => {
                 <input
                   ref={(elem) => (nutritionRef.current[idx] = elem)}
                   type="number"
-                  className="text-secondary m-1"
+                  className="m-1 text-secondary"
                   placeholder={item}
                 />
               </div>
             ))}
           </details>
-          <div className="flex justify-around items-center mt-2 w-full">
+          <div className="flex items-center justify-around w-full mt-2">
             <button onClick={handleAddFood} className="tile" id="addNext">
               <Image
                 src="/icons/add.png"
@@ -187,7 +187,7 @@ const FoodAndWaterLog = () => {
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="rounded-full rotate-45"
+                className="rotate-45 rounded-full"
                 width={25}
                 height={25}
               />
@@ -200,17 +200,17 @@ const FoodAndWaterLog = () => {
         ref={waterModal}
         className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
       >
-        <div className="p-2 grid place-items-center gap-1 overflow-y-hidden">
+        <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             How much did you drink?
           </h1>
-          <div className="w-3/4 grid place-items-center">
+          <div className="grid w-3/4 place-items-center">
             <div className="h-[150px] shadow-lg w-3/4 bg-gray-100 p-1 rounded-md m-2 flex flex-col justify-end items-center">
               <div
                 style={{
                   height: `${(sliderValue / 1000) * 100}%`,
                 }}
-                className="h-full bg-blue-500 w-full rounded-md grid place-items-center transition-all duration-300 ease-in-out"
+                className="grid w-full h-full transition-all duration-300 ease-in-out bg-blue-500 rounded-md place-items-center"
               ></div>
             </div>
             <div>{sliderValue} ml</div>
@@ -222,10 +222,10 @@ const FoodAndWaterLog = () => {
               onValueChange={(value) => {
                 setSliderValue(value[0]);
               }}
-              className="bg-gray-100 rounded-md w-3/4 m-2"
+              className="w-3/4 m-2 bg-gray-100 rounded-md"
             />
           </div>
-          <div className="flex justify-around items-center mt-2 w-full">
+          <div className="flex items-center justify-around w-full mt-2">
             <button
               className="tile"
               id="addNext"
@@ -254,7 +254,7 @@ const FoodAndWaterLog = () => {
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="rounded-full rotate-45"
+                className="rotate-45 rounded-full"
                 width={25}
                 height={25}
               />
@@ -269,7 +269,7 @@ const FoodAndWaterLog = () => {
         className="min-h-[200px]"
         value={ColorLogToggle}
       >
-        <TabsList className="flex flex-row w-full place-content-evenly mb-4 h-auto bg-primarylight rounded-md p-2 shadow-inner shadow-primary/75 bg-blend-multiply">
+        <TabsList className="flex flex-row w-full h-auto p-2 mb-4 rounded-md shadow-inner place-content-evenly bg-primarylight shadow-primary/75 bg-blend-multiply">
           <TabsTrigger
             value="food"
             className={
@@ -299,54 +299,54 @@ const FoodAndWaterLog = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="food" className="">
-          <div className="min-h-full grid grid-cols-2 grid-rows-2">
+          <div className="grid min-h-full grid-cols-2 grid-rows-2">
             <div
-              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md cursor-pointer "
+              className="flex items-center justify-start gap-3 p-3 rounded-md shadow-md cursor-pointer "
               onClick={(event) => handleAddClick(event, "breakfast")}
             >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="bg-primary rounded-full p-3"
+                className="p-3 rounded-full bg-primary"
                 width={40}
                 height={40}
               />
               <div htmlFor="name">Breakfast</div>
             </div>
             <div
-              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md cursor-pointer"
+              className="flex items-center justify-start gap-3 p-3 rounded-md shadow-md cursor-pointer"
               onClick={(event) => handleAddClick(event, "Lunch")}
             >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="bg-primary rounded-full p-3 hover:bg-primarylight"
+                className="p-3 rounded-full bg-primary hover:bg-primarylight"
                 width={40}
                 height={40}
               />
               <div htmlFor="name">Lunch</div>
             </div>
             <div
-              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md cursor-pointer"
+              className="flex items-center justify-start gap-3 p-3 rounded-md shadow-md cursor-pointer"
               onClick={(event) => handleAddClick(event, "Dinner")}
             >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="bg-primary rounded-full p-3"
+                className="p-3 rounded-full bg-primary"
                 width={40}
                 height={40}
               />
               <div htmlFor="name">Dinner</div>
             </div>
             <div
-              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md cursor-pointer"
+              className="flex items-center justify-start gap-3 p-3 rounded-md shadow-md cursor-pointer"
               onClick={(event) => handleAddClick(event, "snack")}
             >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="bg-primary rounded-full p-3"
+                className="p-3 rounded-full bg-primary"
                 width={40}
                 height={40}
               />
@@ -357,7 +357,7 @@ const FoodAndWaterLog = () => {
         <TabsContent value="water">
           <div className="min-h-full">
             <button
-              className="flex justify-start rounded-md items-center gap-3 p-3 shadow-md w-full"
+              className="flex items-center justify-start w-full gap-3 p-3 rounded-md shadow-md"
               onClick={(event) => {
                 event.preventDefault();
                 waterModal.current.showModal();
@@ -366,7 +366,7 @@ const FoodAndWaterLog = () => {
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
-                className="bg-primary rounded-full p-3"
+                className="p-3 rounded-full bg-primary"
                 width={40}
                 height={40}
               />

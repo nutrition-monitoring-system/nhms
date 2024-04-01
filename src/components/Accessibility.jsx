@@ -54,9 +54,11 @@ export default function Accessibility({
     SetUserSelected([...userSelected, settings[refIdx].type]);
   };
 
+  const [themeColors, setThemeColors] = useState(["#fafafa", "#e0e0e0"]);
+
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit rounded-md flex-1 p-1">
+      <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-1 rounded-md items-left min-h-fit">
         <h1 className="grid place-items-center text-secondary text-center font-extrabold text-[1.3rem]">
           Accessibility Settings
         </h1>
@@ -65,10 +67,10 @@ export default function Accessibility({
           <input
             type="text"
             placeholder="Type to add or search"
-            className="pl-7 flex-grow"
+            className="flex-grow pl-7"
           />
         </div>
-        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+        <div className="flex flex-wrap items-center justify-center w-full gap-2 min-h-fitrounded-md">
           <button
             className="tile bg-secondary"
             onClick={handleNone}
@@ -83,6 +85,19 @@ export default function Accessibility({
             />
             None
           </button>
+          {/* <div className="p-0 tile bg-secondary">
+            <select
+              onChange={(event) => event.preventDefault()}
+              className={"bg-sky-400"}
+            >
+              <option value="">Themes</option>
+              <option value="pink" className="text-pink">
+                Pink Theme
+              </option>
+              <option value="blue">Blue Theme</option>
+            </select>
+          </div> */}
+
           {settings.map((setting, idx) => {
             return (
               <div key={idx}>
@@ -103,7 +118,7 @@ export default function Accessibility({
             );
           })}
         </div>
-        <p className="grid place-items-center text-slate text-center opacity-50 my-1">
+        <p className="grid my-1 text-center opacity-50 place-items-center text-slate">
           (Please note your changes will be applied after you leave this form.)
         </p>
         <div className="grid grid-cols-2 place-items-center">

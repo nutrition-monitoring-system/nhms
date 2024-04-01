@@ -6,13 +6,16 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
   const [shareHealthDate, setShareHealthData] = useState(false);
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
+      <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-2 rounded-md items-left min-h-fit">
         <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Data Consent
         </h1>
-        <div className="h-1/2 w-full flex justify-center items-center gap-2 flex-col">
+        <p className="grid my-1 text-left opacity-50 place-items-center text-slate">
+          Please check the boxes before if you agree to continue
+        </p>
+        <div className="flex flex-col items-center justify-center w-full gap-2 h-1/2">
           <div className="flex">
-            <div className="grid place-items-center p-5">
+            <div className="grid p-5 place-items-center">
               <input
                 type="checkbox"
                 id="terms-privacy"
@@ -35,7 +38,7 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
             </p>
           </div>
           <div className="flex">
-            <div className="grid place-items-center p-5">
+            <div className="grid p-5 place-items-center">
               <input
                 className="w-10"
                 type="checkbox"
@@ -52,7 +55,7 @@ export default function TermsAndConditions({ onClickPrev, onClickNext }) {
             </p>
           </div>
         </div>
-        <div className="w-full flex justify-around items-center ">
+        <div className="flex items-center justify-around w-full ">
           <Link href={"/"} className="tile">
             Home
           </Link>

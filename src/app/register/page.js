@@ -160,7 +160,7 @@ export default function Home() {
     <>
       <dialog
         ref={loadingRef}
-        className="bg-none bg-transparent outline-none border-none overflow-hidden min-h-fit min-w-fit"
+        className="overflow-hidden bg-transparent border-none outline-none bg-none min-h-fit min-w-fit"
       >
         <Image
           src="/icons/loading.png"
@@ -171,15 +171,15 @@ export default function Home() {
         />
         <div className="font-semibold">loading...</div>
       </dialog>
-      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit sm:grid-cols-1 sm:grid-rows-4">
-        <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2 sm:gap-2">
+      <div className="absolute inset-0 grid min-h-screen grid-cols-4 text-black bg-white font-opensans h-fit sm:grid-cols-1 sm:grid-rows-4">
+        <div className="flex flex-col items-center justify-center gap-4 pl-4 pr-2 bg-primary sm:gap-2">
           <h1 className="font-extrabold text-[20px]">Welcome back!</h1>
           <p className="text-center">
             Sign in to unlock a world of nutrition opportunities!
           </p>
           <Button href={"/login"}>Login</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
+        <div className="flex flex-col items-center justify-center col-span-3 gap-2 text-black sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
@@ -245,7 +245,7 @@ function ButtonArray({ handleNavClick, nextButtonOpacity }) {
   return (
     <>
       <div
-        className="flex justify-center items-center flex-wrap gap-3 transition-all delay-100"
+        className="flex flex-wrap items-center justify-center gap-3 transition-all delay-100"
         style={{ opacity: nextButtonOpacity }}
       >
         <button

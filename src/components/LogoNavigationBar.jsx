@@ -25,16 +25,16 @@ export default function NavBar() {
   // checking if the user is authenticated or is in a loading state
   if (status === "unauthenticated" || status === "loading") {
     return (
-      <div className="w-full grid grid-cols-2 py-3 bg-white md:grid-cols-1 ">
+      <div className="grid w-full grid-cols-2 py-3 bg-white md:grid-cols-1 ">
         <Logo></Logo>
-        <div className="flex md:flex-wrap justify-center items-center gap-2 md:gap-4 sm:gap-1 sm:col-span-2">
+        <div className="flex items-center justify-center gap-2 md:flex-wrap md:gap-4 sm:gap-1 sm:col-span-2">
           <div className="mx-4">
             <Link href="/home">Recipes</Link>
           </div>
           <div className="mx-4">
             <Link href="/blog">Blog</Link>
           </div>
-          <button className="tile ring-white hover:ring-secondary ring-2 font-semibold">
+          <button className="font-semibold tile ring-white hover:ring-secondary ring-2">
             <Link href="https://scheduler.zoom.us/mgostic">
               Book a Consultation
             </Link>
@@ -50,16 +50,16 @@ export default function NavBar() {
     );
   }
   return (
-    <div className="w-full grid grid-cols-2 py-3 bg-white md:grid-cols-1 ">
+    <div className="grid w-full grid-cols-2 py-3 bg-white md:grid-cols-1 ">
       <Logo></Logo>
-      <div className="flex md:flex-wrap justify-center items-center gap-2 md:gap-4 sm:gap-1 sm:col-span-2">
+      <div className="flex items-center justify-center gap-2 md:flex-wrap md:gap-4 sm:gap-1 sm:col-span-2">
         <div className="mx-4">
           <Link href="/home">Recipes</Link>
         </div>
         <div className="mx-4">
           <Link href="/blog">Blog</Link>
         </div>
-        <button className="tile text-black ring-white hover:ring-secondary ring-2">
+        <button className="text-black tile ring-white hover:ring-secondary ring-2">
           <Link href="https://scheduler.zoom.us/mgostic">
             Book a Consultation
           </Link>
