@@ -54,7 +54,7 @@ function Home() {
   }
 
   return (
-    <div className="h-screen bg-white flex flex-col min-h-fit">
+    <div className="flex flex-col h-screen bg-white min-h-fit">
       <NavBar
         handleLogout={handleLogout}
         recipesList={recipesList}
@@ -62,7 +62,7 @@ function Home() {
         searchInformation={searchInformation}
         setSearchInformation={setSearchInformation}
       />
-      <div className="p-4 min-h-fit grid place-items-center bg-white">
+      <div className="grid p-4 bg-white min-h-fit place-items-center">
         <Recipes
           searchInformation={searchInformation}
           setSearchInformation={setSearchInformation}
@@ -116,27 +116,27 @@ function NavBar({
       <div className="bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
         <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
-          <div className="flex justify-center items-center col-span-2">
+          <div className="flex items-center justify-center col-span-2">
             <ProfileNavigation />
           </div>
         </div>
-        <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
+        <div className="flex items-center justify-center gap-1 bg-primary sm:overflow-hidden sm:flex-wrap sm:p-5">
           <div
-            className="tile bg-black text-white border-none"
+            className="text-white bg-black border-none tile"
             ref={home}
             onClick={() => handleOnclick(home)}
           >
             Home
           </div>
           <div
-            className="tile border-none"
+            className="border-none tile"
             ref={recipes}
             onClick={() => handleOnclick(recipes)}
           >
             Recipes
           </div>
           <div
-            className="tile border-none"
+            className="border-none tile"
             ref={recipesCollections}
             onClick={() => handleOnclick(recipesCollections)}
           >
@@ -152,7 +152,7 @@ function NavBar({
             <input
               type="text conditions"
               placeholder="Type to search recipes..."
-              className="pl-7 flex-grow"
+              className="flex-grow pl-7"
               onChange={handleSearch}
               ref={inputRef}
             />

@@ -6,11 +6,11 @@ import Link from "next/link";
 export default function SideNavBar() {
   return (
     <div className="w-[20%] md:w-full sidebar h-screen md:h-fit sticky top-0 md:relative ">
-      <div className="bg-black p-5 flex flex-col justify-start items-center gap-4 w-full h-full">
+      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-5 bg-black">
         <Logo logoName="Navigation"></Logo>
         <Link
           href="/blog"
-          className="tile w-full text-lg p-5 flex justify-start gap-5 items-center"
+          className="flex items-center justify-start w-full gap-5 p-5 text-lg tile"
         >
           {" "}
           <FaBlog className="size-6" />
@@ -18,7 +18,7 @@ export default function SideNavBar() {
         </Link>
         <Link
           href="#section2"
-          className="tile w-full text-lg p-5 flex justify-start gap-5 items-center"
+          className="flex items-center justify-start w-full gap-5 p-5 text-lg tile"
         >
           {" "}
           <FaPencilAlt className="size-6" />
@@ -26,7 +26,7 @@ export default function SideNavBar() {
         </Link>
         <Link
           href="#section1"
-          className="tile w-full text-lg p-5 flex justify-start gap-5 items-center"
+          className="flex items-center justify-start w-full gap-5 p-5 text-lg tile"
         >
           <MdSettings className="size-6" />
           Settings

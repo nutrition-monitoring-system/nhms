@@ -10,11 +10,11 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 p-2 md:grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] h-fit min-h-3/4 sm:w-full">
+        <div className="grid grid-cols-4 p-2 md:grid-cols-1 md:px-10 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
           {recipesList
             ?.filter((item) =>
-              item.name.toLowerCase().includes(searchInformation.toLowerCase()),
+              item.name.toLowerCase().includes(searchInformation.toLowerCase())
             )
             .map((item, idx) => (
               <div key={idx}>
@@ -47,7 +47,7 @@ function RenderRecipeSection(props) {
         ?.filter((item) => currentSectionList.includes(item.name))
         .map((item, idx) => (
           <div key={idx}>
-            <RecipeInfo {...props} recipe={item} />
+            <RecipeInfo {...props} recipe={item} check={true} />
           </div>
         ));
     default:
@@ -74,11 +74,11 @@ function RecipesModal({ recipe }) {
     <>
       <dialog
         ref={modal}
-        className="w-[50%] min-h-fit rounded-lg p-3 bg-primarylight focus:outline-none overflow-hidden"
+        className="w-[50%] md:w-screen md:h-screen h-fit rounded-lg p-3 bg-primarylight focus:outline-none"
       >
-        <div className="flex justify-end items-center py-1 px-7 sticky top-0">
+        <div className="sticky top-0 flex items-center justify-end py-1 px-7">
           <button
-            className="tile bg-black text-white"
+            className="text-white bg-black tile"
             onClick={() => modal.current.close()}
           >
             Close
@@ -86,11 +86,11 @@ function RecipesModal({ recipe }) {
         </div>
         <article class="prose lg:prose-xl mx-auto prose-gray p-4">
           <h1 className="text-center">{recipe.name}</h1>
-          <div className="flex justify-between items-center text-lg p-1">
+          <div className="flex flex-wrap items-center justify-between p-1 text-lg">
             <strong className="">Servings</strong>
-            <div className="border-r-2 p-2">{recipe.servings || 0}</div>
+            <div className="p-2 border-r-2">{recipe.servings || 0}</div>
             <strong className="">Prep Time</strong>
-            <div className="border-r-2 px-4">
+            <div className="px-4 border-r-2">
               {recipe.prep_time || "0 minutes"}
             </div>
             <strong className="">Cook Time</strong>
@@ -108,7 +108,7 @@ function RecipesModal({ recipe }) {
                 ))}
               </ul>
             </div>
-            <div className="text-right">
+            <div className="text-right md:text-left">
               <h3 className="">Nutrition</h3>
               <div className="">
                 <strong className="border-b-2 border-gray-200">Calories</strong>
@@ -142,14 +142,16 @@ function RecipesModal({ recipe }) {
 }
 
 function RecipeInfo({
+  check,
   recipe,
   customColor,
   setCurrentRecipe,
   currentSectionList,
   setCurrentSectionList,
 }) {
-  const [toogleAddCollections, setToogleAddCollections] =
-    useState("/icons/add.png");
+  const [toogleAddCollections, setToogleAddCollections] = useState(
+    check ? "/icons/check.png" : "/icons/add.png"
+  );
   const toogleIcon = () => {
     if (toogleAddCollections === "/icons/add.png") {
       setToogleAddCollections("/icons/check.png");
@@ -172,10 +174,7 @@ function RecipeInfo({
           ` ${customColor ? `${customColor}` : "bg-rose-100"}`
         }
       >
-        <div
-          className="rounded-md overflow-hidden bg-cover cursor-pointer transition-colors duration-1000 ease-in-out
-        bg-white grid place-items-center p-5 shadow-lg"
-        >
+        <div className="grid p-5 overflow-hidden transition-colors duration-1000 ease-in-out bg-white bg-cover rounded-md shadow-lg cursor-pointer place-items-center">
           <div className="text-center font-sans font-extrabold text-[1.5rem] text-black">
             {recipe.name}
           </div>
@@ -189,7 +188,7 @@ function RecipeInfo({
                 : "bg-rose-100"
             }
           >
-            <div className="flex justify-around items-center w-full">
+            <div className="flex items-center justify-around w-full">
               <Image
                 src="/icons/info.png"
                 alt="information icon"
@@ -207,16 +206,16 @@ function RecipeInfo({
                 onClick={() => toogleIcon()}
               />
             </div>
-            <div className="text-center flex justify-around items-center w-full">
+            <div className="flex items-center justify-around w-full text-center">
               <span>Prep time</span> <span>{recipe.prep_time}</span>
             </div>
-            <div className="text-left flex justify-around items-center w-full">
+            <div className="flex items-center justify-around w-full text-left">
               <span>Cook time</span>{" "}
               <span>
                 {!recipe.cooking_time ? "0 minutes" : recipe.cooking_time}
               </span>
             </div>
-            <div className="text-left flex justify-around items-center w-full">
+            <div className="flex items-center justify-around w-full text-left">
               <span>Meal type</span> <strong>Breakfast</strong>
             </div>
           </div>
@@ -229,21 +228,18 @@ function RecipeInfo({
 function RecipeInfoEmpty() {
   return (
     <div className="min-w-[25%] min-h-[200px] shadow-xl bg-rose-100 rounded-md grid grid-rows-2 gap-1 overflow-hidden p-1">
-      <div
-        className="rounded-md overflow-hidden bg-cover cursor-pointer transition-colors duration-1000 ease-in-out
-    bg-white grid place-items-center p-5 shadow-lg"
-      >
+      <div className="grid p-5 overflow-hidden transition-colors duration-1000 ease-in-out bg-white bg-cover rounded-md shadow-lg cursor-pointer place-items-center">
         <div className="text-center font-sans font-extrabold text-[1.5rem] text-black"></div>
       </div>
       <div className="">
-        <div className="text-sm bg-rose-100 shadow-xl grid place-items-center p-2 rounded-md h-full">
-          <div className="flex justify-around items-center w-full">
+        <div className="grid h-full p-2 text-sm rounded-md shadow-xl bg-rose-100 place-items-center">
+          <div className="flex items-center justify-around w-full">
             <div className="bg-white w-[40px] h-[40px] rounded-full"></div>
             <div className="bg-white w-[40px] h-[40px] rounded-full"></div>
           </div>
-          <div className="text-center flex justify-around items-center w-full"></div>
-          <div className="text-left flex justify-around items-center w-full"></div>
-          <div className="text-left flex justify-around items-center w-full"></div>
+          <div className="flex items-center justify-around w-full text-center"></div>
+          <div className="flex items-center justify-around w-full text-left"></div>
+          <div className="flex items-center justify-around w-full text-left"></div>
         </div>
       </div>
     </div>
