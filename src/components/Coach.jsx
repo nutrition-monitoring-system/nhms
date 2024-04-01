@@ -11,8 +11,8 @@ const Coach = () => {
             className="md:hidden"
           >
             <Image
-              alt="Coach's Main photo"
-              className="rounded-lg bg-primarylight"
+              alt="Monika Gostic's Main photo"
+              className="rounded-lg bg-gray-100"
               src="https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg"
               fill={true}
               objectFit="contain"

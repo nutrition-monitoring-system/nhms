@@ -82,7 +82,7 @@ const FileUpload = ({ fetchImages }) => {
             style={{ display: "none" }}
           />
           <button
-            className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md hover:bg-white/75"
+            className="tile w-1/2 log-bar bg-white flex px-5 space-x-3 py-3 shadow-lg rounded-md hover:bg-white/75"
             onClick={triggerFileInputClick} // Use the new method here
           >
             <FaCamera className="size-6" />
