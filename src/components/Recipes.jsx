@@ -10,23 +10,9 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <RecipeLoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-4 p-2 md:grid-cols-1 md:px-10 sm:grid-cols-1 gap-3 sm:gap-3 w-[80%] xl:w-[70%] h-fit min-h-3/4 sm:w-full">
+        <div className="grid grid-cols-1 justify-center items-start p-2 md:grid-cols-1 md:px-10 gap-1 w-[70%] h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
-          {recipesList
-            ?.filter((item) =>
-              item.name.toLowerCase().includes(searchInformation.toLowerCase())
-            )
-            .map((item, idx) => (
-              <div key={idx}>
-                <RecipeInfo
-                  {...props}
-                  customColor={"bg-amber-100"}
-                  recipe={item}
-                  setCurrentRecipe={setCurrentRecipe}
-                />
-              </div>
-            ))}
-          {/* <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} /> */}
+          <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} />
         </div>
       )}
     </>
@@ -78,9 +64,15 @@ function RecipesModal({ recipe }) {
       >
         <div className="sticky top-0 flex items-center justify-end py-1 px-7">
           <button
-            className="text-white bg-black tile"
+            className="shadow-md focus:ring-0 tile"
             onClick={() => modal.current.close()}
           >
+            <Image
+              src={"/icons/add.png"}
+              className="rotate-45"
+              width={20}
+              height={20}
+            />
             Close
           </button>
         </div>
@@ -149,112 +141,70 @@ function RecipeInfo({
   currentSectionList,
   setCurrentSectionList,
 }) {
-  const [toogleAddCollections, setToogleAddCollections] = useState(
-    check ? "/icons/check.png" : "/icons/add.png"
-  );
-  const toogleIcon = () => {
-    if (toogleAddCollections === "/icons/add.png") {
-      setToogleAddCollections("/icons/check.png");
-      setCurrentSectionList([...currentSectionList, recipe.name]);
-    } else {
-      setToogleAddCollections("/icons/add.png");
-      const index = currentSectionList.indexOf(2);
-      if (index > -1) {
-        currentSectionList.splice(index, 1);
-      }
-      setCurrentSectionList(currentSectionList);
-    }
-  };
-
   return (
-    <>
-      <div
-        className={
-          `shadow-xl rounded-md flex flex-col gap-1 overflow-hidden p-1` +
-          ` ${customColor ? `${customColor}` : "bg-rose-100"}`
-        }
-      >
-        <div className="grid p-5 overflow-hidden transition-colors duration-1000 ease-in-out bg-white bg-cover rounded-md shadow-lg cursor-pointer place-items-center">
-          <div className="text-center font-sans font-extrabold text-[1.5rem] text-black">
-            {recipe.name}
-          </div>
-        </div>
-        <div className="">
-          <div
-            className={
-              `text-sm shadow-xl grid place-items-center p-2 rounded-md` +
-              `${customColor}`
-                ? `${customColor}`
-                : "bg-rose-100"
-            }
+    <ol className="relative p-2 border-gray-200 cursor-pointer rounded-r-md border-s dark:border-gray-700">
+      <li className="mb-10 ms-4">
+        <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+        <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          {new Date().toLocaleString("default", { month: "long" }) +
+            " " +
+            new Date().getFullYear()}
+        </time>
+        <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+          {recipe.name}
+        </h3>
+        <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          <span>Cook time</span>{" "}
+          <strong>
+            {!recipe.cooking_time ? "0 minutes" : recipe.cooking_time}
+          </strong>
+        </p>
+        <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          <span>Prep time</span>{" "}
+          <strong>{!recipe.prep_time ? "0 minutes" : recipe.prep_time}</strong>
+        </p>
+        <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          <span>Meal type</span> <strong>Breakfast</strong>
+        </p>
+        <button
+          href="#"
+          onClick={() => setCurrentRecipe(recipe)}
+          className="flex items-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+        >
+          Add to collections{" "}
+          <svg
+            className="w-3 h-3 ms-2 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
           >
-            <div className="flex items-center justify-around w-full">
-              <Image
-                src="/icons/info.png"
-                alt="information icon"
-                width={30}
-                height={30}
-                className="bg-white rounded-[50px] p-1 cursor-pointer"
-                onClick={() => setCurrentRecipe(recipe)}
-              />
-              <Image
-                src={toogleAddCollections}
-                alt="Add icon"
-                width={30}
-                height={30}
-                className="bg-white rounded-[50px] p-1 cursor-pointer"
-                onClick={() => toogleIcon()}
-              />
-            </div>
-            <div className="flex items-center justify-around w-full text-center">
-              <span>Prep time</span> <span>{recipe.prep_time}</span>
-            </div>
-            <div className="flex items-center justify-around w-full text-left">
-              <span>Cook time</span>{" "}
-              <span>
-                {!recipe.cooking_time ? "0 minutes" : recipe.cooking_time}
-              </span>
-            </div>
-            <div className="flex items-center justify-around w-full text-left">
-              <span>Meal type</span> <strong>Breakfast</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function RecipeInfoEmpty() {
-  return (
-    <div className="min-w-[25%] min-h-[200px] shadow-xl bg-rose-100 rounded-md grid grid-rows-2 gap-1 overflow-hidden p-1">
-      <div className="grid p-5 overflow-hidden transition-colors duration-1000 ease-in-out bg-white bg-cover rounded-md shadow-lg cursor-pointer place-items-center">
-        <div className="text-center font-sans font-extrabold text-[1.5rem] text-black"></div>
-      </div>
-      <div className="">
-        <div className="grid h-full p-2 text-sm rounded-md shadow-xl bg-rose-100 place-items-center">
-          <div className="flex items-center justify-around w-full">
-            <div className="bg-white w-[40px] h-[40px] rounded-full"></div>
-            <div className="bg-white w-[40px] h-[40px] rounded-full"></div>
-          </div>
-          <div className="flex items-center justify-around w-full text-center"></div>
-          <div className="flex items-center justify-around w-full text-left"></div>
-          <div className="flex items-center justify-around w-full text-left"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function RecipeLoadingSkeleton() {
-  return (
-    <div className="flex justify-center items-center flex-wrap gap-4 w-[80%] min-h-fit pt-10 sm:w-full">
-      <RecipeInfoEmpty />
-      <RecipeInfoEmpty />
-      <RecipeInfoEmpty />
-      <RecipeInfoEmpty />
-      <RecipeInfoEmpty />
-      <RecipeInfoEmpty />
-    </div>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        </button>
+        <button
+          href="#"
+          onClick={() => setCurrentRecipe(recipe)}
+          className="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+        >
+          Learn more{" "}
+          <svg
+            className="w-3 h-3 ms-2 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
+        </button>
+      </li>
+    </ol>
   );
 }

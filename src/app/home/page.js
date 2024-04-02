@@ -54,7 +54,7 @@ function Home() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-white min-h-fit">
+    <div className="flex flex-col min-h-screen bg-white">
       <NavBar
         handleLogout={handleLogout}
         recipesList={recipesList}
@@ -62,7 +62,7 @@ function Home() {
         searchInformation={searchInformation}
         setSearchInformation={setSearchInformation}
       />
-      <div className="grid p-4 bg-white min-h-fit place-items-center">
+      <div className="grid bg-white h-fit place-items-center">
         <Recipes
           searchInformation={searchInformation}
           setSearchInformation={setSearchInformation}
@@ -113,7 +113,7 @@ function NavBar({
 
   return (
     <>
-      <div className="bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+      <div className="z-10 bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
         <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
           <div className="flex items-center justify-center col-span-2">
