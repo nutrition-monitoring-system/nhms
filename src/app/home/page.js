@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
-import { ref } from "yup";
 
 export default function Page() {
   return (
@@ -118,10 +117,10 @@ function NavBar({
         <div className="grid grid-cols-3 p-4 md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
           <div className="flex flex-wrap items-center justify-center col-span-2 md:gap-3">
-            <div className="mx-4 text-lg">
+            <div className="mx-4">
               <Link href="/">Home</Link>
             </div>
-            <div className="mx-4 text-lg">
+            <div className="mx-4">
               <Link href="/blog">Blog</Link>
             </div>
             <ProfileNavigation />

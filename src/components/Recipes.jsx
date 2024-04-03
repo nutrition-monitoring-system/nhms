@@ -20,28 +20,48 @@ export default function Recipes(props) {
 }
 
 function RenderRecipeSection(props) {
-  const { currentSectionName, currentSectionList, recipesList } = props;
+  const {
+    currentSectionName,
+    currentSectionList,
+    recipesList,
+    searchInformation,
+  } = props;
   switch (currentSectionName) {
     case "Recipes":
-      return recipesList?.map((item, idx) => (
-        <div key={idx}>
-          <RecipeInfo {...props} recipe={item} />
-        </div>
-      ));
-    case "Collections":
       return recipesList
-        ?.filter((item) => currentSectionList.includes(item.name))
+        ?.filter((item) =>
+          item.name.toLowerCase().includes(searchInformation.toLowerCase())
+        )
         .map((item, idx) => (
           <div key={idx}>
-            <RecipeInfo {...props} recipe={item} check={true} />
+            <RecipeInfo {...props} recipe={item} />
+          </div>
+        ));
+
+    case "Collections":
+      return recipesList
+        ?.filter(
+          (item) =>
+            currentSectionList.some(
+              (sectionItem) => sectionItem.name === item.name
+            ) &&
+            item.name.toLowerCase().includes(searchInformation.toLowerCase())
+        )
+        .map((item, idx) => (
+          <div key={idx}>
+            <RecipeInfo {...props} recipe={item} />
           </div>
         ));
     default:
-      return recipesList?.map((item, idx) => (
-        <div key={idx}>
-          <RecipeInfo {...props} recipe={item} />
-        </div>
-      ));
+      return recipesList
+        ?.filter((item) =>
+          item.name.toLowerCase().includes(searchInformation.toLowerCase())
+        )
+        .map((item, idx) => (
+          <div key={idx}>
+            <RecipeInfo {...props} recipe={item} />
+          </div>
+        ));
   }
 }
 
@@ -50,7 +70,6 @@ function RecipesModal({ recipe }) {
 
   useEffect(() => {
     // checking if the object is empty
-    console.log(recipe);
     if (Object.keys(recipe).length !== 0) {
       modal.current.showModal();
     }
@@ -77,7 +96,7 @@ function RecipesModal({ recipe }) {
             Close
           </button>
         </div>
-        <article class="prose lg:prose-xl mx-auto prose-gray p-4">
+        <article className="p-4 mx-auto prose lg:prose-xl prose-gray">
           <h1 className="text-center">{recipe.name}</h1>
           <div className="flex flex-wrap items-center justify-between p-1 text-lg">
             <strong className="">Servings</strong>
@@ -135,27 +154,35 @@ function RecipesModal({ recipe }) {
 }
 
 function RecipeInfo({
-  check,
   recipe,
   customColor,
   setCurrentRecipe,
   currentSectionList,
   setCurrentSectionList,
 }) {
-  const [collectionsCheck, setCollectionsCheck] = useState(check);
   const handleAddToCollections = (event) => {
     // prevent default events from happening
     event.preventDefault();
     // toggle collections check state
     // the check state is responsible for rendering different versions of the svg
-    setCollectionsCheck(!collectionsCheck);
     // if a recipe is not in collections then when the button is clicked add it, otherwise remove it
     // its just a one liner if function that performs a toggle function
-    !currentSectionList.includes(recipe.name)
-      ? setCurrentSectionList([...currentSectionList, recipe.name])
-      : setCurrentSectionList(
-          currentSectionList.filter((item) => item !== recipe.name)
-        );
+    if (
+      !currentSectionList.some((itemRecipe) =>
+        Object.values(itemRecipe).includes(recipe.name)
+      )
+    ) {
+      setCurrentSectionList([
+        ...currentSectionList,
+        { check: true, ...recipe },
+      ]);
+      recipe.check = true;
+    } else {
+      setCurrentSectionList(
+        currentSectionList.filter((item) => item.name !== recipe.name)
+      );
+      recipe.check = false;
+    }
   };
   return (
     <ol className="relative p-2 border-gray-200 cursor-pointer rounded-r-md border-s dark:border-gray-700">
@@ -187,7 +214,7 @@ function RecipeInfo({
           onClick={handleAddToCollections}
           className="flex items-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
         >
-          Add to collections{" "}
+          {recipe?.check ? "Remove from collections" : "Add to collections"}
           <svg
             className="w-3 h-3 ms-2 rtl:rotate-180"
             aria-hidden="true"
@@ -195,7 +222,7 @@ function RecipeInfo({
             viewBox="0 0 24 24"
             fill="currentColor"
           >
-            {collectionsCheck ? (
+            {recipe?.check ? (
               <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
             ) : (
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
@@ -217,9 +244,9 @@ function RecipeInfo({
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
