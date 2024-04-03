@@ -2,7 +2,7 @@
 
 /* After this logID is created, then a new foodLog will be created, that links the food array, and the log.
 
-The food array is structured in a way so that you can add the nutrition values, otherwise it results in 0. */
+The food array is structured in a way so that you can add the custom nutrition values, otherwise it results in 0. */
 import { v1 } from "uuid";
 import prisma from "../../../utils/prismaclientUtil";
 
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
             } catch {
               return res
                 .status(500)
-                .json({ error: "Food not in correct format." });
+                .json({ error: "Food not in correct format. Food must be an Object and have the name and the quantity." });
             }
             if (response != null) {
               let newFoodLogEntry = await prisma.foodLog.create({
