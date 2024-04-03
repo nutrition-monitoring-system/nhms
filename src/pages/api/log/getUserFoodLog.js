@@ -1,4 +1,4 @@
-/* This route gets all the user's food logs. */
+/* This route gets all the user's food logs. This returns the user's logs as a list.*/
 import prisma from "../../../utils/prismaclientUtil";
 export default async function handler(req, res) {
   if (req.method == "GET") {
