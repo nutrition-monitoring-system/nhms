@@ -1,6 +1,7 @@
 "use client";
 import Logo from "../../components/Logo";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
@@ -114,9 +115,15 @@ function NavBar({
   return (
     <>
       <div className="z-10 bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
-        <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
+        <div className="grid grid-cols-3 p-4 md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
-          <div className="flex items-center justify-center col-span-2">
+          <div className="flex flex-wrap items-center justify-center col-span-2 md:gap-3">
+            <div className="mx-4 text-lg">
+              <Link href="/">Home</Link>
+            </div>
+            <div className="mx-4 text-lg">
+              <Link href="/blog">Blog</Link>
+            </div>
             <ProfileNavigation />
           </div>
         </div>
