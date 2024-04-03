@@ -158,6 +158,8 @@ model FoodLog {
   foodQuantity Int
 
   //This maps the relation to the logID + the food ID.
+
+  // IMPORTANT: THE FOOD ID MUST BE A ONE TO MANY RELATIONSHIP, AS USERS CAN DEFINE MULTIPLE FOODS, ONLY THE LOG IS SIGNIFICANTLY UNIQUE.
   log_logID   String @unique @db.VarChar(32)
   LogID       Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
   food_foodID String @unique @db.VarChar(32)
@@ -238,7 +240,7 @@ model Collection {
 model Recipe {
   recipeID             String                 @id @unique @db.Char(32)
   recipeName           String                 @db.VarChar(45)
-  recipeInstructions   String                @db.VarChar(500)
+  recipeInstructions   String                 @db.VarChar(500)
   recipeType           String                 @db.VarChar(20)
   cookTime             String?                @default("0 minutes") @db.VarChar(40)
   prepTime             String?                @default("0 minutes") @db.VarChar(40)
