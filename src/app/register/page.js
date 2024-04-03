@@ -14,20 +14,29 @@ import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 import { useRouter, useSearchParams } from "next/navigation";
 
 // authentication for protected routes
-import { signIn } from "next-auth/react";
+import { SessionProvider, signIn, useSession } from "next-auth/react";
 
 // form validation imports
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import userSchema from "../../utils/otherUtils";
 
-export default function Home() {
+export default function Page() {
+  return (
+    <SessionProvider>
+      <Home></Home>
+    </SessionProvider>
+  );
+}
+function Home() {
   //form validation imports
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
+  // checking the status of the user if they are logged in already or not
+  const { status } = useSession();
 
   // query parameters
   const queryParams = useSearchParams();
@@ -44,7 +53,9 @@ export default function Home() {
     parseInt(formIndex) <= 0 ? useState("0") : useState("1");
 
   // if the query is empty then add data to it
-  !formIndex && router.replace("/register?formIndex=0");
+  useEffect(() => {
+    !formIndex && router.replace("/register?formIndex=0");
+  }, []);
 
   // Function to collect additional form data Dietery Restrictions, allergies, chronic conditions, accessibility settings
   const handleCollectData = (data) => {
@@ -156,6 +167,13 @@ export default function Home() {
     // If there are form errors, reset to the initial step
     resetIndex(errors);
   }, [errors]);
+
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the home page.
+    if (status === "authenticated") {
+      router.push("/home");
+    }
+  }, [status]);
   return (
     <>
       <dialog

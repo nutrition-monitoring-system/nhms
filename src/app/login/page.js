@@ -1,11 +1,11 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
 //page authentication
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 // for form validation
 import { useForm } from "react-hook-form";
@@ -36,11 +36,11 @@ function Home() {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
+  const { status } = useSession();
+  const router = useRouter();
 
   const [timer, setTimer] = useState(10);
   const [timerId, setTimerId] = useState(null);
-
-  const router = useRouter();
 
   const modal = useRef(null);
   const handlePopUP = (e) => {
@@ -89,6 +89,13 @@ function Home() {
   const handleCountDownStart = (event) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the home page.
+    if (status === "authenticated") {
+      router.push("/home");
+    }
+  }, [status]);
   return (
     <>
       <div className="absolute inset-0 grid grid-cols-4 text-black bg-white font-opensans sm:grid-cols-1 sm:grid-rows-3">
