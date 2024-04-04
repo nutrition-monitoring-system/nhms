@@ -27,7 +27,10 @@ function Home() {
   if (status == "authenticated") {
     return (
       <>
-        <div className="flex w-screen h-screen">
+        <div className="sm:grid hidden absolute inset-0 bg-white p-2 text-lg text-center z-[1000] place-items-center">
+          The admin page is not accessibility on smaller devices at the moment
+        </div>
+        <div className="flex w-screen h-screen md:flex-col md:hidden">
           <SideNavBar />
           <MainPage />
         </div>
@@ -40,7 +43,7 @@ function Home() {
 
 const MainPageNavBar = () => {
   return (
-    <div className="grid w-full grid-cols-2 px-3 py-2 sm:grid-cols-3">
+    <div className="grid w-full grid-cols-2 px-3 py-2 md:grid-cols-1">
       <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
         Admin Dashboard
       </div>
@@ -54,7 +57,7 @@ const MainPageNavBar = () => {
 const MainPage = () => (
   <div className="flex flex-col items-center justify-center w-screen col-span-3 gap-1 p-2">
     <MainPageNavBar></MainPageNavBar>
-    <div className="grid w-full h-full grid-cols-3 gap-2 p-3 overflow-hidden bg-white rounded-lg">
+    <div className="grid w-full h-full grid-cols-3 gap-2 p-3 overflow-hidden bg-white rounded-lg md:grid-cols-1 md:grid-rows-3">
       <div className="grid grid-rows-6 gap-3 p-4 place-content-center">
         <button className="text-lg tile">
           <Image src="/icons/add.png" alt="add icon" width={20} height={20} />

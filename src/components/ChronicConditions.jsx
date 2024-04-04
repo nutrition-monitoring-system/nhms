@@ -7,6 +7,7 @@ export default function ChronicConditions({
   onClickNext,
   onClickPrev,
   handleCollectData,
+  forModal = false,
 }) {
   //Chronic conditions
   // Component to handle chronic condition selection
@@ -152,19 +153,21 @@ export default function ChronicConditions({
             );
           })}
         </div>
-        <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <div id="conditionsNext">
-            <Button
-              onClick={(event) => {
-                handleCollectData({ chronicConditions: userSelected });
-                onClickNext(event);
-              }}
-            >
-              Next
-            </Button>
+        {!forModal && (
+          <div className="grid grid-cols-2 place-items-center">
+            <Button onClick={onClickPrev}>Previous</Button>
+            <div id="conditionsNext">
+              <Button
+                onClick={(event) => {
+                  handleCollectData({ chronicConditions: userSelected });
+                  onClickNext(event);
+                }}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

@@ -8,6 +8,7 @@ export default function Accessibility({
   onClickNext,
   onClickPrev,
   handleCollectData,
+  forModal = false,
 }) {
   // Accessibility Settings
   // Component to handle Accessiblity Settings selection
@@ -121,19 +122,21 @@ export default function Accessibility({
         <p className="grid my-1 text-center opacity-50 place-items-center text-slate">
           (Please note your changes will be applied after you leave this form.)
         </p>
-        <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <div id="SettingsNext">
-            <Button
-              onClick={(event) => {
-                handleCollectData({ accessibilitySettings: userSelected });
-                onClickNext(event);
-              }}
-            >
-              Next
-            </Button>
+        {!forModal && (
+          <div className="grid grid-cols-2 place-items-center">
+            <Button onClick={onClickPrev}>Previous</Button>
+            <div id="SettingsNext">
+              <Button
+                onClick={(event) => {
+                  handleCollectData({ accessibilitySettings: userSelected });
+                  onClickNext(event);
+                }}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

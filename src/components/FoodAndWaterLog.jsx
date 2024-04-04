@@ -112,12 +112,30 @@ const FoodAndWaterLog = () => {
       });
     }
   };
+  const handleModalClose = (event, modalRef) => {
+    event.preventDefault();
+    modalRef.current.close();
+  };
   return (
     <>
       <dialog
         ref={foodModal}
-        className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
+        className="w-[35%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
       >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => handleModalClose(event, foodModal)}
+            className="tile"
+          >
+            <Image
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            close
+          </button>
+        </div>
         <div className="grid gap-1 p-2 place-items-center">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             Did you have anything today?
@@ -183,23 +201,27 @@ const FoodAndWaterLog = () => {
               />
               Add
             </button>
-            <button onClick={handleModalclose} className="tile" id="closeNext">
-              <Image
-                src="/icons/add.png"
-                alt="add symbol"
-                className="rotate-45 rounded-full"
-                width={25}
-                height={25}
-              />
-              Close
-            </button>
           </div>
         </div>
       </dialog>
       <dialog
         ref={waterModal}
-        className="w-[40%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
+        className="w-[35%] md:w-full h-fit bg-white rounded-md relative p-1"
       >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => handleModalClose(event, waterModal)}
+            className="tile"
+          >
+            <Image
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            close
+          </button>
+        </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             How much did you drink?
@@ -242,23 +264,6 @@ const FoodAndWaterLog = () => {
                 height={25}
               />
               Add
-            </button>
-            <button
-              onClick={(event) => {
-                event.preventDefault();
-                waterModal.current.close();
-              }}
-              className="tile"
-              id="closeNext"
-            >
-              <Image
-                src="/icons/add.png"
-                alt="add symbol"
-                className="rotate-45 rounded-full"
-                width={25}
-                height={25}
-              />
-              Close
             </button>
           </div>
         </div>
