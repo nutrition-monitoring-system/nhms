@@ -128,6 +128,7 @@ const FoodAndWaterLog = () => {
             className="tile"
           >
             <Image
+              alt="add image icon"
               src="/icons/add.png"
               className="rotate-45"
               width={20}
@@ -214,6 +215,7 @@ const FoodAndWaterLog = () => {
             className="tile"
           >
             <Image
+              alt="add image icon"
               src="/icons/add.png"
               className="rotate-45"
               width={20}

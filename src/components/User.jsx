@@ -212,7 +212,12 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
         </div>
         <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-3 shadow-lg h-full">
           <span className="container flex items-center justify-center w-full gap-2 text-xl">
-            <Image src={"/icons/settings.png"} width={20} height={20}></Image>
+            <Image
+              alt="settings image icon"
+              src={"/icons/settings.png"}
+              width={20}
+              height={20}
+            ></Image>
             <h1 className="font-bold text-left text-md">My Settings</h1>
           </span>
           <div className="container grid w-full grid-cols-2 grid-rows-2 gap-2 py-3">
