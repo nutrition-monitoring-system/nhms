@@ -86,19 +86,6 @@ export default function Accessibility({
             />
             None
           </button>
-          {/* <div className="p-0 tile bg-secondary">
-            <select
-              onChange={(event) => event.preventDefault()}
-              className={"bg-sky-400"}
-            >
-              <option value="">Themes</option>
-              <option value="pink" className="text-pink">
-                Pink Theme
-              </option>
-              <option value="blue">Blue Theme</option>
-            </select>
-          </div> */}
-
           {settings.map((setting, idx) => {
             return (
               <div key={idx}>

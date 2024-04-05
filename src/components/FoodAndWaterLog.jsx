@@ -120,7 +120,7 @@ const FoodAndWaterLog = () => {
     <>
       <dialog
         ref={foodModal}
-        className="w-[35%] md:w-[90%] h-fit bg-white rounded-md relative p-1"
+        className="w-[35%] md:w-[90%] h-fit bg-white rounded-md p-1"
       >
         <div className="w-full p-2">
           <button
@@ -207,7 +207,7 @@ const FoodAndWaterLog = () => {
       </dialog>
       <dialog
         ref={waterModal}
-        className="w-[35%] md:w-full h-fit bg-white rounded-md relative p-1"
+        className="w-[35%] md:w-full h-fit bg-white rounded-md p-1"
       >
         <div className="w-full p-2">
           <button
@@ -306,7 +306,7 @@ const FoodAndWaterLog = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="food" className="">
-          <div className="grid min-h-full grid-cols-2 grid-rows-2">
+          <div className="grid min-h-full grid-cols-2 grid-rows-2 gap-2">
             <div
               className="flex items-center justify-start gap-3 p-3 rounded-md shadow-md cursor-pointer "
               onClick={(event) => handleAddClick(event, "breakfast")}

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import userSchema from "../utils/otherUtils";
+import { updateUserSchema } from "../utils/otherUtils";
 
 // personal information
 export default function UserInformation() {
@@ -18,7 +18,7 @@ export default function UserInformation() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(userSchema) });
+  } = useForm({ resolver: yupResolver(updateUserSchema) });
 
   // This portion configures the input type for date and time as 'datetime'.
   // Issue: <input type="datatime"> This approach doesn't support placeholder variables.
@@ -30,6 +30,10 @@ export default function UserInformation() {
     // Change the input type to text with a placeholder "date of birth" and use a click or focus event to trigger handleclick, which will set the type back to datetime.
     event.preventDefault();
     setType("date");
+  };
+
+  const handleFormSubmit = (data) => {
+    console.log(data);
   };
 
   return (
@@ -95,28 +99,12 @@ export default function UserInformation() {
         />
         {/* Displaying the error message*/}
         <p className="text-sm text-rose-600">{errors.email?.message}</p>
-        <input
-          type={"password"}
-          placeholder={"New Password"}
-          {...register("password")} //making sure the user types the right dataype
-        />
-        {/* Displaying the error message*/}
-        <p className="text-sm text-rose-600">{errors.password?.message}</p>
-        <input
-          type={"password"}
-          placeholder={"Confirm New Password*"}
-          {...register("confirmPassword")} //making sure the user types the right dataype
-        />
-        <p className="text-sm text-rose-600">
-          {/* Displaying the error message*/}
-          {errors.confirmPassword?.message}
-        </p>
         <div
           className="flex justify-around w-full itemss-center"
           id="RestrictionsNext"
         >
           <button className="tile">My Profile</button>
-          <button className="tile" onClick={() => {}}>
+          <button className="tile" onClick={handleSubmit(handleFormSubmit)}>
             Submit
           </button>
         </div>

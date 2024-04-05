@@ -119,9 +119,13 @@ export default function Symptoms() {
         </CardContent>
 
         <CardFooter className="flex justify-end">
-          <Button onClick={onSubmit} disabled={symptoms.length === 0}>
+          <button
+            className="shadow-lg tile bg-primary"
+            onClick={onSubmit}
+            disabled={symptoms.length === 0}
+          >
             Submit
-          </Button>
+          </button>
         </CardFooter>
       </Card>
     </div>

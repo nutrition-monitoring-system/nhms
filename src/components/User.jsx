@@ -199,7 +199,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
       </PopModal>
 
       <div className="flex items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
-        <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] p-3 shadow-lg h-full">
+        <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] p-4 shadow-lg h-full">
           <span className="container flex items-center justify-center w-full gap-2 text-xl">
             <span>
               <FaRegAddressCard className="size-6" />
@@ -210,7 +210,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
           <UserData props={"calendar"}></UserData>
           <div className="expand-user-info" onClick={goToPage}></div>
         </div>
-        <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-3 shadow-lg h-full">
+        <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-4 shadow-lg h-full">
           <span className="container flex items-center justify-center w-full gap-2 text-xl">
             <Image
               alt="settings image icon"
@@ -220,7 +220,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
             ></Image>
             <h1 className="font-bold text-left text-md">My Settings</h1>
           </span>
-          <div className="container grid w-full grid-cols-2 grid-rows-2 gap-2 py-3">
+          <div className="container grid w-full grid-cols-2 gap-2 py-3">
             <button className="w-full text-sm bg-white tile hover:bg-white/75">
               <div
                 onClick={(event) => {
@@ -271,11 +271,6 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
             </button>
           </div>
         </div>
-        {/* <div className="Calendar bg-secondary rounded-md grid place-items-center h-[70%] w-[20%] px-5 py-2 shadow-lg">
-        <Link className="calendar-text" href="">
-          Calendar
-        </Link>
-      </div> */}
       </div>
     </>
   );

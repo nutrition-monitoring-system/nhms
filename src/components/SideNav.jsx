@@ -5,8 +5,8 @@ import Link from "next/link";
 
 export default function SideNavBar() {
   return (
-    <div className="w-[20%] md:w-full sidebar h-screen md:h-fit sticky top-0 md:relative ">
-      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-5 bg-black">
+    <div className="w-[20%] md:w-full sidebar h-screen md:h-fit sticky top-0 md:relative md:p-1">
+      <div className="flex flex-col items-center justify-start w-full h-full gap-4 p-5 bg-black md:rounded-lg">
         <Logo></Logo>
         <Link
           href="/blog"
