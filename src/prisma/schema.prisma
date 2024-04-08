@@ -67,20 +67,20 @@ model UserToChronicCondition {
 
 model Food {
   // This is the list of foods that are kept in the database. 
-  foodID        String   @id @unique @db.Char(32)
-  foodName      String   @db.VarChar(45)
-  isDrink       Boolean  @default(false)
-  protein       Decimal  @default(0)
-  fat           Decimal  @default(0)
-  carbohydrates Decimal  @default(0)
-  vitamins      Decimal  @default(0)
-  calcium       Decimal  @default(0)
-  iron          Decimal  @default(0)
-  potassium     Decimal  @default(0)
-  sugar         Decimal  @default(0)
-  sodium        Decimal  @default(0)
-  fibre         Decimal  @default(0)
-  FoodLog       FoodLog?
+  foodID        String    @id @unique @db.Char(32)
+  foodName      String    @db.VarChar(45)
+  isDrink       Boolean   @default(false)
+  protein       Decimal   @default(0)
+  fat           Decimal   @default(0)
+  carbohydrates Decimal   @default(0)
+  vitamins      Decimal   @default(0)
+  calcium       Decimal   @default(0)
+  iron          Decimal   @default(0)
+  potassium     Decimal   @default(0)
+  sugar         Decimal   @default(0)
+  sodium        Decimal   @default(0)
+  fibre         Decimal   @default(0)
+  FoodLog       FoodLog[]
 }
 
 model Preference {
@@ -162,7 +162,7 @@ model FoodLog {
   // IMPORTANT: THE FOOD ID MUST BE A ONE TO MANY RELATIONSHIP, AS USERS CAN DEFINE MULTIPLE FOODS, ONLY THE LOG IS SIGNIFICANTLY UNIQUE.
   log_logID   String @id @unique @db.VarChar(32)
   LogID       Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
-  food_foodID String @unique @db.VarChar(32)
+  food_foodID String @db.VarChar(32)
   foodID      Food   @relation(fields: [food_foodID], references: [foodID], onDelete: Cascade, onUpdate: Cascade)
 
   //Creates a compound ID.

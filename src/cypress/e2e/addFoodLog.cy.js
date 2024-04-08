@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-describe("This should make a request to the addCondition endpoint. ", () => {
-    let endpoint = Cypress.config("baseUrl") + "/api/log/addFoodLog";
+describe("This should make a request to the log endpoint. ", () => {
+    let endpoint = Cypress.config("baseUrl") + "/api/log/addLogEntry";
     it("This should automatically fail, due to the wrong HTTP method.", () => {
       cy.request({
         url: endpoint,

@@ -115,7 +115,7 @@ export default async function handler(req, res) {
           }
           /* Carry on with logging new food, as now new food should be valid. */
           try {
-            console.log("Creating new food entry.")
+            console.log("Creating new food entry.");
             const newLog = await prisma.log
               .create({
                 data: {
@@ -126,7 +126,6 @@ export default async function handler(req, res) {
                 },
               })
               .then(async (response) => {
-
                 /* Check if food exists or not. */
                 if (response != null) {
                   let newFoodLogEntry = await prisma.foodLog.create({
@@ -149,7 +148,36 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: "No food value(s) present." });
       } else if (keyword === "water") {
         /* Add water log items here. */
-        /* Create a new log which saves the water content. */
+
+        if (req.body.water != null) {
+          let water = req.body.water;
+          /* Create a new log which saves the water content. */
+
+          const newLog = await prisma.log
+            .create({
+              data: {
+                logID: newLogID,
+                logType: "water",
+                timestamp: timestamp,
+                user_UserID: userID,
+              },
+            })
+            .then(async (response) => {
+              /* Check if food exists or not. */
+              let newWaterLogEntry = await prisma.waterLog.create({
+                data: {
+                  log_logID: newLogID,
+                  waterAmount: water.waterAmount,
+                },
+              });
+            });
+
+          return res.status(200).json({ ok: true });
+        } else {
+          return res
+            .status(404)
+            .json({ error: "Problem with water entry entered." });
+        }
       } else {
         return res
           .status(404)
