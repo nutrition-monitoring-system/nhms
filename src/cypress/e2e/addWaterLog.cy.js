@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 describe("This should make a request to the addCondition endpoint. ", () => {
-    let endpoint = Cypress.config("baseUrl") + "/api/log/addWaterLog";
+    let endpoint = Cypress.config("baseUrl") + "/api/log/addLogEntry";
     it("This should automatically fail, due to the wrong HTTP method.", () => {
       cy.request({
         url: endpoint,
@@ -25,7 +25,8 @@ describe("This should make a request to the addCondition endpoint. ", () => {
   
     it.skip("This should fail, due to an invalid userID.", () => {
       let data = {
-        userID: "wrongID"
+        userID: "wrongID",
+        keyword: "water"
       };
       cy.request({
         url: endpoint,
