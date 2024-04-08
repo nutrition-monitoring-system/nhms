@@ -1,41 +1,47 @@
 'use client'
-import React from 'react';
+import React,  { useState }from 'react';
 import '../app/globals.css';
 import { useTable,useGlobalFilter } from 'react-table';
+import Button from './Button';
 
 
 
 function ChronicDiseaseTable() {
-    const data = React.useMemo(
-        () => [
+    const [data, setData]= useState([
+        
             {
+                id:1,
                 disease: 'diabetes',
                 blogName: 'diabetes management',
                 blogLink: 'https://example.com/diabetes-management',
             },
             {
+                id:2,
                 disease: 'hypertension',
                 blogName: 'Miraculous cure for high blood pressure',
                 blogLink: 'https://example.com/hypertension',
             },
             {
+                id:3,
                 disease: 'hypertension',
                 blogName: 'Miraculous cure for high blood pressure',
                 blogLink: 'https://example.com/hypertension',
             },{
+                id:4,
                 disease: 'hypertension',
                 blogName: 'Miraculous cure for high blood pressure',
                 blogLink: 'https://example.com/hypertension',
             }
-        ],
-        []
-    );
+    ]);
+
+    const [addingEntry, setAddingEntry] = useState(false);
+    const [newEntry, setNewEntry] = useState({ id: null, disease: '', blogName: '', blogLink: '' });
 
     const columns = React.useMemo(
         () => [
             {
                 Header: 'chronic',
-                accessor: 'disease', // 从原始数据中对应的键
+                accessor: 'disease', 
             },
             {
                 Header: 'Blog name',
@@ -46,9 +52,39 @@ function ChronicDiseaseTable() {
                 accessor: 'blogLink',
                 Cell: ({ value }) => <a href={value} style={{ textDecoration: 'underline', color: 'blue' }}>Visit blog</a>,
             },
+            {
+                Header: 'Actions',
+                id: 'actions', // Adding an ID for actions column
+                Cell: ({ row }) => (
+                    <div>
+                        {/* <Button onClick={() => editRow(row.original)}>Edit</Button> */}
+                        <Button onClick={() => deleteRow(row.original.id)}>Delete</Button>
+                    </div>
+                ),
+            },
         ],
         []
     );
+    //Handling delete
+    const deleteRow = (id) => {
+        const updatedData = data.filter((item) => item.id !== id);
+        setData(updatedData);
+    };
+
+    const addRow = () => {
+        setAddingEntry(true);
+    };
+
+    const saveNewEntry = () => {
+        const newId = data.length ? data[data.length - 1].id + 1 : 1;
+        setData([...data, { ...newEntry, id: newId }]);
+        setAddingEntry(false);
+        setNewEntry({ disease: '', blogName: '', blogLink: '' }); //重置新条目
+    };
+
+    
+   
+
 
     const {
         getTableProps,
@@ -58,7 +94,11 @@ function ChronicDiseaseTable() {
         prepareRow,
     } = useTable({ columns, data });
 
+
+
+
     return (
+        
         <table {...getTableProps()} className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
                 {headerGroups.map(headerGroup => (
@@ -69,6 +109,9 @@ function ChronicDiseaseTable() {
                     </tr>
                 ))}
             </thead>
+            
+            <Button onClick={addRow}>Add New Entry</Button>
+        
             <tbody {...getTableBodyProps()} className="bg-white divide-y divide-gray-200">
                 {rows.map(row => {
                     prepareRow(row);
@@ -80,6 +123,15 @@ function ChronicDiseaseTable() {
                         </tr>
                     );
                 })}
+
+{addingEntry && (
+                        <tr>
+                            <td><input value={newEntry.disease} onChange={(e) => setNewEntry({ ...newEntry, disease: e.target.value })} placeholder="Disease" /></td>
+                            <td><input value={newEntry.blogName} onChange={(e) => setNewEntry({ ...newEntry, blogName: e.target.value })} placeholder="Blog Name" /></td>
+                            <td><input value={newEntry.blogLink} onChange={(e) => setNewEntry({ ...newEntry, blogLink: e.target.value })} placeholder="Blog Link" /></td>
+                            <td><Button onClick={saveNewEntry}>Save</Button></td>
+                        </tr>
+                    )}
             </tbody>
         </table>
     );

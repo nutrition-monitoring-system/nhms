@@ -16,6 +16,10 @@ export default function Page() {
 }
 function Home() {
   const router = useRouter();
+  const toBlog = () => {
+    router.push('/admin/blogTable');
+  };
+
   const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -29,7 +33,7 @@ function Home() {
       <>
         <div className="w-screen h-screen flex">
           <SideNavBar/>
-          <MainPage />
+          <MainPage toBlog={toBlog} />
         </div>
       </>
     );
@@ -51,7 +55,7 @@ const MainPageNavBar = () => {
   );
 };
 
-const MainPage = () => (
+const MainPage = ({toBlog}) => (
   <div className="col-span-3 p-2 flex flex-col justify-center items-center gap-1 w-screen">
     <MainPageNavBar></MainPageNavBar>
     <div className="bg-white h-full w-full grid grid-cols-3 overflow-hidden p-3 gap-2 rounded-lg">
@@ -112,7 +116,7 @@ const MainPage = () => (
           />
           <div>Quick Search</div>
         </button>
-        <button className="tile text-lg">
+        <button className="tile text-lg" onClick={toBlog}>
           <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
           <div>Manage Blogs</div>
         </button>
