@@ -274,6 +274,7 @@ function Home() {
 
 function ButtonArray({ handleNavClick, nextButtonOpacity }) {
   // These buttons are another way of quickly changing the form index
+  //
   return (
     <>
       <div

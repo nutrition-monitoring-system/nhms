@@ -1,7 +1,16 @@
 "use client";
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-export default function PopModal({ children, showModal, setShowModal }) {
+export default function PopModal({
+  children,
+  showModal = false,
+  setShowModal,
+}) {
+  // This Function creates a pop up for that component.
+  // This function takes
+  // children -  children components(could be a jsx component or any html component)
+  // showModal - A variable that handles the close or open state of the modal popup
+  // setShowModal - Changes the state of the modal from true to false or false to true
   const modalRef = useRef();
   const handleModalClose = (event) => {
     event.preventDefault();
