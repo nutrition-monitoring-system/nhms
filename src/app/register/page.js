@@ -3,14 +3,16 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
 
+// These are multi-stage form components. They are rendered in a carousel manner.
+import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 import PersonalInformation from "@/components/PersonalInformation.jsx";
 import FoodCategories from "@/components/FoodCategories.jsx";
 import Allergies from "@/components/Allergies.jsx";
 import ChronicConditions from "@/components/ChronicConditions.jsx";
 import DailyIntake from "@/components/DailyIntake.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
-import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 
+// handles rerouting users
 import { useRouter, useSearchParams } from "next/navigation";
 
 // authentication for protected routes
@@ -22,6 +24,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import userSchema from "../../utils/otherUtils";
 
 export default function Page() {
+  // Start point of this page
+  // Uses Session to check if the user is logged in or nots
   return (
     <SessionProvider>
       <Home></Home>
@@ -29,7 +33,8 @@ export default function Page() {
   );
 }
 function Home() {
-  //form validation imports
+  // form validation imports
+  // read more of the comments in the login/page.js file
   const {
     register,
     handleSubmit,
@@ -38,15 +43,18 @@ function Home() {
   // checking the status of the user if they are logged in already or not
   const { status } = useSession();
 
-  // query parameters
+  // query parameters - Example - https://website.com/register?formIndex=0
+  // formIndex is the index of the form that the user is on.
   const queryParams = useSearchParams();
   const formIndex = queryParams.get("formIndex");
 
   // State variables using the useState hook
   const router = useRouter();
+  // we use formIndex to determine what Carousel component needs to be rerendered at the moment
   const [index, setIndex] = !formIndex
     ? useState(0)
     : useState(parseInt(formIndex));
+  // if the user is almost at the end of the registration process then we show "Almost Done" else we show "Create a new account"
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
   const [nextButtonOpacity, setNextButtonOpacity] =
@@ -75,6 +83,8 @@ function Home() {
 
   // Function to handle initial next button click
   const handleInitialNextClick = (formData) => {
+    // we set the form index to index + 1 and if the index is greater than total number of carousel components
+    // then we do not do anything.
     const numberOFSubForms = 6;
     if (index >= numberOFSubForms) {
       return;
@@ -103,6 +113,8 @@ function Home() {
 
   // Function to handle previous button click
   const handleClickPrev = (e) => {
+    // we set the form index to index + 1 and if the index is less than 0 of carousel components
+    // then we do not do anything.
     e.preventDefault();
     if (index <= 0) {
       return;
@@ -115,6 +127,7 @@ function Home() {
 
   // Function to handle the final form submission
   const handleFormSubmit = async (data) => {
+    // This gets data from the useForm API then send it to the backend when the user creates a new account
     data = {
       forename: data.firstName,
       surname: data.lastName,
@@ -260,6 +273,7 @@ function Home() {
 }
 
 function ButtonArray({ handleNavClick, nextButtonOpacity }) {
+  // These buttons are another way of quickly changing the form index
   return (
     <>
       <div

@@ -55,8 +55,6 @@ export default function Accessibility({
     SetUserSelected([...userSelected, settings[refIdx].type]);
   };
 
-  const [themeColors, setThemeColors] = useState(["#fafafa", "#e0e0e0"]);
-
   return (
     <>
       <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-1 rounded-md items-left min-h-fit">

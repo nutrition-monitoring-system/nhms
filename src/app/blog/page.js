@@ -1,16 +1,14 @@
-//import Image from 'next/image'
+// By default next js renders components on the server for performance
+// "use client" tells next js to render the code in the client side
 "use client";
 import Footer from "../../components/Footer";
 import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import NavBar from "@/components/LogoNavigationBar";
-// export const metadata = {
-//   title: "Blog",
-//   description: "Blog Page",
-// };
 
 export default function Home() {
-  //Not implemeted Yet
+  // This function describes the structure of the page
+  // The Hero header, the Main Page and the Footer
   return (
     <>
       <BlogHeaderParent></BlogHeaderParent>
@@ -21,6 +19,8 @@ export default function Home() {
 }
 
 const BlogHeaderParent = () => {
+  // Wrapping The session provider Api we have access to the session object
+  // And can check if the user is Logged in or Not
   return (
     <SessionProvider>
       <BlogHeader></BlogHeader>
@@ -29,6 +29,10 @@ const BlogHeaderParent = () => {
 };
 
 const BlogHeader = () => {
+  // Blog
+  // - NavBar
+  // - Title
+  // - Description
   return (
     <div className="relative grid h-screen text-black min-h-fit place-items-center font-opensans">
       <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%] sm:h-[70%]">
@@ -55,6 +59,7 @@ const BlogHeader = () => {
 };
 
 const BlogPage = () => {
+  // Main Blog page where a preview of the content is displayed
   return (
     <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto">
       <BlogComponent />
@@ -64,7 +69,14 @@ const BlogPage = () => {
 };
 
 const BlogComponent = () => {
-  //const date = new Date().toDateString();
+  // Note - ** The dynamic part of the code has not been implemented yet. **
+  // The Blog is not linked to the database yet so all the data displayed is static
+
+  // The Actual preview of the blog
+  // - Time
+  // - Subtile
+  // - Title
+  // - A short Description
   return (
     <ol className="relative border-gray-200 border-s dark:border-gray-700">
       <li className="mb-10 ms-4">

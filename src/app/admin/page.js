@@ -15,7 +15,9 @@ export default function Page() {
   );
 }
 function Home() {
+  // useRouter hook is use to navigate programmatically to different routes
   const router = useRouter();
+  // checking if user is authenticated or not
   const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -23,7 +25,7 @@ function Home() {
       return router.push("/login");
     },
   });
-
+  // if user is authenticated then render the admin page else render the loading component
   if (status == "authenticated") {
     return (
       <>
@@ -36,9 +38,8 @@ function Home() {
         </div>
       </>
     );
-  } else {
-    return <Loading></Loading>;
   }
+  return <Loading></Loading>;
 }
 
 const MainPageNavBar = () => {

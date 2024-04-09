@@ -50,7 +50,3 @@ export default Layout;
 ##### Additional Files
 
 In addition to the pages and the layout component, the `/app` folder may also contain other files such as `globals.css` for global styles.
-
-##### Component Linkup Diagram
-
-To show how the components in the `/app` folder link up, you can create a waterfall modal diagram. Unfortunately, I am unable to generate the diagram directly in this text-based format. However, you can use various tools to create a waterfall modal diagram, such as Lucidchart or draw.io. These tools provide a user-friendly interface to create diagrams and export them as images or embed them in your README.

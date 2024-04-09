@@ -11,6 +11,7 @@ import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
 
 export default function Page() {
+  // Using the Session Provider Api we wrap the home page so we have access to session data
   return (
     <>
       <SessionProvider>
@@ -28,7 +29,6 @@ function Home() {
   //initialise the router for conditional redirection
   const router = useRouter();
   // initialise the session.
-  //
   const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -42,6 +42,7 @@ function Home() {
   };
 
   useEffect(() => {
+    // fetch the recipes from the apis
     (function RequestRecipes() {
       fetch("/api/getRecipes")
         .then((response) => response.json())
@@ -49,6 +50,7 @@ function Home() {
     })();
   }, []);
 
+  // if user is authenticated then render the admin page else render the loading component
   if (status === "loading") {
     return <Loading />;
   }
@@ -82,13 +84,23 @@ function NavBar({
   searchInformation,
   setSearchInformation,
 }) {
+  // The navigation bar found in the home Page has buttons
+  // home, recipes, recipesCollections
+  // home button displays all the content on the page including food information, and not just recipes
+  // The collections button lets the user view all the recipes that has been added into a collection
+
+  // useRef is used to create a direct reference on almost any html element when it after it has mounted(been rendered on the screen)
   const home = useRef(null);
   const recipes = useRef(null);
   const recipesCollections = useRef(null);
-
+  // The refList is used to store all the references of the html elements
   const refList = [home, recipes, recipesCollections];
 
   const handleOnclick = (reference) => {
+    // This function is used to change the background color of the navigation bar when the user clicks on the button
+    // It just toggles the color of every button that is not active to white the black for the one that is active
+
+    // referenceIndex holds the index of the btn that is clicked
     const refIndex = refList.findIndex((refValue) => refValue === reference);
     const classes = ["bg-black", "text-white"];
     if (refIndex !== -1) {
@@ -105,9 +117,11 @@ function NavBar({
     });
     setCurrentSectionName(reference.current.innerText); // home, recipes, collections etc
   };
+  // the inputRef handles changes from the search input
   const inputRef = useRef(null);
   const handleSearch = () => {
     const searchValue = inputRef.current.value;
+    // using useState() we can dynamically change the state of the search input
     setSearchInformation(searchValue);
   };
 

@@ -1,5 +1,7 @@
 import Footer from "@/components/Footer.jsx";
-export default function Page() {
+export default function Page({ id }) {
+  // This Function Component renders different blogs based on the blog id.
+  // Check the folder structure of the parent
   return (
     <>
       <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">

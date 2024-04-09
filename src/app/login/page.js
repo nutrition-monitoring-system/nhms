@@ -31,6 +31,11 @@ export default function Page() {
   );
 }
 function Home() {
+  // React Hook form is a library that helps us to validate forms in React/Next Js
+  // useForm() gives us access to
+  // - register: to register the input fields(handles storing data)
+  // - handleSubmit: to handle the form submission
+  // - formState: to get the form state and also gives us access to errors
   const {
     register,
     handleSubmit,
@@ -39,9 +44,11 @@ function Home() {
   const { status } = useSession();
   const router = useRouter();
 
+  // this is a timer for forgot password verification.
   const [timer, setTimer] = useState(10);
   const [timerId, setTimerId] = useState(null);
 
+  // this is a modal for forgot password verification.
   const modal = useRef(null);
   const handlePopUP = (e) => {
     e.preventDefault();
@@ -59,10 +66,13 @@ function Home() {
     }, 1000);
     setTimerId(tempId);
   };
+  // this function closes the modal when it is open
   const handleClose = (e) => {
     e.preventDefault();
     modal.current.close();
   };
+  // this function is used to handle user login.
+  // it takes the user input and sends it to the NextAuth Api to check if the user record in the databse is valid or not.
   const submitForm = async (data) => {
     data = { ...data, registration: false };
     const result = await signIn("credentials", {
