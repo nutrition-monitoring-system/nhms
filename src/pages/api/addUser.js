@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       gender: gender.toUpperCase()[0], // for MALE, gender[0] = M and gender[0] = F for female
       userID: newUserID,
       password: passwordHash,
-      is_admin: Number(is_admin),
+      isAdmin: Number(is_admin),
       ...newUserData,
     };
     /* Check if a user with the same email is not already in the database. */
@@ -49,29 +49,40 @@ export default async function handler(req, res) {
     if (emailCheck == null) {
       /* Create a new user in the database. */
       console.log("New user created.");
+
       const newUser = await prisma.user.create({
         data: data,
       });
-      console.log(Allergies);
-      /* This will be changed in the new database. */
-      if (Allergies.length != 0) {
-        let allergyArray = Allergies.split(",");
-        console.log(allergyArray);
-        let allergyData = allergyArray.map((element) => {
-          return {
-            AllergiesID: v1().slice(0, 32),
-            Allergy_Type: element,
-            Alternative_Choice: "None",
-          };
-        });
-        const newAllergy = await prisma.allergies.createMany({
-          data: allergyData,
-          skipDuplicates: true,
-        });
 
-        /* In the new table, the allergies that the user has will be linked to their userID. */
+      /* Check if user added allergies. */
+      console.log(Allergies);
+      if (Allergies.length != 0) {
+        /* Split allergies into an array. */
+        let allergyData = Allergies.split(",");
+        allergyData.forEach(async (element) => {
+          /* Find each allergy in the table. */
+          const checkAllergy = await prisma.allergy
+            .findFirst({
+              where: {
+                allergyType: element,
+              },
+            })
+            .then(async (response) => {
+              // console.log(response)
+              if (response != null) {
+                /* Add the allergyID with the userID */
+                const linkAllergyToTable = await prisma.userToAllergy.create({
+                  data: { userID: newUserID, allergyID: response.allergyID },
+                });
+              }
+            });
+        });
+        console.log(`Added ${Allergies} for user ${newUserData.forename}.`)
       }
 
+      /* In the new table, the allergies that the user has will be linked to their userID. */
+
+      /* Find all the ids of the allergies using the names. */
       console.log("New user created.");
 
       // return a valid response
