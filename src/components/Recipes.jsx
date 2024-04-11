@@ -194,12 +194,22 @@ function RecipeInfo({
             Voluptatibus quia, nulla! Maiores et perferendis eaque,
             exercitationem praesentium nihil.
           </p>
-          <div className="mt-3">
-            <button
-              href="#"
-              onClick={handleAddToCollections}
-              className="flex items-center px-4 py-2 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
-            >
+          <div className="flex items-center justify-between gap-2 mt-4 md:flex-wrap">
+            <span>
+              Prep time{" "}
+              <span className="font-bold">
+                {!recipe.prep_time ? "0 minutes" : recipe.prep_time}
+              </span>
+            </span>
+            <span>
+              Cook time{" "}
+              <span className="font-bold">
+                {!recipe.cooking_time ? "0 minutes" : recipe.cooking_time}
+              </span>
+            </span>
+          </div>
+          <div className="flex items-center justify-between gap-2 mt-4 md:flex-wrap">
+            <button href="#" onClick={handleAddToCollections} className="tile">
               {recipe?.check ? "Remove from collections" : "Add to collections"}
               <svg
                 className="w-3 h-3 ms-2 rtl:rotate-180"
@@ -218,7 +228,7 @@ function RecipeInfo({
             <button
               href="#"
               onClick={() => setCurrentRecipe(recipe)}
-              className="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+              className="tile"
             >
               Learn more{" "}
               <svg
@@ -242,13 +252,6 @@ function RecipeInfo({
         <div className="px-6 pt-4 pb-2">
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
             #BreakFast
-          </span>
-          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
-            #Prep-time {!recipe.prep_time ? "0 minutes" : recipe.prep_time}
-          </span>
-          <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
-            #Cook-time{" "}
-            {!recipe.cooking_time ? "0 minutes" : recipe.cooking_time}
           </span>
         </div>
       </div>
