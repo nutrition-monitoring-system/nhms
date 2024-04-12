@@ -8,7 +8,9 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 function Home({ params }) {
+  // useRouter hook is use to navigate programmatically to different routes
   const router = useRouter();
+  // checking if user is authenticated or not
   const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -16,7 +18,7 @@ function Home({ params }) {
       return router.push("/login");
     },
   });
-
+  // if user is authenticated then render the admin page else render the loading component
   if ("loading" === status) {
     return <Loading />;
   }

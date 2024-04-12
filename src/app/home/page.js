@@ -1,6 +1,7 @@
 "use client";
 import Logo from "../../components/Logo";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
@@ -8,9 +9,9 @@ import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
-import { ref } from "yup";
 
 export default function Page() {
+  // Using the Session Provider Api we wrap the home page so we have access to session data
   return (
     <>
       <SessionProvider>
@@ -28,7 +29,6 @@ function Home() {
   //initialise the router for conditional redirection
   const router = useRouter();
   // initialise the session.
-  //
   const { session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -42,6 +42,7 @@ function Home() {
   };
 
   useEffect(() => {
+    // fetch the recipes from the apis
     (function RequestRecipes() {
       fetch("/api/getRecipes")
         .then((response) => response.json())
@@ -49,12 +50,13 @@ function Home() {
     })();
   }, []);
 
+  // if user is authenticated then render the admin page else render the loading component
   if (status === "loading") {
     return <Loading />;
   }
 
   return (
-    <div className="h-screen bg-white flex flex-col min-h-fit">
+    <div className="flex flex-col min-h-screen bg-white">
       <NavBar
         handleLogout={handleLogout}
         recipesList={recipesList}
@@ -62,7 +64,7 @@ function Home() {
         searchInformation={searchInformation}
         setSearchInformation={setSearchInformation}
       />
-      <div className="p-4 min-h-fit grid place-items-center bg-white">
+      <div className="grid bg-white h-fit place-items-center">
         <Recipes
           searchInformation={searchInformation}
           setSearchInformation={setSearchInformation}
@@ -82,13 +84,23 @@ function NavBar({
   searchInformation,
   setSearchInformation,
 }) {
+  // The navigation bar found in the home Page has buttons
+  // home, recipes, recipesCollections
+  // home button displays all the content on the page including food information, and not just recipes
+  // The collections button lets the user view all the recipes that has been added into a collection
+
+  // useRef is used to create a direct reference on almost any html element when it after it has mounted(been rendered on the screen)
   const home = useRef(null);
   const recipes = useRef(null);
   const recipesCollections = useRef(null);
-
+  // The refList is used to store all the references of the html elements
   const refList = [home, recipes, recipesCollections];
 
   const handleOnclick = (reference) => {
+    // This function is used to change the background color of the navigation bar when the user clicks on the button
+    // It just toggles the color of every button that is not active to white the black for the one that is active
+
+    // referenceIndex holds the index of the btn that is clicked
     const refIndex = refList.findIndex((refValue) => refValue === reference);
     const classes = ["bg-black", "text-white"];
     if (refIndex !== -1) {
@@ -105,38 +117,46 @@ function NavBar({
     });
     setCurrentSectionName(reference.current.innerText); // home, recipes, collections etc
   };
+  // the inputRef handles changes from the search input
   const inputRef = useRef(null);
   const handleSearch = () => {
     const searchValue = inputRef.current.value;
+    // using useState() we can dynamically change the state of the search input
     setSearchInformation(searchValue);
   };
 
   return (
     <>
-      <div className="bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
-        <div className="grid grid-cols-3 p-4 shadow-2xl md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
+      <div className="z-10 bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
+        <div className="grid grid-cols-3 p-4 md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
-          <div className="flex justify-center items-center col-span-2">
+          <div className="flex flex-wrap items-center justify-center col-span-2 md:gap-3">
+            <div className="mx-4">
+              <Link href="/">Home</Link>
+            </div>
+            <div className="mx-4">
+              <Link href="/blog">Blog</Link>
+            </div>
             <ProfileNavigation />
           </div>
         </div>
-        <div className="bg-primary flex justify-center items-center gap-1 sm:overflow-hidden sm:flex-wrap sm:p-5">
+        <div className="flex items-center justify-center gap-1 bg-primary sm:overflow-hidden sm:flex-wrap sm:p-5">
           <div
-            className="tile bg-black text-white"
+            className="text-white bg-black border-none tile"
             ref={home}
             onClick={() => handleOnclick(home)}
           >
             Home
           </div>
           <div
-            className="tile"
+            className="border-none tile"
             ref={recipes}
             onClick={() => handleOnclick(recipes)}
           >
             Recipes
           </div>
           <div
-            className="tile"
+            className="border-none tile"
             ref={recipesCollections}
             onClick={() => handleOnclick(recipesCollections)}
           >
@@ -152,7 +172,7 @@ function NavBar({
             <input
               type="text conditions"
               placeholder="Type to search recipes..."
-              className="pl-7 flex-grow"
+              className="flex-grow pl-7"
               onChange={handleSearch}
               ref={inputRef}
             />

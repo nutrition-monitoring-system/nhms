@@ -39,7 +39,7 @@ export default function PersonalInformation({
 
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-2 min-w-full p-3 rounded-md">
+      <div className="flex flex-col justify-center min-w-full gap-2 p-3 rounded-md items-left">
         <div className="flex gap-2">
           <input
             type={"text"}
@@ -53,17 +53,17 @@ export default function PersonalInformation({
             {...register("lastName", { required: true })}
           />
         </div>
-        <div className="flex gap-2 justify-between">
+        <div className="flex justify-between gap-2">
           {/* Displaying the error message*/}
-          <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
-          <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
+          <p className="text-sm text-rose-600">{errors.firstName?.message}</p>
+          <p className="text-sm text-rose-600">{errors.lastName?.message}</p>
         </div>
-        <div className="relative h-fit py-7 shadow-sm rounded-lg">
+        <div className="relative rounded-lg shadow-sm h-fit py-7">
           <select
             {...register("gender", { required: "Gender is required" })} //making sure the user types the right datatype
             className="absolute inset-0"
           >
-            <option className="opacity-70 font-semibold" value="">
+            <option className="font-semibold opacity-70" value="">
               Select a gender*
             </option>
             <option className="pl-3" value="male">
@@ -77,9 +77,9 @@ export default function PersonalInformation({
             </option>
           </select>
         </div>
-        <p className="text-rose-600 text-sm">{errors.gender?.message}</p>{" "}
+        <p className="text-sm text-rose-600">{errors.gender?.message}</p>{" "}
         {/* Displaying the error message*/}
-        <div className="relative flex sm:py-7 shadow-sm rounded-md">
+        <div className="relative flex rounded-md shadow-sm sm:py-7">
           <input
             placeholder={"Date of Birth*"}
             type={type}
@@ -89,32 +89,32 @@ export default function PersonalInformation({
           />
         </div>
         {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.date?.message}</p>
+        <p className="text-sm text-rose-600">{errors.date?.message}</p>
         <input
           type={"text"}
           placeholder={"Email Address*"}
           {...register("email", { required: true })} //making sure the user types the right dataype
         />
         {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.email?.message}</p>
+        <p className="text-sm text-rose-600">{errors.email?.message}</p>
         <input
           type={"password"}
           placeholder={"Password*"}
           {...register("password", { required: true })} //making sure the user types the right dataype
         />
         {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.password?.message}</p>
+        <p className="text-sm text-rose-600">{errors.password?.message}</p>
         <input
           type={"password"}
           placeholder={"Confirm Password*"}
           {...register("confirmPassword", { required: true })} //making sure the user types the right dataype
         />
-        <p className="text-rose-600 text-sm">
+        <p className="text-sm text-rose-600">
           {/* Displaying the error message*/}
           {errors.confirmPassword?.message}
         </p>
         <div
-          className="w-full flex justify-around items-center"
+          className="flex items-center justify-around w-full"
           id="RestrictionsNext"
         >
           <Button onClick={onClickPrev}>Previous</Button>
