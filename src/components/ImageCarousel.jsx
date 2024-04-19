@@ -80,13 +80,13 @@ export default function ImageCarousel() {
   };
 
   return (
-    <div className="flex gap-4 place-content-center w-full bg-gray-100 p-2 h-fit">
-      <div className="w-[90%] xl:w-[70%] grid grid-cols-2 sm:grid-cols-1 gap-2 text-black p-2">
+    <div className="flex w-full gap-4 p-2 bg-gray-100 place-content-center h-fit">
+      <div className="w-[90%] xl:w-[70%] grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-2 text-black p-2">
         <Carousel slide={false}>
           {images.map((image) => (
             <div
               key={image.id}
-              className="relative flex h-full items-center justify-center bg-primary text-black"
+              className="relative flex items-center justify-center h-full text-black bg-primary"
             >
               <Image src={image.url} fill={true} alt={`Image ${image.id}`} />
               <div className="absolute top-2 right-[30%] flex space-x-2">
@@ -94,15 +94,15 @@ export default function ImageCarousel() {
                   <>
                     <button
                       onClick={() => deleteImage(image.id)}
-                      className="p-2 text-white bg-red-600 rounded-full focus:outline-none focus:ring"
+                      className="p-2 text-white rounded-full bg-rose-600 focus:outline-none focus:ring"
                     >
-                      <FaTrash className="h-6 w-6" />
+                      <FaTrash className="w-6 h-6" />
                     </button>
                     <button
                       onClick={() => replaceImage(image.id)}
-                      className="p-2 text-white bg-blue-600 rounded-full focus:outline-none focus:ring"
+                      className="p-2 text-white rounded-full bg-sky-600 focus:outline-none focus:ring"
                     >
-                      <FaPencilAlt className="h-6 w-6" />
+                      <FaPencilAlt className="w-6 h-6" />
                     </button>
                   </>
                 )}

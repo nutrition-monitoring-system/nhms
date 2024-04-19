@@ -11,6 +11,7 @@ import {
   FaBlog,
   FaCamera,
   FaPencilAlt,
+  FaBars,
 } from "react-icons/fa";
 import {
   MdSettings,
@@ -18,14 +19,17 @@ import {
   MdLocalDrink,
   MdDining,
 } from "react-icons/md";
-import ChartComponent from "../components/UserCharts.jsx";
-import Logo from "../components/Logo";
 import useSWR from "swr";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import FileUpload from "../components/fileUpload";
 import ImageCarousel from "./ImageCarousel";
 import SideNavBar from "./SideNav.jsx";
+import PopModal from "./PopUp.jsx";
+
+import ChronicConditions from "@/components/ChronicConditions.jsx";
+import Accessibility from "@/components/Accessibility.jsx";
+import UserInformation from "./UpdateUserInformation";
+import Symptoms from "./Symptoms";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -60,14 +64,14 @@ function UserData({ props }) {
   }
   if (props == "calendar") {
     return (
-      <div className="container space-y-5 py-3">
+      <div className="container py-3 space-y-5">
         <h1
           id="generatedData"
-          className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white"
+          className="p-3 bg-white rounded-sm outline-white outline-2 outline outline-offset-2"
         >
           Name: {data.name} {data.surname}
         </h1>
-        <p className="outline-white outline-2 outline outline-offset-2 p-1 rounded-sm bg-white">
+        <p className="p-3 bg-white rounded-sm outline-white outline-2 outline outline-offset-2">
           Email: {session.user.email}
         </p>
       </div>
@@ -76,7 +80,7 @@ function UserData({ props }) {
     /* Checks if the props are a navbar. */
     const dob = new Date(data.dob);
     return (
-      <div className="container">
+      <div className="container text-lg">
         <div className="grid grid-cols-3">
           <span id="user-name" className="col-span-2">
             {data.name} {data.surname}
@@ -141,27 +145,24 @@ export default function User({ handsignOut }) {
     signOut();
   };
 
-  const goToPage = () => {
-    const router = useRouter();
-    router.push("/home");
-  };
-  const goToPage2 = () => {
-    const router = useRouter();
-    router.push("/");
-  };
+  const handleShowNavBar = () => {};
 
   return (
-    <div className="body flex">
-      <SideNavBar></SideNavBar>
-      <div className="grid grid-cols-1 grid-rows-5 overflow-hidden w-full xl-[95%]">
-        <TopInformation></TopInformation>
+    <div className="flex body md:flex-col">
+      <SideNavBar handleShowNavBar={handleShowNavBar}></SideNavBar>
+      <div className="grid grid-cols-1 grid-rows-3 overflow-hidden w-full xl-[95%]">
+        <TopInformation
+          avatar={avatar}
+          handleAvatarChange={handleAvatarChange}
+          confirmLogout={confirmLogout}
+        ></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
-        {/* <div className="flex gap-4 container place-content-center w-full bg-gray-100"> */}
-        {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
         <ImageCarousel></ImageCarousel>
+        {/* <div className="container flex w-full gap-4 bg-gray-100 place-content-center"> */}
+        {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
         {/* <Log></Log> */}
         {/* </div> */}
-        <CreateHealthRecordForm></CreateHealthRecordForm>
+        {/* <CreateHealthRecordForm></CreateHealthRecordForm> */}
         {/* <ChartComponent /> */}
       </div>
     </div>
@@ -169,83 +170,121 @@ export default function User({ handsignOut }) {
 }
 
 function HealthAndUserSettings({ userInfo, goToPage }) {
-  return (
-    <div className="bg-white calendar-health flex justify-center items-center gap-4 p-3">
-      <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] p-3 shadow-lg h-full">
-        <span className="place-self-start container flex place-content-between w-full">
-          <h1 className="text-md font-bold text-left">Health Information:</h1>
-          <span>
-            <FaRegAddressCard className="size-6" />
-          </span>
-        </span>
+  const [show, setShow] = useState(false);
+  const [modalType, setModalType] = useState(<></>);
+  const showModal = (modalType) => {
+    setShow(true);
+    if (modalType === "accessibility") {
+      setModalType(<Accessibility forModal={true} />);
+      return;
+    }
+    if (modalType === "chronicConditions") {
+      setModalType(<ChronicConditions forModal={true} />);
+      return;
+    }
+    if (modalType === "updateUserInformation") {
+      setModalType(<UserInformation />);
+      return;
+    }
 
-        <UserData props={"calendar"}></UserData>
-        {/* <p>Health information</p>
-        <p>Name: {userInfo.name}</p>
-        <p>Email: {userInfo.email}</p> */}
-        <div className="expand-user-info" onClick={goToPage}></div>
-      </div>
-      {/* <div className="Calendar bg-secondary rounded-md grid place-items-center h-[70%] w-[20%] px-5 py-2 shadow-lg">
-        <Link className="calendar-text" href="">
-          Calendar
-        </Link>
-      </div> */}
-      <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[50%] max-w-max p-3 shadow-lg h-full">
-        <h1 className="text-md font-bold text-left place-self-start">
-          {"My Settings: "}
-        </h1>
-        <div className="container grid grid-cols-2 grid-rows-2 py-3 gap-2 w-full">
-          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
-            <Link
-              href={"/404"}
-              className="flex content-center items-center justify-start w-full gap-2"
-            >
-              <FaUserAlt className="size-6" />
-              <span className="text-left">User Information</span>
-            </Link>
-          </button>
-          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
-            <Link
-              href={"/404"}
-              className="flex content-center items-center justify-start w-full gap-2"
-            >
-              <FaAccessibleIcon className="size-6" />
-              <span className="text-left">Accessibility Settings</span>
-            </Link>
-          </button>
-          <button className="tile bg-white text-sm hover:bg-white/75 ">
-            <Link
-              href={"/symptoms"}
-              className="flex content-center items-center justify-start w-full gap-2"
-            >
-              <FaPills className="size-6" />
-              <span className="text-left">Symptoms</span>
-            </Link>
-          </button>
-          <button className="tile bg-white text-sm  hover:bg-white/75 w-full">
-            <Link
-              href={"/404"}
-              className="flex content-center items-center justify-start w-full gap-2"
-            >
-              <MdLocalHospital className="size-6" />
-              <span className="text-left">Chronic Conditions</span>
-            </Link>
-          </button>
+    if (modalType === "symptoms") {
+      setModalType(<Symptoms />);
+      return;
+    }
+  };
+  return (
+    <>
+      <PopModal showModal={show} setShowModal={setShow}>
+        {modalType}
+      </PopModal>
+
+      <div className="flex items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
+        <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] p-4 shadow-lg h-full">
+          <span className="container flex items-center justify-center w-full gap-2 text-xl">
+            <span>
+              <FaRegAddressCard className="size-6" />
+            </span>
+            <h1 className="font-bold text-left text-md">Health Information</h1>
+          </span>
+
+          <UserData props={"calendar"}></UserData>
+          <div className="expand-user-info" onClick={goToPage}></div>
+        </div>
+        <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-4 shadow-lg h-full">
+          <span className="container flex items-center justify-center w-full gap-2 text-xl">
+            <Image
+              alt="settings image icon"
+              src={"/icons/settings.png"}
+              width={20}
+              height={20}
+            ></Image>
+            <h1 className="font-bold text-left text-md">My Settings</h1>
+          </span>
+          <div className="container grid w-full grid-cols-2 gap-2 py-3">
+            <button className="w-full text-sm bg-white tile hover:bg-white/75">
+              <div
+                onClick={(event) => {
+                  event.preventDefault();
+                  showModal("updateUserInformation");
+                }}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <FaUserAlt className="size-6" />
+                <span className="text-left">User Information</span>
+              </div>
+            </button>
+            <button className="w-full text-sm bg-white tile hover:bg-white/75">
+              <div
+                onClick={(event) => {
+                  event.preventDefault();
+                  showModal("accessibility");
+                }}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <FaAccessibleIcon className="size-6" />
+                <span className="text-left">Accessibility Settings</span>
+              </div>
+            </button>
+            <button className="text-sm bg-white tile hover:bg-white/75 ">
+              <div
+                onClick={(event) => {
+                  event.preventDefault();
+                  showModal("symptoms");
+                }}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <FaPills className="size-6" />
+                <span className="text-left">Symptoms</span>
+              </div>
+            </button>
+            <button className="w-full text-sm bg-white tile hover:bg-white/75">
+              <div
+                onClick={(event) => {
+                  event.preventDefault();
+                  showModal("chronicConditions");
+                }}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <MdLocalHospital className="size-6" />
+                <span className="text-left">Chronic Conditions</span>
+              </div>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
 function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   return (
-    <div className="bg-gray-100 grid grid-cols-2 gap-3 justify-center items-center px-6 py-3">
-      <div className="user-info p-5 flex justify-center items-center gap-4">
-        <div className="user-avatar relative grid justify-center p-1 min-h-fit rounded-lg">
+    <div className="grid items-center justify-center grid-cols-2 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
+      <div className="flex items-center justify-center gap-1 py-6 user-info px-7 md:bg-white md:rounded-lg md:shadow-lg md:order-last">
+        <div className="relative grid justify-center p-1 rounded-lg user-avatar min-h-fit">
           <Image
             className="rounded-[50px] shadow-lg"
-            width={100}
-            height={100}
+            width={150}
+            height={150}
             id="avatar"
             src={avatar}
             alt="user-avatar"
@@ -277,15 +316,13 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   );
 }
 
-
-
 function PhotoLog({ photo, handlePhoto }) {
   const months = ["Jan", "Feb", "Mar", "Apr", "May"];
   return (
     <div className=" photo flex justify-center items-center gap-4 w-[50%]">
       {/* <div className="relative bg-white photo-bar rounded-md grid place-items-center h-[70%] px-7 py-2 shadow-lg">
         <p>Initial</p>
-        <FaCamera className="camera text-center" />
+        <FaCamera className="text-center camera" />
       </div> */}
       <ImageCarousel></ImageCarousel>
       {/* {months.map((item, idx) => (
@@ -306,13 +343,13 @@ function PhotoLog({ photo, handlePhoto }) {
 // function Log() {
 //   return (
 //     <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3 gap-2">
-//       <button className="log-bar bg-white flex space-x-3 px-5 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+//       <button className="flex w-full px-5 py-2 space-x-3 bg-white rounded-md shadow-lg log-bar hover:bg-white/75">
 //         <MdDining className="size-6" />
-//         <p className="text-left w-full">Food Log</p>
+//         <p className="w-full text-left">Food Log</p>
 //       </button>
-//       <button className="log-bar bg-white flex px-5 space-x-3 py-2 shadow-lg w-full rounded-md  hover:bg-white/75">
+//       <button className="flex w-full px-5 py-2 space-x-3 bg-white rounded-md shadow-lg log-bar hover:bg-white/75">
 //         <MdLocalDrink className="size-6" />
-//         <p className="text-left w-full">Water Log</p>
+//         <p className="w-full text-left">Water Log</p>
 //       </button>
 //       <FileUpload></FileUpload>
 //     </div>
@@ -328,7 +365,7 @@ function CreateHealthRecordForm() {
   ];
 
   return (
-    <div className=" flex justify-center items-center gap-4">
+    <div className="flex items-center justify-center gap-4 ">
       {items.map((item, index) => (
         <div
           key={index}

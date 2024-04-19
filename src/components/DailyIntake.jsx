@@ -15,16 +15,16 @@ export default function DailyIntake({ onClickNext, onClickPrev }) {
         <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Did you have anything today?
         </h1>
-        <div className="grid grid-rows-3 grid-cols-1 p-1 rounded-md">
-          <div className="rounded-md shadow-lg p-2 row-span-2">
+        <div className="grid grid-cols-1 grid-rows-3 p-1 rounded-md">
+          <div className="row-span-2 p-2 rounded-md shadow-lg">
             <FoodAndWaterLog />
           </div>
-          <div className="bg-primarylight rounded-md flex flex-col p-3 shadow-lg my-1">
+          <div className="flex flex-col p-3 my-1 rounded-md shadow-lg bg-primarylight">
             <div className="flex items-center justify-around gap-3">
               <h1>Mood</h1>
               <h1>Exercise</h1>
             </div>
-            <div className="min-w-full p-1 flex justify-around items-center gap-3">
+            <div className="flex items-center justify-around min-w-full gap-3 p-1">
               <div
                 className="aspect-[1/1] w-[70px] rounded-md bg-white shadow-lg grid place-items-center cursor-pointer outline-primary outline-2 outline-offset-[-10px]"
                 onClick={

@@ -1,5 +1,3 @@
-"use client";
-import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
@@ -32,11 +30,11 @@ export default function ProfileNavigation() {
   if (data) {
     return (
       <>
-        <div className="flex justify-around items-center gap-3 py-2 px-3">
+        <div className="flex items-center justify-around gap-3 px-3 py-2">
           <Link
             href={"/user"}
             id="Profile"
-            className="tile shadow-none hover:shadow-none"
+            className="shadow-none tile hover:shadow-none"
           >
             <Image
               src={data.gender === "F" ? "/icons/woman.png" : "/icons/man.png"}
@@ -45,7 +43,7 @@ export default function ProfileNavigation() {
               alt="Person icon"
               className="ml-2 rounded-[50px]"
             />
-            <span className="shadow-none text-lg">
+            <span className="text-lg shadow-none">
               {data.name + " " + data.surname}
             </span>
           </Link>
@@ -65,7 +63,7 @@ export default function ProfileNavigation() {
           </Link>
         </div>
       </>
-
     );
   }
+  return <></>;
 }

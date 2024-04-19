@@ -3,48 +3,67 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
 
+// These are multi-stage form components. They are rendered in a carousel manner.
+import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 import PersonalInformation from "@/components/PersonalInformation.jsx";
 import FoodCategories from "@/components/FoodCategories.jsx";
 import Allergies from "@/components/Allergies.jsx";
 import ChronicConditions from "@/components/ChronicConditions.jsx";
 import DailyIntake from "@/components/DailyIntake.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
-import TermsAndConditions from "@/components/TermsAndConditions.jsx";
 
+// handles rerouting users
 import { useRouter, useSearchParams } from "next/navigation";
 
 // authentication for protected routes
-import { signIn } from "next-auth/react";
+import { SessionProvider, signIn, useSession } from "next-auth/react";
 
 // form validation imports
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import userSchema from "../../utils/otherUtils";
 
-export default function Home() {
-  //form validation imports
+export default function Page() {
+  // Start point of this page
+  // Uses Session to check if the user is logged in or nots
+  return (
+    <SessionProvider>
+      <Home></Home>
+    </SessionProvider>
+  );
+}
+function Home() {
+  // form validation imports
+  // read more of the comments in the login/page.js file
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
+  // checking the status of the user if they are logged in already or not
+  const { status } = useSession();
 
-  // query parameters
+  // query parameters - Example - https://website.com/register?formIndex=0
+  // formIndex is the index of the form that the user is on.
   const queryParams = useSearchParams();
   const formIndex = queryParams.get("formIndex");
 
   // State variables using the useState hook
   const router = useRouter();
+  // we use formIndex to determine what Carousel component needs to be rerendered at the moment
   const [index, setIndex] = !formIndex
     ? useState(0)
     : useState(parseInt(formIndex));
+  // if the user is almost at the end of the registration process then we show "Almost Done" else we show "Create a new account"
   const [title, setTitle] = useState("Create a new account: ");
   const [otherFormData, setOtherFormData] = useState({});
   const [nextButtonOpacity, setNextButtonOpacity] =
     parseInt(formIndex) <= 0 ? useState("0") : useState("1");
 
   // if the query is empty then add data to it
-  !formIndex && router.replace("/register?formIndex=0");
+  useEffect(() => {
+    !formIndex && router.replace("/register?formIndex=0");
+  }, []);
 
   // Function to collect additional form data Dietery Restrictions, allergies, chronic conditions, accessibility settings
   const handleCollectData = (data) => {
@@ -64,6 +83,8 @@ export default function Home() {
 
   // Function to handle initial next button click
   const handleInitialNextClick = (formData) => {
+    // we set the form index to index + 1 and if the index is greater than total number of carousel components
+    // then we do not do anything.
     const numberOFSubForms = 6;
     if (index >= numberOFSubForms) {
       return;
@@ -92,6 +113,8 @@ export default function Home() {
 
   // Function to handle previous button click
   const handleClickPrev = (e) => {
+    // we set the form index to index + 1 and if the index is less than 0 of carousel components
+    // then we do not do anything.
     e.preventDefault();
     if (index <= 0) {
       return;
@@ -104,6 +127,7 @@ export default function Home() {
 
   // Function to handle the final form submission
   const handleFormSubmit = async (data) => {
+    // This gets data from the useForm API then send it to the backend when the user creates a new account
     data = {
       forename: data.firstName,
       surname: data.lastName,
@@ -156,11 +180,18 @@ export default function Home() {
     // If there are form errors, reset to the initial step
     resetIndex(errors);
   }, [errors]);
+
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the home page.
+    if (status === "authenticated") {
+      router.push("/home");
+    }
+  }, [status]);
   return (
     <>
       <dialog
         ref={loadingRef}
-        className="bg-none bg-transparent outline-none border-none overflow-hidden min-h-fit min-w-fit"
+        className="overflow-hidden bg-transparent border-none outline-none bg-none min-h-fit min-w-fit"
       >
         <Image
           src="/icons/loading.png"
@@ -171,15 +202,15 @@ export default function Home() {
         />
         <div className="font-semibold">loading...</div>
       </dialog>
-      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans min-h-screen h-fit sm:grid-cols-1 sm:grid-rows-4">
-        <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2 sm:gap-2">
+      <div className="absolute inset-0 grid min-h-screen grid-cols-4 text-black bg-white font-opensans h-fit sm:grid-cols-1 sm:grid-rows-4">
+        <div className="flex flex-col items-center justify-center gap-4 pl-4 pr-2 bg-primary sm:gap-2">
           <h1 className="font-extrabold text-[20px]">Welcome back!</h1>
           <p className="text-center">
             Sign in to unlock a world of nutrition opportunities!
           </p>
           <Button href={"/login"}>Login</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-2 sm:row-span-3">
+        <div className="flex flex-col items-center justify-center col-span-3 gap-2 text-black sm:row-span-3">
           <h1 className="font-black text-[20px] font-modak text-center w-1/2 leading-10 sm:w-3/4">
             {title}
           </h1>
@@ -242,10 +273,12 @@ export default function Home() {
 }
 
 function ButtonArray({ handleNavClick, nextButtonOpacity }) {
+  // These buttons are another way of quickly changing the form index
+  //
   return (
     <>
       <div
-        className="flex justify-center items-center flex-wrap gap-3 transition-all delay-100"
+        className="flex flex-wrap items-center justify-center gap-3 transition-all delay-100"
         style={{ opacity: nextButtonOpacity }}
       >
         <button

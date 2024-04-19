@@ -8,15 +8,16 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   images: {
+    domains: ["monikagostic.com"],
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'encrypted-tbn0.gstatic.com',
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
       },
       {
         protocol: "https",
-        hostname: 'flowbite.com'
-      }
+        hostname: "flowbite.com",
+      },
     ],
   },
 };
