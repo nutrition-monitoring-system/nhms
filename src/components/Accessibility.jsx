@@ -8,6 +8,7 @@ export default function Accessibility({
   onClickNext,
   onClickPrev,
   handleCollectData,
+  forModal = false,
 }) {
   // Accessibility Settings
   // Component to handle Accessiblity Settings selection
@@ -56,7 +57,7 @@ export default function Accessibility({
 
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit rounded-md flex-1 p-1">
+      <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-1 rounded-md items-left min-h-fit">
         <h1 className="grid place-items-center text-secondary text-center font-extrabold text-[1.3rem]">
           Accessibility Settings
         </h1>
@@ -65,10 +66,10 @@ export default function Accessibility({
           <input
             type="text"
             placeholder="Type to add or search"
-            className="pl-7 flex-grow"
+            className="flex-grow pl-7"
           />
         </div>
-        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+        <div className="flex flex-wrap items-center justify-center w-full gap-2 min-h-fitrounded-md">
           <button
             className="tile bg-secondary"
             onClick={handleNone}
@@ -103,22 +104,24 @@ export default function Accessibility({
             );
           })}
         </div>
-        <p className="grid place-items-center text-slate text-center opacity-50 my-1">
+        <p className="grid my-1 text-center opacity-50 place-items-center text-slate">
           (Please note your changes will be applied after you leave this form.)
         </p>
-        <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <div id="SettingsNext">
-            <Button
-              onClick={(event) => {
-                handleCollectData({ accessibilitySettings: userSelected });
-                onClickNext(event);
-              }}
-            >
-              Next
-            </Button>
+        {!forModal && (
+          <div className="grid grid-cols-2 place-items-center">
+            <Button onClick={onClickPrev}>Previous</Button>
+            <div id="SettingsNext">
+              <Button
+                onClick={(event) => {
+                  handleCollectData({ accessibilitySettings: userSelected });
+                  onClickNext(event);
+                }}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

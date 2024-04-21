@@ -1,22 +1,25 @@
 "use client";
 import { useState } from "react";
-import Button from "@/components/Button";
-export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
+import Link from "next/link";
+export default function TermsAndConditions({ onClickPrev, onClickNext }) {
   const [termsConditions, setTermsConditions] = useState(false);
   const [shareHealthDate, setShareHealthData] = useState(false);
   return (
     <>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
+      <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-2 rounded-md items-left min-h-fit">
         <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Data Consent
         </h1>
-        <div className="h-1/2 w-full flex justify-center items-center gap-2 flex-col">
+        <p className="grid my-1 text-left opacity-50 place-items-center text-slate">
+          Please check the boxes before if you agree to continue
+        </p>
+        <div className="flex flex-col items-center justify-center w-full gap-2 h-1/2">
           <div className="flex">
-            <div className="grid place-items-center p-5">
+            <div className="grid p-5 place-items-center">
               <input
                 type="checkbox"
-                id="termsCheckbox"
-                name="termsCheckbox"
+                id="terms-privacy"
+                name="terms-privacy"
                 value={termsConditions ? "1" : "0"}
                 onChange={() => setTermsConditions((prev) => !prev)}
               />
@@ -35,12 +38,12 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
             </p>
           </div>
           <div className="flex">
-            <div className="grid place-items-center p-5">
+            <div className="grid p-5 place-items-center">
               <input
                 className="w-10"
                 type="checkbox"
-                id="healthDataCheckbox"
-                name="healthDataCheckbox"
+                id="sharing-data"
+                name="sharing-data"
                 value={shareHealthDate ? "1" : "0"}
                 onChange={() => setShareHealthData((prev) => !prev)}
               />
@@ -52,17 +55,24 @@ export default function TermsAndConditions({ onClickPrev, handleSubmit }) {
             </p>
           </div>
         </div>
-        <div className="w-full flex justify-around items-center ">
-          <Button onClick={onClickPrev}>previous</Button>
-          <Button
+        <div className="flex items-center justify-around w-full ">
+          <Link href={"/"} className="tile">
+            Home
+          </Link>
+          <button
+            id="register-next"
+            className="tile"
             onClick={(event) =>
               termsConditions && shareHealthDate
-                ? handleSubmit()
+                ? (function () {
+                    event.preventDefault();
+                    onClickNext();
+                  })()
                 : event.preventDefault()
             }
           >
-            Finish
-          </Button>
+            Next
+          </button>
         </div>
       </div>
     </>

@@ -197,21 +197,21 @@ function ChartComponent() {
       <div className="grid p-5 m-2 text-lg font-extrabold text-center">
         User Analytics
       </div>
-      <div className="w-full flex justify-center items-center gap-3 p-2 text-center">
-        <button onClick={() => setOption(option4)} className="tile bg-gray-100">
+      <div className="flex items-center justify-center w-full gap-3 p-2 text-center">
+        <button onClick={() => setOption(option4)} className="bg-gray-100 tile">
           Bar chart
         </button>
-        <button onClick={() => setOption(option1)} className="tile bg-gray-100">
+        <button onClick={() => setOption(option1)} className="bg-gray-100 tile">
           Pie chart
         </button>
-        <button onClick={() => setOption(option2)} className="tile bg-gray-100">
+        <button onClick={() => setOption(option2)} className="bg-gray-100 tile">
           Line chart
         </button>
-        <button onClick={() => setOption(option3)} className="tile bg-gray-100">
+        <button onClick={() => setOption(option3)} className="bg-gray-100 tile">
           Bar chart
         </button>
       </div>
-      <div className="h-screen grid place-items-center">
+      <div className="grid h-screen place-items-center">
         <ReactEcharts
           option={option}
           style={{ height: "500px", width: "60%" }}

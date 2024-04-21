@@ -1,6 +1,5 @@
 //import Image from 'next/image'
 import Header from "../components/Header";
-import Information from "../components/Information";
 import Footer from "../components/Footer";
 import Offer from "../components/Offer.jsx";
 import Coach from "../components/Coach.jsx";
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Information />
       <Coach />
       <Offer />
       <Footer />

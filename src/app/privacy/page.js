@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 export default function Page() {
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <Logo />
       </div>
       <Privacy />
@@ -16,7 +16,7 @@ export default function Page() {
 function Privacy() {
   return (
     <div className="mx-[25%] font-opensans">
-      <h1 className="font-bold text-lg m-3 text-center">
+      <h1 className="m-3 text-lg font-bold text-center">
         Privacy Policy for Nutrition and Health Monitoring System
       </h1>
 
@@ -43,7 +43,7 @@ function Privacy() {
         Privacy Policy, do not hesitate to contact us.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         General Data Protection Regulation (GDPR)
       </h2>
       <p>{`We are a Data Controller of your information.`}</p>
@@ -102,7 +102,7 @@ function Privacy() {
         <li>The right to withdraw consent.</li>
       </ul>
 
-      <h2 className="font-bold text-lg m-3 text-center">Log Files</h2>
+      <h2 className="m-3 text-lg font-bold text-center">Log Files</h2>
 
       <p>{`
         nhms follows a standard procedure of using log files. These files log
@@ -116,7 +116,7 @@ function Privacy() {
         the website, and gathering demographic information.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         Cookies and Web Beacons
       </h2>
 
@@ -128,7 +128,7 @@ function Privacy() {
         on visitors' browser type and/or other information.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">Privacy Policies</h2>
+      <h2 className="m-3 text-lg font-bold text-center">Privacy Policies</h2>
 
       <p>{`
         You may consult this list to find the Privacy Policy for each of the
@@ -150,7 +150,7 @@ function Privacy() {
         used by third-party advertisers.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         Third Party Privacy Policies
       </h2>
 
@@ -169,7 +169,7 @@ function Privacy() {
         websites.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         {`Children's Information`}
       </h2>
 
@@ -189,7 +189,7 @@ function Privacy() {
         remove such information from our records.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         Online Privacy Policy Only
       </h2>
 
@@ -200,7 +200,7 @@ function Privacy() {
         information collected offline or via channels other than this website.
       `}</p>
 
-      <h2 className="font-bold text-lg m-3 text-center">Consent</h2>
+      <h2 className="m-3 text-lg font-bold text-center">Consent</h2>
 
       <p>{`
         By using our website, you hereby consent to our Privacy Policy and agree

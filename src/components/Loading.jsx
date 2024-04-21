@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Loading() {
   return (
-    <div className="bg-none flex dark:bg-black flex-col gap-7 justify-center items-center absolute inset-0">
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-none dark:bg-black gap-7">
       <Image
         src="/icons/loading.png"
         width={100}
@@ -9,7 +9,7 @@ export default function Loading() {
         className="animate-spin"
         alt="Loading Image"
       />
-      <div className="text-center dark:text-white text-3xl">Loading...</div>
+      <div className="text-3xl text-center dark:text-white">Loading...</div>
     </div>
   );
 }
