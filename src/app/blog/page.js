@@ -1,20 +1,14 @@
-//import Image from 'next/image'
+// By default next js renders components on the server for performance
+// "use client" tells next js to render the code in the client side
 "use client";
 import Footer from "../../components/Footer";
-import Logo from "../../components/Logo";
-import { signOut, useSession } from "next-auth/react";
 import { SessionProvider } from "next-auth/react";
-import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
-import ProfileNavigation from "@/components/ProfileNavigation";
-// export const metadata = {
-//   title: "Blog",
-//   description: "Blog Page",
-// };
+import NavBar from "@/components/LogoNavigationBar";
 
 export default function Home() {
-  //Not implemeted Yet
+  // This function describes the structure of the page
+  // The Hero header, the Main Page and the Footer
   return (
     <>
       <BlogHeaderParent></BlogHeaderParent>
@@ -25,6 +19,8 @@ export default function Home() {
 }
 
 const BlogHeaderParent = () => {
+  // Wrapping The session provider Api we have access to the session object
+  // And can check if the user is Logged in or Not
   return (
     <SessionProvider>
       <BlogHeader></BlogHeader>
@@ -33,9 +29,13 @@ const BlogHeaderParent = () => {
 };
 
 const BlogHeader = () => {
+  // Blog
+  // - NavBar
+  // - Title
+  // - Description
   return (
-    <div className="h-screen min-h-fit relative text-black grid place-items-center font-opensans">
-      <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%]">
+    <div className="relative grid h-screen text-black min-h-fit place-items-center font-opensans">
+      <div className="absolute flex bg-primary justify-center items-center flex-col inset-x-0 top-0 min-h-fit h-[85%] sm:h-[70%]">
         <NavBar></NavBar>
         <div className="text-center grid place-items-center min-h-fit h-full p-2 sm:p-0 translate-y-[-50px] animate-enter">
           <h1
@@ -49,7 +49,7 @@ const BlogHeader = () => {
             and integrate with well-being apps. Embark on your journey to a
             healthier you today!`
           </div>
-          <div className="min-h-auto py-1 flex justify-center items-center sm:gap-3 gap-7 sm:flex-wrap">
+          <div className="flex items-center justify-center py-1 min-h-auto sm:gap-3 gap-7 sm:flex-wrap">
             <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
           </div>
         </div>
@@ -58,70 +58,10 @@ const BlogHeader = () => {
   );
 };
 
-const NavBar = () => {
-  const menuItems = useRef(null); // a container reference to the list of menuitems
-  const handleMenuclick = () => {
-    // This function handles the animation for the userMenu. It will animate base on the custom class added
-    menuItems.current.classList.toggle("slide-down");
-  };
-  const { status } = useSession({
-    // useSesstion is for protection.
-    // Making sure the user does not visit a route they are not allowed to visit
-    required: true,
-    onUnauthenticated() {
-      // The user is not authenticated, handle it here.
-    },
-  });
-  // checking if the user is authenticated or is in a loading state
-  if (status === "unauthenticated" || status === "loading") {
-    return (
-      <div className="w-full grid grid-cols-2 py-3 bg-white sm:grid-cols-3">
-        <Logo></Logo>
-        <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-          <div className="mx-4">
-            <Link href="/">Home</Link>
-          </div>
-          <div className="mx-4">
-            <Link href="/login">Recipes</Link>
-          </div>
-          <button className="tile">
-            <Link href="/login">Login</Link>
-          </button>
-          <button className="tile">
-            <Link href="/register">Register</Link>
-          </button>
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="w-full grid grid-cols-2 py-2 bg-white sm:grid-cols-3">
-      <Logo />
-      <div className="flex justify-center items-center gap-2 sm:gap-1 sm:col-span-2">
-        <div className="mx-4">
-          <Link href="/login">Home</Link>
-        </div>
-        <div className="mx-4">
-          <Link href="/login">Recipes</Link>
-        </div>
-        <button className="tile ring-white hover:ring-secondary ring-2 font-semibold">
-          <Link href="https://scheduler.zoom.us/mgostic">
-            Book a Consultation
-          </Link>
-        </button>
-        <ProfileNavigation />
-      </div>
-    </div>
-  );
-};
-
 const BlogPage = () => {
+  // Main Blog page where a preview of the content is displayed
   return (
-    <div className="flex flex-wrap justify-center items-center gap-3 m-auto min-h-screen p-5">
-      <BlogComponent />
-      <BlogComponent />
-      <BlogComponent />
-      <BlogComponent />
+    <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto">
       <BlogComponent />
       <BlogComponent />
     </div>
@@ -129,32 +69,76 @@ const BlogPage = () => {
 };
 
 const BlogComponent = () => {
-  //const date = new Date().toDateString();
+  // Note - ** The dynamic part of the code has not been implemented yet. **
+  // The Blog is not linked to the database yet so all the data displayed is static
+
+  // The Actual preview of the blog
+  // - Time
+  // - Subtile
+  // - Title
+  // - A short Description
   return (
-    <div className="max-w-lg mx-auto">
-      <div className="bg-primary shadow-md border border-gray-200 rounded-lg max-w-sm mb-5">
-        <a href="#">
-          <Image
-            className="rounded-t-lg"
-            src="https://flowbite.com/docs/images/blog/image-1.jpg"
-            width={600}
-            height={300}
-            alt=""
-          />
+    <ol className="relative border-gray-200 border-s dark:border-gray-700">
+      <li className="mb-10 ms-4">
+        <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+        <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          February 2022
+        </time>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Application UI code in Tailwind CSS
+        </h3>
+        <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          Get access to over 20+ pages including a dashboard layout, charts,
+          kanban board, calendar, and pre-order E-commerce & Marketing pages.
+        </p>
+        <a
+          href="/blog/blog-num-idadjf"
+          className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:outline-none focus:ring-gray-100 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-700"
+        >
+          Learn more{" "}
+          <svg
+            className="w-3 h-3 ms-2 rtl:rotate-180"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
+          </svg>
         </a>
-        <div className="p-5">
-          <a href="#">
-            <h5 className="text-gray-900 font-bold text-2xl tracking-tight mb-2">
-              Noteworthy technology acquisitions 2021
-            </h5>
-          </a>
-          <p className="font-normal text-gray-700 mb-3">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p>
-          <button className="tile bg-black text-white">Read more</button>
-        </div>
-      </div>
-    </div>
+      </li>
+      <li className="mb-10 ms-4">
+        <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+        <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          March 2022
+        </time>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          Marketing UI design in Figma
+        </h3>
+        <p className="text-base font-normal text-gray-500 dark:text-gray-400">
+          All of the pages and components are first designed in Figma and we
+          keep a parity between the two versions even as we update the project.
+        </p>
+      </li>
+      <li className="ms-4">
+        <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
+        <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+          April 2022
+        </time>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+          E-Commerce UI code in Tailwind CSS
+        </h3>
+        <p className="text-base font-normal text-gray-500 dark:text-gray-400">
+          Get started with dozens of web components and interactive elements
+          built on top of Tailwind CSS.
+        </p>
+      </li>
+    </ol>
   );
 };

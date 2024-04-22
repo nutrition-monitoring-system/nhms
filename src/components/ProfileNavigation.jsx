@@ -1,12 +1,10 @@
-"use client";
-import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
-export default function ProfileNavigation({ search }) {
+export default function ProfileNavigation() {
   const { data: session, status } = useSession();
 
   const sendID = { id: session?.user?.name };
@@ -31,51 +29,41 @@ export default function ProfileNavigation({ search }) {
   /* Uses the SWR Next hook.  */
   if (data) {
     return (
-      <div className="flex justify-around items-center gap-3 py-2 px-3">
-        <Link
-          href={"/user"}
-          id="Profile"
-          className="tile shadow-none hover:shadow-none"
-        >
-          <Image
-            src={data.gender === "F" ? "/icons/woman.png" : "/icons/man.png"}
-            width={25}
-            height={25}
-            alt="Person icon"
-            className="ml-2 rounded-[50px]"
-          />
-          <span className="shadow-none text-lg">
-            {data.name + " " + data.surname}
-          </span>
-        </Link>
-        {search === true && (
-          <>
-            <div className="tile hover:shadow-none bg-secondary">
-              <Image
-                src="/icons/search.png"
-                width={20}
-                height={20}
-                alt="Search icon"
-              />
-              <span>Search</span>
-            </div>
-          </>
-        )}
-        <Link
-          href={""}
-          id="Logout"
-          className="tile bg-secondary"
-          onClick={() => signOut({ callbackUrl: "/" })}
-        >
-          <Image
-            src="/icons/logout.png"
-            alt="Logout icon"
-            width={20}
-            height={20}
-          />
-          <span>Logout</span>
-        </Link>
-      </div>
+      <>
+        <div className="flex items-center justify-around gap-3 px-3 py-2">
+          <Link
+            href={"/user"}
+            id="Profile"
+            className="shadow-none tile hover:shadow-none"
+          >
+            <Image
+              src={data.gender === "F" ? "/icons/woman.png" : "/icons/man.png"}
+              width={25}
+              height={25}
+              alt="Person icon"
+              className="ml-2 rounded-[50px]"
+            />
+            <span className="text-lg shadow-none">
+              {data.name + " " + data.surname}
+            </span>
+          </Link>
+          <Link
+            href={""}
+            id="Logout"
+            className="tile bg-secondary"
+            onClick={() => signOut({ callbackUrl: "/" })}
+          >
+            <Image
+              src="/icons/logout.png"
+              alt="Logout icon"
+              width={20}
+              height={20}
+            />
+            <span>Logout</span>
+          </Link>
+        </div>
+      </>
     );
   }
+  return <></>;
 }

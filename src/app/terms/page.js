@@ -3,7 +3,7 @@ import Logo from "@/components/Logo";
 export default function Page() {
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center justify-center">
         <Logo />
       </div>
       <Terms />
@@ -15,7 +15,7 @@ export default function Page() {
 function Terms() {
   return (
     <div className="mx-[25%] font-opensans">
-      <h2 className="font-bold text-lg m-3 text-center">
+      <h2 className="m-3 text-lg font-bold text-center">
         <strong>Terms and Conditions</strong>
       </h2>
 
@@ -58,13 +58,13 @@ function Terms() {
         they, are taken as interchangeable and therefore as referring to same.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Who can use the service</strong>
       </h3>
 
       <p>{`You must be at least 18 years old to use nhms.`}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Cookies</strong>
       </h3>
 
@@ -82,7 +82,7 @@ function Terms() {
         cookies.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>License</strong>
       </h3>
 
@@ -159,7 +159,7 @@ function Terms() {
         and edit any of your Comments in any and all forms, formats or media.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Hyperlinking to our Content</strong>
       </h3>
 
@@ -251,7 +251,7 @@ function Terms() {
         will be allowed for linking absent a trademark license agreement.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>iFrames</strong>
       </h3>
 
@@ -261,7 +261,7 @@ function Terms() {
         appearance of our Website.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Content Liability</strong>
       </h3>
 
@@ -274,7 +274,7 @@ function Terms() {
         any third party rights.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Reservation of Rights</strong>
       </h3>
 
@@ -287,7 +287,7 @@ function Terms() {
         these linking terms and conditions.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Removal of links from our website</strong>
       </h3>
 
@@ -305,7 +305,7 @@ function Terms() {
         is kept up to date.
       `}</p>
 
-      <h3 className="font-bold text-lg m-3 text-center">
+      <h3 className="m-3 text-lg font-bold text-center">
         <strong>Disclaimer</strong>
       </h3>
 

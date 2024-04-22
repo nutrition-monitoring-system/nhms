@@ -1,12 +1,11 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
-import Button from "@/components/Button";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import userSchema from "../../utils/otherUtils";
+import { updateUserSchema } from "../utils/otherUtils";
 
 // personal information
-export default function Page() {
+export default function UserInformation() {
   /*
 
   params: 
@@ -19,7 +18,7 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(userSchema) });
+  } = useForm({ resolver: yupResolver(updateUserSchema) });
 
   // This portion configures the input type for date and time as 'datetime'.
   // Issue: <input type="datatime"> This approach doesn't support placeholder variables.
@@ -33,12 +32,16 @@ export default function Page() {
     setType("date");
   };
 
+  const handleFormSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-col">
+    <div className="flex flex-col items-center justify-center">
       <h1 className="grid place-items-center font-black text-[1.5rem]">
         Update personal information
       </h1>
-      <div className="flex flex-col justify-center items-left gap-2 w-1/2 xl:w-[30%] p-3 rounded-md">
+      <div className="flex flex-col justify-center gap-2 p-3 rounded-md items-left">
         <div className="flex gap-2">
           <input
             type={"text"}
@@ -52,17 +55,17 @@ export default function Page() {
             {...register("lastName")}
           />
         </div>
-        <div className="flex gap-2 justify-between">
+        <div className="flex justify-between gap-2">
           {/* Displaying the error message*/}
-          <p className="text-rose-600 text-sm">{errors.firstName?.message}</p>
-          <p className="text-rose-600 text-sm">{errors.lastName?.message}</p>
+          <p className="text-sm text-rose-600">{errors.firstName?.message}</p>
+          <p className="text-sm text-rose-600">{errors.lastName?.message}</p>
         </div>
-        <div className="relative h-fit py-7 shadow-sm rounded-lg">
+        <div className="relative rounded-lg shadow-sm h-fit py-7">
           <select
             {...register("gender", { required: "Gender is required" })} //making sure the user types the right datatype
             className="absolute inset-0"
           >
-            <option className="opacity-70 font-semibold" value="">
+            <option className="font-semibold opacity-70" value="">
               Change your gender
             </option>
             <option className="pl-3" value="male">
@@ -76,9 +79,9 @@ export default function Page() {
             </option>
           </select>
         </div>
-        <p className="text-rose-600 text-sm">{errors.gender?.message}</p>{" "}
+        <p className="text-sm text-rose-600">{errors.gender?.message}</p>{" "}
         {/* Displaying the error message*/}
-        <div className="relative flex sm:py-7 shadow-sm rounded-md">
+        <div className="relative flex rounded-md shadow-sm sm:py-7">
           <input
             placeholder={"Date of Birth*"}
             type={type}
@@ -88,36 +91,22 @@ export default function Page() {
           />
         </div>
         {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.date?.message}</p>
+        <p className="text-sm text-rose-600">{errors.date?.message}</p>
         <input
           type={"text"}
           placeholder={"New Email Address"}
           {...register("email")} //making sure the user types the right dataype
         />
         {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.email?.message}</p>
-        <input
-          type={"password"}
-          placeholder={"New Password"}
-          {...register("password")} //making sure the user types the right dataype
-        />
-        {/* Displaying the error message*/}
-        <p className="text-rose-600 text-sm">{errors.password?.message}</p>
-        <input
-          type={"password"}
-          placeholder={"Confirm New Password*"}
-          {...register("confirmPassword")} //making sure the user types the right dataype
-        />
-        <p className="text-rose-600 text-sm">
-          {/* Displaying the error message*/}
-          {errors.confirmPassword?.message}
-        </p>
+        <p className="text-sm text-rose-600">{errors.email?.message}</p>
         <div
-          className="w-full flex justify-around itemss-center"
+          className="flex justify-around w-full itemss-center"
           id="RestrictionsNext"
         >
-          <Button>My Profile</Button>
-          <Button>Submit</Button>
+          <button className="tile">My Profile</button>
+          <button className="tile" onClick={handleSubmit(handleFormSubmit)}>
+            Submit
+          </button>
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ export default function ChronicConditions({
   onClickNext,
   onClickPrev,
   handleCollectData,
+  forModal = false,
 }) {
   //Chronic conditions
   // Component to handle chronic condition selection
@@ -85,17 +86,17 @@ export default function ChronicConditions({
       {/* dynamic dialog box */}
       <dialog
         ref={modal}
-        className="min-h-fit min-w-fit bg-white rounded-md relative"
+        className="relative bg-white rounded-md min-h-fit min-w-fit"
       >
-        <div className="p-2 grid place-items-center gap-1">
-          <h1 className="text-center text-lg font-bold">{type}</h1>
-          <p className="text-center w-3/4">{description}</p>
+        <div className="grid gap-1 p-2 place-items-center">
+          <h1 className="text-lg font-bold text-center">{type}</h1>
+          <p className="w-3/4 text-center">{description}</p>
           <button onClick={handleModalclose} className="tile">
             Close
           </button>
         </div>
       </dialog>
-      <div className="flex flex-col justify-center items-left gap-3 min-w-full min-h-fit p-2 rounded-md flex-1">
+      <div className="flex flex-col justify-center flex-1 min-w-full gap-3 p-2 rounded-md items-left min-h-fit">
         <h1 className="grid place-items-center text-secondary font-extrabold text-[1.3rem]">
           Chronic Conditions
         </h1>
@@ -104,13 +105,13 @@ export default function ChronicConditions({
           <input
             type="text conditions"
             placeholder="Type to add or search"
-            className="pl-7 flex-grow"
+            className="flex-grow pl-7"
             onChange={handleOnChange}
             ref={inputRef}
             onSubmit={(e) => e.preventDefault()}
           />
         </div>
-        <div className="min-h-fitrounded-md flex flex-wrap justify-center items-center gap-2 w-full">
+        <div className="flex flex-wrap items-center justify-center w-full gap-2 min-h-fitrounded-md">
           <button
             className="tile bg-secondary"
             onClick={handleNone}
@@ -152,19 +153,21 @@ export default function ChronicConditions({
             );
           })}
         </div>
-        <div className="grid grid-cols-2 place-items-center">
-          <Button onClick={onClickPrev}>Previous</Button>
-          <div id="conditionsNext">
-            <Button
-              onClick={(event) => {
-                handleCollectData({ chronicConditions: userSelected });
-                onClickNext(event);
-              }}
-            >
-              Next
-            </Button>
+        {!forModal && (
+          <div className="grid grid-cols-2 place-items-center">
+            <Button onClick={onClickPrev}>Previous</Button>
+            <div id="conditionsNext">
+              <Button
+                onClick={(event) => {
+                  handleCollectData({ chronicConditions: userSelected });
+                  onClickNext(event);
+                }}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

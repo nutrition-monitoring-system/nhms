@@ -1,11 +1,11 @@
 "use client";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
 
 //page authentication
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 // for form validation
 import { useForm } from "react-hook-form";
@@ -31,17 +31,24 @@ export default function Page() {
   );
 }
 function Home() {
+  // React Hook form is a library that helps us to validate forms in React/Next Js
+  // useForm() gives us access to
+  // - register: to register the input fields(handles storing data)
+  // - handleSubmit: to handle the form submission
+  // - formState: to get the form state and also gives us access to errors
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(userSchema) });
+  const { status } = useSession();
+  const router = useRouter();
 
+  // this is a timer for forgot password verification.
   const [timer, setTimer] = useState(10);
   const [timerId, setTimerId] = useState(null);
 
-  const router = useRouter();
-
+  // this is a modal for forgot password verification.
   const modal = useRef(null);
   const handlePopUP = (e) => {
     e.preventDefault();
@@ -59,10 +66,13 @@ function Home() {
     }, 1000);
     setTimerId(tempId);
   };
+  // this function closes the modal when it is open
   const handleClose = (e) => {
     e.preventDefault();
     modal.current.close();
   };
+  // this function is used to handle user login.
+  // it takes the user input and sends it to the NextAuth Api to check if the user record in the databse is valid or not.
   const submitForm = async (data) => {
     data = { ...data, registration: false };
     const result = await signIn("credentials", {
@@ -89,10 +99,17 @@ function Home() {
   const handleCountDownStart = (event) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    // if the user is already authenticated, redirect to the home page.
+    if (status === "authenticated") {
+      router.push("/home");
+    }
+  }, [status]);
   return (
     <>
-      <div className="bg-white absolute inset-0 grid grid-cols-4 text-black font-opensans sm:grid-cols-1 sm:grid-rows-3">
-        <div className="bg-primary flex flex-col justify-center items-center gap-4 pl-4 pr-2 sm:gap-2">
+      <div className="absolute inset-0 grid grid-cols-4 text-black bg-white font-opensans sm:grid-cols-1 sm:grid-rows-3">
+        <div className="flex flex-col items-center justify-center gap-4 pl-4 pr-2 bg-primary sm:gap-2">
           <h1 className="font-extrabold text-[20px]">New Here?</h1>
           <p className="text-center">
             Sign up to explore endless nutrition possibilities. Welcome to the
@@ -100,12 +117,12 @@ function Home() {
           </p>
           <Button href={"/register"}>Sign up Now</Button>
         </div>
-        <div className="col-span-3 text-black flex flex-col justify-center items-center gap-7 sm:gap-4 sm:row-span-2 relative">
+        <div className="relative flex flex-col items-center justify-center col-span-3 text-black gap-7 sm:gap-4 sm:row-span-2">
           <Image
             src={"/icons/fruits.png"}
             width={100}
             height={100}
-            className="absolute top-3 left-10 z-0 sm:hidden"
+            className="absolute z-0 top-3 left-10 sm:hidden"
             alt="fruit icon"
           />
           <Image
@@ -122,7 +139,7 @@ function Home() {
             className="flex flex-col justify-center items-left gap-3 w-[50%] p-3 rounded-md sm:w-[90%]"
             onSubmit={handleSubmit(submitForm)}
           >
-            <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+            <div className="grid w-full grid-cols-5 gap-2 rounded-md place-items-center">
               <Image
                 src={"/icons/email.png"}
                 width={35}
@@ -138,9 +155,9 @@ function Home() {
               ></input>
             </div>
             {errors.email && (
-              <p className="text-rose-600 text-sm">{errors.email?.message}</p>
+              <p className="text-sm text-rose-600">{errors.email?.message}</p>
             )}
-            <div className="w-full grid gap-2 grid-cols-5 place-items-center rounded-md">
+            <div className="grid w-full grid-cols-5 gap-2 rounded-md place-items-center">
               <Image
                 src={"/icons/password.png"}
                 width={35}
@@ -156,11 +173,11 @@ function Home() {
               ></input>
             </div>
             {errors.password && (
-              <p className="text-rose-600 text-sm">
+              <p className="text-sm text-rose-600">
                 {errors.password?.message}
               </p>
             )}
-            <div className="flex justify-between items-center w-full p-2 rounded-md">
+            <div className="flex items-center justify-between w-full p-2 rounded-md">
               <a className="grid place-items-center">
                 <span className="cursor-pointer" onClick={handlePopUP}>
                   Forgot Password?
@@ -168,7 +185,7 @@ function Home() {
               </a>
               <div id="handleLogin">
                 <button
-                  className="tile bg-black text-white px-7 py-3"
+                  className="py-3 text-white bg-black tile px-7"
                   type="submit"
                 >
                   Login
@@ -178,12 +195,12 @@ function Home() {
           </form>
           {/* <dialog
             ref={modal}
-            className="p-3 focus:outline-none rounded-md backdrop-blur-3xl"
+            className="p-3 rounded-md focus:outline-none backdrop-blur-3xl"
           >
-            <h1 className="text-center text-lg font-extrabold">
+            <h1 className="text-lg font-extrabold text-center">
               Forgot Password?{" "}
             </h1>
-            <form className="flex flex-col justify-center items-left gap-3 w-full p-3 rounded-md">
+            <form className="flex flex-col justify-center w-full gap-3 p-3 rounded-md items-left">
               <input
                 type={"text"}
                 placeholder={"Email Address.."}
@@ -203,7 +220,7 @@ function Home() {
                 placeholder={"Confirmation Code.."}
                 name="code"
               ></input>
-              <div className="flex justify-left items-center gap-2">
+              <div className="flex items-center gap-2 justify-left">
                 <span className="p-2 mx-1">
                   {timer}
                   <span className="">s</span>
@@ -215,7 +232,7 @@ function Home() {
                 type={"password"}
                 placeholder={"Confirm New Password"}
               ></input>
-              <div className="flex justify-between items-center">
+              <div className="flex items-center justify-between">
                 <Button onClick={handleClose}>submit</Button>
                 <Button onClick={handleClose}>close</Button>
               </div>
