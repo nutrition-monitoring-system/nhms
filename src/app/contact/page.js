@@ -19,11 +19,12 @@ function About() {
           Contact Us
         </h1>
         <p className="text-xl text-gray-400 my-4 max-w-[70%]">
-          Not sure what you need? The team will be happy to listen to you and suggest event ideas you hadn't considered.
+         {`Have some feedback for the system? Please put it in here. `}
         </p>
       </div>
       <div className="min-w-96 min-h-96 bg-neutral-100 rounded-lg p-10 shadow-md space-y-8">
-        <h1 className="max-w-[80%] text-xl text-gray-500">We'd love to hear from you!Let's get in touch</h1>
+        <h1 className="max-w-[80%] text-xl text-gray-500">{`We'd love to hear from you!
+        Get in touch!`}</h1>
 
         <form className="space-y-4">
           <div className="space-y-2">

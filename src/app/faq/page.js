@@ -41,10 +41,10 @@ function About() {
   return (
     <div className="min-h-full flex flex-col items-center justify-center p-10">
       <h1 className="text-center scroll-m-20 text-[58px] font-extrabold tracking-tight lg:text-5xl max-w-[30%] leading-tight">
-        Frequently asked questions
+        Frequently Asked Questions(FAQ)
       </h1>
       <p className="text-xl text-gray-400 my-4">
-        Do you need some help with something or davou have questions on some features ?
+        Do you need some help with something or have questions on some features?
       </p>
 
       <Accordion type="single" collapsible className="rounded-lg bg-neutral-100 px-10 py-5 w-[50%] mt-10 transition">
