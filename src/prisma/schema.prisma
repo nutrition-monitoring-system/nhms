@@ -22,6 +22,7 @@ model User {
   // These are one to many relationships.
   Logs                   Log[]
   Collections            Collection[]
+  Goals                  Goal[]
   // These are many to many relationships, represented via junction tables.
   UserToChronicCondition UserToChronicCondition[]
   UserToAllergy          UserToAllergy[]
@@ -33,6 +34,15 @@ model Allergy {
   allergyID     String          @id @unique @db.Char(32)
   allergyType   String          @db.VarChar(45)
   UserToAllergy UserToAllergy[]
+}
+
+model Goal {
+  // One user has one or many goals.
+  goalID          String @id @unique @db.Char(32)
+  goalDescription String @db.VarChar(100)
+
+  User       User?   @relation(fields: [userUserID], references: [userID])
+  userUserID String? @db.Char(32)
 }
 
 model UserToAllergy {

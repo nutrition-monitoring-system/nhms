@@ -30,6 +30,7 @@ import ChronicConditions from "@/components/ChronicConditions.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
 import UserInformation from "./UpdateUserInformation";
 import Symptoms from "./Symptoms";
+import Goals from "./Goals";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -158,6 +159,7 @@ export default function User({ handsignOut }) {
         ></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
         <ImageCarousel></ImageCarousel>
+        <Goals></Goals>
         {/* <div className="container flex w-full gap-4 bg-gray-100 place-content-center"> */}
         {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
         {/* <Log></Log> */}
