@@ -30,6 +30,8 @@ import ChronicConditions from "@/components/ChronicConditions.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
 import UserInformation from "./UpdateUserInformation";
 import Symptoms from "./Symptoms";
+import Goals from "./Goals";
+import ChartComponent from "./UserCharts";
 
 function UserData({ props }) {
   const { data: session, status } = useSession();
@@ -148,9 +150,9 @@ export default function User({ handsignOut }) {
   const handleShowNavBar = () => {};
 
   return (
-    <div className="flex body md:flex-col">
+    <div className="flex gap-4 px-3 py-10 bg-gray-900 body md:flex-col">
       <SideNavBar handleShowNavBar={handleShowNavBar}></SideNavBar>
-      <div className="grid grid-cols-1 grid-rows-3 overflow-hidden w-full xl-[95%]">
+      <div className="flex flex-col-reverse overflow-hidden w-full xl-[95%] bg-white p-2 rounded-xl">
         <TopInformation
           avatar={avatar}
           handleAvatarChange={handleAvatarChange}
@@ -158,12 +160,8 @@ export default function User({ handsignOut }) {
         ></TopInformation>
         <HealthAndUserSettings></HealthAndUserSettings>
         <ImageCarousel></ImageCarousel>
-        {/* <div className="container flex w-full gap-4 bg-gray-100 place-content-center"> */}
-        {/* <PhotoLog photo={photo} handlePhoto={handlePhoto} ></PhotoLog> */}
-        {/* <Log></Log> */}
-        {/* </div> */}
-        {/* <CreateHealthRecordForm></CreateHealthRecordForm> */}
-        {/* <ChartComponent /> */}
+        <Goals />
+        <ChartComponent />
       </div>
     </div>
   );
@@ -199,19 +197,19 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
       </PopModal>
 
       <div className="flex items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
-        <div className="Health-info bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] p-4 shadow-lg h-full">
-          <span className="container flex items-center justify-center w-full gap-2 text-xl">
+        <div className="Health-info bg-primary rounded-md grid grid-row-2 place-items-center w-[30%] md:w-[98%] p-3 shadow-lg h-full">
+          <div className="container flex items-center justify-center w-full h-full gap-2 p-6 text-xl bg-white rounded-md">
             <span>
               <FaRegAddressCard className="size-6" />
             </span>
             <h1 className="font-bold text-left text-md">Health Information</h1>
-          </span>
-
-          <UserData props={"calendar"}></UserData>
-          <div className="expand-user-info" onClick={goToPage}></div>
+          </div>
+          <div className="w-full p-1 bg-rose-500p">
+            <UserData props={"calendar"}></UserData>
+          </div>
         </div>
         <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-4 shadow-lg h-full">
-          <span className="container flex items-center justify-center w-full gap-2 text-xl">
+          <span className="container flex items-center justify-center w-full h-full gap-2 p-6 text-xl bg-white rounded-md">
             <Image
               alt="settings image icon"
               src={"/icons/settings.png"}
