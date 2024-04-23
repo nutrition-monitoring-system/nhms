@@ -81,6 +81,10 @@ export default function FoodCategories({
     SetUserSelected([...userSelected, foodTypeInformation[refIdx].type]);
   };
 
+  useEffect(() => {
+    localStorage.setItem("diet", JSON.stringify(userSelected));
+  }, [userSelected]);
+
   return (
     <>
       {/* dynamic dialog box */}

@@ -80,38 +80,43 @@ export default function ImageCarousel() {
   };
 
   return (
-    <div className="flex w-full gap-4 p-2 bg-gray-100 place-content-center h-fit">
-      <div className="w-[90%] xl:w-[70%] grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-2 text-black p-2">
-        <Carousel slide={false}>
-          {images.map((image) => (
-            <div
-              key={image.id}
-              className="relative flex items-center justify-center h-full text-black bg-primary"
-            >
-              <Image src={image.url} fill={true} alt={`Image ${image.id}`} />
-              <div className="absolute top-2 right-[30%] flex space-x-2">
-                {image.id !== "default" && ( // avoid delete or replace button for default image
-                  <>
-                    <button
-                      onClick={() => deleteImage(image.id)}
-                      className="p-2 text-white rounded-full bg-rose-600 focus:outline-none focus:ring"
-                    >
-                      <FaTrash className="w-6 h-6" />
-                    </button>
-                    <button
-                      onClick={() => replaceImage(image.id)}
-                      className="p-2 text-white rounded-full bg-sky-600 focus:outline-none focus:ring"
-                    >
-                      <FaPencilAlt className="w-6 h-6" />
-                    </button>
-                  </>
-                )}
+    <>
+      <h1 className="grid p-3 font-extrabold text-black text-md place-items-center">
+        Image and Food Log
+      </h1>
+      <div className="flex w-full gap-4 p-2 bg-gray-100 place-content-center h-fit">
+        <div className="w-[90%] xl:w-[70%] grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-2 text-black p-2">
+          <Carousel slide={false}>
+            {images.map((image) => (
+              <div
+                key={image.id}
+                className="relative flex items-center justify-center h-full text-black bg-primary"
+              >
+                <Image src={image.url} fill={true} alt={`Image ${image.id}`} />
+                <div className="absolute top-2 right-[30%] flex space-x-2">
+                  {image.id !== "default" && ( // avoid delete or replace button for default image
+                    <>
+                      <button
+                        onClick={() => deleteImage(image.id)}
+                        className="p-2 text-white rounded-full bg-rose-600 focus:outline-none focus:ring"
+                      >
+                        <FaTrash className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={() => replaceImage(image.id)}
+                        className="p-2 text-white rounded-full bg-sky-600 focus:outline-none focus:ring"
+                      >
+                        <FaPencilAlt className="w-6 h-6" />
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-        </Carousel>
-        <FileUpload fetchImages={() => fetchImages(db)}></FileUpload>
+            ))}
+          </Carousel>
+          <FileUpload fetchImages={() => fetchImages(db)}></FileUpload>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

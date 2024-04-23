@@ -32,7 +32,7 @@ import UserInformation from "./UpdateUserInformation";
 import Symptoms from "./Symptoms";
 import Goals from "./Goals";
 import ChartComponent from "./UserCharts";
-
+import ViewLogData from "./ViewLogData";
 function UserData({ props }) {
   const { data: session, status } = useSession();
 
@@ -152,12 +152,13 @@ export default function User({ handsignOut }) {
   return (
     <div className="flex gap-4 px-3 py-10 bg-gray-900 body md:flex-col">
       <SideNavBar handleShowNavBar={handleShowNavBar}></SideNavBar>
-      <div className="flex flex-col-reverse overflow-hidden w-full xl-[95%] bg-white p-2 rounded-xl">
+      <div className="flex flex-col overflow-hidden w-full xl-[95%] bg-white p-2 rounded-xl">
         <TopInformation
           avatar={avatar}
           handleAvatarChange={handleAvatarChange}
           confirmLogout={confirmLogout}
         ></TopInformation>
+        <ViewLogData />
         <HealthAndUserSettings></HealthAndUserSettings>
         <ImageCarousel></ImageCarousel>
         <Goals />
@@ -196,12 +197,20 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
         {modalType}
       </PopModal>
 
-      <div className="flex items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
+      <h1 className="flex items-center justify-center gap-1 p-3 font-extrabold text-black text-md">
+        <FaRegAddressCard className="font-light size-7" />
+        Health Information and{" "}
+        <Image
+          alt="settings image icon"
+          src={"/icons/settings.png"}
+          width={20}
+          height={20}
+        ></Image>{" "}
+        Settings
+      </h1>
+      <div className="flex flex-row items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
         <div className="Health-info bg-primary rounded-md grid grid-row-2 place-items-center w-[30%] md:w-[98%] p-3 shadow-lg h-full">
           <div className="container flex items-center justify-center w-full h-full gap-2 p-6 text-xl bg-white rounded-md">
-            <span>
-              <FaRegAddressCard className="size-6" />
-            </span>
             <h1 className="font-bold text-left text-md">Health Information</h1>
           </div>
           <div className="w-full p-1 bg-rose-500p">
@@ -210,12 +219,6 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
         </div>
         <div className="bg-primary rounded-md grid place-items-center w-[30%] md:w-[98%] max-w-max p-4 shadow-lg h-full">
           <span className="container flex items-center justify-center w-full h-full gap-2 p-6 text-xl bg-white rounded-md">
-            <Image
-              alt="settings image icon"
-              src={"/icons/settings.png"}
-              width={20}
-              height={20}
-            ></Image>
             <h1 className="font-bold text-left text-md">My Settings</h1>
           </span>
           <div className="container grid w-full grid-cols-2 gap-2 py-3">

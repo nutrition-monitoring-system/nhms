@@ -1,6 +1,6 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { chronicConditions } from "@/utils/dataRegistration.js";
 export default function ChronicConditions({
@@ -80,6 +80,10 @@ export default function ChronicConditions({
     // Update selected user options
     SetUserSelected([...userSelected, chronicConditions[refIdx].type]);
   };
+
+  useEffect(() => {
+    localStorage.setItem("chronicConditions", JSON.stringify(userSelected));
+  }, [userSelected]);
 
   return (
     <>

@@ -81,6 +81,9 @@ export default function Allergies({
     // Update selected user options
     SetUserSelected([...userSelected, AllergiesInformation[refIdx].type]);
   };
+  useEffect(() => {
+    localStorage.setItem("allergies", JSON.stringify(userSelected));
+  }, [userSelected]);
   return (
     <>
       {/* dynamic dialog box */}
