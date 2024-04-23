@@ -62,7 +62,7 @@ export default function Goals() {
         <input type="text" placeholder="Enter goal" ref={inputRef} />
         <div className="grid w-full py-4 place-content-end">
           <button className="tile" onClick={handleAddGoal}>
-            <Image src="/icons/add.png" width={20} height={20} />
+            <Image src="/icons/add.png" width={20} height={20} alt="add icon" />
             Add New Goal
           </button>
         </div>

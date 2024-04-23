@@ -15,6 +15,7 @@ export default function SideNavBar() {
         >
           {" "}
           <Image
+            alt="B icon"
             src="/icons/bold.png"
             className=""
             width={20}
@@ -27,7 +28,12 @@ export default function SideNavBar() {
           className="flex items-center justify-start w-full gap-4 p-5 text-lg tile"
         >
           {" "}
-          <Image src="/icons/add.png" width={20} height={20}></Image>
+          <Image
+            src="/icons/add.png"
+            width={20}
+            height={20}
+            alt="add icon"
+          ></Image>
           Plan
         </Link>
         <Link

@@ -1,5 +1,5 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { foodTypeInformation } from "../utils/dataRegistration.js";
 
