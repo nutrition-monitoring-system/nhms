@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
+import PopModal from "@/components/PopUp";
 
 export default function Page() {
   // Using the Session Provider Api we wrap the home page so we have access to session data
@@ -93,6 +94,7 @@ function NavBar({
   const home = useRef(null);
   const recipes = useRef(null);
   const recipesCollections = useRef(null);
+  const [showModal, setShowModal] = useState(false);
   // The refList is used to store all the references of the html elements
   const refList = [home, recipes, recipesCollections];
 
@@ -125,14 +127,38 @@ function NavBar({
     setSearchInformation(searchValue);
   };
 
+  const points = 20;
   return (
     <>
+      <PopModal showModal={showModal} setShowModal={setShowModal}>
+        <div className="grid w-full grid-cols-2 place-items-center">
+          <h1 className="grid text-lg font-bold place-items-center">
+            Redeem Earned Points
+          </h1>
+          <div>Current Points - {points}</div>
+        </div>
+        <h1 className="grid font-bold text-md place-items-center">
+          Available services
+        </h1>
+        <div className="grid grid-rows-3 gap-2 mt-2">
+          <button className="w-full p-5 tile bg-primary">
+            Book a free 20 minutes appointment with Dr. Monika
+          </button>
+          <button className="w-full p-5 tile bg-primary">
+            Book a free 1 hour appointment with Dr. Monika
+          </button>
+          <button className="w-full p-5 tile bg-primary">
+            Get a premium recipe for free appointment with Dr. Monika
+          </button>
+        </div>
+      </PopModal>
       <div className="z-10 bg-white w-full grid grid-rows-2 h-[30%] sm:h-fit sticky top-0 sm:relative sm:grid-rows-3">
         <div className="grid grid-cols-3 p-4 md:grid-cols-1 md:grid-rows-4 sm:place-items-center sm:row-span-2">
           <Logo></Logo>
-          <div className="flex flex-wrap items-center justify-center col-span-2 md:gap-3">
-            <div className="mx-4">
-              <Link href="/">Home</Link>
+          <div className="flex flex-wrap items-center justify-center col-span-2 gap-2 md:gap-3">
+            <div className="flex flex-col items-center justify-center h-full rounded-lg">
+              <span className="font-black text-[0.9rem]">{20}</span>
+              <span className="">Points</span>
             </div>
             <div className="mx-4">
               <Link href="/blog">Blog</Link>
@@ -161,6 +187,12 @@ function NavBar({
             onClick={() => handleOnclick(recipesCollections)}
           >
             Collections
+          </div>
+          <div
+            className="text-white bg-gray-900 border-none tile"
+            onClick={() => setShowModal(true)}
+          >
+            Redeem Points
           </div>
           <div className="relative flex items-center gap-1 p-2">
             <Image

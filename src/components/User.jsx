@@ -66,16 +66,11 @@ function UserData({ props }) {
   }
   if (props == "calendar") {
     return (
-      <div className="container py-3 space-y-5">
-        <h1
-          id="generatedData"
-          className="p-3 bg-white rounded-sm outline-white outline-2 outline outline-offset-2"
-        >
+      <div className="container py-3 space-y-3">
+        <h1 id="generatedData" className="p-5 bg-white rounded-md">
           Name: {data.name} {data.surname}
         </h1>
-        <p className="p-3 bg-white rounded-sm outline-white outline-2 outline outline-offset-2">
-          Email: {session.user.email}
-        </p>
+        <p className="p-5 bg-white rounded-md">Email: {session.user.email}</p>
       </div>
     );
   } else if (props == "nav") {
@@ -198,15 +193,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
       </PopModal>
 
       <h1 className="flex items-center justify-center gap-1 p-3 font-extrabold text-black text-md">
-        <FaRegAddressCard className="font-light size-7" />
-        Health Information and{" "}
-        <Image
-          alt="settings image icon"
-          src={"/icons/settings.png"}
-          width={20}
-          height={20}
-        ></Image>{" "}
-        Settings
+        Health Information and Settings
       </h1>
       <div className="flex flex-row items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">
         <div className="Health-info bg-primary rounded-md grid grid-row-2 place-items-center w-[30%] md:w-[98%] p-3 shadow-lg h-full">
@@ -278,8 +265,9 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
 }
 
 function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
+  const count = 20;
   return (
-    <div className="grid items-center justify-center grid-cols-2 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
+    <div className="grid items-center justify-center grid-cols-3 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
       <div className="flex items-center justify-center gap-1 py-6 user-info px-7 md:bg-white md:rounded-lg md:shadow-lg md:order-last">
         <div className="relative grid justify-center p-1 rounded-lg user-avatar min-h-fit">
           <Image
@@ -301,7 +289,13 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
         </div>
         <UserData props="nav"></UserData>
       </div>
-      <div className="grid place-items-center ">
+      <div className="flex flex-col items-center justify-center h-full gap-2 bg-gray-200 rounded-lg">
+        <span>you earned</span>
+        <span className="font-black text-[2rem]">{count}</span>
+        <span className="">Points</span>
+        <button className="tile">Redeem here!</button>
+      </div>
+      <div className="grid gap-2 place-items-center">
         <button className="tile" onClick={signOut}>
           <Image
             id="logout"
@@ -311,6 +305,17 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
             height={20}
           />
           Logout
+        </button>
+        <button className="tile" onClick={signOut}>
+          <Image
+            id="delete"
+            src="/icons/add.png"
+            alt="user-delete"
+            className="rotate-45"
+            width={20}
+            height={20}
+          />
+          Delete my account
         </button>
       </div>
     </div>

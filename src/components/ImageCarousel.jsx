@@ -85,7 +85,7 @@ export default function ImageCarousel() {
         Image and Food Log
       </h1>
       <div className="flex w-full gap-4 p-2 bg-gray-100 place-content-center h-fit">
-        <div className="w-[90%] xl:w-[70%] grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-2 text-black p-2">
+        <div className="w-[90%] xl:w-[80%] grid grid-cols-2 md:grid-cols-1 md:grid-rows-2 gap-2 text-black p-2">
           <Carousel slide={false}>
             {images.map((image) => (
               <div

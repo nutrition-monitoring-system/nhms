@@ -13,6 +13,7 @@ const FoodAndWaterLog = () => {
   const foodName = useRef(null);
   const waterModal = useRef(null);
   const sliderRef = useRef(null);
+  const cycleModal = useRef(null);
   // State variables
   const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
   const [breakfast, setBreakFast] = useState([]);
@@ -116,6 +117,14 @@ const FoodAndWaterLog = () => {
     event.preventDefault();
     modalRef.current.close();
   };
+
+  const showCirlceModal = () => {
+    cycleModal.current.showModal();
+  };
+  const showMoodModal = () => {
+    moodModal.current.showModal();
+  };
+
   return (
     <>
       <dialog
@@ -270,13 +279,127 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
+      <dialog
+        ref={cycleModal}
+        className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"
+      >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => {
+              handleModalClose(event, cycleModal);
+              setColorLogToggle("food");
+            }}
+            className="tile"
+          >
+            <Image
+              alt="add image icon"
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            close
+          </button>
+        </div>
+        <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Menstraul Cycle Log
+          </h1>
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Time
+          </h1>
+          <input type="date" />
+        </div>
+        <div className="flex items-center justify-around w-full mt-2">
+          <button
+            className="tile"
+            id="addNext"
+            onClick={(event) => {
+              event.preventDefault();
+              cycleModal.current.close();
+              setColorLogToggle("food");
+            }}
+          >
+            <Image
+              src="/icons/add.png"
+              alt="add symbol"
+              className="rounded-full"
+              width={25}
+              height={25}
+            />
+            Add
+          </button>
+        </div>
+      </dialog>
+      <dialog
+        ref={moodModal}
+        className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"
+      >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => {
+              handleModalClose(event, moodModal);
+              setColorLogToggle("food");
+            }}
+            className="tile"
+          >
+            <Image
+              alt="add image icon"
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            close
+          </button>
+        </div>
+        <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Mood Log
+          </h1>
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            How are you feeling today?
+          </h1>
+          <div className="grid w-full grid-cols-3 h-[50px] gap-2 p-2 place-content-center">
+            <div className="grid h-full rounded-md bg-emerald-400 place-items-center tile">
+              Happy
+            </div>
+            <div className="grid h-full rounded-md bg-amber-400 place-items-center tile">
+              Sad
+            </div>
+            <div className="grid h-full rounded-md bg-rose-400 place-items-center tile">
+              Angry
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-around w-full mt-2">
+          <button
+            className="tile"
+            id="addNext"
+            onClick={(event) => {
+              event.preventDefault();
+              moodModal.current.close();
+              setColorLogToggle("food");
+            }}
+          >
+            <Image
+              src="/icons/add.png"
+              alt="add symbol"
+              className="rounded-full"
+              width={25}
+              height={25}
+            />
+            Add
+          </button>
+        </div>
+      </dialog>
 
       <Tabs
         defaultValue="food"
         className="min-h-[200px]"
         value={ColorLogToggle}
       >
-        <TabsList className="flex flex-row w-full h-auto p-2 mb-4 rounded-md shadow-inner place-content-evenly bg-primarylight shadow-primary/75 bg-blend-multiply">
+        <TabsList className="flex justify-around w-full h-auto p-2 mb-4 bg-white rounded-md shadow-inner shadow-primary/75 bg-blend-multiply">
           <TabsTrigger
             value="food"
             className={
@@ -290,7 +413,7 @@ const FoodAndWaterLog = () => {
           >
             Food Log
           </TabsTrigger>
-          <span className="w-0.5 min-h-full bg-[#C2897C]"></span>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
           <TabsTrigger
             value="water"
             className={
@@ -303,6 +426,36 @@ const FoodAndWaterLog = () => {
             }}
           >
             Water Log
+          </TabsTrigger>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
+          <TabsTrigger
+            value="cycle"
+            className={
+              ColorLogToggle === "cycle"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                : "tile bg-transparent shadow-none px-4 rounded-md"
+            }
+            onClick={() => {
+              setColorLogToggle("cycle");
+              showCirlceModal();
+            }}
+          >
+            Cycle Log
+          </TabsTrigger>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
+          <TabsTrigger
+            value="mood"
+            className={
+              ColorLogToggle === "mood"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                : "tile bg-transparent shadow-none px-4 rounded-md"
+            }
+            onClick={() => {
+              setColorLogToggle("mood");
+              showMoodModal();
+            }}
+          >
+            Mood Log
           </TabsTrigger>
         </TabsList>
         <TabsContent value="food" className="">

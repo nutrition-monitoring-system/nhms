@@ -10,7 +10,7 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <></>
       ) : (
-        <div className="flex flex-wrap gap-5 justify-center items-start p-2 md:grid-cols-1 md:px-10 w-[70%] h-fit min-h-3/4 sm:w-full">
+        <div className="flex flex-wrap gap-5 justify-center items-start p-2 md:grid-cols-1 md:px-10 w-[80%] h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
           <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} />
         </div>
@@ -186,15 +186,19 @@ function RecipeInfo({
   };
   return (
     <>
-      <div className="max-w-sm overflow-hidden rounded-lg shadow-lg">
-        <div className="px-6 py-4">
-          <div className="mb-2 text-xl font-bold">{recipe.name}</div>
-          <p className="text-base text-gray-700">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Voluptatibus quia, nulla! Maiores et perferendis eaque,
-            exercitationem praesentium nihil.
-          </p>
-          <div className="flex items-center justify-between gap-2 mt-4 md:flex-wrap">
+      <div className="max-w-sm overflow-hidden border-2 border-gray-300 rounded-lg shadow-xl">
+        <div className="grid p-3 place-items-center">
+          <Image
+            className="w-full m-2 rounded-lg shadow-xl"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
+            width={500}
+            height={300}
+            alt="Sunset in the mountains"
+          />
+          <div className="grid mb-2 text-xl font-bold place-items-center">
+            {recipe.name}
+          </div>
+          <div className="flex flex-col items-center justify-between gap-2 mt-4 md:flex-wrap">
             <span>
               Prep time{" "}
               <span className="font-bold">
@@ -208,7 +212,7 @@ function RecipeInfo({
               </span>
             </span>
           </div>
-          <div className="flex items-center justify-between gap-2 mt-4 md:flex-wrap">
+          <div className="flex flex-col items-center justify-between gap-2 mt-4 md:flex-wrap">
             <button href="#" onClick={handleAddToCollections} className="tile">
               {recipe?.check ? "Remove from collections" : "Add to collections"}
               <svg
