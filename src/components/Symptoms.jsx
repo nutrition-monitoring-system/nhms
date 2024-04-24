@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useSession, signOut } from "next-auth/react";
 import { Label } from "@/components/ui/label";
-import { DatePicker } from "@/components/ui/datePicker";
 import {
   Card,
   CardContent,
@@ -19,30 +17,65 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
+import useSWR from "swr";
+
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+
+let options = [
+  { label: "Fever", value: "Fever" },
+  { label: "Cough", value: "Cough" },
+  { label: "Fatigue", value: "Fatigue" },
+  { label: "Muscle Aches", value: "Muscle Aches" },
+  { label: "Headache", value: "Headache" },
+  { label: "Sore Throat", value: "Sore Throat" },
+  { label: "Nausea", value: "Nausea" },
+  { label: "Loss of Taste", value: "Loss of Taste" },
+  { label: "Loss of Smell", value: "Loss of Smell" },
+  { label: "Diarrhea", value: "Diarrhea" },
+  { label: "Abdominal Pain", value: "Abdominal Pain" },
+  { label: "Congestion", value: "Congestion" },
+];
 
 export default function Symptoms() {
   const [symptoms, setSymptoms] = useState([]);
-  const [currentSymptom, setCurrentSymptom] = useState("");
+  const { data: session, status } = useSession();
 
-  const handleSymptomsInput = (e) => {
-    console.log(e.target.value);
-    let capitalised =
-      e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
-    setCurrentSymptom(capitalised);
-  };
+  const sendID = { id: session.user.name };
+  // const [currentSymptom, setCurrentSymptom] = useState('')
+  const fetcher = (...args) =>
+    fetch(
+      ...args,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      },
+      { revalidateIfStale: false }
+    ).then((res) => res.json());
 
-  const handleKeyDown = (e) => {
-    /* Enter the symptom. */
-    if (
-      e.key === "Enter" &&
-      currentSymptom !== "" &&
-      !symptoms.some((s) => s.name === currentSymptom)
-    ) {
-      console.log("Enter key pressed");
-      setSymptoms([...symptoms, { name: currentSymptom, intensity: 5 }]);
-      setCurrentSymptom("");
+  const { data, error, isLoading } = useSWR("/api/getSymptoms", fetcher);
+
+  const handleSymptomsInput = (item) => {
+    // console.log(item)
+    let capitalised = item.value.charAt(0).toUpperCase() + item.value.slice(1);
+    // setCurrentSymptom(capitalised)
+    if (!symptoms.some((s) => s.name === capitalised)) {
+      setSymptoms([...symptoms, { name: capitalised, intensity: 5 }]);
+      // setCurrentSymptom('')
     }
   };
+
+  // const handleKeyDown = e => {
+  //   /* Enter the symptom. */
+  //   if (e.key === 'Enter' && currentSymptom !== '' && !symptoms.some(s => s.name === currentSymptom)) {
+  //     console.log('Enter key pressed')
+  //     setSymptoms([...symptoms, { name: currentSymptom, intensity: 5 }])
+  //     setCurrentSymptom('')
+  //   }
+  // }
 
   const updateSymptom = (symptom, intensity) => {
     /* Update a symptom with the new intensity. */
@@ -62,9 +95,122 @@ export default function Symptoms() {
 
   const onSubmit = () => {
     console.log("Symptoms submitted.");
+    console.log(symptoms.length);
+    
+    for (let index = 0; index < symptoms.length; index++) {
+      const element = symptoms[index];
+      // console.log(element);
+      // console.log(element.name);
+      // console.log(element.intensity);
+      fetch("/api/log/addLogEntry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userID: sendID.id,
+          keyword: "symptom",
+          symptom: { symptomName: element.name, intensity: element.intensity },
+        }),
+      });
+    }
+    // fetch("/api/addSymptoms", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(),
+    // });
     console.log(symptoms);
   };
+  if (data) {
+    /**Added the symptoms from the database. */
+    options = [];
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      options.push({ label: element.symptomName, value: element.symptomName });
+    }
 
+    return (
+      <div className="flex flex-col items-center justify-center gap-10 p-4">
+        <h1 className="grid place-items-center text-center font-extrabold text-[2rem]">
+          What are your symptoms?
+        </h1>
+        <div className="flex flex-col w-full gap-3">
+          <WithLabel name="Symptoms">
+            {/* <input
+              type="text"
+              id="Symptoms"
+              placeholder="Type your main symptoms here:"
+              value={currentSymptom}
+              onInput={handleSymptomsInput}
+              onKeyDown={handleKeyDown}
+            /> */}
+            <Autocomplete
+              disablePortal
+              id="combo-box-demo"
+              options={options}
+              sx={{ width: "100%" }}
+              renderInput={(params) => (
+                <TextField {...params} label="Input your symptoms" />
+              )}
+              // value={currentSymptom}
+              onChange={(event, newValue) => {
+                handleSymptomsInput(newValue);
+              }}
+              className="w-full"
+            />
+          </WithLabel>
+          <WithLabel name="Date">
+            <input type="date" placeholder="Enter a date:" />
+          </WithLabel>
+        </div>
+
+        <Card className="w-full max-w-xl shadow-lg">
+          <CardHeader>
+            <CardTitle>My Symptoms</CardTitle>
+            <CardDescription>
+              Here are the symptoms you&apos;ve entered.<br></br> Add the
+              intensity below:
+            </CardDescription>
+            <hr></hr>
+          </CardHeader>
+
+          <CardContent>
+            <Accordion type="single" collapsible className="w-full">
+              {symptoms.map((symptom, idx) => (
+                /* Each item gets put into the accordion component. */
+                <AccordionItem
+                  value={`${symptom.name}-${idx}`}
+                  key={`${symptom.name}-${idx}`}
+                >
+                  <AccordionTrigger onRemove={() => removeSymptom(symptom)}>
+                    {symptom.name}
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <Intensity
+                      value={symptom.intensity}
+                      onChange={([value]) => updateSymptom(symptom, value)}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </CardContent>
+
+          <CardFooter className="flex justify-end">
+            <button
+              className="shadow-lg tile bg-primary"
+              onClick={onSubmit}
+              disabled={symptoms.length === 0}
+            >
+              Submit
+            </button>
+          </CardFooter>
+        </Card>
+      </div>
+    );
+  }
   return (
     <div className="flex flex-col items-center justify-center gap-10 p-4">
       <h1 className="grid place-items-center text-center font-extrabold text-[2rem]">
@@ -72,13 +218,27 @@ export default function Symptoms() {
       </h1>
       <div className="flex flex-col w-full gap-3">
         <WithLabel name="Symptoms">
-          <input
+          {/* <input
             type="text"
             id="Symptoms"
             placeholder="Type your main symptoms here:"
             value={currentSymptom}
             onInput={handleSymptomsInput}
             onKeyDown={handleKeyDown}
+          /> */}
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={options}
+            sx={{ width: "100%" }}
+            renderInput={(params) => (
+              <TextField {...params} label="Input your symptoms" />
+            )}
+            // value={currentSymptom}
+            onChange={(event, newValue) => {
+              handleSymptomsInput(newValue);
+            }}
+            className="w-full"
           />
         </WithLabel>
         <WithLabel name="Date">
