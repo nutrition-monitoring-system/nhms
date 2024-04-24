@@ -19,11 +19,11 @@ const Footer = () => (
           </p>
         </div>
         <div className="flex items-center justify-around w-full md:col-span-2">
-          <Link href="">About</Link>
-          <Link href="">Contact</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
           <Link href="/terms">Terms</Link>
           <Link href="/privacy">Privacy</Link>
-          <Link href="">FAQ</Link>
+          <Link href="/faq">FAQ</Link>
         </div>
       </div>
     </div>
