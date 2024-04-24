@@ -34,6 +34,11 @@ const AllergiesInformation = [
 
 // List of available allergies with types and descriptions
 const chronicConditions = [
+  {
+    type: "IBS",
+    description:
+      "Irritable bowel syndrome (IBS) is a common condition that affects the digestive system.",
+  },
   { type: "Diabetes", description: "Affects blood sugar regulation." },
   { type: "Hypertension", description: "High blood pressure." },
   {

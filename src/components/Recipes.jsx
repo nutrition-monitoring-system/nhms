@@ -186,15 +186,15 @@ function RecipeInfo({
   };
   return (
     <>
-      <div className="max-w-sm overflow-hidden border-2 border-gray-300 rounded-lg shadow-xl">
+      <div className="max-w-sm overflow-hidden border-2 border-gray-300 rounded-lg shadow-xl p-4">
         <div className="grid p-3 place-items-center">
-          <Image
+          {/* <Image
             className="w-full m-2 rounded-lg shadow-xl"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
             width={500}
             height={300}
             alt="Sunset in the mountains"
-          />
+          /> */}
           <div className="grid mb-2 text-xl font-bold place-items-center">
             {recipe.name}
           </div>
@@ -255,7 +255,7 @@ function RecipeInfo({
         </div>
         <div className="px-6 pt-4 pb-2">
           <span className="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">
-            #BreakFast
+            #Breakfast
           </span>
         </div>
       </div>

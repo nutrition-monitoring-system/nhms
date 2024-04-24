@@ -257,7 +257,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 <span className="text-left">Chronic Conditions</span>
               </div>
             </button>
-            <button className="w-full text-sm bg-white tile hover:bg-white/75">
+            <button className="w-full text-sm bg-white tile hover:bg-white/75 col-span-2">
               <div
                 onClick={(event) => {
                   event.preventDefault();
