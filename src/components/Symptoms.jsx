@@ -84,12 +84,13 @@ export default function Symptoms() {
             disablePortal
             id="combo-box-demo"
             options={options}
-            sx={{ width: 300 }}
+            sx={{ width: "100%" }}
             renderInput={params => <TextField {...params} label="Input you symptoms" />}
             // value={currentSymptom}
             onChange={(event, newValue) => {
               handleSymptomsInput(newValue)
             }}
+            className='w-full'
           />
         </WithLabel>
         <WithLabel name="Date">
