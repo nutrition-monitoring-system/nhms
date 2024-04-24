@@ -39,7 +39,7 @@ function About() {
   ]
 
   return (
-    <div className="min-h-full flex flex-col items-center justify-center p-10">
+    <div className="min-h-[100vh] flex flex-col items-center justify-center p-10">
       <h1 className="text-center scroll-m-20 text-[58px] font-extrabold tracking-tight lg:text-5xl max-w-[30%] leading-tight">
         Frequently Asked Questions(FAQ)
       </h1>

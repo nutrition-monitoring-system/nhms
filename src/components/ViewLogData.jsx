@@ -29,7 +29,7 @@ export default function ViewLogData() {
   }, []);
   return (
     <div className="flex flex-col items-center justify-center w-full p-2 bg-gray-100">
-      <h1 className="grid p-3 font-extrabold text-black text-md place-items-center">
+      <h1 className="grid p-3 font-extrabold text-black place-items-center text-[1.3rem]">
         User Logs
       </h1>
       <div className="grid items-center justify-around w-full grid-cols-4 gap-3 p-2 md:grid-cols-1 md:grid-rows-4 md:w-full">

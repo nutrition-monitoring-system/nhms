@@ -35,6 +35,7 @@ const AllergiesInformation = [
 // List of available allergies with types and descriptions
 const chronicConditions = [
   { type: "Diabetes", description: "Affects blood sugar regulation." },
+  { type: "IBS", description: "Irritates bowels." },
   { type: "Hypertension", description: "High blood pressure." },
   {
     type: "Asthma",
