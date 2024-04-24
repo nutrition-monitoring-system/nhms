@@ -143,7 +143,7 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 place-items-center">
@@ -230,7 +230,7 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
@@ -298,12 +298,12 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
-            Menstraul Cycle Log
+            Menstrual Cycle Log
           </h1>
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             Time
@@ -350,7 +350,7 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
@@ -365,10 +365,10 @@ const FoodAndWaterLog = () => {
               Happy
             </div>
             <div className="grid h-full rounded-md bg-amber-400 place-items-center tile">
-              Sad
+              Neutral
             </div>
             <div className="grid h-full rounded-md bg-rose-400 place-items-center tile">
-              Angry
+              Sad
             </div>
           </div>
         </div>
