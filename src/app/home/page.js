@@ -141,14 +141,29 @@ function NavBar({
           Available services
         </h1>
         <div className="grid grid-rows-3 gap-2 mt-2">
-          <button className="w-full p-5 tile bg-primary">
-            Book a free 20 minutes appointment with Dr. Monika
+          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+            <span className="col-span-3">
+              Book a free 20 minutes appointment with Dr. Monika{" "}
+            </span>
+            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+              1300s points
+            </span>
           </button>
-          <button className="w-full p-5 tile bg-primary">
-            Book a free 1 hour appointment with Dr. Monika
+          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+            <span className="col-span-3">
+              Book a free 1 hour appointment with Dr. Monika{" "}
+            </span>
+            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+              2100 points
+            </span>
           </button>
-          <button className="w-full p-5 tile bg-primary">
-            Get a premium recipe for free appointment with Dr. Monika
+          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+            <span className="col-span-3">
+              Get a premium recipe for free appointment with Dr. Monika{" "}
+            </span>
+            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+              550 points
+            </span>
           </button>
         </div>
       </PopModal>

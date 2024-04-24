@@ -4,85 +4,143 @@ export default function Page({ id }) {
   // Check the folder structure of the parent
   return (
     <>
-      <main class="pt-8 pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900 antialiased">
-        <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
-          <article class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
-            <header class="mb-4 lg:mb-6 not-format">
-              <address class="flex items-center mb-6 not-italic">
-                <div class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
-                  <img
-                    class="mr-4 w-16 h-16 rounded-full"
-                    src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                    alt="Jese Leos"
-                  />
-                  <div>
-                    <a
-                      href="#"
-                      rel="author"
-                      class="text-xl font-bold text-gray-900 dark:text-white"
-                    >
-                      Jese Leos
-                    </a>
-                    <p class="text-base text-gray-500 dark:text-gray-400">
-                      Graphic Designer, educator & CEO Flowbite
-                    </p>
-                    <p class="text-base text-gray-500 dark:text-gray-400">
-                      <time
-                        pubdate
-                        datetime="2022-02-08"
-                        title="February 8th, 2022"
-                      >
-                        Feb. 8, 2022
-                      </time>
-                    </p>
-                  </div>
-                </div>
-              </address>
-              <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
-                Best practices for successful prototypes
+      <div className="mx-[10rem]">
+        <main className="container mx-auto py-8">
+          <header className="bg-black py-10 rounded-md">
+            <div className="container mx-auto text-center text-white">
+              <h1 className="text-3xl font-bold text-white">
+                Diabetes Management: Navigating Your Way to a Healthier You
               </h1>
-            </header>
-            <p class="lead">
-              Flowbite is an open-source library of UI components built with the
-              utility-first classes from Tailwind CSS. It also includes
-              interactive elements such as dropdowns, modals, datepickers.
+            </div>
+          </header>
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Introduction</h2>
+            <p className="text-lg">
+              Living with diabetes can feel overwhelming, but with the right
+              knowledge and support, managing your condition becomes a more
+              navigable journey. Whether you’re newly diagnosed or have been
+              dealing with diabetes for years, understanding how to balance your
+              lifestyle with your health needs is key to maintaining your
+              well-being.
             </p>
-            <p>
-              Before going digital, you might benefit from scribbling down some
-              ideas in a sketchbook. This way, you can think things through
-              before committing to an actual design project.
+          </section>
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Understanding Diabetes</h2>
+            <p className="text-lg">
+              Diabetes, a condition characterized by high blood sugar levels,
+              comes in two main forms: Type 1, where the body fails to produce
+              insulin, and Type 2, where the body cannot use insulin
+              effectively. Both types require careful management of diet,
+              exercise, and medication. The good news is that with proactive
+              management, you can lead a full and active life.
             </p>
-            <p>
-              But then I found a{" "}
-              <a href="https://flowbite.com">
-                component library based on Tailwind CSS called Flowbite
-              </a>
-              . It comes with the most commonly used UI components, such as
-              buttons, navigation bars, cards, form elements, and more which are
-              conveniently built with the utility classes from Tailwind CSS.
+          </section>
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Dietary Management</h2>
+            <ul className="list-disc pl-8">
+              <li className="mb-2">
+                Carbohydrate Counting: Keeping track of the carbs you eat is
+                crucial because they have the biggest effect on your blood sugar
+                levels. Use food labels and apps to help manage your intake.
+              </li>
+              <li className="mb-2">
+                Balanced Meals: Incorporate a variety of foods in your meals -
+                include sources of lean protein, healthy fats, and fibers. This
+                not only helps manage blood sugar but also supports overall
+                health.
+              </li>
+              <li>
+                Regular Meal Times: Eating at regular times helps keep your
+                blood sugar stable. Skipping meals, especially if you’re on
+                medications that lower blood sugar, can lead to hypoglycemia.
+              </li>
+            </ul>
+          </section>
+
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">
+              Exercise for Diabetes Control
+            </h2>
+            <ul className="list-disc pl-8">
+              <li className="mb-2">
+                Increase Physical Activity: Aim for at least 150 minutes of
+                moderate-intensity exercise each week, such as brisk walking,
+                swimming, or cycling.
+              </li>
+              <li className="mb-2">
+                Monitor Your Blood Sugar: Check your levels before and after
+                exercise to learn how different activities affect you.
+              </li>
+              <li>
+                Stay Hydrated: Exercise can affect your blood glucose levels and
+                your hydration status; make sure to drink plenty of water.
+              </li>
+            </ul>
+          </section>
+
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Medication Management</h2>
+            <ul className="list-disc pl-8">
+              <li className="mb-2">
+                Consistency is Key: Take your medication at the same times each
+                day to maintain stable blood sugar levels.
+              </li>
+              <li className="mb-2">
+                Understand Your Medication: Know what each medication does and
+                how it affects your sugar levels. Don’t hesitate to ask your
+                doctor or pharmacist if you’re unsure about anything.
+              </li>
+              <li>
+                Adjust as Needed: Your medication needs might change over time,
+                especially if you lose weight, change your diet, or alter your
+                exercise habits. Regular check-ins with your healthcare provider
+                are essential.
+              </li>
+            </ul>
+          </section>
+
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Living with Diabetes</h2>
+            <ul className="list-disc pl-8">
+              <li className="mb-2">
+                Mental Health: Chronic conditions can be mentally taxing.
+                Consider talking to a counselor or joining a support group to
+                address the emotional aspects.
+              </li>
+              <li className="mb-2">
+                Routine Checks: Regular visits to your healthcare provider for
+                blood sugar monitoring, along with yearly eye exams and regular
+                foot checks, are crucial.
+              </li>
+              <li>
+                Stay Informed: Keep up with the latest diabetes research and
+                treatments. Knowledge is power, and staying informed can help
+                you make better decisions about your care.
+              </li>
+            </ul>
+          </section>
+
+          <section className="mb-1">
+            <h2 className="text-2xl font-bold mb-4">Conclusion</h2>
+            <p className="text-lg">
+              Managing diabetes might seem daunting, but it’s entirely possible
+              to live a happy and healthy life by making informed choices about
+              your lifestyle and treatment options. Remember, you’re not alone
+              in this journey—millions of people live with diabetes, and with
+              the right strategies and support, you can too.
             </p>
-            <figure>
-              <img
-                src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png"
-                alt=""
-              />
-              <figcaption>Digital art by Anonymous</figcaption>
-            </figure>
-            <h2>Getting started with Flowbite</h2>
-            <p>
-              First of all you need to understand how Flowbite works. This
-              library is not another framework. Rather, it is a set of
-              components based on Tailwind CSS that you can just copy-paste from
-              the documentation.
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold mb-4">Call to Action</h2>
+            <p className="text-lg">
+              If you found this post helpful, share it with someone who might
+              benefit from it. Stay tuned for more posts on managing chronic
+              conditions effectively!
             </p>
-            <p>
-              It also includes a JavaScript file that enables interactive
-              components, such as modals, dropdowns, and datepickers which you
-              can optionally include into your project via CDN or NPM.
-            </p>
-          </article>
-        </div>
-      </main>
+          </section>
+        </main>
+      </div>
       <Footer />
     </>
   );

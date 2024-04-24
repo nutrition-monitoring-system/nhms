@@ -257,6 +257,25 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 <span className="text-left">Chronic Conditions</span>
               </div>
             </button>
+            <button className="w-full text-sm bg-white tile hover:bg-white/75">
+              <div
+                onClick={(event) => {
+                  event.preventDefault();
+                  showModal("chronicConditions");
+                }}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <Image
+                  id="delete"
+                  src="/icons/add.png"
+                  alt="user-delete"
+                  className="rotate-45"
+                  width={30}
+                  height={30}
+                />
+                <span className="text-left">Delete Account</span>
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -305,17 +324,6 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
             height={20}
           />
           Logout
-        </button>
-        <button className="tile" onClick={signOut}>
-          <Image
-            id="delete"
-            src="/icons/add.png"
-            alt="user-delete"
-            className="rotate-45"
-            width={20}
-            height={20}
-          />
-          Delete my account
         </button>
       </div>
     </div>
