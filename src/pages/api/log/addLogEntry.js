@@ -178,6 +178,49 @@ export default async function handler(req, res) {
             .status(404)
             .json({ error: "Problem with water entry entered." });
         }
+      } else if (keyword === "symptom") {
+        if (req.body.symptom != null) {
+          let symptom = req.body.symptom;
+          /* Create a new log which saves the symptom content. */
+
+          /* Get name for the symptom. */
+
+          const firstSymptom = await prisma.symptom.findFirst({
+            where: {
+              symptomName: symptom.name,
+            },
+            select: {
+              symptomID: true,
+              symptomName: true,
+            },
+          });
+
+          const newLog = await prisma.log
+            .create({
+              data: {
+                logID: newLogID,
+                logType: "symptom",
+                timestamp: timestamp,
+                user_UserID: userID,
+              },
+            })
+            .then(async (response) => {
+              /* Check if food exists or not. */
+              let newSymptomLogEntry = await prisma.symptomLog.create({
+                data: {
+                  log_logID: newLogID,
+                  intensity: symptom.intensity,
+                  symptom_symptomID: firstSymptom.symptomID,
+                },
+              });
+            });
+
+          return res.status(200).json({ ok: true });
+        } else {
+          return res
+            .status(404)
+            .json({ error: "Problem with symptom entry entered." });
+        }
       } else {
         return res
           .status(404)
