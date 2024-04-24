@@ -157,7 +157,7 @@ export default function User({ handsignOut }) {
         <HealthAndUserSettings></HealthAndUserSettings>
         <ImageCarousel></ImageCarousel>
         <Goals />
-        <ChartComponent />
+        {/* <ChartComponent /> */}
       </div>
     </div>
   );
@@ -192,7 +192,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
         {modalType}
       </PopModal>
 
-      <h1 className="flex items-center justify-center gap-1 p-3 font-extrabold text-black text-md">
+      <h1 className="flex items-center justify-center gap-1 p-3 font-extrabold text-black text-[1.3rem]">
         Health Information and Settings
       </h1>
       <div className="flex flex-row items-center justify-center gap-4 p-4 bg-white calendar-health md:flex-col">

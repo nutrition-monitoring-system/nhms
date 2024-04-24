@@ -81,7 +81,7 @@ export default function ImageCarousel() {
 
   return (
     <>
-      <h1 className="grid p-3 font-extrabold text-black text-md place-items-center">
+      <h1 className="grid p-3 font-extrabold text-black place-items-center text-[1.3rem]">
         Image and Food Log
       </h1>
       <div className="flex w-full gap-4 p-2 bg-gray-100 place-content-center h-fit">

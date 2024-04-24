@@ -47,7 +47,7 @@ const BlogHeader = () => {
           <div className="w-1/2 sm:w-full py-2 text-[20px]">
             Explore a vibrant recipe library, set and monitor your health goals,
             and integrate with well-being apps. Embark on your journey to a
-            healthier you today!`
+            healthier you today!
           </div>
           <div className="flex items-center justify-center py-1 min-h-auto sm:gap-3 gap-7 sm:flex-wrap">
             <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
