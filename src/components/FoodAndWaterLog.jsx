@@ -42,7 +42,8 @@ const FoodAndWaterLog = () => {
   /* Get user's username. */
   const { data: session, status } = useSession();
 
-  const sendID = { id: session.user.name };
+  /* MADE USERNAME OPTIONAL BUT IT WONT WORK IN THE REGISTER SECTION */
+  let sendID = { id: session?.user.name };
   // Function to close the food modal
   const handleModalclose = (event) => {
     event.preventDefault();
