@@ -47,7 +47,7 @@ const BlogHeader = () => {
           <div className="w-1/2 sm:w-full py-2 text-[20px]">
             Explore a vibrant recipe library, set and monitor your health goals,
             and integrate with well-being apps. Embark on your journey to a
-            healthier you today!`
+            healthier you today!
           </div>
           <div className="flex items-center justify-center py-1 min-h-auto sm:gap-3 gap-7 sm:flex-wrap">
             <Image src="/icons/blog2.png" alt="blog" width={50} height={50} />
@@ -61,7 +61,7 @@ const BlogHeader = () => {
 const BlogPage = () => {
   // Main Blog page where a preview of the content is displayed
   return (
-    <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto">
+    <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto w-[70%] md:w-full">
       <BlogComponent />
       <BlogComponent />
     </div>
@@ -85,11 +85,14 @@ const BlogComponent = () => {
           February 2022
         </time>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Application UI code in Tailwind CSS
+          Diabetes Management: Navigating Your Way to a Healthier You
         </h3>
         <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-          Get access to over 20+ pages including a dashboard layout, charts,
-          kanban board, calendar, and pre-order E-commerce & Marketing pages.
+          Living with diabetes can feel overwhelming, but with the right
+          knowledge and support, managing your condition becomes a more
+          navigable journey. Whether you’re newly diagnosed or have been dealing
+          with diabetes for years, understanding how to balance your lifestyle
+          with your health needs is key to maintaining your well-being.
         </p>
         <a
           href="/blog/blog-num-idadjf"
@@ -119,11 +122,15 @@ const BlogComponent = () => {
           March 2022
         </time>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Marketing UI design in Figma
+          Understanding Diabetes
         </h3>
         <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-          All of the pages and components are first designed in Figma and we
-          keep a parity between the two versions even as we update the project.
+          Diabetes, a condition characterized by high blood sugar levels, comes
+          in two main forms: Type 1, where the body fails to produce insulin,
+          and Type 2, where the body cannot use insulin effectively. Both types
+          require careful management of diet, exercise, and medication. The good
+          news is that with proactive management, you can lead a full and active
+          life.
         </p>
       </li>
       <li className="ms-4">
@@ -132,11 +139,11 @@ const BlogComponent = () => {
           April 2022
         </time>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          E-Commerce UI code in Tailwind CSS
+          Dietary Management
         </h3>
         <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-          Get started with dozens of web components and interactive elements
-          built on top of Tailwind CSS.
+          One of the pillars of diabetes care is dietary management. Here’s how
+          you can eat well to control your diabetes...
         </p>
       </li>
     </ol>

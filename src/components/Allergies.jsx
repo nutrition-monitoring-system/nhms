@@ -1,6 +1,6 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { AllergiesInformation } from "../utils/dataRegistration.js";
 
@@ -81,6 +81,9 @@ export default function Allergies({
     // Update selected user options
     SetUserSelected([...userSelected, AllergiesInformation[refIdx].type]);
   };
+  useEffect(() => {
+    localStorage.setItem("allergies", JSON.stringify(userSelected));
+  }, [userSelected]);
   return (
     <>
       {/* dynamic dialog box */}

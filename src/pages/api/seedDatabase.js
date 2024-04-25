@@ -2,6 +2,7 @@ import prisma from "../../utils/prismaclientUtil.js";
 import { v1 } from "uuid";
 import {
   AllergiesInformation,
+  Symptoms,
   chronicConditions,
   pinnedRecipes,
 } from "@/utils/dataRegistration.js";
@@ -90,6 +91,33 @@ export default async function handler(req, res) {
             }
           });
       });
+
+      console.log("Adding some common symptoms to the database.");
+
+      Symptoms.forEach(async (symptom) => {
+        const checkRecipe = await prisma.symptom
+        .findFirst({
+          where: {
+            symptomName: symptom,
+          },
+        })
+        .then(async (response) => {
+          // console.log(response)
+          if (response == null) {
+            /* Add the new data into the database. */
+            try {
+              let addNewRecipe = await prisma.symptom.create({
+                data: {
+                  symptomID: v1().slice(0, 32),
+                  symptomName: symptom.charAt(0).toUpperCase()
+                  + symptom.slice(1)
+                },
+              });
+            } catch {
+              console.log(`${symptom} was unable to be added.`);
+            }
+          }
+      })})
       console.log("Database populated.");
       return res.status(200).json({ ok: true });
     } catch (error) {

@@ -1,6 +1,6 @@
 "use client"; // This tells Next js that the everycode in this file will be rendered in the client side
 import Button from "./Button.jsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { settings } from "../utils/dataRegistration.js";
 
@@ -50,10 +50,16 @@ export default function Accessibility({
 
     // Deselect all other options and toggle background color for "None"
     handleNone(null);
-
     // Update selected user options
-    SetUserSelected([...userSelected, settings[refIdx].type]);
+    SetUserSelected([...userSelected, settings[refIdx].value]);
   };
+
+  useEffect(() => {
+    localStorage.setItem(
+      "accessibility_Settings",
+      JSON.stringify(userSelected)
+    );
+  }, [userSelected]);
 
   return (
     <>

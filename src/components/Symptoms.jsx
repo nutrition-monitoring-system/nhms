@@ -39,6 +39,7 @@ let options = [
 
 export default function Symptoms() {
   const [symptoms, setSymptoms] = useState([]);
+  /* Get user's username. */
   const { data: session, status } = useSession();
 
   const sendID = { id: session.user.name };

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
+import { useSession, signOut } from "next-auth/react";
+import toast from 'react-hot-toast';
 
 const FoodAndWaterLog = () => {
   // Refs for modals and form elements
@@ -13,6 +15,7 @@ const FoodAndWaterLog = () => {
   const foodName = useRef(null);
   const waterModal = useRef(null);
   const sliderRef = useRef(null);
+  const cycleModal = useRef(null);
   // State variables
   const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
   const [breakfast, setBreakFast] = useState([]);
@@ -36,6 +39,11 @@ const FoodAndWaterLog = () => {
     "sugar_g",
   ];
   const [type, setType] = useState("");
+  /* Get user's username. */
+  const { data: session, status } = useSession();
+
+  /* MADE USERNAME OPTIONAL BUT IT WONT WORK IN THE REGISTER SECTION */
+  let sendID = { id: session?.user.name };
   // Function to close the food modal
   const handleModalclose = (event) => {
     event.preventDefault();
@@ -116,8 +124,17 @@ const FoodAndWaterLog = () => {
     event.preventDefault();
     modalRef.current.close();
   };
+
+  const showCircleModal = () => {
+    cycleModal.current.showModal();
+  };
+  const showMoodModal = () => {
+    moodModal.current.showModal();
+  };
+
   return (
     <>
+    {/* Food Modal */}
       <dialog
         ref={foodModal}
         className="w-[35%] md:w-[90%] h-fit bg-white rounded-md p-1"
@@ -134,7 +151,7 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 place-items-center">
@@ -205,6 +222,7 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
+      {/* Water Modal */}
       <dialog
         ref={waterModal}
         className="w-[35%] md:w-full h-fit bg-white rounded-md p-1"
@@ -221,7 +239,7 @@ const FoodAndWaterLog = () => {
               width={20}
               height={20}
             ></Image>
-            close
+            Close
           </button>
         </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
@@ -254,7 +272,29 @@ const FoodAndWaterLog = () => {
               className="tile"
               id="addNext"
               onClick={(event) => {
+                /* This is where the fetch request for adding a new water entry should go. */
                 event.preventDefault();
+                console.log(sliderValue);
+                fetch("/api/log/addLogEntry", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    userID: sendID.id,
+                    keyword: "water",
+                    water: { "waterAmount": sliderValue},
+                  }),
+                }).then((response)=> {
+                  if(response.ok){
+                    toast.success('Water log added!')
+                  }
+                  else{
+                    toast.error('There was a problem.')
+                  }
+                });
+
+
                 waterModal.current.close();
               }}
             >
@@ -270,13 +310,129 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
+      {/* Menstrual Cycle Modal */}
+      <dialog
+        ref={cycleModal}
+        className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"
+      >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => {
+              handleModalClose(event, cycleModal);
+              setColorLogToggle("food");
+            }}
+            className="tile"
+          >
+            <Image
+              alt="add image icon"
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            Close
+          </button>
+        </div>
+        <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Menstrual Cycle Log
+          </h1>
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Time
+          </h1>
+          <input type="date" />
+        </div>
+        <div className="flex items-center justify-around w-full mt-2">
+          <button
+            className="tile"
+            id="addNext"
+            onClick={(event) => {
+              event.preventDefault();
+              cycleModal.current.close();
+              setColorLogToggle("food");
+            }}
+          >
+            <Image
+              src="/icons/add.png"
+              alt="add symbol"
+              className="rounded-full"
+              width={25}
+              height={25}
+            />
+            Add
+          </button>
+        </div>
+      </dialog>
+      {/* Mood Modal */}
+      <dialog
+        ref={moodModal}
+        className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"
+      >
+        <div className="w-full p-2">
+          <button
+            onClick={(event) => {
+              handleModalClose(event, moodModal);
+              setColorLogToggle("food");
+            }}
+            className="tile"
+          >
+            <Image
+              alt="add image icon"
+              src="/icons/add.png"
+              className="rotate-45"
+              width={20}
+              height={20}
+            ></Image>
+            Close
+          </button>
+        </div>
+        <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            Mood Log
+          </h1>
+          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+            How are you feeling today?
+          </h1>
+          <div className="grid w-full grid-cols-3 h-[50px] gap-2 p-2 place-content-center">
+            <div className="grid h-full rounded-md bg-emerald-400 place-items-center tile">
+              Happy
+            </div>
+            <div className="grid h-full rounded-md bg-amber-400 place-items-center tile">
+              Neutral
+            </div>
+            <div className="grid h-full rounded-md bg-rose-400 place-items-center tile">
+              Sad
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-around w-full mt-2">
+          <button
+            className="tile"
+            id="addNext"
+            onClick={(event) => {
+              event.preventDefault();
+              moodModal.current.close();
+              setColorLogToggle("food");
+            }}
+          >
+            <Image
+              src="/icons/add.png"
+              alt="add symbol"
+              className="rounded-full"
+              width={25}
+              height={25}
+            />
+            Add
+          </button>
+        </div>
+      </dialog>
 
       <Tabs
         defaultValue="food"
         className="min-h-[200px]"
         value={ColorLogToggle}
       >
-        <TabsList className="flex flex-row w-full h-auto p-2 mb-4 rounded-md shadow-inner place-content-evenly bg-primarylight shadow-primary/75 bg-blend-multiply">
+        <TabsList className="flex justify-around w-full h-auto p-2 mb-4 bg-white rounded-md shadow-inner shadow-primary/75 bg-blend-multiply">
           <TabsTrigger
             value="food"
             className={
@@ -290,7 +446,7 @@ const FoodAndWaterLog = () => {
           >
             Food Log
           </TabsTrigger>
-          <span className="w-0.5 min-h-full bg-[#C2897C]"></span>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
           <TabsTrigger
             value="water"
             className={
@@ -303,6 +459,36 @@ const FoodAndWaterLog = () => {
             }}
           >
             Water Log
+          </TabsTrigger>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
+          <TabsTrigger
+            value="cycle"
+            className={
+              ColorLogToggle === "cycle"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                : "tile bg-transparent shadow-none px-4 rounded-md"
+            }
+            onClick={() => {
+              setColorLogToggle("cycle");
+              showCircleModal();
+            }}
+          >
+            Cycle Log
+          </TabsTrigger>
+          <span className="w-0.5 min-h-full bg-secondary"></span>
+          <TabsTrigger
+            value="mood"
+            className={
+              ColorLogToggle === "mood"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                : "tile bg-transparent shadow-none px-4 rounded-md"
+            }
+            onClick={() => {
+              setColorLogToggle("mood");
+              showMoodModal();
+            }}
+          >
+            Mood Log
           </TabsTrigger>
         </TabsList>
         <TabsContent value="food" className="">

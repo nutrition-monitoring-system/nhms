@@ -56,14 +56,14 @@ const Information = [
 function InfoCard({ title, content }) {
   return (
     <>
-      <div className="max-w-md p-1 overflow-hidden rounded-lg shadow-xl bg-primarylight xl:flex xl:max-w-full">
-        <Image
+      <div className="max-w-md p-3 overflow-hidden rounded-lg shadow-xl bg-primarylight xl:flex xl:max-w-full">
+        {/* <Image
           className="w-full rounded-lg shadow-xl"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSm8oPRV7E_qlUYUZwVZDHiXR-0Sosbb1TujQ&usqp=CAU"
           width={500}
           height={300}
           alt="Sunset in the mountains"
-        />
+        /> */}
         <div className="px-6 py-4">
           <div className="mb-2 text-xl font-bold">{title}</div>
           <ul className="p-2 text-sm text-gray-900">
