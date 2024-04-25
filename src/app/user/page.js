@@ -6,6 +6,7 @@ import Loading from "../../components/Loading.jsx";
 import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 function Home({ params }) {
   // useRouter hook is use to navigate programmatically to different routes
@@ -26,6 +27,7 @@ function Home({ params }) {
   return (
     <>
       <User handsignOut={() => signOut({ callbackUrl: "/" })} />
+      <Toaster></Toaster>
     </>
   );
 }
