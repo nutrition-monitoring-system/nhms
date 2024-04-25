@@ -24,6 +24,19 @@ export default function SideNavBar() {
           Blogs
         </Link>
         <Link
+          href="/home"
+          className="flex items-center justify-start w-full gap-4 p-5 text-lg tile"
+        >
+          {" "}
+          <Image
+            alt="recipe icon"
+            src="/icons/recipe-book.png"
+            width={25}
+            height={25}
+          ></Image>
+          Recipes
+        </Link>
+        <Link
           href="#section2"
           className="flex items-center justify-start w-full gap-4 p-5 text-lg tile"
         >

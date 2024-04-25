@@ -66,7 +66,7 @@ function ChartComponent({ userID, keyword = "water" }) {
 
   useEffect(() => {
     const bodyToSend = { userID: userID, keyword: keyword };
-    if (Object.keys(bodyToSend).length === 0) {
+    if (userID === null || keyword === null) {
       return;
     }
     fetch("/api/log/getAllLogEntries", {

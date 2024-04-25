@@ -7,6 +7,8 @@ import { useSession, signOut } from "next-auth/react";
 import toast from "react-hot-toast";
 
 const FoodAndWaterLog = () => {
+  // user Earned points
+  const [points, setPoints] = useState(localStorage.getItem("points") || 20);
   // Refs for modals and form elements
   const checkboxRef = useRef(null);
   const foodModal = useRef(null);
@@ -132,6 +134,14 @@ const FoodAndWaterLog = () => {
     moodModal.current.showModal();
   };
 
+  useEffect(() => {
+    if (points < 1) {
+      setPoints(localStorage.getItem("points") || 0);
+      return;
+    }
+    localStorage.setItem("points", points);
+  }, [points]);
+
   return (
     <>
       {/* Food Modal */}
@@ -209,7 +219,21 @@ const FoodAndWaterLog = () => {
             ))}
           </details>
           <div className="flex items-center justify-around w-full mt-2">
-            <button onClick={handleAddFood} className="tile" id="addNext">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                toast.success("Food log added!");
+                setTimeout(() => {
+                  toast.success(
+                    "Earn +50 points for logging information about your diet. Well done!"
+                  );
+                }, 500);
+                setPoints((p) => p + 50);
+                handleModalClose(event, foodModal);
+              }}
+              className="tile"
+              id="addNext"
+            >
               <Image
                 src="/icons/add.png"
                 alt="add symbol"
@@ -288,6 +312,10 @@ const FoodAndWaterLog = () => {
                 }).then((response) => {
                   if (response.ok) {
                     toast.success("Water log added!");
+                    setTimeout(() => {
+                      toast.success("Earn +20 points for logging water!");
+                    }, 500);
+                    setPoints(points + 20);
                   } else {
                     toast.error("There was a problem.");
                   }
@@ -346,6 +374,13 @@ const FoodAndWaterLog = () => {
             id="addNext"
             onClick={(event) => {
               event.preventDefault();
+              toast.success("Cycle log added!");
+              setTimeout(() => {
+                toast.success(
+                  "Earn +50 points for logging information about your cycle!"
+                );
+              }, 500);
+              setPoints((p) => p + 50);
               cycleModal.current.close();
               setColorLogToggle("food");
             }}
@@ -409,6 +444,13 @@ const FoodAndWaterLog = () => {
             id="addNext"
             onClick={(event) => {
               event.preventDefault();
+              toast.success("Mood log added!");
+              setTimeout(() => {
+                toast.success(
+                  "Earn +30 points for logging information about your mood today!"
+                );
+              }, 500);
+              setPoints((p) => p + 30);
               moodModal.current.close();
               setColorLogToggle("food");
             }}

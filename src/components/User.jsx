@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //import "./User.css"; // 导入 CSS 文件
 import Image from "next/image";
 import Link from "next/link";
@@ -287,7 +287,13 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
 }
 
 function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
-  const count = 20;
+  const [points, setPoints] = useState(localStorage.getItem("points") || 20);
+
+  useEffect(() => {
+    if (points === 20) {
+      setPoints(localStorage.getItem("points", points));
+    }
+  }, [points]);
   return (
     <div className="grid items-center justify-center grid-cols-3 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
       <div className="flex items-center justify-center gap-1 py-6 user-info px-7 md:px-4 md:bg-white md:rounded-lg md:shadow-lg md:order-last">
@@ -313,7 +319,7 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
       </div>
       <div className="flex flex-col items-center justify-center h-full gap-2 py-2 bg-gray-200 rounded-lg min-h-fit">
         <span>you earned</span>
-        <span className="font-black text-[2rem]">{count}</span>
+        <span className="font-black text-[2rem]">{points}</span>
         <span className="">Points</span>
         <button className="tile">Redeem here!</button>
       </div>
