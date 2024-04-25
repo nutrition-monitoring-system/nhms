@@ -101,7 +101,7 @@ model Symptom {
   // This is where all the symptoms are kept.
   symptomID              String                   @id @unique @db.VarChar
   symptomName            String?                  @db.VarChar
-  SymptomLog             SymptomLog?
+  SymptomLog             SymptomLog[]
   MenstrualLogToSymptoms MenstrualLogToSymptoms[]
 }
 
@@ -144,11 +144,11 @@ model HealthLog {
 model MoodLog {
   // This is where the mood log entries can be found. These will have a tag of mood
   // in the logtype.
-  moodID     String @id @unique @db.Char(32)
+  moodID     String @db.Char(32)
   moodStatus String
 
   //This maps the relation to the logID. 
-  log_logID String @unique @db.VarChar(32)
+  log_logID String @id @unique @db.VarChar(32)
   LogID     Log    @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
 }
 
@@ -173,13 +173,10 @@ model SymptomLog {
   intensity Int
 
   //This maps the relation to the logID + the symptom ID.
-  log_logID         String  @unique @db.VarChar(32)
+  log_logID         String  @id @unique @db.VarChar(32)
   LogID             Log     @relation(fields: [log_logID], references: [logID], onDelete: Cascade, onUpdate: Cascade)
-  symptom_symptomID String  @unique @db.VarChar(32)
+  symptom_symptomID String  @db.VarChar(32)
   symptom           Symptom @relation(fields: [symptom_symptomID], references: [symptomID], onDelete: Cascade, onUpdate: Cascade)
-
-  //Creates a compound ID.
-  @@id([log_logID, symptom_symptomID])
 }
 
 model WaterLog {
