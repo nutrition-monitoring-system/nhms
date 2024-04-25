@@ -31,7 +31,28 @@ const AllergiesInformation = [
   { type: "Shellfish", description: "Allergic to shellfish." },
   { type: "Meat", description: "Allergic to meat products." },
 ];
-
+/* List of common symptoms */
+const Symptoms = [
+  "Fatigue",
+  "Weakness",
+  "Shortness of breath",
+  "Memory problems",
+  "Brain Fog",
+  "Insomnia",
+  "Sleep Apnea",
+  "Depression",
+  "Anxiety",
+  "Muscle weakness",
+  "Constipation",
+  "Diarrhea",
+  "Nausea",
+  "Loss of appetite",
+  "Dizziness",
+  "Numbness",
+  "Unexplained weight gain",
+  "Chronic cough",
+  "Wheezing",
+];
 // List of available allergies with types and descriptions
 const chronicConditions = [
   {
@@ -807,4 +828,5 @@ export {
   chronicConditions,
   foodTypeInformation,
   pinnedRecipes,
+  Symptoms
 };
