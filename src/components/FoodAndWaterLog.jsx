@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 import { useSession, signOut } from "next-auth/react";
+import toast from 'react-hot-toast';
 
 const FoodAndWaterLog = () => {
   // Refs for modals and form elements
@@ -283,7 +284,16 @@ const FoodAndWaterLog = () => {
                     keyword: "water",
                     water: { "waterAmount": sliderValue},
                   }),
+                }).then((response)=> {
+                  if(response.ok){
+                    toast.success('Water log added!')
+                  }
+                  else{
+                    toast.error('There was a problem.')
+                  }
                 });
+
+
                 waterModal.current.close();
               }}
             >
@@ -299,6 +309,7 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
+      {/* Menstrual Cycle Modal */}
       <dialog
         ref={cycleModal}
         className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"

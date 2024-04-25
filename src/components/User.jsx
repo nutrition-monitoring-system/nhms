@@ -145,6 +145,7 @@ export default function User({ handsignOut }) {
   const handleShowNavBar = () => {};
 
   return (
+    <>
     <div className="flex gap-4 px-3 py-10 bg-gray-900 body md:flex-col">
       <SideNavBar handleShowNavBar={handleShowNavBar}></SideNavBar>
       <div className="flex flex-col overflow-hidden w-full xl-[95%] bg-white p-2 rounded-xl">
@@ -160,6 +161,7 @@ export default function User({ handsignOut }) {
         {/* <ChartComponent /> */}
       </div>
     </div>
+    </>
   );
 }
 
