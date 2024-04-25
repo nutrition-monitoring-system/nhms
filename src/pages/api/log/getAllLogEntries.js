@@ -1,7 +1,7 @@
 /* This route gets all the user's food logs. This returns the user's logs as a list.*/
 import prisma from "../../../utils/prismaclientUtil";
 export default async function handler(req, res) {
-  if (req.method == "GET") {
+  if (req.method == "POST") {
     // Process a GET request
     const { userID, keyword } = req.body;
     if (keyword == null) {
@@ -39,8 +39,7 @@ export default async function handler(req, res) {
           },
         });
         return res.status(200).json({ ok: true, logs: getLogIDs });
-      }
-      else if (keyword == "symptom"){
+      } else if (keyword == "symptom") {
         let getLogIDs = await prisma.log.findMany({
           where: { user_UserID: userID, logType: keyword },
           select: {
@@ -55,8 +54,7 @@ export default async function handler(req, res) {
           },
         });
         return res.status(200).json({ ok: true, logs: getLogIDs });
-      }
-      else{
+      } else {
         let getLogIDs = await prisma.log.findMany({
           where: { user_UserID: userID, logType: keyword },
           select: {

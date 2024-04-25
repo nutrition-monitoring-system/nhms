@@ -74,7 +74,7 @@ const FileUpload = ({ fetchImages }) => {
         <div>
           <FoodAndWaterLog />
         </div>
-        <div>
+        <div className="">
           <input
             type="file"
             ref={fileInputRef}
@@ -82,7 +82,7 @@ const FileUpload = ({ fetchImages }) => {
             style={{ display: "none" }}
           />
           <button
-            className="flex w-1/2 px-5 py-3 space-x-3 bg-white rounded-md shadow-lg tile log-bar hover:bg-white/75"
+            className="flex w-full px-5 py-4 space-x-3 bg-white rounded-md shadow-lg tile log-bar hover:bg-white/75"
             onClick={triggerFileInputClick} // Use the new method here
           >
             <FaCamera className="size-6" />

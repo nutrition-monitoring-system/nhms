@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
 import { useSession, signOut } from "next-auth/react";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const FoodAndWaterLog = () => {
   // Refs for modals and form elements
@@ -134,7 +134,7 @@ const FoodAndWaterLog = () => {
 
   return (
     <>
-    {/* Food Modal */}
+      {/* Food Modal */}
       <dialog
         ref={foodModal}
         className="w-[35%] md:w-[90%] h-fit bg-white rounded-md p-1"
@@ -283,17 +283,15 @@ const FoodAndWaterLog = () => {
                   body: JSON.stringify({
                     userID: sendID.id,
                     keyword: "water",
-                    water: { "waterAmount": sliderValue},
+                    water: { waterAmount: sliderValue },
                   }),
-                }).then((response)=> {
-                  if(response.ok){
-                    toast.success('Water log added!')
-                  }
-                  else{
-                    toast.error('There was a problem.')
+                }).then((response) => {
+                  if (response.ok) {
+                    toast.success("Water log added!");
+                  } else {
+                    toast.error("There was a problem.");
                   }
                 });
-
 
                 waterModal.current.close();
               }}
@@ -437,7 +435,7 @@ const FoodAndWaterLog = () => {
             value="food"
             className={
               ColorLogToggle === "food"
-                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner md:text-sm shadow-black/10"
                 : "tile px-4 bg-transparent shadow-none rounded-md"
             }
             onClick={() => {
@@ -451,7 +449,7 @@ const FoodAndWaterLog = () => {
             value="water"
             className={
               ColorLogToggle === "water"
-                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner md:text-sm shadow-black/10"
                 : "tile bg-transparent shadow-none px-4 rounded-md"
             }
             onClick={() => {
@@ -465,7 +463,7 @@ const FoodAndWaterLog = () => {
             value="cycle"
             className={
               ColorLogToggle === "cycle"
-                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner shadow-black/10"
+                ? "tile font-bold bg-primary px-4 rounded-md shadow-inner md:text-sm shadow-black/10"
                 : "tile bg-transparent shadow-none px-4 rounded-md"
             }
             onClick={() => {
