@@ -40,7 +40,6 @@ const chronicConditions = [
       "Irritable bowel syndrome (IBS) is a common condition that affects the digestive system.",
   },
   { type: "Diabetes", description: "Affects blood sugar regulation." },
-  { type: "IBS", description: "Irritates bowels." },
   { type: "Hypertension", description: "High blood pressure." },
   {
     type: "Asthma",

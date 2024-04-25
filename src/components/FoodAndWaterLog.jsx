@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState, useRef, useEffect } from "react";
 import { Slider } from "@/components/ui/slider";
+import { useSession, signOut } from "next-auth/react";
 
 const FoodAndWaterLog = () => {
   // Refs for modals and form elements
@@ -37,6 +38,10 @@ const FoodAndWaterLog = () => {
     "sugar_g",
   ];
   const [type, setType] = useState("");
+  /* Get user's username. */
+  const { data: session, status } = useSession();
+
+  const sendID = { id: session.user.name };
   // Function to close the food modal
   const handleModalclose = (event) => {
     event.preventDefault();
@@ -118,7 +123,7 @@ const FoodAndWaterLog = () => {
     modalRef.current.close();
   };
 
-  const showCirlceModal = () => {
+  const showCircleModal = () => {
     cycleModal.current.showModal();
   };
   const showMoodModal = () => {
@@ -127,6 +132,7 @@ const FoodAndWaterLog = () => {
 
   return (
     <>
+    {/* Food Modal */}
       <dialog
         ref={foodModal}
         className="w-[35%] md:w-[90%] h-fit bg-white rounded-md p-1"
@@ -214,6 +220,7 @@ const FoodAndWaterLog = () => {
           </div>
         </div>
       </dialog>
+      {/* Water Modal */}
       <dialog
         ref={waterModal}
         className="w-[35%] md:w-full h-fit bg-white rounded-md p-1"
@@ -263,7 +270,20 @@ const FoodAndWaterLog = () => {
               className="tile"
               id="addNext"
               onClick={(event) => {
+                /* This is where the fetch request for adding a new water entry should go. */
                 event.preventDefault();
+                console.log(sliderValue);
+                fetch("/api/log/addLogEntry", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    userID: sendID.id,
+                    keyword: "water",
+                    water: { "waterAmount": sliderValue},
+                  }),
+                });
                 waterModal.current.close();
               }}
             >
@@ -331,6 +351,7 @@ const FoodAndWaterLog = () => {
           </button>
         </div>
       </dialog>
+      {/* Mood Modal */}
       <dialog
         ref={moodModal}
         className="w-[30%] md:w-full h-fit bg-white rounded-md p-1"
@@ -437,7 +458,7 @@ const FoodAndWaterLog = () => {
             }
             onClick={() => {
               setColorLogToggle("cycle");
-              showCirlceModal();
+              showCircleModal();
             }}
           >
             Cycle Log
