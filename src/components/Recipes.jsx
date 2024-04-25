@@ -10,7 +10,7 @@ export default function Recipes(props) {
       {recipesList.length === 0 ? (
         <></>
       ) : (
-        <div className="flex flex-wrap gap-5 justify-center items-start p-2 md:grid-cols-1 md:px-10 w-[80%] h-fit min-h-3/4 sm:w-full">
+        <div className="grid items-start justify-center grid-cols-3 gap-5 p-2 w-fit md:grid-cols-1 h-fit min-h-3/4 sm:w-full">
           <RecipesModal recipe={currentRecipe} />
           <RenderRecipeSection {...props} setCurrentRecipe={setCurrentRecipe} />
         </div>
@@ -186,7 +186,7 @@ function RecipeInfo({
   };
   return (
     <>
-      <div className="max-w-sm overflow-hidden border-2 border-gray-300 rounded-lg shadow-xl p-4">
+      <div className="p-4 overflow-hidden border-2 border-gray-200 rounded-lg shadow-xl backdrop-blur-sm">
         <div className="grid p-3 place-items-center">
           {/* <Image
             className="w-full m-2 rounded-lg shadow-xl"

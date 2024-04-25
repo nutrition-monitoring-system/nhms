@@ -11,22 +11,14 @@ function ChartComponent({ userID, keyword = "water" }) {
     if (waterLog.length === 0) {
       return;
     }
-    // const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    // const data = [];
-    // for (let i = 0; i < days.length; i++) {
-    //   data.push(Math.floor(Math.random() * 200) + 100);
-    // }
-
     const timeStamp = [];
     const data = [];
 
     for (let i = 0; i < waterLog.length; i++) {
-      console.log(waterLog[i]);
-      timeStamp.push(
-        new Date(Date.parse(waterLog[i].timestamp)).toDateString()
-      );
+      let timestamp = new Date(Date.parse(waterLog[i].timestamp));
+      let formattedTimestamp = `${timestamp.toDateString()} ${timestamp.toLocaleTimeString()}`;
+      timeStamp.push(formattedTimestamp);
       data.push(waterLog[i].WaterLog.waterAmount);
-      //console.log(new Date(Date.parse(waterLog[i].timeStamp)).toDateString());
     }
 
     // Set options for the chart
