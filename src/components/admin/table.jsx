@@ -1,31 +1,31 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Collapse from '@mui/material/Collapse'
-import IconButton from '@mui/material/IconButton'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Typography from '@mui/material/Typography'
-import Paper from '@mui/material/Paper'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
 
-import { FaAngleDown as KeyboardArrowDownIcon } from 'react-icons/fa'
-import { FaAngleUp as KeyboardArrowUpIcon } from 'react-icons/fa'
-import { Chip, LinearProgress, Pagination } from '@mui/material'
+import { FaAngleDown as KeyboardArrowDownIcon } from "react-icons/fa";
+import { FaAngleUp as KeyboardArrowUpIcon } from "react-icons/fa";
+import { Chip, LinearProgress, Pagination } from "@mui/material";
 
 export default function AdminTable(props) {
-  const { rows, onSelect } = props
-  const [selectedRow, setSelectedRow] = React.useState(null)
+  const { rows, onSelect } = props;
+  const [selectedRow, setSelectedRow] = React.useState(null);
 
-  const handleClick = row => {
-    setSelectedRow(row.id)
-    onSelect(row)
-  }
+  const handleClick = (row) => {
+    setSelectedRow(row.id);
+    onSelect(row);
+  };
   return (
     <>
-      <TableContainer component={Paper} sx={{ maxHeight: 400 }}>
+      <TableContainer component={Paper} sx={{ minHeight: 400 }}>
         <Table aria-label="collapsible table">
           <TableHead>
             <TableRow>
@@ -39,33 +39,42 @@ export default function AdminTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <Row key={row.name} row={row} selected={selectedRow === row.id} onClick={() => handleClick(row)} />
+            {rows.map((row) => (
+              <Row
+                key={row.name}
+                row={row}
+                selected={selectedRow === row.id}
+                onClick={() => handleClick(row)}
+              />
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-      <div className="mt-4 flex justify-center">
+      <div className="flex justify-center mt-4">
         <Pagination count={10} color="primary" />
       </div>
     </>
-  )
+  );
 }
 
 function Row(props) {
-  const { row, onClick, selected } = props
-  const [open, setOpen] = React.useState(false)
+  const { row, onClick, selected } = props;
+  const [open, setOpen] = React.useState(false);
 
   return (
     <React.Fragment>
       <TableRow
-        sx={{ '& > *': { borderBottom: 'unset' }, cursor: 'pointer' }}
+        sx={{ "& > *": { borderBottom: "unset" }, cursor: "pointer" }}
         hover
         onClick={onClick}
         selected={selected}
       >
         <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
@@ -74,7 +83,13 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{row.symptoms.length}</TableCell>
         <TableCell align="right">
-          <Chip label={row.status} color={row.status === 'Sick' ? 'error' : 'success'} />
+          <button
+            className={
+              row.status === "Sick" ? "chip bg-rose-400" : "chip bg-emerald-400"
+            }
+          >
+            {row.status}
+          </button>
         </TableCell>
         {/* <TableCell align="right">{row.carbs}</TableCell>
         <TableCell align="right">{row.protein}</TableCell> */}
@@ -96,7 +111,7 @@ function Row(props) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.symptoms.map(item => (
+                  {row.symptoms.map((item) => (
                     <TableRow key={item.name}>
                       <TableCell component="th" scope="row">
                         {item.date}
@@ -110,7 +125,11 @@ function Row(props) {
                             variant="determinate"
                             value={Number(item.intensity) * 10}
                           />
-                          <Typography variant="body2" color="text.secondary" className="inline">
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            className="inline"
+                          >
                             {item.intensity}
                           </Typography>
                         </div>
@@ -124,5 +143,5 @@ function Row(props) {
         </TableCell>
       </TableRow>
     </React.Fragment>
-  )
+  );
 }
