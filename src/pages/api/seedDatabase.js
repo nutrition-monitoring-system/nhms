@@ -118,6 +118,10 @@ export default async function handler(req, res) {
             }
           }
       })})
+
+      console.log("Adding some foods from the OpenFoodFacts API to the database.")
+
+      fetch("/api/getNutrition")
       console.log("Database populated.");
       return res.status(200).json({ ok: true });
     } catch (error) {

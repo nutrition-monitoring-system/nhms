@@ -47,7 +47,7 @@ export default async function handler(req, res) {
     /* Get a product name + the nutritional values */
     try {
       const nutrition = [];
-      let numberOfEntries = 100;
+      let numberOfEntries = 10;
       if (req.body.numberOfEntries != null) {
         numberOfEntries = req.body.numberOfEntries;
       }
