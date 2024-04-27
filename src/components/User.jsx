@@ -287,11 +287,13 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
 }
 
 function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
-  const [points, setPoints] = useState(localStorage.getItem("points") || 20);
+  const [points, setPoints] = useState(
+    parseInt(localStorage.getItem("points")) || 20
+  );
 
   useEffect(() => {
     if (points === 20) {
-      setPoints(localStorage.getItem("points", points));
+      setPoints(parseInt(localStorage.getItem("points")));
     }
   }, [points]);
   return (
@@ -321,7 +323,9 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
         <span>you earned</span>
         <span className="font-black text-[2rem]">{points}</span>
         <span className="">Points</span>
-        <button className="tile">Redeem here!</button>
+        <Link href={"/home"} className="tile">
+          Redeem here!
+        </Link>
       </div>
       <div className="grid gap-2 place-items-center">
         <button className="tile" onClick={signOut}>

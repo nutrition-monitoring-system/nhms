@@ -98,7 +98,9 @@ function NavBar({
   // The refList is used to store all the references of the html elements
   const refList = [home, recipes, recipesCollections];
   //stores information about the number of points each user has earned
-  const [points, setPoints] = useState(localStorage.getItem("points") || 20);
+  const [points, setPoints] = useState(
+    parseInt(localStorage.getItem("points")) || 20
+  );
 
   const handleOnclick = (reference) => {
     // This function is used to change the background color of the navigation bar when the user clicks on the button
@@ -131,7 +133,7 @@ function NavBar({
 
   useEffect(() => {
     if (points === 20) {
-      setPoints(localStorage.getItem("points", points));
+      setPoints(parseInt(localStorage.getItem("points", points)) || 20);
     }
   }, [points]);
   return (
