@@ -1,32 +1,41 @@
-"use client";
-import Image from "next/image";
-import Logo from "../../components/Logo";
-import ProfileNavigation from "../../components/ProfileNavigation";
-import { SessionProvider } from "next-auth/react";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Loading from "@/components/Loading";
-import SideNavBar from "@/components/SideNav";
+'use client'
+import { SessionProvider } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import Loading from '@/components/Loading'
+import SideNavBar from '@/components/SideNav'
+
+import * as React from 'react'
+import Typography from '@mui/material/Typography'
+import Breadcrumbs from '@mui/material/Breadcrumbs'
+import Link from '@mui/material/Link'
+import AdminTable from '@/components/admin/table'
+import { Button, LinearProgress, Paper, ThemeProvider, createTheme } from '@mui/material'
+import Card from '@mui/material/Card'
+import CardHeader from '@mui/material/CardHeader'
+import CardContent from '@mui/material/CardContent'
+import { CardFooter } from '@/components/ui/card'
+
 export default function Page() {
   return (
     <SessionProvider>
       <Home />
     </SessionProvider>
-  );
+  )
 }
 function Home() {
   // useRouter hook is use to navigate programmatically to different routes
-  const router = useRouter();
+  const router = useRouter()
   // checking if user is authenticated or not
-  const { session, status } = useSession({
+  const { status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
-      return router.push("/login");
+      return router.push('/login')
     },
-  });
+  })
   // if user is authenticated then render the admin page else render the loading component
-  if (status == "authenticated") {
+  if (status == 'authenticated') {
     return (
       <>
         <div className="sm:grid hidden absolute inset-0 bg-white p-2 text-lg text-center z-[1000] place-items-center">
@@ -37,104 +46,155 @@ function Home() {
           <MainPage />
         </div>
       </>
-    );
+    )
   }
-  return <Loading></Loading>;
+  return <Loading></Loading>
 }
 
-const MainPageNavBar = () => {
-  return (
-    <div className="grid w-full grid-cols-2 px-3 py-2 md:grid-cols-1">
-      <div className="grid place-items-center text-black font-extrabold font-opensans text-[30px]">
-        Admin Dashboard
-      </div>
-      <div className="flex items-center justify-center gap-2 sm:gap-1 sm:col-span-2">
-        <ProfileNavigation />
-      </div>
-    </div>
-  );
-};
+const rows = [
+  {
+    id: 1,
+    name: 'Johns',
+    status: 'Sick',
+    symptoms: [
+      { name: 'Fever', intensity: 6, date: '2021-10-10' },
+      { name: 'Cough', intensity: 4, date: '2021-10-10' },
+      { name: 'Headache', intensity: 3, date: '2021-10-10' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Doe',
+    status: 'Healthy',
+    symptoms: [
+      { name: 'Couph', intensity: 4, date: '2021-10-10' },
+      { name: 'Headache', intensity: 9, date: '2021-10-10' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Doe',
+    status: 'Healthy',
+    symptoms: [
+      { name: 'Couph', intensity: 4, date: '2021-10-10' },
+      { name: 'Headache', intensity: 9, date: '2021-10-10' },
+    ],
+  },
+]
 
-const MainPage = () => (
-  <div className="flex flex-col items-center justify-center w-screen col-span-3 gap-1 p-2">
-    <MainPageNavBar></MainPageNavBar>
-    <div className="grid w-full h-full grid-cols-3 gap-2 p-3 overflow-hidden bg-white rounded-lg md:grid-cols-1 md:grid-rows-3">
-      <div className="grid grid-rows-6 gap-3 p-4 place-content-center">
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Manage Frontend</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Frontend Customisation</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Manage Mobile app</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>System Diagnostics</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Permissions Access</div>
-        </button>
+function MainPage() {
+  const [showRow, setShowRow] = React.useState({
+    id: 3,
+    name: 'Doe',
+    status: 'Healthy',
+    symptoms: [
+      { name: 'Couph', intensity: 4, date: '2021-10-10' },
+      { name: 'Headache', intensity: 9, date: '2021-10-10' },
+    ],
+  })
+  const onSelect = row => {
+    setShowRow(row)
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div className="h-screen w-full p-6 bg-gray-50">
+        <header>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link underline="hover" color="inherit" href="/">
+              NHMS
+            </Link>
+            <Typography color="text.primary">Admin</Typography>
+          </Breadcrumbs>
+        </header>
+
+        <div className="flex flex-row gap-8 h-full pt-8">
+          <div className="basis-2/3 flex flex-col gap-10">
+            <div className="flex gap-4">
+              <Paper className="p-6">
+                <Typography color="text.primary" gutterBottom>
+                  Your Symptoms Data
+                </Typography>
+                <Typography variant="body1" gutterBottom>
+                  This is the data of all the symptoms that have been recorded by the users.
+                </Typography>
+                <Button variant="contained" color="primary">
+                  <Link underline="none" color="inherit" href="/user">
+                    Create New Symptoms
+                  </Link>
+                </Button>
+              </Paper>
+              <Paper className="p-6 basis-1/3">
+                <Typography color="text.secondary" gutterBottom>
+                  This Week
+                </Typography>
+                <div className="text-5xl">13</div>
+                <Typography color="text.secondary" sx={{ fontSize: '0.75em' }} gutterBottom>
+                  -25% from last week
+                </Typography>
+                <LinearProgress color="primary" variant="determinate" value={25} />
+              </Paper>
+              <Paper className="p-6 basis-1/3">
+                <Typography color="text.secondary" gutterBottom>
+                  This Month
+                </Typography>
+                <div className="text-5xl">55</div>
+                <Typography color="text.secondary" sx={{ fontSize: '0.75em' }} gutterBottom>
+                  -10% from last Month
+                </Typography>
+                <LinearProgress color="primary" variant="determinate" value={10} />
+              </Paper>
+            </div>
+
+            <div>
+              <div className="mb-4 flex justify-end gap-2">
+                <Button variant="contained" color="inherit">
+                  Filter
+                </Button>
+                <Button variant="contained" color="inherit">
+                  Export
+                </Button>
+              </div>
+              <Paper className="p-6" sx={{ overflow: 'hidden' }}>
+                <div className="mb-6">
+                  <Typography color="text.primary">Symptoms</Typography>
+                  <Typography color="text.secondary">Recent orders from the user.</Typography>
+                </div>
+                <AdminTable rows={rows} onSelect={onSelect} />
+              </Paper>
+            </div>
+          </div>
+
+          {showRow && (
+            <div className="basis-1/3 h-full">
+              <Card className="p-6">
+                <CardHeader title={showRow.name} subheader="September 14, 2016" />
+                <CardContent>
+                  <Typography variant="body2" color="text.secondary">
+                    NHMS, short for Nutrition and Health Monitoring System, is the result of Team Delta’s year-long
+                    software engineering project at the University of Aberdeen. This web-based application is designed
+                    to assist individuals with chronic health conditions such as IBS and diabetes in tracking their
+                    nutrition and symptoms.
+                  </Typography>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="contained" color="primary" size="small">
+                    View Profile
+                  </Button>
+                </CardFooter>
+              </Card>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="grid grid-cols-2 grid-rows-3 gap-1 p-2 bg-white">
-        <div className="flex flex-col items-center justify-center text-lg text-black bg-white rounded-md shadow-md">
-          <h4 className="text-[1.4rem] font-bold">2.5k</h4>
-          <span className="text-center">
-            accounts <br></br> created
-          </span>
-        </div>
-        <div className="flex flex-col items-center justify-center text-lg text-black bg-white rounded-md shadow-md">
-          <h4 className="text-[1.4rem] font-bold">376</h4>
-          <span className="text-center">Visited today</span>
-        </div>
-        <div className="relative flex items-center justify-center col-span-2 p-2 bg-white rounded-md shadow-md">
-          <h2 className="font-opensans font-black text-[1.5rem] text-black">
-            Image graph here
-          </h2>
-        </div>
-        <div className="grid col-span-2 py-2 bg-white rounded-md shadow-md place-items-center">
-          <button className="text-lg tile">
-            <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-            <div>User Analytics</div>
-          </button>
-          <button className="text-lg tile">
-            <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-            <div>User Information</div>
-          </button>
-        </div>
-      </div>
-      <div className="grid grid-rows-6 gap-3 p-4 rounded-lg place-content-center">
-        <button className="text-lg tile">
-          <Image
-            src="/icons/search.png"
-            alt="add icon"
-            width={20}
-            height={20}
-          />
-          <div>Quick Search</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Manage Blogs</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>Manage Articles</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>User Information</div>
-        </button>
-        <button className="text-lg tile">
-          <Image src="/icons/add.png" alt="add icon" width={20} height={20} />
-          <div>User Feedback</div>
-        </button>
-      </div>
-    </div>
-  </div>
-);
+    </ThemeProvider>
+  )
+}
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#f4ab9b',
+    },
+  },
+})
