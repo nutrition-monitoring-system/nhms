@@ -13,7 +13,7 @@ import Paper from '@mui/material/Paper'
 
 import { FaAngleDown as KeyboardArrowDownIcon } from 'react-icons/fa'
 import { FaAngleUp as KeyboardArrowUpIcon } from 'react-icons/fa'
-import { Chip, Pagination } from '@mui/material'
+import { Chip, LinearProgress, Pagination } from '@mui/material'
 
 export default function AdminTable(props) {
   const { rows, onSelect } = props
@@ -102,8 +102,19 @@ function Row(props) {
                         {item.date}
                       </TableCell>
                       <TableCell>{item.name}</TableCell>
-                      <TableCell align="right">{item.intensity}</TableCell>
-                      {/* <TableCell align="right">{Math.round(historyRow.amount * row.price * 100) / 100}</TableCell> */}
+                      <TableCell align="right">
+                        <div className="flex items-center justify-end gap-2">
+                          <LinearProgress
+                            className="flex-1"
+                            color="primary"
+                            variant="determinate"
+                            value={Number(item.intensity) * 10}
+                          />
+                          <Typography variant="body2" color="text.secondary" className="inline">
+                            {item.intensity}
+                          </Typography>
+                        </div>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
