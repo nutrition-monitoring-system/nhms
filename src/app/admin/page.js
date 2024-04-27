@@ -11,10 +11,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs'
 import Link from '@mui/material/Link'
 import AdminTable from '@/components/admin/table'
 import { Button, LinearProgress, Paper, ThemeProvider, createTheme } from '@mui/material'
-import Card from '@mui/material/Card'
-import CardHeader from '@mui/material/CardHeader'
-import CardContent from '@mui/material/CardContent'
-import { CardFooter } from '@/components/ui/card'
+import AdminPeopleCard from '@/components/admin/sider'
 
 export default function Page() {
   return (
@@ -61,6 +58,8 @@ const rows = [
       { name: 'Cough', intensity: 4, date: '2021-10-10' },
       { name: 'Headache', intensity: 3, date: '2021-10-10' },
     ],
+    chronicCondition: ['IBS', 'Diabetes', 'Hypertension'],
+    goals: ['Lose Weight', 'Gain Muscle'],
   },
   {
     id: 2,
@@ -70,6 +69,8 @@ const rows = [
       { name: 'Couph', intensity: 4, date: '2021-10-10' },
       { name: 'Headache', intensity: 9, date: '2021-10-10' },
     ],
+    chronicCondition: ['Asthma', 'COPD'],
+    goals: ['Lose Weight', 'Gain Muscle'],
   },
   {
     id: 3,
@@ -79,21 +80,14 @@ const rows = [
       { name: 'Couph', intensity: 4, date: '2021-10-10' },
       { name: 'Headache', intensity: 9, date: '2021-10-10' },
     ],
+    chronicCondition: ['Chronic Kidney Disease', 'Arthritis', 'Cancer'],
   },
 ]
 
 function MainPage() {
-  const [showRow, setShowRow] = React.useState({
-    id: 3,
-    name: 'Doe',
-    status: 'Healthy',
-    symptoms: [
-      { name: 'Couph', intensity: 4, date: '2021-10-10' },
-      { name: 'Headache', intensity: 9, date: '2021-10-10' },
-    ],
-  })
+  const [selectRow, setSelectRow] = React.useState(rows[0])
   const onSelect = row => {
-    setShowRow(row)
+    setSelectRow(row)
   }
 
   return (
@@ -148,10 +142,10 @@ function MainPage() {
 
             <div>
               <div className="mb-4 flex justify-end gap-2">
-                <Button variant="contained" color="inherit">
+                <Button variant="contained" color="inherit" size='small'>
                   Filter
                 </Button>
-                <Button variant="contained" color="inherit">
+                <Button variant="contained" color="inherit" size='small'>
                   Export
                 </Button>
               </div>
@@ -165,26 +159,7 @@ function MainPage() {
             </div>
           </div>
 
-          {showRow && (
-            <div className="basis-1/3 h-full">
-              <Card className="p-6">
-                <CardHeader title={showRow.name} subheader="September 14, 2016" />
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    NHMS, short for Nutrition and Health Monitoring System, is the result of Team Delta’s year-long
-                    software engineering project at the University of Aberdeen. This web-based application is designed
-                    to assist individuals with chronic health conditions such as IBS and diabetes in tracking their
-                    nutrition and symptoms.
-                  </Typography>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="contained" color="primary" size="small">
-                    View Profile
-                  </Button>
-                </CardFooter>
-              </Card>
-            </div>
-          )}
+          {selectRow && <AdminPeopleCard row={selectRow} />}
         </div>
       </div>
     </ThemeProvider>
