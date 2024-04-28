@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     if (id) {
       const userData = await prisma.user.findFirst({ where: { userID: id } });
       /* Any cases where a user with the id exists. */
-      if (userData.is_admin == 1) {
+      if (userData.isAdmin == 1) {
         /* The user is an admin. */
         return res.status(200).json({
           ok: "true",
