@@ -20,5 +20,28 @@ const updateUserSchema = object().shape({
   gender: string("Please select your gender."),
   email: string().email("Please type in your email."),
 });
-export { updateUserSchema };
+
+function UpdateAllthemesStoredOnDevice() {
+  try {
+    const primary = localStorage.getItem("--color-primary");
+    const secondary = localStorage.getItem("--color-secondary");
+    const primaryLight = localStorage.getItem("--color-primary-light");
+    const secondaryLight = localStorage.getItem("--color-secondary-light");
+
+    document.documentElement.style.setProperty("--color-primary", primary);
+    document.documentElement.style.setProperty("--color-secondary", secondary);
+    document.documentElement.style.setProperty(
+      "--color-primary-light",
+      primaryLight
+    );
+    document.documentElement.style.setProperty(
+      "--color-secondary-light",
+      secondaryLight
+    );
+    console.log("something ain't right");
+  } catch (e) {
+    console.log("No stored theme colors availaible");
+  }
+}
+export { updateUserSchema, UpdateAllthemesStoredOnDevice };
 export default userSchema;

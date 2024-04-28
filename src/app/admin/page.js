@@ -7,7 +7,9 @@ import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import SideNavBar from "@/components/SideNav";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 export default function Page() {
+  UpdateAllthemesStoredOnDevice();
   return (
     <SessionProvider>
       <Home />

@@ -11,7 +11,7 @@ import Allergies from "@/components/Allergies.jsx";
 import ChronicConditions from "@/components/ChronicConditions.jsx";
 import DailyIntake from "@/components/DailyIntake.jsx";
 import Accessibility from "@/components/Accessibility.jsx";
-
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils.js";
 // handles rerouting users
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -26,6 +26,7 @@ import userSchema from "../../utils/otherUtils";
 export default function Page() {
   // Start point of this page
   // Uses Session to check if the user is logged in or nots
+  UpdateAllthemesStoredOnDevice();
   return (
     <SessionProvider>
       <Home></Home>

@@ -10,9 +10,11 @@ import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
 import PopModal from "@/components/PopUp";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 
 export default function Page() {
   // Using the Session Provider Api we wrap the home page so we have access to session data
+  UpdateAllthemesStoredOnDevice();
   return (
     <>
       <SessionProvider>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 //import "./User.css"; // 导入 CSS 文件
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,10 @@ import {
   FaCamera,
   FaPencilAlt,
   FaBars,
+  FaThemeco,
+  Fa,
 } from "react-icons/fa";
+import { IoIosColorFilter } from "react-icons/io";
 import {
   MdSettings,
   MdLocalHospital,
@@ -64,7 +67,7 @@ function UserData({ props }) {
   if (!data) {
     return <div className="">Loading...</div>;
   }
-  if (props == "calendar") {
+  if (props === "calendar") {
     return (
       <div className="container py-3 space-y-3">
         <h1 id="generatedData" className="p-5 bg-white rounded-md">
@@ -73,9 +76,12 @@ function UserData({ props }) {
         <p className="p-5 bg-white rounded-md">Email: {session?.user?.email}</p>
       </div>
     );
-  } else if (props == "nav") {
+  } else if (props === "nav") {
     /* Checks if the props are a navbar. */
     const dob = new Date(data.dob);
+    const date = dob.getDate();
+    const month = dob.getMonth() + 1;
+    const year = dob.getFullYear();
     return (
       <div className="flex flex-col p-1 text-lg place-items-start">
         <div className="">
@@ -90,7 +96,7 @@ function UserData({ props }) {
         </div>
         <div className="">
           <span id="user-dob" className="col-span-2">
-            {dob.getDate()}/{dob.getMonth() + 1}/{dob.getFullYear()}
+            {date && month && year ? `${date}/${month}/${year}` : "Loading..."}
           </span>
         </div>
       </div>
@@ -163,6 +169,13 @@ export default function User({ handsignOut }) {
 
 function HealthAndUserSettings({ userInfo, goToPage }) {
   const [show, setShow] = useState(false);
+  const [showThemeModal, setShowThemeModal] = useState(false);
+  const [colourCategory, setColourCategory] = useState("--color-primary");
+  const [currentPick, setCurrentPick] = useState(
+    getComputedStyle(document.body).getPropertyValue(colourCategory)
+  );
+  const [themeName, setThemeName] = useState("Primary");
+  const inputColourRef = useRef(null);
   const [modalType, setModalType] = useState(<></>);
   const showModal = (modalType) => {
     setShow(true);
@@ -184,10 +197,136 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
       return;
     }
   };
+  const handleThemeChange = (event) => {
+    event.preventDefault();
+    if (themeName === "Primary") {
+      document.documentElement.style.setProperty(
+        "--color-primary",
+        currentPick
+      );
+      localStorage.setItem("--color-primary", currentPick);
+    } else if (themeName === "Secondary") {
+      document.documentElement.style.setProperty(
+        "--color-secondary",
+        currentPick
+      );
+      localStorage.setItem("--color-secondary", currentPick);
+    } else if (themeName === "Primary Light") {
+      document.documentElement.style.setProperty(
+        "--color-primary-light",
+        currentPick
+      );
+      localStorage.setItem("--color-primary-light", currentPick);
+    } else if (themeName === "Secondary Light") {
+      document.documentElement.style.setProperty(
+        "--color-secondary-light",
+        currentPick
+      );
+      localStorage.setItem("--color-secondary-light", currentPick);
+    }
+  };
+  const handleResetDefaultThemes = (event) => {
+    event.preventDefault();
+    // we are resetting all the colors back to the original
+    document.documentElement.style.setProperty("--color-primary", "#f4ab9b");
+    document.documentElement.style.setProperty("--color-secondary", "#ff9b9b");
+    document.documentElement.style.setProperty(
+      "--color-primary-light",
+      "#fff8e3"
+    );
+    document.documentElement.style.setProperty(
+      "--color-secondary-light",
+      "#ffdd95"
+    );
+    // storing in local storage so when the page is refreshed we will get the same theme
+    localStorage.setItem("--color-primary", "#f4ab9b");
+    localStorage.setItem("--color-secondary", "#ff9b9b");
+    localStorage.setItem("--color-primary-light", "#fff8e3");
+    localStorage.setItem("--color-secondary-light", "#ffdd95");
+  };
+
   return (
     <>
       <PopModal showModal={show} setShowModal={setShow}>
         {modalType}
+      </PopModal>
+
+      <PopModal showModal={showThemeModal} setShowModal={setShowThemeModal}>
+        <h1 className="mb-3 text-xl font-bold text-center text-md">
+          Change theme
+        </h1>
+        <div className="grid grid-rows-4 gap-2 place-items-center">
+          <span>{themeName} </span>
+          <input
+            className="!shadow-xl"
+            style={{
+              width: "20px",
+              height: "20px",
+              padding: "none",
+              backgroundColor: `${currentPick}`,
+            }}
+            type="color"
+            value={(() => {
+              const style = getComputedStyle(document.body);
+              return style.getPropertyValue(colourCategory);
+            })()}
+            onChange={(e) => setCurrentPick(e.target.value)}
+          />
+          <button
+            className="text-white bg-black shadow-lg tile"
+            onClick={handleThemeChange}
+          >
+            update colour
+          </button>
+          <button
+            className="bg-white shadow-lg tile"
+            onClick={handleResetDefaultThemes}
+          >
+            reset to default
+          </button>
+        </div>
+        <div className="grid grid-cols-1 gap-1 p-3 rounded-lg place-items-center">
+          <div className="">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setThemeName("Primary");
+              }}
+              className="w-full rounded-lg h-[30px] bg-primary shadow-lg tile"
+            ></button>
+            <h3 className="text-center">Primary</h3>
+          </div>
+          <div className="">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setThemeName("Secondary");
+              }}
+              className="w-full rounded-lg h-[30px] bg-secondary shadow-lg tile"
+            ></button>
+            <h3 className="text-center">Secondary</h3>
+          </div>
+          <div className="">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setThemeName("Primary Light");
+              }}
+              className="w-full rounded-lg h-[30px] bg-primarylight shadow-lg tile"
+            ></button>
+            <h3 className="text-center">Primary Light</h3>
+          </div>
+          <div className="">
+            <button
+              onClick={(event) => {
+                event.preventDefault();
+                setThemeName("Secondary Light");
+              }}
+              className="w-full rounded-lg h-[30px] bg-secondarylight shadow-lg tile"
+            ></button>
+            <h3 className="text-center">Secondary Light</h3>
+          </div>
+        </div>
       </PopModal>
 
       <h1 className="flex items-center justify-center gap-1 p-3 font-extrabold text-black text-[1.3rem]">
@@ -215,7 +354,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 }}
                 className="flex items-center content-center justify-start w-full gap-2"
               >
-                <FaUserAlt className="size-6" />
+                <FaUserAlt className="size-8" />
                 <span className="text-left">User Information</span>
               </div>
             </button>
@@ -227,7 +366,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 }}
                 className="flex items-center content-center justify-start w-full gap-2"
               >
-                <FaAccessibleIcon className="size-6" />
+                <FaAccessibleIcon className="size-8" />
                 <span className="text-left">Accessibility Settings</span>
               </div>
             </button>
@@ -239,7 +378,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 }}
                 className="flex items-center content-center justify-start w-full gap-2"
               >
-                <FaPills className="size-6" />
+                <FaPills className="size-8" />
                 <span className="text-left">Symptoms</span>
               </div>
             </button>
@@ -251,11 +390,11 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 }}
                 className="flex items-center content-center justify-start w-full gap-2"
               >
-                <MdLocalHospital className="size-6" />
+                <MdLocalHospital className="size-8" />
                 <span className="text-left">Chronic Conditions</span>
               </div>
             </button>
-            <button className="w-full col-span-2 py-4 text-sm bg-white tile hover:bg-white/75">
+            <button className="py-3 text-sm bg-white tile hover:bg-white/75">
               <div
                 onClick={(event) => {
                   event.preventDefault();
@@ -266,7 +405,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                     signOut();
                   }
                 }}
-                className="flex items-center content-center justify-start w-full gap-2"
+                className="flex items-center content-center justify-start gap-2"
               >
                 <Image
                   id="delete"
@@ -277,6 +416,21 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                   height={30}
                 />
                 <span className="text-left">Delete Account</span>
+              </div>
+            </button>
+            <button
+              className="w-full py-3 text-sm tile bg-gradient-to-r from-white via-primarylight to-primary"
+              onClick={(event) => {
+                event.preventDefault();
+                setShowThemeModal(true);
+              }}
+            >
+              <div
+                onClick={(event) => {}}
+                className="flex items-center content-center justify-start w-full gap-2"
+              >
+                <IoIosColorFilter className="size-8" />
+                <span className="text-left">Change theme</span>
               </div>
             </button>
           </div>
@@ -372,11 +526,11 @@ function PhotoLog({ photo, handlePhoto }) {
 //   return (
 //     <div className="flex flex-col self-center justify-evenly bg-primary rounded-md h-[70%] p-3 gap-2">
 //       <button className="flex w-full px-5 py-2 space-x-3 bg-white rounded-md shadow-lg log-bar hover:bg-white/75">
-//         <MdDining className="size-6" />
+//         <MdDining className="size-8" />
 //         <p className="w-full text-left">Food Log</p>
 //       </button>
 //       <button className="flex w-full px-5 py-2 space-x-3 bg-white rounded-md shadow-lg log-bar hover:bg-white/75">
-//         <MdLocalDrink className="size-6" />
+//         <MdLocalDrink className="size-8" />
 //         <p className="w-full text-left">Water Log</p>
 //       </button>
 //       <FileUpload></FileUpload>

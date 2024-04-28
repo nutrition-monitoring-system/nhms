@@ -5,10 +5,12 @@ import Footer from "../../components/Footer";
 import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import NavBar from "@/components/LogoNavigationBar";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 
 export default function Home() {
   // This function describes the structure of the page
   // The Hero header, the Main Page and the Footer
+  UpdateAllthemesStoredOnDevice();
   return (
     <>
       <BlogHeaderParent></BlogHeaderParent>
