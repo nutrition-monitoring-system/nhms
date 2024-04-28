@@ -37,12 +37,13 @@ function Home() {
       return router.push("/login");
     },
   });
+  /* Check if the user is an admin or not. */
   // if user is authenticated then render the admin page else render the loading component
   if (status == "authenticated") {
     return (
       <>
         <div className="sm:grid hidden absolute inset-0 bg-white p-2 text-lg text-center z-[1000] place-items-center">
-          The admin page is not accessibility on smaller devices at the moment
+          The admin page is inaccessible on smaller devices at the moment.
         </div>
         <div className="flex gap-4 p-2 px-3 py-10 bg-gray-900 md:flex-col md:hidden">
           <SideNavBar />
@@ -74,7 +75,7 @@ const rows = [
     name: "Doe",
     status: "Healthy",
     symptoms: [
-      { name: "Couph", intensity: 4, date: "2021-10-10" },
+      { name: "Cough", intensity: 4, date: "2021-10-10" },
       { name: "Headache", intensity: 9, date: "2021-10-10" },
     ],
     chronicCondition: ["Asthma", "COPD"],
@@ -85,7 +86,7 @@ const rows = [
     name: "Doe",
     status: "Healthy",
     symptoms: [
-      { name: "Couph", intensity: 4, date: "2021-10-10" },
+      { name: "Cough", intensity: 4, date: "2021-10-10" },
       { name: "Headache", intensity: 9, date: "2021-10-10" },
     ],
     chronicCondition: ["Chronic Kidney Disease", "Arthritis", "Cancer"],
@@ -121,31 +122,45 @@ function MainPage() {
                   This is the data of all the symptoms that have been recorded
                   by the users.
                 </Typography>
-                <button className="shadow-lg bg-secondary tile">
+                <button className="shadow-lg bg-secondary tile text-white">
+                  {/* This should let the admin create a new symptom: add a new SYMPTOM(NOT A LOG) to the database that the person can choose from. */}
+
+                  {/* SHOULD BRING UP SOME SORT OF DIALOG */}
                   <Link underline="none" color="inherit" href="/user">
-                    Create New Symptoms
+                    Create a new symptom
                   </Link>
                 </button>
               </Paper>
-              <Paper className="p-6 basis-1/3 !shadow-lg">
-                <Typography color="text.secondary" gutterBottom>
+
+              <div className="p-6 basis-1/3 shadow-lg bg-white flex flex-col">
+                <h1 className="text-md" gutterBottom>
                   This Week
-                </Typography>
-                <div className="text-5xl">13</div>
-                <Typography
-                  color="text.secondary"
-                  sx={{ fontSize: "0.75em" }}
-                  gutterBottom
-                >
+                </h1>
+                <span className="text-5xl">13</span>
+                <p className="text-[0.75rem] text-secondary pb-2">
                   -25% from last week
-                </Typography>
+                </p>
                 <LinearProgress
                   color="primary"
                   variant="determinate"
                   value={25}
                 />
-              </Paper>
-              <Paper className="p-6 basis-1/3 !shadow-lg">
+              </div>
+              <div className="p-6 basis-1/3 shadow-lg bg-white flex flex-col">
+                <h1 className="text-md" gutterBottom>
+                  This Month
+                </h1>
+                <span className="text-5xl">55</span>
+                <p className="text-[0.75rem] text-secondary text-left pb-2">
+                -10% from last month
+                </p>
+                <LinearProgress
+                  color="primary"
+                  variant="determinate"
+                  value={25}
+                />
+              </div>
+              {/* <Paper className="p-6 basis-1/3 !shadow-lg">
                 <Typography color="text.secondary" gutterBottom>
                   This Month
                 </Typography>
@@ -155,14 +170,14 @@ function MainPage() {
                   sx={{ fontSize: "0.75em" }}
                   gutterBottom
                 >
-                  -10% from last Month
+                  
                 </Typography>
                 <LinearProgress
                   color="primary"
                   variant="determinate"
                   value={10}
                 />
-              </Paper>
+              </Paper> */}
             </div>
 
             <div>
@@ -176,7 +191,7 @@ function MainPage() {
               </div>
               <Paper className="p-6" sx={{ overflow: "hidden" }}>
                 <div className="mb-6">
-                  <Typography color="text.primary">Symptoms</Typography>
+                  <h1 className="text-primary">Symptoms</h1>
                   <Typography color="text.secondary">
                     Recent orders from the user.
                   </Typography>
