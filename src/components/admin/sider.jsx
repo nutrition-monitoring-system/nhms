@@ -42,7 +42,7 @@ export default function AdminPeopleCard({ row }) {
           </div>
         </CardContent>
         <div className="p-3">
-          <button className="tile bg-primary">View Profile</button>
+          <button className="tile bg-secondary">View Profile</button>
         </div>
       </Card>
     </div>

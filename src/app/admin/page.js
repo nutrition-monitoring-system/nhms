@@ -111,7 +111,7 @@ function MainPage() {
         <div className="flex flex-row gap-8 p-2 h-fit">
           <div className="flex flex-col gap-2 basis-2/3">
             <div className="flex gap-4">
-              <Paper className="p-6">
+              <Paper className="p-6 !shadow-lg">
                 <Typography color="text.primary" gutterBottom>
                   Your Symptoms Data
                 </Typography>
@@ -119,13 +119,13 @@ function MainPage() {
                   This is the data of all the symptoms that have been recorded
                   by the users.
                 </Typography>
-                <Button variant="contained" color="primary">
+                <button className="shadow-lg bg-secondary tile">
                   <Link underline="none" color="inherit" href="/user">
                     Create New Symptoms
                   </Link>
-                </Button>
+                </button>
               </Paper>
-              <Paper className="p-6 basis-1/3">
+              <Paper className="p-6 basis-1/3 !shadow-lg">
                 <Typography color="text.secondary" gutterBottom>
                   This Week
                 </Typography>
@@ -143,7 +143,7 @@ function MainPage() {
                   value={25}
                 />
               </Paper>
-              <Paper className="p-6 basis-1/3">
+              <Paper className="p-6 basis-1/3 !shadow-lg">
                 <Typography color="text.secondary" gutterBottom>
                   This Month
                 </Typography>
