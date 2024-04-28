@@ -23,10 +23,17 @@ export default function AdminPeopleCard({ row }) {
 
           <div>
             <div>Chronic Condition</div>
-            <div className="flex items-center gap-3 my-2">
-              {row.chronicCondition?.map((condition, index) => (
-                <Chip key={index} label={condition} clickable />
-              ))}
+            <div className="flex items-center gap-3 my-2 max-w-full">
+              {row.chronicCondition != null ? (
+                row.chronicCondition?.map((condition, index) => (
+                  <Chip key={index} label={condition} clickable />
+                ))
+              ) : (
+                <Chip key={0} label={"None"}>
+                  {" "}
+                  None
+                </Chip>
+              )}
             </div>
           </div>
 
@@ -45,20 +52,34 @@ export default function AdminPeopleCard({ row }) {
           <div>
             <div>Allergies</div>
             <div className="flex items-center gap-3 my-2">
-              {row.allergies?.map((condition, index) => (
-                <Chip key={index} label={condition} clickable />
-              ))}
+              {row.allergies != null ? (
+                row.allergies?.map((condition, index) => (
+                  <Chip key={index} label={condition} clickable />
+                ))
+              ) : (
+                <Chip key={0} label={"None"}>
+                  {" "}
+                  None
+                </Chip>
+              )}
             </div>
           </div>
 
           <Divider sx={{ margin: "16px 0" }} />
 
           <div>
-            <div>Dietery Restrictions</div>
+            <div>Dietary Restrictions</div>
             <div className="flex items-center gap-3 my-2">
-              {row.diet?.map((condition, index) => (
-                <Chip key={index} label={condition} clickable />
-              ))}
+              {row.diet != null ? (
+                row.diet?.map((condition, index) => (
+                  <Chip key={index} label={condition} clickable />
+                ))
+              ) : (
+                <Chip key={0} label={"None"}>
+                  {" "}
+                  None
+                </Chip>
+              )}
             </div>
           </div>
         </CardContent>

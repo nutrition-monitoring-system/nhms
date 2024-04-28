@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Loading from "@/components/Loading";
 import SideNavBar from "@/components/SideNav";
 
-import * as React from "react";
+import { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
@@ -94,7 +94,7 @@ const rows = [
 ];
 
 function MainPage() {
-  const [selectRow, setSelectRow] = React.useState(rows[0]);
+  const [selectRow, setSelectRow] = useState(rows[0]);
   const onSelect = (row) => {
     setSelectRow(row);
   };
@@ -115,9 +115,9 @@ function MainPage() {
           <div className="flex flex-col gap-2 basis-2/3">
             <div className="flex gap-4">
               <Paper className="p-6 !shadow-lg">
-                <Typography color="text.primary" gutterBottom>
+                <h1 className="font-semibold text-left text-md" gutterBottom>
                   Your Symptoms Data
-                </Typography>
+                </h1>
                 <Typography variant="body1" gutterBottom>
                   This is the data of all the symptoms that have been recorded
                   by the users.
@@ -133,7 +133,7 @@ function MainPage() {
               </Paper>
 
               <div className="p-6 basis-1/3 shadow-lg bg-white flex flex-col">
-                <h1 className="text-md" gutterBottom>
+                <h1 className="font-bold text-left text-md" gutterBottom>
                   This Week
                 </h1>
                 <span className="text-5xl">13</span>
@@ -147,7 +147,7 @@ function MainPage() {
                 />
               </div>
               <div className="p-6 basis-1/3 shadow-lg bg-white flex flex-col">
-                <h1 className="text-md" gutterBottom>
+                <h1 className="font-bold text-left text-md" >
                   This Month
                 </h1>
                 <span className="text-5xl">55</span>
@@ -191,10 +191,10 @@ function MainPage() {
               </div>
               <Paper className="p-6" sx={{ overflow: "hidden" }}>
                 <div className="mb-6">
-                  <h1 className="text-primary">Symptoms</h1>
-                  <Typography color="text.secondary">
-                    Recent orders from the user.
-                  </Typography>
+                  <h1 className="font-bold text-left text-md">Symptoms</h1>
+                  <h2 className="text-grey text-sm">
+                    Recent symptom logs from the user.
+                  </h2>
                 </div>
                 <AdminTable rows={rows} onSelect={onSelect} />
               </Paper>
