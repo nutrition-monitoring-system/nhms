@@ -8,7 +8,9 @@ import toast from "react-hot-toast";
 
 const FoodAndWaterLog = () => {
   // user Earned points
-  const [points, setPoints] = useState(localStorage.getItem("points") || 20);
+  const [points, setPoints] = useState(
+    parseInt(localStorage.getItem("points")) || 20
+  );
   // Refs for modals and form elements
   const checkboxRef = useRef(null);
   const foodModal = useRef(null);
@@ -19,6 +21,7 @@ const FoodAndWaterLog = () => {
   const sliderRef = useRef(null);
   const cycleModal = useRef(null);
   // State variables
+  const [moodState, setMoodState] = useState("Happy");
   const [uploadImageUrl, setUploadImageUrl] = useState("/icons/image.png");
   const [breakfast, setBreakFast] = useState([]);
   const [Lunch, setLunch] = useState([]);
@@ -136,7 +139,7 @@ const FoodAndWaterLog = () => {
 
   useEffect(() => {
     if (points < 1) {
-      setPoints(localStorage.getItem("points") || 0);
+      setPoints(parseInt(localStorage.getItem("points")) || 0);
       return;
     }
     localStorage.setItem("points", points);
@@ -420,22 +423,32 @@ const FoodAndWaterLog = () => {
           </button>
         </div>
         <div className="grid gap-1 p-2 overflow-y-hidden place-items-center">
-          <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
+          <h1 className="grid place-items-center font-extrabold text-[1.5rem]">
             Mood Log
           </h1>
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             How are you feeling today?
           </h1>
+          <h1 className="grid place-items-center text-[1rem]">{moodState}</h1>
           <div className="grid w-full grid-cols-3 h-[50px] gap-2 p-2 place-content-center">
-            <div className="grid h-full rounded-md bg-emerald-400 place-items-center tile">
+            <button
+              className="grid h-full rounded-md bg-emerald-400 place-items-center tile"
+              onClick={() => setMoodState("Happy")}
+            >
               Happy
-            </div>
-            <div className="grid h-full rounded-md bg-amber-400 place-items-center tile">
+            </button>
+            <buton
+              className="grid h-full rounded-md bg-amber-400 place-items-center tile"
+              onClick={() => setMoodState("Neutral")}
+            >
               Neutral
-            </div>
-            <div className="grid h-full rounded-md bg-rose-400 place-items-center tile">
+            </buton>
+            <button
+              className="grid h-full rounded-md bg-rose-400 place-items-center tile"
+              onClick={() => setMoodState("Sad")}
+            >
               Sad
-            </div>
+            </button>
           </div>
         </div>
         <div className="flex items-center justify-around w-full mt-2">

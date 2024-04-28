@@ -288,13 +288,14 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
 
 function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   const [points, setPoints] = useState(
-    parseInt(localStorage.getItem("points")) || 20
+    JSON.parse(localStorage.getItem("points")) || 20
   );
 
   useEffect(() => {
-    if (points === 20) {
-      setPoints(parseInt(localStorage.getItem("points")));
-    }
+    setInterval(() => {
+      const currentPoints = parseInt(localStorage.getItem("points")) || 20;
+      setPoints(currentPoints);
+    }, 1000);
   }, [points]);
   return (
     <div className="grid items-center justify-center grid-cols-3 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
