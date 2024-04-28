@@ -118,10 +118,10 @@ function MainPage() {
                 <h1 className="font-semibold text-left text-md" gutterBottom>
                   Your Symptoms Data
                 </h1>
-                <Typography variant="body1" gutterBottom>
+                <h2 className="text-grey text-sm pb-2" gutterBottom>
                   This is the data of all the symptoms that have been recorded
                   by the users.
-                </Typography>
+                </h2>
                 <button className="shadow-lg bg-secondary tile text-white">
                   {/* This should let the admin create a new symptom: add a new SYMPTOM(NOT A LOG) to the database that the person can choose from. */}
 

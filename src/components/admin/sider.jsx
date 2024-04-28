@@ -23,7 +23,7 @@ export default function AdminPeopleCard({ row }) {
 
           <div>
             <div>Chronic Condition</div>
-            <div className="flex items-center gap-3 my-2 max-w-full">
+            <div className="flex items-center gap-3 my-2 w-[20vw]">
               {row.chronicCondition != null ? (
                 row.chronicCondition?.map((condition, index) => (
                   <Chip key={index} label={condition} clickable />
