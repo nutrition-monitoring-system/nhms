@@ -32,10 +32,31 @@ export default function AdminPeopleCard({ row }) {
 
           <Divider sx={{ margin: "16px 0" }} />
 
-          <div>
+          {/* <div>
             <div>Personal Goals</div>
             <div className="flex items-center gap-3 my-2">
               {row.goals?.map((condition, index) => (
+                <Chip key={index} label={condition} clickable />
+              ))}
+            </div>
+          </div>
+          <Divider sx={{ margin: "16px 0" }} /> */}
+
+          <div>
+            <div>Allergies</div>
+            <div className="flex items-center gap-3 my-2">
+              {row.allergies?.map((condition, index) => (
+                <Chip key={index} label={condition} clickable />
+              ))}
+            </div>
+          </div>
+
+          <Divider sx={{ margin: "16px 0" }} />
+
+          <div>
+            <div>Dietery Restrictions</div>
+            <div className="flex items-center gap-3 my-2">
+              {row.diet?.map((condition, index) => (
                 <Chip key={index} label={condition} clickable />
               ))}
             </div>

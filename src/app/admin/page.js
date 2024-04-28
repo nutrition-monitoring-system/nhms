@@ -66,6 +66,8 @@ const rows = [
     ],
     chronicCondition: ["IBS", "Diabetes", "Hypertension"],
     goals: ["Lose Weight", "Gain Muscle"],
+    diet: ["Keto", "Paleo"],
+    allergies: ["Peanuts", "Dairy"],
   },
   {
     id: 2,
