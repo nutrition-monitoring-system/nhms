@@ -429,7 +429,14 @@ const FoodAndWaterLog = () => {
           <h1 className="grid place-items-center font-extrabold text-[1.3rem]">
             How are you feeling today?
           </h1>
-          <h1 className="grid place-items-center text-[1rem]">{moodState}</h1>
+          {moodState == "Happy" ? (
+            <h1 className="grid place-items-center text-[1rem]">😃</h1>
+          ) : moodState === "Neutral" ? (
+            <h1 className="grid place-items-center text-[1rem]">😐</h1>
+          ) : (
+            <h1 className="grid place-items-center text-[1rem]">😢</h1>
+          )}
+
           <div className="grid w-full grid-cols-3 h-[50px] gap-2 p-2 place-content-center">
             <button
               className="grid h-full rounded-md bg-emerald-400 place-items-center tile"
