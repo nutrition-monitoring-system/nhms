@@ -1,15 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 //import "./User.css"; // 导入 CSS 文件
 import Image from "next/image";
-import Link from "next/link";
-import { AiOutlinePlus } from "react-icons/ai"; // 导入加号图标
 import {
-  FaRegAddressCard,
   FaAccessibleIcon,
   FaPills,
   FaUserAlt,
   FaCamera,
-  FaGifts
+  FaGifts,
 } from "react-icons/fa";
 import { IoIosColorFilter } from "react-icons/io";
 import {
@@ -479,8 +476,11 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
         </Link>
       </div> */}
       <div className="grid gap-2 place-items-center grid-cols-2">
-        <button className="tile" onClick={console.log("Redeeming points via redirect.")}>
-         <FaGifts className="size-6"></FaGifts>
+        <button
+          className="tile"
+          onClick={console.log("Redeeming points via redirect.")}
+        >
+          <FaGifts className="size-6"></FaGifts>
           Redeem Points
         </button>
         <button className="tile" onClick={signOut}>

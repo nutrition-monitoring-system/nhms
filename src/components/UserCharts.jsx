@@ -3,25 +3,55 @@ import { useState, useEffect } from "react";
 import ReactEcharts from "echarts-for-react";
 
 function ChartComponent({ userID, keyword = "water" }) {
+  /* This component currently takes in the water keyword and produces a graph of logs. */
   const [option, setOption] = useState(null);
   const [waterLog, setWaterLog] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    /* This checks if water log is empty or not.  */
     if (waterLog.length === 0) {
       return;
     }
     const timeStamp = [];
     const data = [];
 
+    // eslint-disable-next-line no-undef
+    const loggedDates = {};
+    // console.log(loggedDates);
+    /* Logged dates should be an object of the date, and the total ml. */
+
     for (let i = 0; i < waterLog.length; i++) {
+      /* Parse each timestamp */
       let timestamp = new Date(Date.parse(waterLog[i].timestamp));
+      let dateTime = timestamp.toDateString();
+      let amount = waterLog[i].WaterLog.waterAmount;
+      if (timestamp.toDateString() in loggedDates) {
+        /* We know that an entry has already been added. */
+        loggedDates[dateTime] += amount;
+      } else {
+        /* New entry so: */
+        // console.log(timestamp.toDateString(), waterLog[i].WaterLog.waterAmount)
+        loggedDates[dateTime] = amount;
+      }
       let formattedTimestamp = `${timestamp.toDateString()} ${timestamp.toLocaleTimeString()}`;
-      timeStamp.push(formattedTimestamp);
-      data.push(waterLog[i].WaterLog.waterAmount);
+
+      // timeStamp.push(formattedTimestamp);
+      /* Add each water log to the graph */
+      // data.push(waterLog[i].WaterLog.waterAmount);
+    }
+    console.log(loggedDates);
+    // Object.keys(loggedDates).foreach((date) => {
+    //   console.log(date)
+    // });
+    for (let [date, amount] of Object.entries(loggedDates)) {
+      timeStamp.push(date);
+      data.push(amount);
     }
 
     // Set options for the chart
+
+    /* The water should be the total amount of water for a date, per the time. */
     const newOption = {
       title: {
         text: "Water Log over Time",
@@ -77,10 +107,13 @@ function ChartComponent({ userID, keyword = "water" }) {
       },
       body: JSON.stringify(bodyToSend),
     })
-      .then((res) => res.json())
       .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
         setIsLoading(false);
-        setWaterLog([...waterLog, res.logs[0]]);
+        setWaterLog([...res.logs]);
       })
       .catch((err) => {
         console.log(err);
@@ -99,8 +132,7 @@ function ChartComponent({ userID, keyword = "water" }) {
           option && (
             <ReactEcharts
               option={option}
-              className="w-[60%] md:h-full md:w-full"
-              style={{ height: "400px" }}
+              className="w-[60%] md:h-full md:w-full min-h-[400px]"
             />
           )
         )}
