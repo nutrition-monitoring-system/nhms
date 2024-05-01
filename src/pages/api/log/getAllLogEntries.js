@@ -10,6 +10,9 @@ export default async function handler(req, res) {
     if (userID) {
       if (keyword == "food") {
         let getLogIDs = await prisma.log.findMany({
+          orderBy:{
+            timestamp: 'asc'
+          },
           where: { user_UserID: userID, logType: keyword },
           select: {
             logID: true,
@@ -27,6 +30,9 @@ export default async function handler(req, res) {
         return res.status(200).json({ ok: true, logs: getLogIDs });
       } else if (keyword == "water") {
         let getLogIDs = await prisma.log.findMany({
+          orderBy:{
+            timestamp: 'asc'
+          },
           where: { user_UserID: userID, logType: keyword },
           select: {
             logID: true,
@@ -41,6 +47,9 @@ export default async function handler(req, res) {
         return res.status(200).json({ ok: true, logs: getLogIDs });
       } else if (keyword == "symptom") {
         let getLogIDs = await prisma.log.findMany({
+          orderBy:{
+            timestamp: 'asc'
+          },
           where: { user_UserID: userID, logType: keyword },
           select: {
             logID: true,
@@ -56,6 +65,9 @@ export default async function handler(req, res) {
         return res.status(200).json({ ok: true, logs: getLogIDs });
       } else {
         let getLogIDs = await prisma.log.findMany({
+          orderBy:{
+            timestamp: 'asc'
+          },
           where: { user_UserID: userID, logType: keyword },
           select: {
             logID: true,
