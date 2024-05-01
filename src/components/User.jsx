@@ -537,26 +537,3 @@ function PhotoLog({ photo, handlePhoto }) {
 //     </div>
 //   );
 // }
-
-function CreateHealthRecordForm() {
-  const items = [
-    { text: "Create events" },
-    { text: "Create Nutrition Plan" },
-    { text: "Create Health Record Form" },
-    { text: "Create workout" },
-  ];
-
-  return (
-    <div className="flex items-center justify-center gap-4 ">
-      {items.map((item, index) => (
-        <div
-          key={index}
-          className="Creat-back bg-white rounded-md grid place-items-center h-[70%] px-5 py-2 shadow-lg"
-        >
-          <div className="Creat-text">{item.text}</div>
-          <AiOutlinePlus className="add1" /> {/* 使用加号图标 */}
-        </div>
-      ))}
-    </div>
-  );
-}
