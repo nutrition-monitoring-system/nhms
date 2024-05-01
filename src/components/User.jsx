@@ -8,12 +8,8 @@ import {
   FaAccessibleIcon,
   FaPills,
   FaUserAlt,
-  FaBlog,
   FaCamera,
-  FaPencilAlt,
-  FaBars,
-  FaThemeco,
-  Fa,
+  FaGifts
 } from "react-icons/fa";
 import { IoIosColorFilter } from "react-icons/io";
 import {
@@ -430,7 +426,7 @@ function HealthAndUserSettings({ userInfo, goToPage }) {
                 className="flex items-center content-center justify-start w-full gap-2"
               >
                 <IoIosColorFilter className="size-8" />
-                <span className="text-left">Change theme</span>
+                <span className="text-left">Change Theme</span>
               </div>
             </button>
           </div>
@@ -453,7 +449,7 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
   }, [points]);
   return (
     <div className="grid items-center justify-center grid-cols-3 gap-3 px-6 py-3 bg-gray-100 md:grid-cols-1">
-      <div className="flex items-center justify-center gap-1 py-6 user-info px-7 md:px-4 md:bg-white md:rounded-lg md:shadow-lg md:order-last">
+      <div className="flex items-center justify-evenly gap-1 py-6 user-info px-7 md:px-4 md:bg-white md:rounded-lg md:shadow-lg md:order-last">
         <div className="relative grid justify-center p-1 rounded-lg user-avatar min-h-fit">
           <Image
             className="rounded-[50px] shadow-lg"
@@ -474,15 +470,19 @@ function TopInformation({ avatar, handleAvatarChange, confirmLogout }) {
         </div>
         <UserData props="nav"></UserData>
       </div>
-      <div className="flex flex-col items-center justify-center h-full gap-2 py-2 bg-gray-200 rounded-lg min-h-fit">
-        <span>you earned</span>
+      {/* <div className="flex flex-col items-center justify-center h-full gap-2 py-2 bg-gray-200 rounded-lg min-h-fit">
+        <span>You earned</span>
         <span className="font-black text-[2rem]">{points}</span>
         <span className="">Points</span>
         <Link href={"/home"} className="tile">
           Redeem here!
         </Link>
-      </div>
-      <div className="grid gap-2 place-items-center">
+      </div> */}
+      <div className="grid gap-2 place-items-center grid-cols-2">
+        <button className="tile" onClick={console.log("Redeeming points via redirect.")}>
+         <FaGifts className="size-6"></FaGifts>
+          Redeem Points
+        </button>
         <button className="tile" onClick={signOut}>
           <Image
             id="logout"
