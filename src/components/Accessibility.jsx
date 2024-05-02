@@ -44,10 +44,11 @@ export default function Accessibility({
   };
 
   // Function to handle setting button click
-  const handleOptionClick = (refIdx) => {
+  const handleOptionClick = (refIdx, func) => {
     // Toggle background color for the clicked setting button
     SettingsRef.current[refIdx].classList.toggle("bg-secondary");
-
+    // Add clicked setting to selected options
+    func();
     // Deselect all other options and toggle background color for "None"
     handleNone(null);
     // Update selected user options
@@ -96,7 +97,7 @@ export default function Accessibility({
                 <div
                   className="tile Settings"
                   ref={(element) => (SettingsRef.current[idx] = element)}
-                  onClick={() => handleOptionClick(idx)}
+                  onClick={() => handleOptionClick(idx, setting?.func)}
                 >
                   <Image
                     src={setting?.src}

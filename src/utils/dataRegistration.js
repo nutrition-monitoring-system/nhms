@@ -1,19 +1,46 @@
 // List of available allergies with types and descriptions
 const settings = [
-  { value: "Font Size", src: "/icons/add.png", alt: "add icon" },
-  { value: "Use Bold Text", src: "/icons/bold.png", alt: "capital b" },
-  { value: "Dark Mode", src: "/icons/day-and-night.png", alt: "dark mode" },
+  {
+    value: "Font Size",
+    src: "/icons/add.png",
+    alt: "add icon",
+    func: () => {},
+  },
+  {
+    value: "Use Bold Text",
+    src: "/icons/bold.png",
+    alt: "capital b",
+    func: () => {
+      const allElements = document.querySelectorAll("*");
+      for (let i = 0; i < allElements.length; i++) {
+        allElements[i].style.fontWeight = "bold";
+      }
+    },
+  },
+  {
+    value: "Dark Mode",
+    src: "/icons/day-and-night.png",
+    alt: "dark mode",
+    func: () => {},
+  },
   {
     value: "Use Descriptive Links",
     src: "/icons/information.png",
     alt: "Descriptive Links",
+    func: () => {},
   },
   {
     value: "High Contrast Mode",
     src: "/icons/adjustment.png",
     alt: "High contrast mode",
+    func: () => {},
   },
-  { value: "Alt for images", src: "/icons/image.png", alt: "alt for images" },
+  {
+    value: "Alt for images",
+    src: "/icons/image.png",
+    alt: "alt for images",
+    func: () => {},
+  },
 ];
 
 // List of available allergies with types and descriptions
@@ -828,5 +855,5 @@ export {
   chronicConditions,
   foodTypeInformation,
   pinnedRecipes,
-  Symptoms
+  Symptoms,
 };

@@ -18,7 +18,7 @@ export default function ViewLogData() {
       setChronicConditions(
         JSON.parse(localStorage.getItem("chronicConditions")) || []
       );
-      setChronicConditions()
+      setChronicConditions();
       setAccessibility(
         JSON.parse(localStorage.getItem("accessibility_Settings")) || []
       );
@@ -40,7 +40,8 @@ export default function ViewLogData() {
             Chronic Conditions
           </h1>
           <div className="flex flex-col gap-1 p-1">
-            {Object.keys(chronicConditions).length === 0 ? (
+            {chronicConditions &&
+            Object.keys(chronicConditions).length === 0 ? (
               <div className="grid place-items-center">No items available</div>
             ) : (
               chronicConditions?.map((item, idx) => {
@@ -58,7 +59,7 @@ export default function ViewLogData() {
             Accessibility
           </h1>
           <div className="flex flex-col gap-1 p-1">
-            {Object.keys(accessibility).length === 0 ? (
+            {accessibility && Object.keys(accessibility).length === 0 ? (
               <div className="grid place-items-center">No items available</div>
             ) : (
               accessibility?.map((item, idx) => {
@@ -76,7 +77,7 @@ export default function ViewLogData() {
             Dietary Restrictions
           </h1>
           <div className="flex flex-col gap-1 p-1">
-            {Object.keys(diet).length === 0 ? (
+            {diet && Object.keys(diet).length === 0 ? (
               <div className="grid place-items-center">No items available</div>
             ) : (
               diet?.map((item, idx) => {
