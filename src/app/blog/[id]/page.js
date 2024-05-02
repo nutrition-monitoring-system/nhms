@@ -5,7 +5,7 @@ export default function Page({ id }) {
   return (
     <>
       <div className="mx-[10rem]">
-        <main className="container mx-auto py-8">
+        <main className="container prose mx-auto py-8">
           <header className="bg-black py-10 rounded-md">
             <div className="container mx-auto text-center text-white">
               <h1 className="text-3xl font-bold text-white">
