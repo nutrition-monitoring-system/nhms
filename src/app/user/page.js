@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils.js";
 
 function Home({ params }) {
   // useRouter hook is use to navigate programmatically to different routes
@@ -23,6 +24,8 @@ function Home({ params }) {
   if ("loading" === status) {
     return <Loading />;
   }
+
+  UpdateAllthemesStoredOnDevice();
 
   return (
     <>

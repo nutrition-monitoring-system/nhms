@@ -14,7 +14,8 @@ const Coach = () => {
               alt="Monika Gostic's Main photo"
               className="bg-gray-100 rounded-lg"
               src="https://monikagostic.com/wp-content/uploads/2021/06/Banner.jpg"
-              fill={true}
+              width={1200}
+              height={400}
               objectFit="contain"
             />
           </div>

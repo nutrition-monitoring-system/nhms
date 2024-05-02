@@ -5,10 +5,12 @@ import Footer from "../../components/Footer";
 import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 import NavBar from "@/components/LogoNavigationBar";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 
 export default function Home() {
   // This function describes the structure of the page
   // The Hero header, the Main Page and the Footer
+  UpdateAllthemesStoredOnDevice();
   return (
     <>
       <BlogHeaderParent></BlogHeaderParent>
@@ -62,13 +64,34 @@ const BlogPage = () => {
   // Main Blog page where a preview of the content is displayed
   return (
     <div className="flex flex-wrap items-center justify-center min-h-screen gap-3 p-5 m-auto w-[70%] md:w-full">
-      <BlogComponent />
-      <BlogComponent />
+      <ol className="relative border-gray-200 border-s dark:border-gray-700">
+        <BlogComponent learnMore={true} time={"November 2023"}/>
+        <BlogComponent
+          time={"December 2023"}
+          heading={"Living with Rheumatoid Arthritis: Beyond the Pain"}
+          description={
+            "Rheumatoid arthritis (RA) isn't just a joint condition—it's a challenge that affects every aspect of life for those diagnosed with it. This autoimmune disease causes pain and swelling in the joints and can lead to fatigue and widespread inflammation. But beyond the physical symptoms, there's a whole lifestyle adjustment to navigate. This blog post is here to guide you through managing RA, not just to alleviate symptoms but to improve quality of life."
+          }
+        />
+        <BlogComponent
+          time={"January 2024"}
+          heading={"Journey Through the Fog: Navigating Life with Chronic Kidney Disease"}
+          description={
+            "Chronic Kidney Disease (CKD) affects millions globally, slowly diminishing kidney function over time. Through the story of \"Emily,\" a fictional character based on common experiences of those with CKD, we'll explore the emotional and physical challenges faced by patients, intertwined with expert advice and coping strategies."
+          }
+        />
+      </ol>
     </div>
   );
 };
 
-const BlogComponent = () => {
+const BlogComponent = ({
+  heading,
+  time,
+  description,
+  content,
+  learnMore = false,
+}) => {
   // Note - ** The dynamic part of the code has not been implemented yet. **
   // The Blog is not linked to the database yet so all the data displayed is static
 
@@ -77,22 +100,22 @@ const BlogComponent = () => {
   // - Subtile
   // - Title
   // - A short Description
-  return (
-    <ol className="relative border-gray-200 border-s dark:border-gray-700">
+  if (learnMore == true) {
+    return (
       <li className="mb-10 ms-4">
         <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
         <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          February 2022
+          {time ? time : "February 2022"}
         </time>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Diabetes Management: Navigating Your Way to a Healthier You
+          {heading
+            ? heading
+            : "Diabetes Management: Navigating Your Way to a Healthier You"}
         </h3>
         <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-          Living with diabetes can feel overwhelming, but with the right
-          knowledge and support, managing your condition becomes a more
-          navigable journey. Whether you’re newly diagnosed or have been dealing
-          with diabetes for years, understanding how to balance your lifestyle
-          with your health needs is key to maintaining your well-being.
+          {description
+            ? description
+            : "Living with diabetes can feel overwhelming, but with the right        knowledge and support, managing your condition becomes a more         navigable journey. Whether you’re newly diagnosed or have been dealing  with diabetes for years, understanding how to balance your lifestyle    with your health needs is key to maintaining your well-being."}
         </p>
         <a
           href="/blog/blog-num-idadjf"
@@ -116,36 +139,25 @@ const BlogComponent = () => {
           </svg>
         </a>
       </li>
-      <li className="mb-10 ms-4">
+    );
+  } else {
+    return (
+      <li className="ms-4 mb-6">
         <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
         <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          March 2022
+          {time ? time : "February 2022"}
         </time>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Understanding Diabetes
+          {heading
+            ? heading
+            : "Diabetes Management: Navigating Your Way to a Healthier You"}
         </h3>
         <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-          Diabetes, a condition characterized by high blood sugar levels, comes
-          in two main forms: Type 1, where the body fails to produce insulin,
-          and Type 2, where the body cannot use insulin effectively. Both types
-          require careful management of diet, exercise, and medication. The good
-          news is that with proactive management, you can lead a full and active
-          life.
+          {description
+            ? description
+            : "One of the pillars of diabetes care is dietary management. Here’s how you can eat well to control your diabetes..."}
         </p>
       </li>
-      <li className="ms-4">
-        <div className="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
-        <time className="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          April 2022
-        </time>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Dietary Management
-        </h3>
-        <p className="text-base font-normal text-gray-500 dark:text-gray-400">
-          One of the pillars of diabetes care is dietary management. Here’s how
-          you can eat well to control your diabetes...
-        </p>
-      </li>
-    </ol>
-  );
+    );
+  }
 };

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "../../components/Button.jsx";
 import { useRouter } from "next/navigation";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 
 //page authentication
 import { signIn, useSession } from "next-auth/react";
@@ -22,6 +23,7 @@ const userSchema = object().shape({
 });
 
 export default function Page() {
+  UpdateAllthemesStoredOnDevice();
   return (
     <>
       <SessionProvider>

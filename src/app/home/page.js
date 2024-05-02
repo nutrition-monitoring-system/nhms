@@ -10,9 +10,11 @@ import Recipes from "../../components/Recipes.jsx";
 import Loading from "../../components/Loading";
 import ProfileNavigation from "@/components/ProfileNavigation";
 import PopModal from "@/components/PopUp";
+import { UpdateAllthemesStoredOnDevice } from "../../utils/otherUtils";
 
 export default function Page() {
   // Using the Session Provider Api we wrap the home page so we have access to session data
+  UpdateAllthemesStoredOnDevice();
   return (
     <>
       <SessionProvider>
@@ -97,6 +99,10 @@ function NavBar({
   const [showModal, setShowModal] = useState(false);
   // The refList is used to store all the references of the html elements
   const refList = [home, recipes, recipesCollections];
+  //stores information about the number of points each user has earned
+  const [points, setPoints] = useState(
+    parseInt(localStorage.getItem("points")) || 20
+  );
 
   const handleOnclick = (reference) => {
     // This function is used to change the background color of the navigation bar when the user clicks on the button
@@ -127,7 +133,11 @@ function NavBar({
     setSearchInformation(searchValue);
   };
 
-  const points = 20;
+  useEffect(() => {
+    if (points === 20) {
+      setPoints(parseInt(localStorage.getItem("points", points)) || 20);
+    }
+  }, [points]);
   return (
     <>
       <PopModal showModal={showModal} setShowModal={setShowModal}>
@@ -135,33 +145,35 @@ function NavBar({
           <h1 className="grid text-lg font-bold place-items-center">
             Redeem Earned Points
           </h1>
-          <div>Current Points - {points}</div>
+          <div>
+            Current Points - <b>{points}</b>
+          </div>
         </div>
         <h1 className="grid font-bold text-md place-items-center">
           Available services
         </h1>
         <div className="grid grid-rows-3 gap-2 mt-2">
-          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+          <button className="grid w-full grid-cols-4 gap-3 p-5 text-left tile bg-primary">
             <span className="col-span-3">
               Book a free 20 minutes appointment with Dr. Monika{" "}
             </span>
-            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+            <span className="grid h-full p-5 bg-white rounded-md place-items-center">
               1300s points
             </span>
           </button>
-          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+          <button className="grid w-full grid-cols-4 gap-3 p-5 text-left tile bg-primary">
             <span className="col-span-3">
               Book a free 1 hour appointment with Dr. Monika{" "}
             </span>
-            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+            <span className="grid h-full p-5 bg-white rounded-md place-items-center">
               2100 points
             </span>
           </button>
-          <button className="w-full p-5 tile bg-primary text-left grid grid-cols-4 gap-3">
+          <button className="grid w-full grid-cols-4 gap-3 p-5 text-left tile bg-primary">
             <span className="col-span-3">
               Get a premium recipe for free appointment with Dr. Monika{" "}
             </span>
-            <span className="h-full bg-white grid place-items-center p-5 rounded-md">
+            <span className="grid h-full p-5 bg-white rounded-md place-items-center">
               550 points
             </span>
           </button>
@@ -172,7 +184,7 @@ function NavBar({
           <Logo></Logo>
           <div className="flex flex-wrap items-center justify-center col-span-2 gap-2 md:gap-3">
             <div className="flex flex-col items-center justify-center h-full rounded-lg">
-              <span className="font-black text-[0.9rem]">{20}</span>
+              <span className="font-black text-[0.9rem]">{points}</span>
               <span className="">Points</span>
             </div>
             <div className="mx-4">
