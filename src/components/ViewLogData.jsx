@@ -14,7 +14,6 @@ export default function ViewLogData() {
 
   useEffect(() => {
     try {
-
       /* This needs to remove any duplicates. */
       setChronicConditions(
         JSON.parse(localStorage.getItem("chronicConditions")) || []
